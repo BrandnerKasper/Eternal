@@ -1,0 +1,3 @@
+﻿  Application.cpp
+C:\dev\Eternal\Sandbox\src\Application.cpp(10,1): warning C4326: Der Rückgabetyp von "main" sollte "int" und nicht "void" sein
+  Sandbox.vcxproj -> C:\dev\Eternal\bin\Debug-x64\Sandbox\Sandbox.exe
