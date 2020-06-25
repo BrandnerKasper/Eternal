@@ -1,3 +1,3 @@
-﻿  Application.cpp
-C:\dev\Eternal\Sandbox\src\Application.cpp(10,1): warning C4326: Der Rückgabetyp von "main" sollte "int" und nicht "void" sein
+﻿  SandboxApp.cpp
+C:\dev\Eternal\Eternal\src\Eternal\Application.h(3,10): warning C4067: Unerwartete Token nach Präprozessordirektive - Zeilenvorschub erwartet.
   Sandbox.vcxproj -> C:\dev\Eternal\bin\Debug-x64\Sandbox\Sandbox.exe

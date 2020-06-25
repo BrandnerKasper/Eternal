@@ -1,3 +1,3 @@
-﻿  LINK : C:\dev\Eternal\bin\Debug-x64\Eternal\Eternal.dll wurde nicht gefunden oder beim letzten inkrementellen Linkvorgang nicht erstellt; vollständiger Link wird durchgeführt.
-     Bibliothek "C:\dev\Eternal\bin\Debug-x64\Eternal\Eternal.lib" und Objekt "C:\dev\Eternal\bin\Debug-x64\Eternal\Eternal.exp" werden erstellt.
+﻿  Application.cpp
+C:\dev\Eternal\Eternal\src\Eternal\Application.h(3,10): warning C4067: Unerwartete Token nach Präprozessordirektive - Zeilenvorschub erwartet.
   Eternal.vcxproj -> C:\dev\Eternal\bin\Debug-x64\Eternal\Eternal.dll
