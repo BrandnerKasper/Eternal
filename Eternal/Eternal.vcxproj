@@ -11,12 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Eternal\Log.h" />
     <ClInclude Include="src\Eternal.h" />
     <ClInclude Include="src\Eternal\Application.h" />
     <ClInclude Include="src\Eternal\Core.h" />
     <ClInclude Include="src\Eternal\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Eternal\Log.cpp" />
     <ClCompile Include="src\Eternal\Application.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -70,6 +72,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ET_PLATFORM_WINDOWS;ET_BUILD_DLL; _WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Eternal\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -84,6 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ET_PLATFORM_WINDOWS;ET_BUILD_DLL; _WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Eternal\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

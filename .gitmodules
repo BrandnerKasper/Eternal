@@ -1,0 +1,3 @@
+[submodule "Eternal/vendor/spdlog"]
+	path = Eternal/vendor/spdlog
+	url = https://github.com/gabime/spdlog
