@@ -35,6 +35,7 @@
 .vs/
 bin/
 bin-int/
+vendor/
 
 #Files
 *.user
