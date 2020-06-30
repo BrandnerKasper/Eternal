@@ -32,6 +32,10 @@
 *.app
 *.ipch
 
+#visual studio config
+*.sln
+*.vcxproj
+
 #Directories
 .vs/
 bin/
