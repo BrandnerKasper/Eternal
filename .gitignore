@@ -35,6 +35,7 @@
 #visual studio config
 *.sln
 *.vcxproj
+*.filters
 
 #Directories
 .vs/
