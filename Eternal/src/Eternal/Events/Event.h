@@ -1,6 +1,7 @@
 #pragma once
 
-#include "src/Eternal/Core.h"
+#include "../Core.h"
+#include "Eternal/Core.h" //hmmmmmm
 
 #include <string>
 #include <functional>
@@ -26,9 +27,9 @@ namespace Eternal {
 	{
 		None = 0,
 		EventCategoryApplication = BIT(0),
-		EventCategoryInput       = BIT(1),
-		EventCategoryKeyboard    = BIT(2),
-		EventCategoryMouse       = BIT(3),
+		EventCategoryInput = BIT(1),
+		EventCategoryKeyboard = BIT(2),
+		EventCategoryMouse = BIT(3),
 		EventCategoryMouseButton = BIT(4),
 	};
 
