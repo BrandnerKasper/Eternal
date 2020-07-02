@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../Core.h"
-#include "Eternal/Core.h" //hmmmmmm
+#include "Eternal/Core.h" //hmmmmmm instead we could use #include "../Core.h" if the Eternal/src would not be defined as include path!!
 
 #include <string>
 #include <functional>
