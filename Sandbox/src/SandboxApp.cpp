@@ -1,3 +1,5 @@
+#include "ETpch.h"
+
 #include <Eternal.h>
 
 class Sandbox : public Eternal::Application

@@ -1,3 +1,5 @@
+#include "ETpch.h"
+
 #include "Application.h"
 #include <stdio.h>
 
@@ -28,7 +30,7 @@ namespace Eternal {
 		}
 
 		while (true) {
-			printf("Slaying Demons...");
+			//printf("Slaying Demons...");
 		};
 	}
 

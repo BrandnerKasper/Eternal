@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Eternal {
 
 	class ETERNAL_API WindowResizeEvent : public Event

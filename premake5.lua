@@ -18,6 +18,9 @@ project "Eternal"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "ETpch.h"
+	pchsource "Eternal/src/ETpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

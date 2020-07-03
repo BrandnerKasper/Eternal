@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Eternal {
 
 	class ETERNAL_API KeyEvent : public Event
