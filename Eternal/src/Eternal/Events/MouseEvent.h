@@ -56,6 +56,7 @@ namespace Eternal{
 		inline int GetMouseButton() const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+			//maybe use EventCategoryMouseButton?!?
 	protected:
 		MouseButtonEvent(int button)
 			: m_Button(button) {}
