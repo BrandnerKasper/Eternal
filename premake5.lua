@@ -48,7 +48,7 @@ project "Eternal"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "Off" -- if this leads to problems turn to on and use those buildoptions
 		systemversion "latest"
 
 		defines
@@ -64,14 +64,17 @@ project "Eternal"
 
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
+		--buildoptions " /MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "ET_RELEASE"
+		--buildoptions " /MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "ET_DIST"
+		--buildoptions " /MD"
 		optimize "On"
 
 -------------------------------------------------------------------------------------------
@@ -103,7 +106,7 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
 
 		defines
@@ -113,12 +116,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
+		--buildoptions " /MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "ET_RELEASE"
+		--buildoptions " /MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "ET_DIST"
+		--buildoptions " /MD"
 		optimize "On"
