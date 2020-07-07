@@ -23,6 +23,7 @@ namespace Eternal {
 	{
 		while (m_Running) {
 			//printf("Slaying Demons...");
+			glClearColor(0, 1, 0, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)

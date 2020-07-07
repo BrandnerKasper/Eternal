@@ -8,6 +8,8 @@ workspace "Eternal"
 		"Dist"
 	}
 
+	startproject "Sandbox"
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (in our case solution directory)
@@ -79,7 +81,7 @@ project "Eternal"
 
 -------------------------------------------------------------------------------------------
 
-project "Sandbox" --would be nice to set this as a start project with an command TODO!!
+project "Sandbox" 
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
