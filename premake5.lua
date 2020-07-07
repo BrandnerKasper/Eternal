@@ -79,7 +79,7 @@ project "Eternal"
 
 -------------------------------------------------------------------------------------------
 
-project "Sandbox"
+project "Sandbox" --would be nice to set this as a start project with an command TODO!!
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
