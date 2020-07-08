@@ -15,8 +15,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (in our case solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Eternal/vendor/GLFW/include"
+IncludeDir["Glad"] = "Eternal/vendor/Glad/include"
 
 include "Eternal/vendor/GLFW"
+include "Eternal/vendor/Glad"
 
 project "Eternal"
 	location "Eternal"
@@ -39,12 +41,14 @@ project "Eternal"
 	{
 		"%{prj.name}/vendor/spdlog/include",
 		"%{prj.name}/src",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -56,7 +60,8 @@ project "Eternal"
 		defines
 		{
 			"ET_PLATFORM_WINDOWS",
-			"ET_BUILD_DLL"
+			"ET_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands

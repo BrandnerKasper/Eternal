@@ -3,7 +3,7 @@
 #include "Application.h"
 #include <stdio.h> //because of printf .. better move to precompiled header TODO
 
-#include<GLFW/glfw3.h>
+#include<Glad/glad.h>
 
 namespace Eternal {
 
