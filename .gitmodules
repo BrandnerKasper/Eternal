@@ -1,6 +1,5 @@
 [submodule "Eternal/vendor/spdlog"]
 	path = Eternal/vendor/spdlog
-	branch = master
 	url = https://github.com/gabime/spdlog
 [submodule "Eternal/vendor/GLFW"]
 	path = Eternal/vendor/GLFW
