@@ -53,4 +53,20 @@ namespace Eternal {
 
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	class ETERNAL_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keyCode)
+			: KeyEvent(keyCode) {}
+
+		std::string ToString() const override
+		{
+			std::stringstream sstring;
+			sstring << "KeyTypedEvent: " << m_KeyCode;
+			return sstring.str();
+		}
+
+		EVENT_CLASS_TYPE(KeyTyped)
+	};
 }
