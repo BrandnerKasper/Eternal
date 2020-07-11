@@ -127,7 +127,7 @@ project "Sandbox"
 
 		postbuildcommands
 		{
-			("{COPY} ../bin/" .. outputdir .. "/Eternal/Eternal.dll" .. "../bin/" .. outputdir .. "/%{prj.name}")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
