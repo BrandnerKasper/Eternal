@@ -10,6 +10,10 @@
 	#error Eternal is only for Windows!
 #endif
 
+//#ifdef ET_DEBUG
+//		#define	ET_ENABLE_ASSERTS
+//#endif
+
 #ifdef ET_ENABLE_ASSERTS
 	#define ET_ASSERT(x, ...) { if(!(x)) {ET_ERROR("Assertion failed: {0}", __VA__ARGS__): __debugbreak(); } }
 	#define ET_CORE_ASSERT(x, ...) { if(!(x)) {ET_CORE_ERROR("Assertion failed: {0}",  __VA__ARGS__): __debugbreak(); } }

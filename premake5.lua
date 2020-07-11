@@ -75,17 +75,17 @@ project "Eternal"
 
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
-		--buildoptions " /MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "ET_RELEASE"
-		--buildoptions " /MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "ET_DIST"
-		--buildoptions " /MD"
+		runtime "Release"
 		optimize "On"
 
 -------------------------------------------------------------------------------------------
@@ -127,15 +127,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
-		--buildoptions " /MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "ET_RELEASE"
-		--buildoptions " /MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "ET_DIST"
-		--buildoptions " /MD"
+		runtime "Release"
 		optimize "On"
