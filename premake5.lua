@@ -68,10 +68,10 @@ project "Eternal"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		--postbuildcommands --either build the dll and then copy new version for sandbox or build sandbox first and moves "old" dll into it so it works when cloned for the first time!
-		--{
-		--	("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		--}
+		postbuildcommands --either build the dll and then copy new version for sandbox or build sandbox first and moves "old" dll into it so it works when cloned for the first time!
+		{
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+		}
 
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
@@ -123,11 +123,6 @@ project "Sandbox"
 		defines
 		{
 			"ET_PLATFORM_WINDOWS",
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
