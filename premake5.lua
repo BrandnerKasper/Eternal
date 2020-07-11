@@ -70,7 +70,7 @@ project "Eternal"
 
 		postbuildcommands --either build the dll and then copy new version for sandbox or build sandbox first and moves "old" dll into it so it works when cloned for the first time!
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
