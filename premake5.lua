@@ -68,11 +68,6 @@ project "Eternal"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
 		--buildoptions " /MDd"
@@ -123,6 +118,11 @@ project "Sandbox"
 		defines
 		{
 			"ET_PLATFORM_WINDOWS",
+		}
+
+		postbuildcommands
+		{
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
