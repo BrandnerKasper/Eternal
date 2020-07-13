@@ -5,6 +5,8 @@
 
 #include<Glad/glad.h>
 
+#include "Input.h"
+
 namespace Eternal {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -33,6 +35,10 @@ namespace Eternal {
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			auto [x, y] = Input::GetMousePosition();
+			ET_CORE_TRACE("{0}, {1}, {2}", x, y);
+
 			m_Window->OnUpdate();
 		};
 	}
