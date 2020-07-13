@@ -36,9 +36,6 @@ namespace Eternal {
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 
-			auto [x, y] = Input::GetMousePosition();
-			ET_CORE_TRACE("{0}, {1}, {2}", x, y);
-
 			m_Window->OnUpdate();
 		};
 	}
@@ -47,8 +44,6 @@ namespace Eternal {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-
-		//ET_CORE_TRACE("{0}", e); no need since app will trace now too :)
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
