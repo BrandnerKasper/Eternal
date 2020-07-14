@@ -9,3 +9,6 @@
 	path = Eternal/vendor/imgui
 	branch = master
 	url = https://github.com/BrandnerKasper/imgui
+[submodule "Eternal/vendor/glm"]
+	path = Eternal/vendor/glm
+	url = https://github.com/g-truc/glm

@@ -17,6 +17,8 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Eternal/vendor/GLFW/include"
 IncludeDir["Glad"] = "Eternal/vendor/Glad/include"
 IncludeDir["ImGui"] = "Eternal/vendor/imgui"
+IncludeDir["glm"] = "Eternal/vendor/glm"
+
 
 include "Eternal/vendor/GLFW"
 include "Eternal/vendor/Glad"
@@ -36,7 +38,9 @@ project "Eternal"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -45,7 +49,8 @@ project "Eternal"
 		"%{prj.name}/src",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -107,7 +112,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Eternal/vendor/spdlog/include",
-		"Eternal/src"
+		"Eternal/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
