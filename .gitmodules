@@ -1,13 +1,14 @@
 [submodule "Eternal/vendor/spdlog"]
 	path = Eternal/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = v1.x
 [submodule "Eternal/vendor/GLFW"]
 	path = Eternal/vendor/GLFW
 	branch = master
 	url = https://github.com/BrandnerKasper/glfw
 [submodule "Eternal/vendor/imgui"]
 	path = Eternal/vendor/imgui
-	branch = master
+	branch = docking
 	url = https://github.com/BrandnerKasper/imgui
 [submodule "Eternal/vendor/glm"]
 	path = Eternal/vendor/glm
