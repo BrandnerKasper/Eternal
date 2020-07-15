@@ -7,6 +7,8 @@
 #include "Eternal/Events/Event.h"
 #include "Eternal/Events/ApplicationEvent.h"
 
+#include "Eternal/ImGui/ImGuiLayer.h"
+
 namespace Eternal {
 
 	class ETERNAL_API Application
@@ -27,6 +29,7 @@ namespace Eternal {
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

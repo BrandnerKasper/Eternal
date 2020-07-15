@@ -2,6 +2,8 @@
 
 #include <Eternal.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Eternal::Layer
 {
 public:
@@ -28,6 +30,13 @@ public:
 				ET_WARN("oh my god you pressed the tab button!!! (event will happen... soon)");
 		}
 	}
+
+	virtual void OnImGuiRender() override //Test that sandbox can use ImGui itself <3
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("hello");
+		ImGui::End();
+	}
 };
 
 class Sandbox : public Eternal::Application
@@ -36,7 +45,6 @@ public:
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Eternal::ImGuiLayer());
 	}
 
 	~Sandbox() 

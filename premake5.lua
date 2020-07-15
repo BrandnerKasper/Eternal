@@ -26,7 +26,7 @@ include "Eternal/vendor/imgui"
 
 project "Eternal"
 	location "Eternal"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -99,6 +99,8 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -113,6 +115,7 @@ project "Sandbox"
 	{
 		"Eternal/vendor/spdlog/include",
 		"Eternal/src",
+		"Eternal/vendor",
 		"%{IncludeDir.glm}"
 	}
 
