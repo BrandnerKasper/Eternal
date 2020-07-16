@@ -28,6 +28,8 @@ project "Eternal"
 	location "Eternal"
 	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -41,6 +43,12 @@ project "Eternal"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE"
 	}
 
 	includedirs
@@ -62,36 +70,26 @@ project "Eternal"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "Off" -- if this leads to problems turn to on and use those buildoptions
 		systemversion "latest"
 
 		defines
 		{
-			"ET_PLATFORM_WINDOWS",
-			"ET_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
-		}
-
-		postbuildcommands --either build the dll and then copy new version for sandbox or build sandbox first and moves "old" dll into it so it works when cloned for the first time!
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "ET_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "ET_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 -------------------------------------------------------------------------------------------
 
@@ -125,8 +123,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "Off"
 		systemversion "latest"
 
 		defines
@@ -137,14 +133,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "ET_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "ET_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "ET_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
