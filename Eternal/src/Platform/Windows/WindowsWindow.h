@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Eternal/Renderer/GraphicsContext.h"
+
 namespace Eternal {
 
 	class WindowsWindow : public Window
@@ -29,6 +31,7 @@ namespace Eternal {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
