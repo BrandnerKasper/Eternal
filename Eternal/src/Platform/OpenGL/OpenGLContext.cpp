@@ -18,6 +18,11 @@ namespace Eternal {
 		glfwMakeContextCurrent(m_windowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		ET_CORE_ASSERT(status, "Failed to initialize Glad!");
+
+		ET_CORE_WARN("OpenGL Info:");
+		ET_CORE_INFO(" Vendor: {0}", glGetString(GL_VENDOR));
+		ET_CORE_INFO(" Renderer: {0}", glGetString(GL_RENDERER));
+		ET_CORE_INFO(" Version: {0}", glGetString(GL_VERSION));
 	}
 
 	void OpenGLContext::SwapBuffers()
