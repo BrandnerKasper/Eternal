@@ -20,7 +20,8 @@ namespace Eternal {
 			return new OpenGLVertexBuffer(vertices, size);
 			break;
 		default:
-			ET_CORE_ASSERT(false, "Unknown RendererAPI!")
+			ET_CORE_ASSERT(false, "Unknown RendererAPI!");
+			return nullptr;
 			break;
 		}
 	}
@@ -37,7 +38,8 @@ namespace Eternal {
 			return new OpenGLIndexBuffer(indices, size);
 			break;
 		default:
-			ET_CORE_ASSERT(false, "Unknown RendererAPI!")
+			ET_CORE_ASSERT(false, "Unknown RendererAPI!");
+			return nullptr;
 			break;
 		}
 	}
