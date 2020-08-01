@@ -12,11 +12,11 @@ namespace Eternal {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			ET_CORE_ASSERT(false, "RendererAPI::None is not supported!");
 			return nullptr;
 			break;
-		case RendererAPI::OpenGl:
+		case RendererAPI::API::OpenGl:
 			return new OpenGLVertexBuffer(vertices, size);
 			break;
 		default:
@@ -30,11 +30,11 @@ namespace Eternal {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			ET_CORE_ASSERT(false, "RendererAPI::None is not supported!");
 			return nullptr;
 			break;
-		case RendererAPI::OpenGl:
+		case RendererAPI::API::OpenGl:
 			return new OpenGLIndexBuffer(indices, size);
 			break;
 		default:
