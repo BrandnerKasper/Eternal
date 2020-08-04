@@ -12,6 +12,17 @@
 
 #include "Eternal/ImGui/ImGuiLayer.h"
 
+//----Renderer-----------------------
+#include "Eternal/Renderer/Renderer.h"
+#include "Eternal/Renderer/RenderCommand.h"
+
+#include "Eternal/Renderer/Shader.h"
+#include "Eternal/Renderer/VertexArray.h"
+#include "Eternal/Renderer/Buffer.h"
+
+#include "Eternal/Renderer/Camera.h"
+//-----------------------------------
+
 //----Entry Point--------------------
 #include "Eternal/EntryPoint.h"
-//----Entry Point--------------------
+//-----------------------------------
