@@ -155,13 +155,15 @@ namespace Eternal {
 			RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
 			RenderCommand::Clear();
 
-			m_Camera.SetPosition({ 0.5f, 0.5f, 0.0f });
-			m_Camera.SetRotation(45.0f);
+			//m_Camera.SetPosition({ 0.5f, 0.5f, 0.0f });
+			//m_Camera.SetRotation(45.0f);
 
 			Renderer::BeginScene(m_Camera);
 
 			Renderer::Submit(m_BlueShader, m_SquareVertexArray);
 			Renderer::Submit(m_Shader, m_VertexArray);
+
+			m_Camera.RotateCamera();
 
 			Renderer::EndScene();
 

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Eternal/Input.h"
+#include "Eternal/KeyCodes.h"
+
 #include <glm/glm.hpp>
 
 namespace Eternal {
@@ -19,6 +22,7 @@ namespace Eternal {
 		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
 		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
+		void RotateCamera();
 	private:
 		void RecalculateViewMatrix();
 
