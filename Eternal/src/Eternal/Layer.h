@@ -2,6 +2,7 @@
 
 #include "Eternal/Core.h"
 #include "Eternal/Events/Event.h"
+#include "Eternal/Core/Timestep.h"
 
 
 namespace Eternal {
@@ -14,7 +15,7 @@ namespace Eternal {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

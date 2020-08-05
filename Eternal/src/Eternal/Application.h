@@ -7,13 +7,9 @@
 #include "Eternal/Events/Event.h"
 #include "Eternal/Events/ApplicationEvent.h"
 
+#include "Eternal/Core/Timestep.h"
+
 #include "Eternal/ImGui/ImGuiLayer.h"
-
-#include "Eternal/Renderer/Shader.h"
-#include "Eternal/Renderer/Buffer.h"
-#include "Eternal/Renderer/VertexArray.h"
-
-#include "Eternal/Renderer/Camera.h"
 
 namespace Eternal {
 
@@ -34,10 +30,12 @@ namespace Eternal {
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
 
 	private:
 		static Application* s_Instance;

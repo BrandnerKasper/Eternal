@@ -6,6 +6,8 @@
 #include "Eternal/Layer.h"
 #include "Eternal/Log.h"
 
+#include "Eternal/Core/Timestep.h"
+
 #include "Eternal/Input.h"
 #include "Eternal/KeyCodes.h"
 #include "Eternal/MouseButtonCodes.h"

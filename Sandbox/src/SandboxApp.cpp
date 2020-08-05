@@ -129,26 +129,28 @@ public:
 		m_BlueShader.reset(Eternal::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Eternal::Timestep ts) override
 	{
+		//ET_TRACE("Delta time {0}s ({1} milisecs) ", ts.GetSeconds(), ts.GetMilliseconds());
+
 		if (Eternal::Input::IsKeyPressed(ET_KEY_LEFT) 
 			|| Eternal::Input::IsKeyPressed(ET_KEY_A))
-			m_CameraPosition.x += m_CameraSpeed;
+			m_CameraPosition.x += m_CameraSpeed * ts;
 		else if (Eternal::Input::IsKeyPressed(ET_KEY_RIGHT) 
 			|| Eternal::Input::IsKeyPressed(ET_KEY_D))
-			m_CameraPosition.x -= m_CameraSpeed;
+			m_CameraPosition.x -= m_CameraSpeed * ts;
 
 		if (Eternal::Input::IsKeyPressed(ET_KEY_UP) 
 			|| Eternal::Input::IsKeyPressed(ET_KEY_W))
-			m_CameraPosition.y -= m_CameraSpeed;
+			m_CameraPosition.y -= m_CameraSpeed * ts;
 		else if (Eternal::Input::IsKeyPressed(ET_KEY_DOWN) 
 			|| Eternal::Input::IsKeyPressed(ET_KEY_S))
-			m_CameraPosition.y += m_CameraSpeed;
+			m_CameraPosition.y += m_CameraSpeed * ts;
 
 		if (Eternal::Input::IsKeyPressed(ET_KEY_E))
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;
 		else if (Eternal::Input::IsKeyPressed(ET_KEY_Q))
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
 		Eternal::RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
 		Eternal::RenderCommand::Clear();
@@ -199,9 +201,9 @@ private:
 
 	Eternal::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
-	float m_CameraSpeed = 0.02f;
+	float m_CameraSpeed = 3.0f;
 	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 2.0f;
+	float m_CameraRotationSpeed = 180.0f;
 };
 
 class Sandbox : public Eternal::Application
