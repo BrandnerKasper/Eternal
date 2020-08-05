@@ -6,8 +6,6 @@
 
 #include "Input.h"
 
-#include <GLFW/glfw3.h>
-
 namespace Eternal {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -34,7 +32,7 @@ namespace Eternal {
 	{
 		while (m_Running) {
 			//printf("Slaying Demons...");
-			float time = (float)glfwGetTime(); //Platform::GetTime!!
+			float time = (float)Renderer::GetTime(); //Platform::GetTime!!
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 

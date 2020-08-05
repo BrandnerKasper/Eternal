@@ -20,6 +20,8 @@ namespace Eternal {
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
 
 		inline static API GetAPI() { return s_API; }
+		static float GetTime();
+
 	private:
 		static API s_API;
 	};

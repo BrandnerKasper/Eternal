@@ -13,6 +13,7 @@ namespace Eternal {
 
 		virtual void Init() override;
 		virtual void SwapBuffers() override;
+		static float OpenGLGetTime();
 	private:
 		GLFWwindow* m_windowHandle;
 	};

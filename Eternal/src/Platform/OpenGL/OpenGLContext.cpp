@@ -29,4 +29,9 @@ namespace Eternal {
 	{
 		glfwSwapBuffers(m_windowHandle);
 	}
+
+	float OpenGLContext::OpenGLGetTime()
+	{
+		return glfwGetTime();
+	}
 }

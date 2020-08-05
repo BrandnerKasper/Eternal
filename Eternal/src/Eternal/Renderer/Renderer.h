@@ -18,6 +18,8 @@ namespace Eternal {
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
+		inline static float GetTime() { return RendererAPI::GetTime(); };
+
 	private:
 		struct SceneData
 		{

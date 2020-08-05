@@ -133,6 +133,7 @@ public:
 	{
 		//ET_TRACE("Delta time {0}s ({1} milisecs) ", ts.GetSeconds(), ts.GetMilliseconds());
 
+		//TODO move this into its own class!
 		if (Eternal::Input::IsKeyPressed(ET_KEY_LEFT) 
 			|| Eternal::Input::IsKeyPressed(ET_KEY_A))
 			m_CameraPosition.x += m_CameraSpeed * ts;
@@ -185,10 +186,9 @@ public:
 		dispatcher.Dispatch<Eternal::KeyPressedEvent>(ET_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
 	}
 
+	//Clean up..
 	bool OnKeyPressedEvent(Eternal::KeyPressedEvent& event)
 	{
-		
-
 		return false;
 	}
 
