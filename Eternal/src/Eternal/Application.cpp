@@ -32,7 +32,7 @@ namespace Eternal {
 	{
 		while (m_Running) {
 			//printf("Slaying Demons...");
-			float time = (float)Renderer::GetTime(); //Platform::GetTime!!
+			float time = (float)Renderer::GetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
