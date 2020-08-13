@@ -22,7 +22,7 @@ public:
 			 0.0f,  0.5f, 0.0f,	0.0f, 0.0f, 0.7f, 1.0f
 		};
 
-		std::shared_ptr<Eternal::VertexBuffer> vertexBuffer;
+		Eternal::Ref<Eternal::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Eternal::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Eternal::BufferLayout layout = {
 			{Eternal::ShaderDataType::Float3, "a_Position"},
@@ -34,7 +34,7 @@ public:
 		//index Buffer
 		uint32_t indices[3] = { 0, 1, 2 };
 		uint32_t count = sizeof(indices) / sizeof(uint32_t);
-		std::shared_ptr<Eternal::IndexBuffer> indexBuffer;
+		Eternal::Ref<Eternal::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Eternal::IndexBuffer::Create(indices, count));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -88,7 +88,7 @@ public:
 			-0.5f,  0.5f, 0.0f
 		};
 
-		std::shared_ptr<Eternal::VertexBuffer> squaredVertexBuffer;
+		Eternal::Ref<Eternal::VertexBuffer> squaredVertexBuffer;
 		squaredVertexBuffer.reset(Eternal::VertexBuffer::Create(squaredVertices, sizeof(squaredVertices)));
 		Eternal::BufferLayout squareLayout = {
 			{Eternal::ShaderDataType::Float3, "a_Position"},
@@ -98,7 +98,7 @@ public:
 
 		uint32_t squaredIndices[6] = { 0, 1, 2, 2, 3, 0 };
 		uint32_t squareCount = sizeof(squaredIndices) / sizeof(uint32_t);
-		std::shared_ptr<Eternal::IndexBuffer> squaredIndexBuffer;
+		Eternal::Ref<Eternal::IndexBuffer> squaredIndexBuffer;
 		squaredIndexBuffer.reset(Eternal::IndexBuffer::Create(squaredIndices, squareCount));
 		m_SquareVertexArray->SetIndexBuffer(squaredIndexBuffer);
 
@@ -233,11 +233,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<Eternal::Shader> m_Shader;
-	std::shared_ptr<Eternal::VertexArray> m_VertexArray;
+	Eternal::Ref<Eternal::Shader> m_Shader;
+	Eternal::Ref<Eternal::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Eternal::Shader> m_FlatColorShader;
-	std::shared_ptr<Eternal::VertexArray> m_SquareVertexArray;
+	Eternal::Ref<Eternal::Shader> m_FlatColorShader;
+	Eternal::Ref<Eternal::VertexArray> m_SquareVertexArray;
 
 	Eternal::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
