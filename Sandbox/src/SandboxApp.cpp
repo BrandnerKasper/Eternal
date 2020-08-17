@@ -173,6 +173,7 @@ public:
 		m_TextureShader.reset(Eternal::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
 		m_Texture = Eternal::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_EternalLogo = Eternal::Texture2D::Create("assets/textures/EternalLogo.png");
 
 		m_TextureShader->Bind();
 		m_TextureShader->UploadUniformInt("u_Texture", 0);
@@ -250,7 +251,10 @@ public:
 		glm::vec3 postex(-2.25f, -2.25f, 0.0f);
 		glm::mat4 transformtex = glm::translate(glm::mat4(1.0f), postex) * scaletex;
 		Eternal::Renderer::Submit(m_TextureShader, m_SquareVertexArray, transformtex);
-
+		
+		//add Logo
+		m_EternalLogo->Bind();
+		Eternal::Renderer::Submit(m_TextureShader, m_SquareVertexArray, transformtex);
 
 		Eternal::Renderer::EndScene();
 
@@ -288,7 +292,7 @@ private:
 	Eternal::Ref<Eternal::Shader> m_FlatColorShader, m_TextureShader;
 	Eternal::Ref<Eternal::VertexArray> m_SquareVertexArray;
 
-	Eternal::Ref<Eternal::Texture2D> m_Texture;
+	Eternal::Ref<Eternal::Texture2D> m_Texture, m_EternalLogo;
 
 	Eternal::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
