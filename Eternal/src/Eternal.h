@@ -19,6 +19,7 @@
 #include "Eternal/Renderer/RenderCommand.h"
 
 #include "Eternal/Renderer/Shader.h"
+#include "Eternal/Renderer/Texture.h"
 #include "Eternal/Renderer/VertexArray.h"
 #include "Eternal/Renderer/Buffer.h"
 

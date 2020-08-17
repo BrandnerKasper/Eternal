@@ -18,6 +18,7 @@ IncludeDir["GLFW"] = "Eternal/vendor/GLFW/include"
 IncludeDir["Glad"] = "Eternal/vendor/Glad/include"
 IncludeDir["ImGui"] = "Eternal/vendor/imgui"
 IncludeDir["glm"] = "Eternal/vendor/glm"
+IncludeDir["stb_image"] = "Eternal/vendor/stb_image"
 
 
 include "Eternal/vendor/GLFW"
@@ -41,6 +42,8 @@ project "Eternal"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -58,7 +61,8 @@ project "Eternal"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links

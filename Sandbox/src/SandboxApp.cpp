@@ -81,17 +81,18 @@ public:
 		//test square <3
 		m_SquareVertexArray.reset(Eternal::VertexArray::Create());
 
-		float squaredVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squaredVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		Eternal::Ref<Eternal::VertexBuffer> squaredVertexBuffer;
 		squaredVertexBuffer.reset(Eternal::VertexBuffer::Create(squaredVertices, sizeof(squaredVertices)));
 		Eternal::BufferLayout squareLayout = {
 			{Eternal::ShaderDataType::Float3, "a_Position"},
+			{Eternal::ShaderDataType::Float2, "a_TexCoord"}
 		};
 		squaredVertexBuffer->SetLayout(squareLayout);
 		m_SquareVertexArray->AddVertexBuffer(squaredVertexBuffer);
@@ -135,6 +136,46 @@ public:
 		)";
 
 		m_FlatColorShader.reset(Eternal::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+			
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+			
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			
+			in vec2 v_TexCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Eternal::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Eternal::Texture2D::Create("assets/textures/Checkerboard.png");
+
+		m_TextureShader->Bind();
+		m_TextureShader->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Eternal::Timestep ts) override
@@ -203,6 +244,14 @@ public:
 		Eternal::Renderer::Submit(m_Shader, m_VertexArray, playercontroller);
 
 
+		//Texture Example
+		m_Texture->Bind();
+		glm::mat4 scaletex = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
+		glm::vec3 postex(-2.25f, -2.25f, 0.0f);
+		glm::mat4 transformtex = glm::translate(glm::mat4(1.0f), postex) * scaletex;
+		Eternal::Renderer::Submit(m_TextureShader, m_SquareVertexArray, transformtex);
+
+
 		Eternal::Renderer::EndScene();
 
 	}
@@ -236,8 +285,10 @@ private:
 	Eternal::Ref<Eternal::Shader> m_Shader;
 	Eternal::Ref<Eternal::VertexArray> m_VertexArray;
 
-	Eternal::Ref<Eternal::Shader> m_FlatColorShader;
+	Eternal::Ref<Eternal::Shader> m_FlatColorShader, m_TextureShader;
 	Eternal::Ref<Eternal::VertexArray> m_SquareVertexArray;
+
+	Eternal::Ref<Eternal::Texture2D> m_Texture;
 
 	Eternal::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
