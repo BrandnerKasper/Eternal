@@ -1,4 +1,10 @@
 # Eternal
 
-a small little video game engine will be made :)
-stay tuned <3
+# How to Setup the Project correctly:
+1. Clone the repository from the master branch <br>
+  -> Use `git clone https://github.com/BrandnerKasper/Eternal` and <br>
+  -> `git submodule init` and `git submodule update` to initalize the submodules needed
+2. Open the `GenerateProject.bat` file in the project root directory <br>
+  -> This should create the Micrsoft Visual Studio 2019 solution file <br>
+  -> Open it and just run the Project!
+3. Have fun :)
