@@ -74,7 +74,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Eternal::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Eternal::Shader::Create("Triangle Shader", vertexSrc, fragmentSrc);
 
 
 
@@ -135,15 +135,15 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(Eternal::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = Eternal::Shader::Create("Flat Shader", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
-		m_TextureShader.reset(Eternal::Shader::Create("assets/shaders/Texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = Eternal::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_EternalLogo = Eternal::Texture2D::Create("assets/textures/EternalLogo.png");
 
-		m_TextureShader->Bind();
-		m_TextureShader->UploadUniformInt("u_Texture", 0);
+		textureShader->Bind();
+		textureShader->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Eternal::Timestep ts) override
@@ -213,15 +213,17 @@ public:
 
 
 		//Texture Example
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
 		glm::mat4 scaletex = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
 		glm::vec3 postex(-2.25f, -2.25f, 0.0f);
 		glm::mat4 transformtex = glm::translate(glm::mat4(1.0f), postex) * scaletex;
-		Eternal::Renderer::Submit(m_TextureShader, m_SquareVertexArray, transformtex);
+		Eternal::Renderer::Submit(textureShader, m_SquareVertexArray, transformtex);
 		
 		//add Logo
 		m_EternalLogo->Bind();
-		Eternal::Renderer::Submit(m_TextureShader, m_SquareVertexArray, transformtex);
+		Eternal::Renderer::Submit(textureShader, m_SquareVertexArray, transformtex);
 
 		Eternal::Renderer::EndScene();
 
@@ -253,10 +255,12 @@ public:
 	}
 
 private:
+	Eternal::ShaderLibrary m_ShaderLibrary;
+
 	Eternal::Ref<Eternal::Shader> m_Shader;
 	Eternal::Ref<Eternal::VertexArray> m_VertexArray;
 
-	Eternal::Ref<Eternal::Shader> m_FlatColorShader, m_TextureShader;
+	Eternal::Ref<Eternal::Shader> m_FlatColorShader;
 	Eternal::Ref<Eternal::VertexArray> m_SquareVertexArray;
 
 	Eternal::Ref<Eternal::Texture2D> m_Texture, m_EternalLogo;
