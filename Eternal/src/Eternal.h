@@ -12,6 +12,8 @@
 #include "Eternal/KeyCodes.h"
 #include "Eternal/MouseButtonCodes.h"
 
+#include "Eternal/CameraController.h"
+
 #include "Eternal/ImGui/ImGuiLayer.h"
 
 //----Renderer-----------------------

@@ -12,7 +12,7 @@ class ExampleLayer : public Eternal::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0,0,0), m_PlayerPosition(0,0,0)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f), m_PlayerPosition(0,0,0)
 	{
 		m_VertexArray.reset(Eternal::VertexArray::Create());
 
@@ -150,25 +150,8 @@ public:
 	{
 		//ET_TRACE("Delta time {0}s ({1} milisecs) ", ts.GetSeconds(), ts.GetMilliseconds());
 
-		//TODO move this into its own class!
-		if (Eternal::Input::IsKeyPressed(ET_KEY_LEFT) 
-			|| Eternal::Input::IsKeyPressed(ET_KEY_A))
-			m_CameraPosition.x -= m_CameraSpeed * ts;
-		else if (Eternal::Input::IsKeyPressed(ET_KEY_RIGHT) 
-			|| Eternal::Input::IsKeyPressed(ET_KEY_D))
-			m_CameraPosition.x += m_CameraSpeed * ts;
-
-		if (Eternal::Input::IsKeyPressed(ET_KEY_UP) 
-			|| Eternal::Input::IsKeyPressed(ET_KEY_W))
-			m_CameraPosition.y += m_CameraSpeed * ts;
-		else if (Eternal::Input::IsKeyPressed(ET_KEY_DOWN) 
-			|| Eternal::Input::IsKeyPressed(ET_KEY_S))
-			m_CameraPosition.y -= m_CameraSpeed * ts;
-
-		if (Eternal::Input::IsKeyPressed(ET_KEY_E))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
-		else if (Eternal::Input::IsKeyPressed(ET_KEY_Q))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
+		//Update
+		m_CameraController.OnUpdate(ts);
 
 		//Test obj controller
 		if (Eternal::Input::IsKeyPressed(ET_KEY_J))
@@ -181,13 +164,11 @@ public:
 		else if (Eternal::Input::IsKeyPressed(ET_KEY_K))
 			m_PlayerPosition.y -= m_PlayerMoveSpeed * ts;
 
+		//Render
 		Eternal::RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
 		Eternal::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
-
-		Eternal::Renderer::BeginScene(m_Camera);
+		Eternal::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 		glm::mat4 playercontroller = glm::translate(glm::mat4(1.0f), m_PlayerPosition) * scale;
@@ -244,8 +225,7 @@ public:
 			ET_INFO("{0}, {1}", (char)e.GetKeyCode(), e.GetRepeatCount());
 		}
 
-		Eternal::EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<Eternal::KeyPressedEvent>(ET_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
+		m_CameraController.OnEvent(event);
 	}
 
 	//Clean up..
@@ -265,11 +245,7 @@ private:
 
 	Eternal::Ref<Eternal::Texture2D> m_Texture, m_EternalLogo;
 
-	Eternal::OrthographicCamera m_Camera;
-	glm::vec3 m_CameraPosition;
-	float m_CameraSpeed = 3.0f;
-	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 180.0f;
+	Eternal::OrthographicCameraController m_CameraController;
 
 	glm::vec3 m_PlayerPosition;
 	float m_PlayerMoveSpeed = 1.0f;
