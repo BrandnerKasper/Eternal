@@ -1,10 +1,9 @@
 #pragma once
 
 #include "Eternal/Window.h"
+#include "Eternal/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
-
-#include "Eternal/Renderer/GraphicsContext.h"
 
 namespace Eternal {
 

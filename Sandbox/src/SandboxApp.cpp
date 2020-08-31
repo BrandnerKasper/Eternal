@@ -187,6 +187,7 @@ public:
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 
 				Eternal::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
+				//ET_WARN("{0}", pos.x);
 			}
 		}
 		
@@ -226,12 +227,15 @@ public:
 		}
 
 		m_CameraController.OnEvent(event);
-	}
 
-	//Clean up..
-	bool OnKeyPressedEvent(Eternal::KeyPressedEvent& event)
-	{
-		return false;
+		//resize
+		if (event.GetEventType() == Eternal::EventType::WindowResize)
+		{
+			auto& re = (Eternal::WindowResizeEvent&)event;
+
+			//float zoom = (float)re.GetWidth() / 1280.0f;
+			//m_CameraController.SetZoomLevel();
+		}
 	}
 
 private:

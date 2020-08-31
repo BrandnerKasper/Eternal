@@ -14,7 +14,6 @@ namespace Eternal {
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
-		//TODO move this into its own class!
 		if (Input::IsKeyPressed(ET_KEY_LEFT) || Input::IsKeyPressed(ET_KEY_A))
 			m_CameraPosition.x -= m_CameraSpeed * ts;
 
@@ -60,7 +59,7 @@ namespace Eternal {
 
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
-		m_AspectRatio -= (float)e.GetWidth() / (float)e.GetHeight();
+		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 
 		return false;

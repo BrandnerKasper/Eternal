@@ -42,7 +42,6 @@ namespace Eternal {
 
 		if (!s_GLFWInitialized)
 		{
-			//TODO: glfwTermiante on system shutdown
 			int sucess = glfwInit();
 			ET_CORE_ASSERT(sucess, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
@@ -68,6 +67,7 @@ namespace Eternal {
 				data.Height = height;
 
 				WindowResizeEvent event(width, height);
+				ET_CORE_INFO("Window being resized {0}, {1}", width, height);
 				data.EventCallback(event);
 			});
 

@@ -16,7 +16,9 @@ namespace Eternal {
 		WindowProps(const std::string& title = "Eternal Engine",
 					 unsigned int width = 1280,
 					 unsigned int height = 720)
-			: Title(title), Width(width), Height(height){}
+			: Title(title), Width(width), Height(height)
+		{
+		}
 	};
 
 	//Interface representating a desktop system based Window
@@ -25,7 +27,7 @@ namespace Eternal {
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
 
-		virtual ~Window() {}
+		virtual ~Window() = default;
 
 		virtual void OnUpdate() = 0;
 
