@@ -227,15 +227,6 @@ public:
 		}
 
 		m_CameraController.OnEvent(event);
-
-		//resize
-		if (event.GetEventType() == Eternal::EventType::WindowResize)
-		{
-			auto& re = (Eternal::WindowResizeEvent&)event;
-
-			//float zoom = (float)re.GetWidth() / 1280.0f;
-			//m_CameraController.SetZoomLevel();
-		}
 	}
 
 private:

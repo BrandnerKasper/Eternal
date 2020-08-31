@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Eternal/Layer.h"
+#include "Eternal/Core/Layer.h"
 
 #include "Eternal/Events/ApplicationEvent.h"
 #include "Eternal/Events/MouseEvent.h"

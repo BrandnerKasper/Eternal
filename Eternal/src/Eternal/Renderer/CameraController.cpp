@@ -1,8 +1,8 @@
 #include "ETpch.h"
 #include "CameraController.h"
 
-#include "Eternal/Input.h"
-#include "Eternal/KeyCodes.h"
+#include "Eternal/Core/Input.h"
+#include "Eternal/Core/KeyCodes.h"
 
 namespace Eternal {
 

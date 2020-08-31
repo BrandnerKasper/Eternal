@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Eternal/Input.h"
+#include "Eternal/Core/Input.h"
 
 namespace Eternal {
 

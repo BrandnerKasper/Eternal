@@ -1,5 +1,5 @@
 #pragma once
-#include "Eternal/Core.h"
+#include "Eternal/Core/Core.h"
 
 namespace Eternal {
 

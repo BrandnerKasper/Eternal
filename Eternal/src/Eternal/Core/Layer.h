@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Eternal/Core.h"
+#include "Eternal/Core/Core.h"
 #include "Eternal/Events/Event.h"
 #include "Eternal/Core/Timestep.h"
 

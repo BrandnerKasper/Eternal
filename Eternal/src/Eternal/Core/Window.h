@@ -2,7 +2,7 @@
 
 #include "ETpch.h"
 
-#include "Eternal/Core.h"
+#include "Eternal/Core/Core.h"
 #include "Eternal/Events/Event.h"
 
 namespace Eternal {

@@ -1,7 +1,7 @@
 #include "ETpch.h"
 #include "WindowsInput.h"
 
-#include "Eternal/Application.h"
+#include "Eternal/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Eternal {

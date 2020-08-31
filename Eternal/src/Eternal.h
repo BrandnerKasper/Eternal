@@ -2,17 +2,17 @@
 
 //used by eternal app
 
-#include "Eternal/Application.h"
-#include "Eternal/Layer.h"
-#include "Eternal/Log.h"
+#include "Eternal/Core/Application.h"
+#include "Eternal/Core/Layer.h"
+#include "Eternal/Core/Log.h"
 
 #include "Eternal/Core/Timestep.h"
 
-#include "Eternal/Input.h"
-#include "Eternal/KeyCodes.h"
-#include "Eternal/MouseButtonCodes.h"
+#include "Eternal/Core/Input.h"
+#include "Eternal/Core/KeyCodes.h"
+#include "Eternal/Core/MouseButtonCodes.h"
 
-#include "Eternal/CameraController.h"
+#include "Eternal/Renderer/CameraController.h"
 
 #include "Eternal/ImGui/ImGuiLayer.h"
 
@@ -29,5 +29,5 @@
 //-----------------------------------
 
 //----Entry Point--------------------
-#include "Eternal/EntryPoint.h"
+#include "Eternal/Core/EntryPoint.h"
 //-----------------------------------
