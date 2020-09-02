@@ -27,7 +27,3 @@
 
 #include "Eternal/Renderer/Camera.h"
 //-----------------------------------
-
-//----Entry Point--------------------
-#include "Eternal/Core/EntryPoint.h"
-//-----------------------------------

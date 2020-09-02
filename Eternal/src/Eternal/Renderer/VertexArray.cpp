@@ -8,7 +8,7 @@
 
 namespace Eternal {
 
-	VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -17,7 +17,7 @@ namespace Eternal {
 			return nullptr;
 			break;
 		case RendererAPI::API::OpenGl:
-			return new OpenGLVertexArray();
+			return std::make_shared<OpenGLVertexArray>();
 			break;
 		default:
 			ET_CORE_ASSERT(false, "Unknown RendererAPI!");

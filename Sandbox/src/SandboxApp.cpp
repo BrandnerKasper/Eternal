@@ -7,6 +7,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Sandbox2D.h"
+
 
 class ExampleLayer : public Eternal::Layer
 {
@@ -14,7 +16,7 @@ public:
 	ExampleLayer()
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f), m_PlayerPosition(0,0,0)
 	{
-		m_VertexArray.reset(Eternal::VertexArray::Create());
+		m_VertexArray = Eternal::VertexArray::Create();
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.7f, 0.0f, 0.0f, 1.0f,
@@ -79,7 +81,7 @@ public:
 
 
 		//test square <3
-		m_SquareVertexArray.reset(Eternal::VertexArray::Create());
+		m_SquareVertexArray = Eternal::VertexArray::Create();
 
 		float squaredVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
@@ -253,7 +255,8 @@ class Sandbox : public Eternal::Application
 public:
 	Sandbox() 
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox() 
