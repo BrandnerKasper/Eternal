@@ -18,6 +18,7 @@
 
 //----Renderer-----------------------
 #include "Eternal/Renderer/Renderer.h"
+#include "Eternal/Renderer/Renderer2D.h"
 #include "Eternal/Renderer/RenderCommand.h"
 
 #include "Eternal/Renderer/Shader.h"
