@@ -145,7 +145,7 @@ public:
 		m_EternalLogo = Eternal::Texture2D::Create("assets/textures/EternalLogo.png");
 
 		textureShader->Bind();
-		textureShader->UploadUniformInt("u_Texture", 0);
+		textureShader->SetInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Eternal::Timestep ts) override
@@ -179,7 +179,7 @@ public:
 		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
 
 		m_FlatColorShader->Bind();
-		m_FlatColorShader->UploadUniformFloat3("u_Color", m_SquareColor);
+		m_FlatColorShader->SetFloat3("u_Color", m_SquareColor);
 
 		for (int y = 0; y < 20; y++)
 		{
