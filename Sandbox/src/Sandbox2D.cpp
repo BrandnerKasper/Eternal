@@ -13,7 +13,6 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	m_CheckerboardTexture = Eternal::Texture2D::Create("assets/textures/Checkerboard.png");
-
 }
 
 void Sandbox2D::OnDetach()
