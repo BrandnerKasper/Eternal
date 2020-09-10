@@ -1,4 +1,4 @@
-//Basic Texture Shader!
+//2 in 1 Shader for either a simple color or a texture with texture scaling :)
 
 #type vertex
 #version 330 core
@@ -25,8 +25,10 @@ layout(location = 0) out vec4 color;
 in vec2 v_TexCoord;
 
 uniform vec4 u_Color;
+uniform sampler2D u_Texture;
+uniform int u_TexScale;
 
 void main()
 {
-	color = texture(u_Texture, v_TexCoord);
+	color = texture(u_Texture, v_TexCoord * u_TexScale) * u_Color;
 }
