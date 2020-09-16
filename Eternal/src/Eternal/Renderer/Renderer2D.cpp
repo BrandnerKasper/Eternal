@@ -97,7 +97,8 @@ namespace Eternal {
 	{
 		s_Data->TwoInOneShader->SetFloat4("u_Color", glm::vec4(1.0f));
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) /* * rotation if wanted*/
+		glm::mat4 transform = glm::mat4(1.0f);
+		transform = glm::translate(transform, position) /* * rotation if wanted*/
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		s_Data->TwoInOneShader->SetMat4("u_Transform", transform);
 
