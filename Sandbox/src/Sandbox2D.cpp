@@ -13,7 +13,6 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	m_CheckerboardTexture = Eternal::Texture2D::Create("assets/textures/Checkerboard.png");
-	m_TextureScalingPtr = &m_Scale;
 }
 
 void Sandbox2D::OnDetach()
@@ -33,7 +32,7 @@ void Sandbox2D::OnUpdate(Eternal::Timestep ts)
 
 	Eternal::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-	Eternal::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, m_CheckerboardTexture, *m_TextureScalingPtr);
+	Eternal::Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, glm::radians(45.0f), m_CheckerboardTexture, m_Scale, m_TintColor);
 	Eternal::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.8f, 0.5f, 0.2f, 1.0f });
 	Eternal::Renderer2D::DrawQuad({ 0.0f,  0.0f, -0.1f }, { 10.0f, 10.0f }, m_SquareColor);
 
@@ -44,7 +43,8 @@ void Sandbox2D::OnImGuiRender()
 {
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit4("Background Square Color", glm::value_ptr(m_SquareColor));
-	ImGui::SliderInt("Checkerboard UV Scaling", m_TextureScalingPtr, 1, 10);
+	ImGui::SliderInt("Checkerboard UV Scaling", &m_Scale, 1, 10);
+	ImGui::ColorEdit4("Tint Color of Checkerboard", glm::value_ptr(m_TintColor));
 	ImGui::End();
 }
 

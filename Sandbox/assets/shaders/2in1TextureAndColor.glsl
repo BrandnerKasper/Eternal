@@ -1,4 +1,4 @@
-//2 in 1 Shader for either a simple color or a texture with texture scaling :)
+//2 in 1 Shader for either a simple color or a texture with texture scaling and tint :)
 
 #type vertex
 #version 330 core

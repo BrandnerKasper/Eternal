@@ -80,7 +80,8 @@ namespace Eternal {
 		s_Data->TwoInOneShader->SetFloat4("u_Color", color);
 		s_Data->WhiteTexture->Bind();
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) /* * rotation if wanted*/
+		glm::mat4 transform = glm::mat4(1.0f);
+		transform = glm::translate(transform, position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		s_Data->TwoInOneShader->SetMat4("u_Transform", transform);
 
@@ -88,18 +89,61 @@ namespace Eternal {
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, const int textureScale)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture, textureScale);
+		DrawQuad({ position.x, position.y, 0.0f }, size, texture, textureScale, tintColor);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, const int textureScale)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
-		s_Data->TwoInOneShader->SetFloat4("u_Color", glm::vec4(1.0f));
+		s_Data->TwoInOneShader->SetFloat4("u_Color", tintColor);
 
 		glm::mat4 transform = glm::mat4(1.0f);
-		transform = glm::translate(transform, position) /* * rotation if wanted*/
+		transform = glm::translate(transform, position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		s_Data->TwoInOneShader->SetMat4("u_Transform", transform);
+
+		texture->Bind();
+
+		s_Data->TwoInOneShader->SetInt("u_TexScale", textureScale);
+
+		s_Data->QuadVertexArray->Bind();
+		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+	{
+		DrawRotatedQuad({ position.x, position.y, 0 }, size, rotation, color);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+	{
+		s_Data->TwoInOneShader->SetFloat4("u_Color", color);
+		s_Data->WhiteTexture->Bind();
+
+		glm::mat4 stdMat4 = glm::mat4(1.0f);
+		glm::mat4 transform = glm::translate(stdMat4, position)
+			* glm::rotate(stdMat4, rotation, {0.0f, 0.0f, 1.0f})
+			* glm::scale(stdMat4, { size.x, size.y, 1.0f });
+		s_Data->TwoInOneShader->SetMat4("u_Transform", transform);
+
+		s_Data->QuadVertexArray->Bind();
+		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
+	{
+		DrawRotatedQuad({ position.x, position.y, 0 }, size, rotation, texture, textureScale, tintColor);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
+	{
+		s_Data->TwoInOneShader->SetFloat4("u_Color", tintColor);
+
+		glm::mat4 stdMat4 = glm::mat4(1.0f);
+		glm::mat4 transform = glm::translate(stdMat4, position)
+			* glm::rotate(stdMat4, rotation, { 0.0f, 0.0f, 1.0f })
+			* glm::scale(stdMat4, { size.x, size.y, 1.0f });
 		s_Data->TwoInOneShader->SetMat4("u_Transform", transform);
 
 		texture->Bind();
