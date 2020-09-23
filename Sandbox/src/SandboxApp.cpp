@@ -24,8 +24,7 @@ public:
 			 0.0f,  0.5f, 0.0f,	0.0f, 0.0f, 0.7f, 1.0f
 		};
 
-		Eternal::Ref<Eternal::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Eternal::VertexBuffer::Create(vertices, sizeof(vertices)));
+		Eternal::Ref<Eternal::VertexBuffer> vertexBuffer = Eternal::VertexBuffer::Create(vertices, sizeof(vertices));
 		Eternal::BufferLayout layout = {
 			{Eternal::ShaderDataType::Float3, "a_Position"},
 			{Eternal::ShaderDataType::Float4, "a_Color"},
@@ -36,8 +35,7 @@ public:
 		//index Buffer
 		uint32_t indices[3] = { 0, 1, 2 };
 		uint32_t count = sizeof(indices) / sizeof(uint32_t);
-		Eternal::Ref<Eternal::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Eternal::IndexBuffer::Create(indices, count));
+		Eternal::Ref<Eternal::IndexBuffer> indexBuffer = Eternal::IndexBuffer::Create(indices, count);
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		std::string vertexSrc = R"(
@@ -90,8 +88,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		Eternal::Ref<Eternal::VertexBuffer> squaredVertexBuffer;
-		squaredVertexBuffer.reset(Eternal::VertexBuffer::Create(squaredVertices, sizeof(squaredVertices)));
+		Eternal::Ref<Eternal::VertexBuffer> squaredVertexBuffer = Eternal::VertexBuffer::Create(squaredVertices, sizeof(squaredVertices));
 		Eternal::BufferLayout squareLayout = {
 			{Eternal::ShaderDataType::Float3, "a_Position"},
 			{Eternal::ShaderDataType::Float2, "a_TexCoord"}
@@ -101,8 +98,7 @@ public:
 
 		uint32_t squaredIndices[6] = { 0, 1, 2, 2, 3, 0 };
 		uint32_t squareCount = sizeof(squaredIndices) / sizeof(uint32_t);
-		Eternal::Ref<Eternal::IndexBuffer> squaredIndexBuffer;
-		squaredIndexBuffer.reset(Eternal::IndexBuffer::Create(squaredIndices, squareCount));
+		Eternal::Ref<Eternal::IndexBuffer> squaredIndexBuffer = Eternal::IndexBuffer::Create(squaredIndices, squareCount);
 		m_SquareVertexArray->SetIndexBuffer(squaredIndexBuffer);
 
 		std::string flatColorShaderVertexSrc = R"(
