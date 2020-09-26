@@ -22,7 +22,10 @@ private:
 	Eternal::Ref<Eternal::Shader> m_FlatColorShader;
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 	Eternal::Ref<Eternal::Texture2D> m_CheckerboardTexture;
-	int m_Scale = 2;
+	glm::vec3 m_Position = { -1.0f, 0.0f, 0.0f };
+	glm::vec2 m_Scale = { 0.8f, 0.8f };
+	int m_Tiling = 2;
+	float m_Rotation = 30.0f;
 	glm::vec4 m_TintColor = { 1.0f, 1.0f, 0.8f, 1.0f };
 
 };
