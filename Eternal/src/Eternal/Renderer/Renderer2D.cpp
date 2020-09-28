@@ -143,7 +143,7 @@ namespace Eternal {
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		//Check if too many Quads got drawn or textures!
-		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices || s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 		{
 			StartNewBatch();
 		}
@@ -196,6 +196,12 @@ namespace Eternal {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
+		//Check if too many Quads got drawn or textures!
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices || s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+		{
+			StartNewBatch();
+		}
+
 		glm::vec4 color = tintColor;
 
 		float texID = 0.0f;
@@ -261,6 +267,12 @@ namespace Eternal {
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
+		//Check if too many Quads got drawn or textures!
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+		{
+			StartNewBatch();
+		}
+
 		const float texID = 0; //White Texture!
 		const float tilingFactor = 1.0f;
 
@@ -310,6 +322,12 @@ namespace Eternal {
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
+		//Check if too many Quads got drawn or textures!
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices || s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+		{
+			StartNewBatch();
+		}
+
 		glm::vec4 color = tintColor;
 
 		float texID = 0.0f;
