@@ -39,5 +39,8 @@ namespace Eternal {
 
 	private:
 		static void StartNewBatch();
+		static bool TooManyQuads();
+		static bool TooManyTextures();
+		static float GetTextureSlot(const Ref<Texture2D>& texture);
 	};
 }
