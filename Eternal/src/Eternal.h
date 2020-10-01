@@ -25,6 +25,7 @@
 #include "Eternal/Renderer/Texture.h"
 #include "Eternal/Renderer/VertexArray.h"
 #include "Eternal/Renderer/Buffer.h"
+#include "Eternal/Renderer/FrameBuffer.h"
 
 #include "Eternal/Renderer/Camera.h"
 //-----------------------------------
