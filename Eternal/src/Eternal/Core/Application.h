@@ -16,7 +16,7 @@ namespace Eternal {
 	class ETERNAL_API Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Eternal App");
 		virtual ~Application();
 
 		void Run();

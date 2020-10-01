@@ -12,10 +12,6 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-    Eternal::FrameBufferSpecification frameBufferSpec;
-    frameBufferSpec.Width = 1280;
-    frameBufferSpec.Height = 720;
-    m_FrameBuffer = Eternal::FrameBuffer::Create(frameBufferSpec);
 	m_CheckerboardTexture = Eternal::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
@@ -32,8 +28,6 @@ void Sandbox2D::OnUpdate(Eternal::Timestep ts) // Max Frame Rate auf 60 cappen m
 	//Renderer Stats
 	Eternal::Renderer2D::ResetStats();
 
-    m_FrameBuffer->Bind();
-
 	//Render
 	Eternal::RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
 	Eternal::RenderCommand::Clear();
@@ -47,66 +41,10 @@ void Sandbox2D::OnUpdate(Eternal::Timestep ts) // Max Frame Rate auf 60 cappen m
 	Eternal::Renderer2D::DrawRotatedQuad({ 3.0f, 4.0f, 0.0f }, { 2.0f,2.0f }, 35.0f, Eternal::Texture2D::Create("assets/textures/EternalLogo.png"));
 
 	Eternal::Renderer2D::EndScene();
-    m_FrameBuffer->Unbind();
 }
 
 void Sandbox2D::OnImGuiRender()
 {
-    static bool dockingEnabled = true;
-    if (dockingEnabled)
-    {
-
-        static bool dockspaceOpen = true;
-        static bool opt_fullscreen_persistant = true;
-        bool opt_fullscreen = opt_fullscreen_persistant;
-        static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
-
-        ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-        if (opt_fullscreen)
-        {
-            ImGuiViewport* viewport = ImGui::GetMainViewport();
-            ImGui::SetNextWindowPos(viewport->GetWorkPos());
-            ImGui::SetNextWindowSize(viewport->GetWorkSize());
-            ImGui::SetNextWindowViewport(viewport->ID);
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-            window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-            window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-        }
-
-        if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
-            window_flags |= ImGuiWindowFlags_NoBackground;
-
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-        ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
-        ImGui::PopStyleVar();
-
-        if (opt_fullscreen)
-            ImGui::PopStyleVar(2);
-
-        // DockSpace
-        ImGuiIO& io = ImGui::GetIO();
-        if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-        {
-            ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-            ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
-        }
-
-        if (ImGui::BeginMenuBar())
-        {
-            if (ImGui::BeginMenu("File"))
-            {
-                if (ImGui::MenuItem("Exit")) Eternal::Application::Get().Close();
-                //ImGui::Separator();
-                //if (ImGui::MenuItem("Close DockSpace", NULL, false, &dockspaceOpen != NULL))
-                   // dockspaceOpen = false;
-                ImGui::EndMenu();
-            }
-
-            ImGui::EndMenuBar();
-        }
-    }
-
     ImGui::Begin("Settings");
 
     auto stats = Eternal::Renderer2D::GetStats();
@@ -123,16 +61,10 @@ void Sandbox2D::OnImGuiRender()
     ImGui::SliderInt("Checkerboard UV Scaling", &m_Tiling, 1, 10);
     ImGui::SliderFloat("Checkerboard Rotation", &m_Rotation, 0.0f, 360.0f);
     ImGui::Image((void*)m_CheckerboardTexture->GetRendererID(), ImVec2(256.0f, 256.0f));
-    ImGui::Image((void*)m_FrameBuffer->GetColorAttachmentRendererID(), ImVec2(1280.0f, 720.0f));
     ImGui::ColorEdit4("Tint Color of Checkerboard", glm::value_ptr(m_TintColor));
-
-    //uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
-    //ImGui::Image((void*)textureID->GetRendererID(), ImVec2(128.0f, 128.0f));
 
     ImGui::End();
 
-    if(dockingEnabled)
-        ImGui::End();
 }
 
 void Sandbox2D::OnEvent(Eternal::Event& event)

@@ -18,7 +18,6 @@ private:
 	Eternal::OrthographicCameraController m_CameraController;
 
 	//Temporary!!
-	Eternal::Ref<Eternal::FrameBuffer> m_FrameBuffer;
 	Eternal::Ref<Eternal::VertexArray> m_SquareVertexArray;
 	Eternal::Ref<Eternal::Shader> m_FlatColorShader;
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
