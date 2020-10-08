@@ -15,8 +15,11 @@ namespace Eternal {
 		void OnUpdate(Eternal::Timestep ts) override;
 		virtual void OnImGuiRender() override;
 		void OnEvent(Eternal::Event& event) override;
+		void ChangeSytle(bool show);
 	private:
 		OrthographicCameraController m_CameraController;
+
+		glm::vec2 m_ViewportPanelSize;
 
 		//Temporary!!
 		Ref<FrameBuffer> m_FrameBuffer;

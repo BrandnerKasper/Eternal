@@ -21,7 +21,7 @@ namespace Eternal {
 
     void EditorLayer::OnDetach()
     {
-
+        
     }
 
     void EditorLayer::OnUpdate(Eternal::Timestep ts) // Max Frame Rate auf 60 cappen maybe!!
@@ -52,6 +52,8 @@ namespace Eternal {
 
     void EditorLayer::OnImGuiRender()
     {
+        ChangeSytle(false);
+
         static bool dockingEnabled = true;
         if (dockingEnabled)
         {
@@ -116,6 +118,10 @@ namespace Eternal {
         ImGui::Text("Vertex Count: %d", stats.GetTotalVertexCount());
         ImGui::Text("Index Count: %d", stats.GetTotalIndexCount());
 
+        ImGui::End();
+
+        ImGui::Begin("Property Panel");
+
         ImGui::Text("Chess Quad:");
         ImGui::SliderFloat3("Checkerboard Position", glm::value_ptr(m_Position), -10.0f, 10.0f);
         ImGui::SliderFloat2("Checkerboard Quad Scale", glm::value_ptr(m_Scale), 0.0f, 10.0f);
@@ -123,13 +129,27 @@ namespace Eternal {
         ImGui::SliderInt("Checkerboard UV Scaling", &m_Tiling, 1, 10);
         ImGui::SliderFloat("Checkerboard Rotation", &m_Rotation, 0.0f, 360.0f);
         ImGui::Image((void*)m_CheckerboardTexture->GetRendererID(), ImVec2(256.0f, 256.0f));
-        ImGui::Image((void*)m_FrameBuffer->GetColorAttachmentRendererID(), ImVec2(1280.0f, 720.0f), ImVec2{ 0,1 }, ImVec2{ 1,0 });
         ImGui::ColorEdit4("Tint Color of Checkerboard", glm::value_ptr(m_TintColor));
 
-        //uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
-        //ImGui::Image((void*)textureID->GetRendererID(), ImVec2(128.0f, 128.0f));
-
         ImGui::End();
+
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });
+
+        ImGui::Begin("Scene Viewport");
+
+        ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+        //ET_INFO("ViewportPanelSize: {0}, {1}: ", viewportPanelSize.x, viewportPanelSize.y);
+        if (m_ViewportPanelSize != *((glm::vec2*)&viewportPanelSize))
+        {
+            m_ViewportPanelSize = { viewportPanelSize.x, viewportPanelSize.y };
+            m_FrameBuffer->Resize((uint32_t)m_ViewportPanelSize.x, (uint32_t)m_ViewportPanelSize.y);
+        }
+        uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
+        ImGui::Image((void*)textureID, ImVec2{ m_ViewportPanelSize.x, m_ViewportPanelSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
+        
+        ImGui::End();
+
+        ImGui::PopStyleVar();
 
         if (dockingEnabled)
             ImGui::End();
@@ -139,5 +159,16 @@ namespace Eternal {
     {
         m_CameraController.OnEvent(event);
     }
+
+    void EditorLayer::ChangeSytle(bool show)
+    {
+        if (show) {
+            ImGui::Begin("Dear ImGui Style Editor");
+            ImGui::ShowStyleEditor();
+            ImGui::End();
+        }
+    }
+
+    
 
 }
