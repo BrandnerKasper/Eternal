@@ -4,25 +4,14 @@
 
 namespace Eternal {
 
-	class ETERNAL_API Input
+	class Input
 	{
 	public:
-		virtual ~Input() = default;
-		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
+		static bool IsKeyPressed(int keycode);
 
-		inline static bool IsMouseButtonPressed(int button) { return s_Instance->IsMouseButtonPressedImpl(button); }
-		inline static std::pair<double, double> GetMousePosition() { return s_Instance->GetMousePositionImpl(); }
-		inline static double GetMouseX() { return s_Instance->GetMouseXImpl(); }
-		inline static double GetMouseY() { return s_Instance->GetMouseYImpl(); }
-
-	protected:
-		virtual bool IsKeyPressedImpl(int keycode) = 0;
-
-		virtual bool IsMouseButtonPressedImpl(int button) = 0;
-		virtual std::pair<double, double> GetMousePositionImpl() = 0;
-		virtual double GetMouseXImpl() = 0;
-		virtual double GetMouseYImpl() = 0;
-	private:
-		static Input* s_Instance;
+		static bool IsMouseButtonPressed(int button);
+		static std::pair<double, double> GetMousePosition();
+		static double GetMouseX();
+		static double GetMouseY();
 	};
 }

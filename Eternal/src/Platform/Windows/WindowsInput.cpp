@@ -1,14 +1,12 @@
 #include "ETpch.h"
-#include "WindowsInput.h"
+#include "Eternal/Core/Input.h"
 
 #include "Eternal/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Eternal {
 
-	Input* Input::s_Instance = new WindowsInput();
-
-	bool WindowsInput::IsKeyPressedImpl(int keycode)
+	bool Input::IsKeyPressed(int keycode)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
@@ -16,7 +14,7 @@ namespace Eternal {
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool WindowsInput::IsMouseButtonPressedImpl(int button)
+	bool Input::IsMouseButtonPressed(int button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
@@ -24,7 +22,7 @@ namespace Eternal {
 		return state == GLFW_PRESS;
 	}
 
-	std::pair<double, double> WindowsInput::GetMousePositionImpl()
+	std::pair<double, double> Input::GetMousePosition()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double xPos, yPos;
@@ -33,15 +31,15 @@ namespace Eternal {
 		return std::pair<double, double>(xPos, yPos);
 	}
 
-	double WindowsInput::GetMouseXImpl()
+	double Input::GetMouseX()
 	{
-		auto [x, y] = GetMousePositionImpl();
+		auto [x, y] = GetMousePosition();
 		return x;
 	}
 
-	double WindowsInput::GetMouseYImpl()
+	double Input::GetMouseY()
 	{
-		auto [x, y] = GetMousePositionImpl();
+		auto [x, y] = GetMousePosition();
 		return y;
 	}
 
