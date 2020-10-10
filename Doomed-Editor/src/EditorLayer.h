@@ -19,6 +19,8 @@ namespace Eternal {
 	private:
 		OrthographicCameraController m_CameraController;
 
+		bool m_ViewportFocused = false, m_ViewportHovered = false;
+
 		glm::vec2 m_ViewportPanelSize;
 
 		//Temporary!!

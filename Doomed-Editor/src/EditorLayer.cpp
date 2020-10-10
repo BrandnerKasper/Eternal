@@ -27,7 +27,8 @@ namespace Eternal {
     void EditorLayer::OnUpdate(Eternal::Timestep ts) // Max Frame Rate auf 60 cappen maybe!!
     {
         //Update
-        m_CameraController.OnUpdate(ts);
+        if (m_ViewportFocused)
+            m_CameraController.OnUpdate(ts);
 
         //Renderer Stats
         Eternal::Renderer2D::ResetStats();
@@ -52,7 +53,7 @@ namespace Eternal {
 
     void EditorLayer::OnImGuiRender()
     {
-        ChangeSytle(false);
+        ChangeSytle(true);
 
         static bool dockingEnabled = true;
         if (dockingEnabled)
@@ -136,6 +137,10 @@ namespace Eternal {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });
 
         ImGui::Begin("Scene Viewport");
+
+        m_ViewportFocused = ImGui::IsWindowFocused();
+        m_ViewportHovered = ImGui::IsWindowHovered();
+        Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
         //ET_INFO("ViewportPanelSize: {0}, {1}: ", viewportPanelSize.x, viewportPanelSize.y);
