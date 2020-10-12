@@ -16,6 +16,11 @@
 
 #include "Eternal/ImGui/ImGuiLayer.h"
 
+//----Scene---------------------------
+#include "Eternal/Scene/Scene.h"
+#include "Eternal/Scene/Component.h"
+#include "Eternal/Scene/Entity.h"
+
 //----Renderer-----------------------
 #include "Eternal/Renderer/Renderer.h"
 #include "Eternal/Renderer/Renderer2D.h"

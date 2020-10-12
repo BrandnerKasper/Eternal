@@ -23,6 +23,9 @@ namespace Eternal {
 
 		glm::vec2 m_ViewportPanelSize;
 
+		Ref<Scene> m_ActiveScene;
+		Entity m_SquareEntity;
+
 		//Temporary!!
 		Ref<FrameBuffer> m_FrameBuffer;
 		Ref<VertexArray> m_SquareVertexArray;

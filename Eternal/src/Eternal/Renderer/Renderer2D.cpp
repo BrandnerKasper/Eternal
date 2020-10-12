@@ -141,6 +141,8 @@ namespace Eternal {
 		s_Data.Stats.DrawCalls++;
 	}
 
+	//TODO: Refactor DrawQuad fct to take in transform and spriteComponent? 
+
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, color);
@@ -148,10 +150,18 @@ namespace Eternal {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-		constexpr size_t quadVertexCount = 4;
-		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 		constexpr glm::mat4 std_Mat = glm::mat4(1.0f);
 
+		glm::mat4 transform = glm::translate(std_Mat, position)
+			* glm::scale(std_Mat, { size.x, size.y, 1.0f });
+
+		DrawQuad(transform, color);
+	}
+
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
+	{
+		constexpr size_t quadVertexCount = 4;
+		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
 		//Check if too many Quads got drawn!
 		if (TooManyQuads())
@@ -161,9 +171,6 @@ namespace Eternal {
 
 		const float texID = 0; //White Texture!
 		const float tilingFactor = 1.0f;
-
-		glm::mat4 transform = glm::translate(std_Mat, position)
-			* glm::scale(std_Mat, { size.x, size.y, 1.0f });
 
 		for (size_t i = 0; i < quadVertexCount; i++)
 		{
@@ -188,9 +195,18 @@ namespace Eternal {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
+		constexpr glm::mat4 std_Mat = glm::mat4(1.0f);
+
+		glm::mat4 transform = glm::translate(std_Mat, position)
+			* glm::scale(std_Mat, { size.x, size.y, 1.0f });
+
+		DrawQuad(transform, texture, textureScale, tintColor);
+	}
+
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
+	{
 		constexpr size_t quadVertexCount = 4;
 		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-		constexpr glm::mat4 std_Mat = glm::mat4(1.0f);
 
 		//Check if too many Quads got drawn or textures!
 		if (TooManyQuads() || TooManyTextures())
@@ -201,10 +217,6 @@ namespace Eternal {
 		glm::vec4 color = tintColor;
 
 		float texID = GetTextureSlot(texture);
-
-		
-		glm::mat4 transform = glm::translate(std_Mat, position)
-			* glm::scale(std_Mat, { size.x, size.y, 1.0f });
 
 		for (size_t i = 0; i < quadVertexCount; i++)
 		{

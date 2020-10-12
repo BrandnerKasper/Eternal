@@ -12,11 +12,17 @@ namespace Eternal {
 
     void EditorLayer::OnAttach()
     {
-        Eternal::FrameBufferSpecification frameBufferSpec;
+        FrameBufferSpecification frameBufferSpec;
         frameBufferSpec.Width = 1280;
         frameBufferSpec.Height = 720;
-        m_FrameBuffer = Eternal::FrameBuffer::Create(frameBufferSpec);
-        m_CheckerboardTexture = Eternal::Texture2D::Create("assets/textures/Checkerboard.png");
+        m_FrameBuffer = FrameBuffer::Create(frameBufferSpec);
+        m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+    
+        m_ActiveScene = CreateRef<Scene>();
+
+        auto square = m_ActiveScene->CreateEntity("Test Sqaure");
+        square.AddComponent<SpriteRendererComponent>(m_CheckerboardTexture, m_Tiling, m_TintColor);
+        m_SquareEntity = square;
     }
 
     void EditorLayer::OnDetach()
@@ -24,36 +30,39 @@ namespace Eternal {
         
     }
 
-    void EditorLayer::OnUpdate(Eternal::Timestep ts) // Max Frame Rate auf 60 cappen maybe!!
+    void EditorLayer::OnUpdate(Timestep ts) // Max Frame Rate auf 60 cappen maybe!!
     {
         //Update
         if (m_ViewportFocused)
             m_CameraController.OnUpdate(ts);
 
         //Renderer Stats
-        Eternal::Renderer2D::ResetStats();
+        Renderer2D::ResetStats();
 
         m_FrameBuffer->Bind();
 
         //Render
-        Eternal::RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
-        Eternal::RenderCommand::Clear();
+        RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
+        RenderCommand::Clear();
 
-        Eternal::Renderer2D::BeginScene(m_CameraController.GetCamera());
+        Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-        Eternal::Renderer2D::DrawRotatedQuad(m_Position, m_Scale, m_Rotation, m_CheckerboardTexture, m_Tiling, m_TintColor);
-        Eternal::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.8f, 0.5f, 0.2f, 1.0f });
-        Eternal::Renderer2D::DrawQuad({ 0.0f,  0.0f, -0.1f }, { 10.0f, 10.0f }, m_SquareColor);
-        Eternal::Renderer2D::DrawRotatedQuad({ 1.0f, 1.0f, 0.0f }, { 2.0f, 0.5f }, 20.0f, { 0.3f, 0.8f, 0.4f, 1.0f });
-        Eternal::Renderer2D::DrawRotatedQuad({ 3.0f, 4.0f, 0.0f }, { 2.0f,2.0f }, 35.0f, Eternal::Texture2D::Create("assets/textures/EternalLogo.png"));
+        //Update Scene
+        m_ActiveScene->OnUpdate(ts);
 
-        Eternal::Renderer2D::EndScene();
+        //Renderer2D::DrawRotatedQuad(m_Position, m_Scale, m_Rotation, m_CheckerboardTexture, m_Tiling, m_TintColor);
+        //Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.8f, 0.5f, 0.2f, 1.0f });
+        //Renderer2D::DrawQuad({ 0.0f,  0.0f, -0.1f }, { 10.0f, 10.0f }, m_SquareColor);
+        //Renderer2D::DrawRotatedQuad({ 1.0f, 1.0f, 0.0f }, { 2.0f, 0.5f }, 20.0f, { 0.3f, 0.8f, 0.4f, 1.0f });
+        //Renderer2D::DrawRotatedQuad({ 3.0f, 4.0f, 0.0f }, { 2.0f,2.0f }, 35.0f, Texture2D::Create("assets/textures/EternalLogo.png"));
+
+        Renderer2D::EndScene();
         m_FrameBuffer->Unbind();
     }
 
     void EditorLayer::OnImGuiRender()
     {
-        ChangeSytle(true);
+        ChangeSytle(false);
 
         static bool dockingEnabled = true;
         if (dockingEnabled)
@@ -99,7 +108,7 @@ namespace Eternal {
             {
                 if (ImGui::BeginMenu("File"))
                 {
-                    if (ImGui::MenuItem("Exit")) Eternal::Application::Get().Close();
+                    if (ImGui::MenuItem("Exit")) Application::Get().Close();
                     //ImGui::Separator();
                     //if (ImGui::MenuItem("Close DockSpace", NULL, false, &dockspaceOpen != NULL))
                        // dockspaceOpen = false;
@@ -112,7 +121,7 @@ namespace Eternal {
 
         ImGui::Begin("Settings");
 
-        auto stats = Eternal::Renderer2D::GetStats();
+        auto stats = Renderer2D::GetStats();
         ImGui::Text("Batch Renderer Stats:");
         ImGui::Text("Draw Calls: %d", stats.DrawCalls);
         ImGui::Text("Quad Count: %d", stats.QuadCount);
@@ -160,7 +169,7 @@ namespace Eternal {
             ImGui::End();
     }
 
-    void EditorLayer::OnEvent(Eternal::Event& event)
+    void EditorLayer::OnEvent(Event& event)
     {
         m_CameraController.OnEvent(event);
     }

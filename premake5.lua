@@ -19,6 +19,7 @@ IncludeDir["Glad"] = "Eternal/vendor/Glad/include"
 IncludeDir["ImGui"] = "Eternal/vendor/imgui"
 IncludeDir["glm"] = "Eternal/vendor/glm"
 IncludeDir["stb_image"] = "Eternal/vendor/stb_image"
+IncludeDir["entt"] = "Eternal/vendor/entt/include"
 
 group "Dependencies"
 	include "Eternal/vendor/GLFW"
@@ -63,7 +64,8 @@ project "Eternal"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -119,7 +121,8 @@ project "Sandbox"
 		"Eternal/vendor/spdlog/include",
 		"Eternal/src",
 		"Eternal/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -173,7 +176,8 @@ project "Doomed-Editor"
 		"Eternal/vendor/spdlog/include",
 		"Eternal/src",
 		"Eternal/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
