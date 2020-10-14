@@ -27,7 +27,7 @@ namespace Eternal {
 
 		auto& tag = entity.AddComponent<TagComponent>();
 		tag.Tag = name.empty() ? "Entity" : name;
-		entity.AddComponent<TransformComponent>();
+		//entity.AddComponent<TransformComponent>();
 		
 		return entity;
 	}
@@ -38,7 +38,7 @@ namespace Eternal {
 		for (auto entity : group)
 		{
 			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-			Renderer2D::DrawQuad(transform, sprite.Color);
+			Renderer2D::DrawQuad(transform.Position, transform.Size, transform.Rotation, sprite.Texture, sprite.TextureScale, sprite.Color);
 		}
 	}
 }

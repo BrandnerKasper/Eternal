@@ -17,12 +17,26 @@ namespace Eternal {
         frameBufferSpec.Height = 720;
         m_FrameBuffer = FrameBuffer::Create(frameBufferSpec);
         m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+        m_DoomTexture = Texture2D::Create("assets/textures/EternalLogo.png");
     
         m_ActiveScene = CreateRef<Scene>();
 
-        auto square = m_ActiveScene->CreateEntity("Test Sqaure");
-        square.AddComponent<SpriteRendererComponent>(m_CheckerboardTexture, m_Tiling, m_TintColor);
-        m_SquareEntity = square;
+        auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
+        chessSquare.AddComponent<TransformComponent>(glm::vec3{ 3.0f, 1.0f, 0.0f }, glm::vec2{ 1.0f, 1.0f}, 0.0f);
+        chessSquare.AddComponent<SpriteRendererComponent>(m_CheckerboardTexture, 1, m_TintColor);
+        m_ChessSquareEntity = chessSquare;
+
+        auto colorSquare = m_ActiveScene->CreateEntity("One Color Square");
+        colorSquare.AddComponent<TransformComponent>(glm::vec3{ 0.0f });
+        colorSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
+
+        auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
+        DoomSquare.AddComponent<TransformComponent>(glm::vec3{-1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f);
+        DoomSquare.AddComponent<SpriteRendererComponent>(m_DoomTexture);
+
+        auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
+        ChernoSquare.AddComponent<TransformComponent>(glm::vec3{ -10.0f, -10.0f, 0.0f }, glm::vec2{ 3.0f, 3.0f }, 40.0f);
+        ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
     }
 
     void EditorLayer::OnDetach()
@@ -49,12 +63,6 @@ namespace Eternal {
 
         //Update Scene
         m_ActiveScene->OnUpdate(ts);
-
-        //Renderer2D::DrawRotatedQuad(m_Position, m_Scale, m_Rotation, m_CheckerboardTexture, m_Tiling, m_TintColor);
-        //Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.8f, 0.5f, 0.2f, 1.0f });
-        //Renderer2D::DrawQuad({ 0.0f,  0.0f, -0.1f }, { 10.0f, 10.0f }, m_SquareColor);
-        //Renderer2D::DrawRotatedQuad({ 1.0f, 1.0f, 0.0f }, { 2.0f, 0.5f }, 20.0f, { 0.3f, 0.8f, 0.4f, 1.0f });
-        //Renderer2D::DrawRotatedQuad({ 3.0f, 4.0f, 0.0f }, { 2.0f,2.0f }, 35.0f, Texture2D::Create("assets/textures/EternalLogo.png"));
 
         Renderer2D::EndScene();
         m_FrameBuffer->Unbind();
@@ -132,14 +140,13 @@ namespace Eternal {
 
         ImGui::Begin("Property Panel");
 
-        ImGui::Text("Chess Quad:");
-        ImGui::SliderFloat3("Checkerboard Position", glm::value_ptr(m_Position), -10.0f, 10.0f);
-        ImGui::SliderFloat2("Checkerboard Quad Scale", glm::value_ptr(m_Scale), 0.0f, 10.0f);
-        ImGui::ColorEdit4("Background Square Color", glm::value_ptr(m_SquareColor));
-        ImGui::SliderInt("Checkerboard UV Scaling", &m_Tiling, 1, 10);
-        ImGui::SliderFloat("Checkerboard Rotation", &m_Rotation, 0.0f, 360.0f);
-        ImGui::Image((void*)m_CheckerboardTexture->GetRendererID(), ImVec2(256.0f, 256.0f));
-        ImGui::ColorEdit4("Tint Color of Checkerboard", glm::value_ptr(m_TintColor));
+        ImGui::Text(m_ChessSquareEntity.GetComponent<TagComponent>().Tag.c_str());
+        ImGui::SliderFloat3("Checkerboard Position", glm::value_ptr(m_ChessSquareEntity.GetComponent<TransformComponent>().Position), -10.0f, 10.0f);
+        ImGui::SliderFloat2("Checkerboard Quad Size", glm::value_ptr(m_ChessSquareEntity.GetComponent<TransformComponent>().Size), 0.0f, 10.0f);
+        ImGui::SliderInt("Checkerboard UV Scaling", &m_ChessSquareEntity.GetComponent<SpriteRendererComponent>().TextureScale, 1, 10);
+        ImGui::SliderFloat("Checkerboard Rotation", &m_ChessSquareEntity.GetComponent<TransformComponent>().Rotation, 0.0f, 360.0f);
+        ImGui::Image((void*)m_ChessSquareEntity.GetComponent<SpriteRendererComponent>().Texture->GetRendererID(), ImVec2(256.0f, 256.0f));
+        ImGui::ColorEdit4("Tint Color of Checkerboard", glm::value_ptr(m_ChessSquareEntity.GetComponent<SpriteRendererComponent>().Color));
 
         ImGui::End();
 

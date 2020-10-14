@@ -1,6 +1,9 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+
 #include "Eternal/Renderer/Texture.h"
 
 namespace Eternal {
@@ -17,21 +20,35 @@ namespace Eternal {
 
 	struct TransformComponent
 	{
-		//Refactor to take in position rotation and scale!
-		glm::mat4 Transform { 1.0f };
+		//Refactor so that Maybe when Transform gets newly Calculated every time someting changes
+		//glm::mat4 Transform { 1.0f };
+		glm::vec3 Position { 0.0f, 0.0f, 0.0f };
+		glm::vec2 Size { 1.0f, 1.0f };
+		float Rotation = 0.0f;
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const glm::mat4& transform)
-			: Transform(transform) {}
+		//TransformComponent(const glm::mat4& transform)
+			//: Transform(transform) {}
+		TransformComponent(const glm::vec3& position, const glm::vec2& size, float rotation)
+			: Position(position), Size(size), Rotation(rotation)
+		{
+			//Transform = glm::translate(Transform, Position) 
+				//* glm::rotate(Transform, glm::radians(Rotation), { 0.0f, 0.0f, 1.0f })
+				//* glm::scale(Transform, { Size.x, Size.y, 1.0f });
+		}
+		TransformComponent(const glm::vec3& position)
+			: Position(position){}
+		TransformComponent(const glm::vec3& position, const glm::vec2& size)
+			: Position(position), Size(size) {}
 
-		operator glm::mat4& () { return Transform; }
-		operator const glm::mat4& () const { return Transform; }
+		//operator glm::mat4& () { return Transform; }
+		//operator const glm::mat4& () const { return Transform; }
 	};
 
 	struct SpriteRendererComponent
 	{
-		Ref<Texture2D> Texture = Texture2D::Create(1, 1);
+		Ref<Texture2D> Texture = nullptr;
 		int TextureScale = 1;
 
 		glm::vec4 Color {1.0f, 1.0f, 1.0f, 1.0f};
@@ -42,5 +59,7 @@ namespace Eternal {
 			: Color(color) {}
 		SpriteRendererComponent(const Ref<Texture2D>& texture, const int textureScale, glm::vec4 tintColor)
 			: Texture(texture), TextureScale(textureScale), Color(tintColor) {}
+		SpriteRendererComponent(const Ref<Texture2D>& texture)
+			: Texture(texture){}
 	};
 }
