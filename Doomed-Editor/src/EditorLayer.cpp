@@ -21,8 +21,9 @@ namespace Eternal {
     
         m_ActiveScene = CreateRef<Scene>();
 
+        //Entitys
         auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
-        chessSquare.AddComponent<TransformComponent>(glm::vec3{ 3.0f, 1.0f, 0.0f }, glm::vec2{ 1.0f, 1.0f}, 0.0f);
+        chessSquare.AddComponent<TransformComponent>(glm::vec3{ 0.0f, 1.0f, 0.1f }, glm::vec2{ 1.0f, 1.0f}, 0.0f);
         chessSquare.AddComponent<SpriteRendererComponent>(m_CheckerboardTexture, 1, m_TintColor);
         m_ChessSquareEntity = chessSquare;
 
@@ -37,6 +38,10 @@ namespace Eternal {
         auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
         ChernoSquare.AddComponent<TransformComponent>(glm::vec3{ -10.0f, -10.0f, 0.0f }, glm::vec2{ 3.0f, 3.0f }, 40.0f);
         ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
+   
+        m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
+        m_CameraEntity.AddComponent<TransformComponent>(glm::vec3{ 0.0f });
+        m_CameraEntity.AddComponent<CameraComponent>();
     }
 
     void EditorLayer::OnDetach()
@@ -46,6 +51,17 @@ namespace Eternal {
 
     void EditorLayer::OnUpdate(Timestep ts) // Max Frame Rate auf 60 cappen maybe!!
     {
+        // Resize
+        FrameBufferSpecification spec = m_FrameBuffer->GetSpecification();
+        if (m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
+            (spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
+        {
+            m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+            //m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+
+            m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+        }
+
         //Update
         if (m_ViewportFocused)
             m_CameraController.OnUpdate(ts);
@@ -59,12 +75,9 @@ namespace Eternal {
         RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
         RenderCommand::Clear();
 
-        Renderer2D::BeginScene(m_CameraController.GetCamera());
-
         //Update Scene
         m_ActiveScene->OnUpdate(ts);
 
-        Renderer2D::EndScene();
         m_FrameBuffer->Unbind();
     }
 
@@ -159,14 +172,12 @@ namespace Eternal {
         Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-        //ET_INFO("ViewportPanelSize: {0}, {1}: ", viewportPanelSize.x, viewportPanelSize.y);
-        if (m_ViewportPanelSize != *((glm::vec2*)&viewportPanelSize))
+        if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
         {
-            m_ViewportPanelSize = { viewportPanelSize.x, viewportPanelSize.y };
-            m_FrameBuffer->Resize((uint32_t)m_ViewportPanelSize.x, (uint32_t)m_ViewportPanelSize.y);
+            m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
         }
         uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
-        ImGui::Image((void*)textureID, ImVec2{ m_ViewportPanelSize.x, m_ViewportPanelSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
+        ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
         
         ImGui::End();
 

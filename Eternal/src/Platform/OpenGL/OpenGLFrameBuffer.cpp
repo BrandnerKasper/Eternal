@@ -53,7 +53,7 @@ namespace Eternal {
 	void OpenGLFramebuffer::Bind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
-		glViewport(0, 0, m_Specification.Width, m_Specification.Height); //not ssure if needed!
+		glViewport(0, 0, m_Specification.Width, m_Specification.Height); //not sure if needed!
 	}
 
 	void OpenGLFramebuffer::Unbind()
@@ -63,11 +63,6 @@ namespace Eternal {
 
 	void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 	{
-		//if (width == 0 || height == 0 || width > s_MaxFrameBufferSize || height > s_MaxFrameBufferSize)
-		//{
-		//	ET_CORE_WARN("Framebuffer wanted to be resized to {0}, {1}", width, height);
-		//	return;
-		//}
 		m_Specification.Width = width;
 		m_Specification.Height = height;
 

@@ -21,22 +21,16 @@ namespace Eternal {
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
-		glm::vec2 m_ViewportPanelSize;
+		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 
 		Ref<Scene> m_ActiveScene;
 		Entity m_ChessSquareEntity;
+		Entity m_CameraEntity;
 
 		//Temporary!!
 		Ref<FrameBuffer> m_FrameBuffer;
-		Ref<VertexArray> m_SquareVertexArray;
-		Ref<Shader> m_FlatColorShader;
-		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 		Ref<Texture2D> m_CheckerboardTexture;
 		Ref<Texture2D> m_DoomTexture;
-		glm::vec3 m_Position = { -1.0f, 0.0f, 0.0f };
-		glm::vec2 m_Scale = { 0.8f, 0.8f };
-		int m_Tiling = 2;
-		float m_Rotation = 30.0f;
 		glm::vec4 m_TintColor = { 1.0f, 1.0f, 0.8f, 1.0f };
 
 	};

@@ -67,7 +67,7 @@ namespace Eternal {
 				data.Height = height;
 
 				WindowResizeEvent event(width, height);
-				ET_CORE_INFO("Window being resized {0}, {1}", width, height);
+				//ET_CORE_INFO("Window being resized {0}, {1}", width, height);
 				data.EventCallback(event);
 			});
 
