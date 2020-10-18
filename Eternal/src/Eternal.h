@@ -20,6 +20,7 @@
 #include "Eternal/Scene/Scene.h"
 #include "Eternal/Scene/Component.h"
 #include "Eternal/Scene/Entity.h"
+#include "Eternal/Scene/ScriptableEntity.h"
 
 //----Renderer-----------------------
 #include "Eternal/Renderer/Renderer.h"

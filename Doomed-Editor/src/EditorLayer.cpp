@@ -42,6 +42,30 @@ namespace Eternal {
         m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
         m_CameraEntity.AddComponent<TransformComponent>(glm::vec3{ 0.0f });
         m_CameraEntity.AddComponent<CameraComponent>();
+
+        class CameraController : public ScriptableEntity
+        {
+        public:
+            void OnCreate()
+            {
+                std::cout << "i am alive.";
+            }
+
+            void OnDestroy()
+            {
+
+            }
+
+            void OnUpdate(Timestep ts)
+            {
+                auto& transform = GetComponent<TransformComponent>().Transform;
+                float speed = 5.0f;
+                if (Input::IsKeyPressed(ET_KEY_A))
+                    transform[3][0] -= speed * ts;
+            }
+        };
+
+        m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
     }
 
     void EditorLayer::OnDetach()
@@ -148,7 +172,12 @@ namespace Eternal {
         ImGui::Text("Quad Count: %d", stats.QuadCount);
         ImGui::Text("Vertex Count: %d", stats.GetTotalVertexCount());
         ImGui::Text("Index Count: %d", stats.GetTotalIndexCount());
-
+        { //Camera
+            auto& camera = m_CameraEntity.GetComponent<CameraComponent>().Camera;
+            float orthoSize = camera.GetOrthographicSize();
+            if (ImGui::DragFloat("Camera View Size", &orthoSize))
+                camera.SetOrthographicSize(orthoSize);
+        }
         ImGui::End();
 
         ImGui::Begin("Property Panel");

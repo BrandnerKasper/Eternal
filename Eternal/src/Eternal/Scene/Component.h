@@ -3,9 +3,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-
 #include "Eternal/Renderer/Texture.h"
 #include "Eternal/Scene/SceneCamera.h"
+#include "Eternal/Scene/ScriptableEntity.h"
 
 namespace Eternal {
 
@@ -83,5 +83,20 @@ namespace Eternal {
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
 
+	};
+
+	struct NativeScriptComponent
+	{
+		ScriptableEntity* Instance = nullptr;
+
+		ScriptableEntity* (*InstantiateScript)();
+		void (*DestroyScript)(NativeScriptComponent*);
+
+		template<typename T>
+		void Bind()
+		{
+			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
+			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+		}
 	};
 }
