@@ -16,7 +16,7 @@ namespace Eternal {
 		static void EndScene();
 		static void Flush();
 
-		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const int textureScale = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+		static void DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
 
 		struct Statistics
 		{

@@ -154,14 +154,8 @@ namespace Eternal {
 		s_Data.Stats.DrawCalls++;
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
-		//Maybe refactor to let tranform be calculated from Componennt when changed?
-		glm::mat4 stdMat{ 1.0f };
-		const glm::mat4& transform = glm::translate(stdMat, position)
-			* glm::rotate(stdMat, glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-			* glm::scale(stdMat, { size.x, size.y, 1.0f });
-
 		constexpr size_t quadVertexCount = 4;
 		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 

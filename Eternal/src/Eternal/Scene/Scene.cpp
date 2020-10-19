@@ -34,6 +34,14 @@ namespace Eternal {
 
 	void Scene::OnUpdate(Timestep ts)
 	{
+		//Update Transforms
+		{
+			auto view = m_Registry.view<TransformComponent>();
+			for (auto entity : view)
+			{
+				view.get<TransformComponent>(entity).CalculateTransform();
+			}
+		}
 		// Update scripts
 		{
 			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
@@ -77,7 +85,7 @@ namespace Eternal {
 			for (auto entity : group)
 			{
 				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-				Renderer2D::DrawQuad(transform.Position, transform.Size, transform.Rotation, sprite.Texture, sprite.TextureScale, sprite.Color);
+				Renderer2D::DrawQuad(transform.Transform, sprite.Texture, sprite.TextureScale, sprite.Color);
 			}
 
 			Renderer2D::EndScene();

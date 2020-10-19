@@ -48,7 +48,7 @@ namespace Eternal {
         public:
             void OnCreate()
             {
-                std::cout << "i am alive.";
+                //std::cout << "i am alive.";
             }
 
             void OnDestroy()
@@ -58,10 +58,16 @@ namespace Eternal {
 
             void OnUpdate(Timestep ts)
             {
-                auto& transform = GetComponent<TransformComponent>().Transform;
+                auto& position = GetComponent<TransformComponent>().Position;
                 float speed = 5.0f;
                 if (Input::IsKeyPressed(ET_KEY_A))
-                    transform[3][0] -= speed * ts;
+                    position.x -= speed * ts;
+                if (Input::IsKeyPressed(ET_KEY_D))
+                    position.x += speed * ts;
+                if (Input::IsKeyPressed(ET_KEY_W))
+                    position.y += speed * ts;
+                if (Input::IsKeyPressed(ET_KEY_S))
+                    position.y -= speed * ts;
             }
         };
 
