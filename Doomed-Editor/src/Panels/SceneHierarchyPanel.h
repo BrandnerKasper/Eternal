@@ -13,10 +13,14 @@ namespace Eternal {
 		void SetContext(const Ref<Scene>& context);
 
 		void OnImGuiRender();
+
+		Entity GetSelectedEntity() { return m_SelectedEntity; }
 	private:
 		void DrawEntityNode(Entity entity);
 	private:
 		Ref<Scene> m_Context;
-		Entity m_SelectionContext;
+		Entity m_SelectedEntity;
+
+		friend class PropertiesPanel;
 	};
 }

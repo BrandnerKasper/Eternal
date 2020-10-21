@@ -2,6 +2,9 @@
 
 #include <Eternal.h>
 #include "Panels/SceneHierarchyPanel.h"
+#include "Panels/PropertiesPanel.h"
+#include "Panels/SettingsPanel.h"
+#include "Panels/SceneViewportPanel.h"
 
 namespace Eternal {
 	class EditorLayer : public Layer
@@ -20,22 +23,15 @@ namespace Eternal {
 	private:
 		OrthographicCameraController m_CameraController;
 
-		bool m_ViewportFocused = false, m_ViewportHovered = false;
-
-		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
-
 		Ref<Scene> m_ActiveScene;
 		Entity m_ChessSquareEntity;
 		Entity m_CameraEntity;
 		
 		//Panel
-		SceneHierarchyPanel m_SceneHierachyPanel;
-
-		//Temporary!!
-		Ref<FrameBuffer> m_FrameBuffer;
-		Ref<Texture2D> m_CheckerboardTexture;
-		Ref<Texture2D> m_DoomTexture;
-		glm::vec4 m_TintColor = { 1.0f, 1.0f, 0.8f, 1.0f };
+		Ref<SceneHierarchyPanel> m_SceneHierachyPanel;
+		Ref<PropertiesPanel> m_PropertiesPanel;
+		Ref<SettingsPanel> m_SettingsPanel;
+		Ref<SceneViewportPanel> m_SceneViewportPanel;
 
 	};
 }

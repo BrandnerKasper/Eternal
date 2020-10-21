@@ -38,11 +38,12 @@ namespace Eternal {
 			auto view = m_Registry.view<TransformComponent>();
 			for (auto entity : view)
 			{
-				view.get<TransformComponent>(entity).CalculateTransform();
+				view.get<TransformComponent>(entity).CheckTransform();
 			}
 		}
 		// Update scripts
 		{
+			//TODO: block events when window is not focused!
 			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 				{
 					// TODO: Move to Scene::OnScenePlay

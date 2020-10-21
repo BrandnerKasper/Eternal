@@ -53,10 +53,14 @@ namespace Eternal {
 			CalculateTransform();
 		}
 
+		void CheckTransform()
+		{
+			if (TransformChanged())
+				CalculateTransform();
+		}
+
 		void CalculateTransform()
 		{
-			//Check old position, rotation or scale, of change, then recalculate :)
-			if(TransformChanged());
 			Transform = glm::translate(stdMat, Position)
 				* glm::rotate(stdMat, glm::radians(Rotation), { 0.0f, 0.0f, 1.0f })
 				* glm::scale(stdMat, { Size.x, Size.y, 1.0f });

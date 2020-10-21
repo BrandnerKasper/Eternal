@@ -13,19 +13,19 @@ namespace Eternal {
 
     void EditorLayer::OnAttach()
     {
-        FrameBufferSpecification frameBufferSpec;
-        frameBufferSpec.Width = 1280;
-        frameBufferSpec.Height = 720;
-        m_FrameBuffer = FrameBuffer::Create(frameBufferSpec);
-        m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
-        m_DoomTexture = Texture2D::Create("assets/textures/EternalLogo.png");
+        auto checkerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+        auto doomTexture = Texture2D::Create("assets/textures/EternalLogo.png");
     
         m_ActiveScene = CreateRef<Scene>();
+        m_SceneHierachyPanel = CreateRef<SceneHierarchyPanel>();
+        m_PropertiesPanel = CreateRef<PropertiesPanel>();
+        m_SettingsPanel = CreateRef<SettingsPanel>();
+        m_SceneViewportPanel = CreateRef<SceneViewportPanel>();
 
         //Entitys
         auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
         chessSquare.AddComponent<TransformComponent>() = { glm::vec3{ 1.0f, 1.0f, 0.1f } };
-        chessSquare.AddComponent<SpriteRendererComponent>(m_CheckerboardTexture, 1, m_TintColor);
+        chessSquare.AddComponent<SpriteRendererComponent>(checkerboardTexture);
         m_ChessSquareEntity = chessSquare;
 
         auto colorSquare = m_ActiveScene->CreateEntity("One Color Square");
@@ -34,7 +34,7 @@ namespace Eternal {
 
         auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
         DoomSquare.AddComponent<TransformComponent>() = { glm::vec3{ -1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f };
-        DoomSquare.AddComponent<SpriteRendererComponent>(m_DoomTexture);
+        DoomSquare.AddComponent<SpriteRendererComponent>(doomTexture);
 
         auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
         ChernoSquare.AddComponent<TransformComponent>() = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
@@ -46,7 +46,9 @@ namespace Eternal {
 
         camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
         m_CameraEntity = camera;
-        m_SceneHierachyPanel.SetContext(m_ActiveScene);
+        m_SceneHierachyPanel->SetContext(m_ActiveScene);
+        m_PropertiesPanel->SetContext(m_SceneHierachyPanel);
+        m_SceneViewportPanel->SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OnDetach()
@@ -56,34 +58,13 @@ namespace Eternal {
 
     void EditorLayer::OnUpdate(Timestep ts) // Max Frame Rate auf 60 cappen maybe!!
     {
-        // Resize
-        FrameBufferSpecification spec = m_FrameBuffer->GetSpecification();
-        if (m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
-            (spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
-        {
-            m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-            //m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
-
-            m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-        }
+        m_SceneViewportPanel->OnUpdate(ts);
 
         //Update
-        if (m_ViewportFocused)
-            m_CameraController.OnUpdate(ts);
+        //if (m_ViewportFocused)
+        //Old TODO remove
+        m_CameraController.OnUpdate(ts);
 
-        //Renderer Stats
-        Renderer2D::ResetStats();
-
-        m_FrameBuffer->Bind();
-
-        //Render
-        RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
-        RenderCommand::Clear();
-
-        //Update Scene
-        m_ActiveScene->OnUpdate(ts);
-
-        m_FrameBuffer->Unbind();
     }
 
     void EditorLayer::OnImGuiRender()
@@ -145,56 +126,11 @@ namespace Eternal {
             }
         }
 
-        //Panel
-        m_SceneHierachyPanel.OnImGuiRender();
-
-        ImGui::Begin("Settings");
-
-        auto stats = Renderer2D::GetStats();
-        ImGui::Text("Batch Renderer Stats:");
-        ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-        ImGui::Text("Quad Count: %d", stats.QuadCount);
-        ImGui::Text("Vertex Count: %d", stats.GetTotalVertexCount());
-        ImGui::Text("Index Count: %d", stats.GetTotalIndexCount());
-        { //Camera
-            auto& camera = m_CameraEntity.GetComponent<CameraComponent>().Camera;
-            float orthoSize = camera.GetOrthographicSize();
-            if (ImGui::DragFloat("Camera View Size", &orthoSize))
-                camera.SetOrthographicSize(orthoSize);
-        }
-        ImGui::End();
-
-        ImGui::Begin("Property Panel");
-
-        ImGui::Text(m_ChessSquareEntity.GetComponent<TagComponent>().Tag.c_str());
-        ImGui::SliderFloat3("Checkerboard Position", glm::value_ptr(m_ChessSquareEntity.GetComponent<TransformComponent>().Position), -10.0f, 10.0f);
-        ImGui::SliderFloat2("Checkerboard Quad Size", glm::value_ptr(m_ChessSquareEntity.GetComponent<TransformComponent>().Size), 0.0f, 10.0f);
-        ImGui::SliderInt("Checkerboard UV Scaling", &m_ChessSquareEntity.GetComponent<SpriteRendererComponent>().TextureScale, 1, 10);
-        ImGui::SliderFloat("Checkerboard Rotation", &m_ChessSquareEntity.GetComponent<TransformComponent>().Rotation, 0.0f, 360.0f);
-        ImGui::Image((void*)m_ChessSquareEntity.GetComponent<SpriteRendererComponent>().Texture->GetRendererID(), ImVec2(256.0f, 256.0f));
-        ImGui::ColorEdit4("Tint Color of Checkerboard", glm::value_ptr(m_ChessSquareEntity.GetComponent<SpriteRendererComponent>().Color));
-
-        ImGui::End();
-
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });
-
-        ImGui::Begin("Scene Viewport");
-
-        m_ViewportFocused = ImGui::IsWindowFocused();
-        m_ViewportHovered = ImGui::IsWindowHovered();
-        Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
-
-        ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-        if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
-        {
-            m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-        }
-        uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
-        ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
-        
-        ImGui::End();
-
-        ImGui::PopStyleVar();
+        //Panels
+        m_SceneHierachyPanel->OnImGuiRender();
+        m_PropertiesPanel->OnImGuiRender();
+        m_SettingsPanel->OnImGuiRender();
+        m_SceneViewportPanel->OnImGuiRender();
 
         if (dockingEnabled)
             ImGui::End();
