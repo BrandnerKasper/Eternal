@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Eternal.h>
+#include "Panels/SceneHierarchyPanel.h"
 
 namespace Eternal {
 	class EditorLayer : public Layer
@@ -26,6 +27,9 @@ namespace Eternal {
 		Ref<Scene> m_ActiveScene;
 		Entity m_ChessSquareEntity;
 		Entity m_CameraEntity;
+		
+		//Panel
+		SceneHierarchyPanel m_SceneHierachyPanel;
 
 		//Temporary!!
 		Ref<FrameBuffer> m_FrameBuffer;

@@ -1,5 +1,6 @@
 #include "EditorLayer.h"
 #include "imgui/imgui.h"
+#include "Scripts/CameraController.h"
 
 #include <glm/gtc/type_ptr.hpp>
 
@@ -23,55 +24,29 @@ namespace Eternal {
 
         //Entitys
         auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
-        chessSquare.AddComponent<TransformComponent>(glm::vec3{ 0.0f, 1.0f, 0.1f }, glm::vec2{ 1.0f, 1.0f}, 0.0f);
+        chessSquare.AddComponent<TransformComponent>() = { glm::vec3{ 1.0f, 1.0f, 0.1f } };
         chessSquare.AddComponent<SpriteRendererComponent>(m_CheckerboardTexture, 1, m_TintColor);
         m_ChessSquareEntity = chessSquare;
 
         auto colorSquare = m_ActiveScene->CreateEntity("One Color Square");
-        colorSquare.AddComponent<TransformComponent>(glm::vec3{ 0.0f });
+        colorSquare.AddComponent<TransformComponent>();
         colorSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
 
         auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
-        DoomSquare.AddComponent<TransformComponent>(glm::vec3{-1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f);
+        DoomSquare.AddComponent<TransformComponent>() = { glm::vec3{ -1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f };
         DoomSquare.AddComponent<SpriteRendererComponent>(m_DoomTexture);
 
         auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
-        ChernoSquare.AddComponent<TransformComponent>(glm::vec3{ -10.0f, -10.0f, 0.0f }, glm::vec2{ 3.0f, 3.0f }, 40.0f);
+        ChernoSquare.AddComponent<TransformComponent>() = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
         ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
    
-        m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
-        m_CameraEntity.AddComponent<TransformComponent>(glm::vec3{ 0.0f });
-        m_CameraEntity.AddComponent<CameraComponent>();
+        auto camera = m_ActiveScene->CreateEntity("Camera Entity");
+        camera.AddComponent<TransformComponent>();
+        camera.AddComponent<CameraComponent>();
 
-        class CameraController : public ScriptableEntity
-        {
-        public:
-            void OnCreate()
-            {
-                //std::cout << "i am alive.";
-            }
-
-            void OnDestroy()
-            {
-
-            }
-
-            void OnUpdate(Timestep ts)
-            {
-                auto& position = GetComponent<TransformComponent>().Position;
-                float speed = 5.0f;
-                if (Input::IsKeyPressed(ET_KEY_A))
-                    position.x -= speed * ts;
-                if (Input::IsKeyPressed(ET_KEY_D))
-                    position.x += speed * ts;
-                if (Input::IsKeyPressed(ET_KEY_W))
-                    position.y += speed * ts;
-                if (Input::IsKeyPressed(ET_KEY_S))
-                    position.y -= speed * ts;
-            }
-        };
-
-        m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+        camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+        m_CameraEntity = camera;
+        m_SceneHierachyPanel.SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OnDetach()
@@ -169,6 +144,9 @@ namespace Eternal {
                 ImGui::EndMenuBar();
             }
         }
+
+        //Panel
+        m_SceneHierachyPanel.OnImGuiRender();
 
         ImGui::Begin("Settings");
 

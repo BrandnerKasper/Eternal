@@ -28,6 +28,10 @@ namespace Eternal {
 		glm::vec2 Size { 1.0f, 1.0f };
 		float Rotation = 0.0f;
 
+		glm::vec3 OldPosition;
+		glm::vec2 OldSize;
+		float OldRotation;
+
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
 		TransformComponent(const glm::mat4& transform)
@@ -51,9 +55,24 @@ namespace Eternal {
 
 		void CalculateTransform()
 		{
+			//Check old position, rotation or scale, of change, then recalculate :)
+			if(TransformChanged());
 			Transform = glm::translate(stdMat, Position)
 				* glm::rotate(stdMat, glm::radians(Rotation), { 0.0f, 0.0f, 1.0f })
 				* glm::scale(stdMat, { Size.x, Size.y, 1.0f });
+		}
+
+		bool TransformChanged()
+		{
+			if (OldPosition != Position || OldSize != Size || OldRotation != Rotation)
+			{
+				OldPosition = Position;
+				OldSize = Size;
+				OldRotation = Rotation;
+				return true;
+			}
+			else
+				return false;
 		}
 
 		operator glm::mat4& () { return Transform; }
