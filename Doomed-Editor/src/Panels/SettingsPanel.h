@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Eternal.h"
+#include "Eternal/Core/Timestep.h"
 
 namespace Eternal {
 
@@ -9,6 +10,10 @@ namespace Eternal {
 	public:
 		SettingsPanel() = default;
 
+		void SetTimestep(Timestep ts) { m_timestep = ts; }
+
 		void OnImGuiRender();
+	private:
+		Timestep m_timestep;
 	};
 }

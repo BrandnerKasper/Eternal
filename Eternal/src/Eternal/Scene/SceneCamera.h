@@ -15,6 +15,12 @@ namespace Eternal {
 
 		float GetOrthographicSize() const { return m_OrthograpicSize; }
 		void SetOrthographicSize(float size) { m_OrthograpicSize = size; RecalculateProjection(); }
+
+		float GetOrthographicNearClip() const { return m_OrthographicNear; }
+		void SetOrthographicNearClip(float size) { m_OrthographicNear = size; RecalculateProjection(); }
+
+		float GetOrthographicFarClip() const { return m_OrthograpghicFar; }
+		void SetOrthographicFarClip(float size) { m_OrthograpghicFar = size; RecalculateProjection(); }
 	private:
 		void RecalculateProjection();
 	private:

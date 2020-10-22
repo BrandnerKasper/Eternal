@@ -25,6 +25,7 @@ namespace Eternal {
 		ImGui::End();
 	}
 
+	//TODO: Use a templated fct to stop repeating code like if(has entity) do that etc
 	void PropertiesPanel::DrawComponents(Entity entity)
 	{
 		if (entity.HasComponent<TagComponent>())
@@ -44,6 +45,7 @@ namespace Eternal {
 			ImGui::NewLine();
 			ImGui::Text("Transform");
 
+			//z-Position should be between near and far clip of camera!
 			auto& position = entity.GetComponent<TransformComponent>().Position;
 			ImGui::DragFloat3("Position", glm::value_ptr(position), 0.5f);
 
@@ -78,10 +80,22 @@ namespace Eternal {
 			ImGui::NewLine();
 			ImGui::Text("Camera Component");
 
-			auto& camera = entity.GetComponent<CameraComponent>().Camera;
+			auto& cameraComponent = entity.GetComponent<CameraComponent>();
+			auto& camera = cameraComponent.Camera;
+
+			ImGui::Checkbox("Primary", &cameraComponent.Primary);
+
 			float orthoSize = camera.GetOrthographicSize();
-			if (ImGui::DragFloat("Camera View Size", &orthoSize))
+			if (ImGui::DragFloat("View Size", &orthoSize))
 				camera.SetOrthographicSize(orthoSize);
+
+			float orthoNear = camera.GetOrthographicNearClip();
+			if (ImGui::DragFloat("Near Clip", &orthoNear))
+				camera.SetOrthographicNearClip(orthoNear);
+
+			float orthoFar = camera.GetOrthographicFarClip();
+			if (ImGui::DragFloat("Far Clip", &orthoFar))
+				camera.SetOrthographicFarClip(orthoFar);
 		}
 	}
 }

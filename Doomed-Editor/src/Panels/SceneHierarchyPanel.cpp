@@ -44,6 +44,9 @@ namespace Eternal {
 		{
 			ImGui::TreePop();
 		}
+		//Deselect Entity -> Property panel shows nothing
+		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+			m_SelectedEntity = {};
 	}
 
 }

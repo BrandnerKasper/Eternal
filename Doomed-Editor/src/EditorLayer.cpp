@@ -32,13 +32,13 @@ namespace Eternal {
         colorSquare.AddComponent<TransformComponent>();
         colorSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
 
-        auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
-        DoomSquare.AddComponent<TransformComponent>() = { glm::vec3{ -1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f };
-        DoomSquare.AddComponent<SpriteRendererComponent>(doomTexture);
-
         auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
         ChernoSquare.AddComponent<TransformComponent>() = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
         ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
+
+        auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
+        DoomSquare.AddComponent<TransformComponent>() = { glm::vec3{ -1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f };
+        DoomSquare.AddComponent<SpriteRendererComponent>(doomTexture);
    
         auto camera = m_ActiveScene->CreateEntity("Camera Entity");
         camera.AddComponent<TransformComponent>();
@@ -59,7 +59,7 @@ namespace Eternal {
     void EditorLayer::OnUpdate(Timestep ts) // Max Frame Rate auf 60 cappen maybe!!
     {
         m_SceneViewportPanel->OnUpdate(ts);
-
+        m_SettingsPanel->SetTimestep(ts);
         //Update
         //if (m_ViewportFocused)
         //Old TODO remove
