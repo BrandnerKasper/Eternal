@@ -19,6 +19,7 @@ namespace Eternal {
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		ET_CORE_ASSERT(status, "Failed to initialize Glad!");
 
+		//Variables in Graphics Context ->Setter function for openGL
 		ET_CORE_WARN("OpenGL Info:");
 		ET_CORE_INFO(" Vendor: {0}", glGetString(GL_VENDOR));
 		ET_CORE_INFO(" Renderer: {0}", glGetString(GL_RENDERER));
