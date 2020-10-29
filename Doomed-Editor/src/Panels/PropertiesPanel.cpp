@@ -53,7 +53,7 @@ namespace Eternal {
 		ImGui::End();
 	}
 
-	void PropertiesPanel::DrawVecControl(const std::string& label, float& value, float resetValue = 0.0f, float columnWidth = 100.0f)
+	static void DrawVecControl(const std::string& label, float& value, float resetValue = 0.0f, float columnWidth = 100.0f)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
@@ -93,7 +93,7 @@ namespace Eternal {
 		ImGui::PopID();
 	}
 
-	void PropertiesPanel::DrawVec2Control(const std::string& label, glm::vec2& values, float resetValue = 1.0f, float columnWidth = 100.0f)
+	static void DrawVec2Control(const std::string& label, glm::vec2& values, float resetValue = 1.0f, float columnWidth = 100.0f)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
@@ -146,7 +146,7 @@ namespace Eternal {
 
 	}
 
-	void PropertiesPanel::DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f)
+	static void DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
@@ -212,39 +212,74 @@ namespace Eternal {
 		ImGui::PopID();
 	}
 
-	//TODO: Use a templated fct to stop repeating code like if(has entity) do that etc
-	void PropertiesPanel::DrawComponents(Entity entity)
+	template<typename T, typename UIFunction>
+	static void PropertiesPanel::HandleComponent(const std::string& name, Entity entity, UIFunction uiFunction, bool showRemove)
 	{
-		if (entity.HasComponent<TagComponent>())
+		const ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap | ImGuiTreeNodeFlags_FramePadding;
+		if (entity.HasComponent<T>())
 		{
-			auto& tagComponent = entity.GetComponent<TagComponent>();
-			DrawTagComponent(tagComponent);
-		}
+			auto& component = entity.GetComponent<T>();
+			ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
 
-		if (entity.HasComponent<TransformComponent>())
-		{
-			//z-Position should be between near and far clip of camera!
-			auto& transformComponent = entity.GetComponent<TransformComponent>();
-			DrawTransformComponent(transformComponent);
-		}
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4, 4 });
+			float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+			ImGui::Separator();
+			bool open = ImGui::TreeNodeEx((void*)typeid(T).hash_code(), treeNodeFlags, name.c_str());
+			ImGui::PopStyleVar();
+			if (showRemove)
+			{
+				ImGui::SameLine(contentRegionAvailable.x - lineHeight * 0.5f);
+				if (ImGui::Button("+", ImVec2{ lineHeight, lineHeight }))
+				{
+					ImGui::OpenPopup("ComponentSettings");
+				}
+			}
+			bool removeComponent = false;
+			if (ImGui::BeginPopup("ComponentSettings"))
+			{
+				if (ImGui::MenuItem("Remove component"))
+					removeComponent = true;
 
-		if (entity.HasComponent<SpriteRendererComponent>())
-		{
-			auto& spriteRendererComponent = entity.GetComponent<SpriteRendererComponent>();
-			DrawSpriteRenderComponent(spriteRendererComponent);
-		}
+				ImGui::EndPopup();
+			}
 
-		if (entity.HasComponent<CameraComponent>())
-		{
-			auto& cameraComponent = entity.GetComponent<CameraComponent>();
-			DrawCameraComponent(cameraComponent);
+			if (open)
+			{
+				uiFunction(component);
+				ImGui::TreePop();
+			}
+
+			if (removeComponent)
+				entity.RemoveComponent<T>();
 		}
 	}
 
-	void PropertiesPanel::DrawTagComponent(TagComponent& tagComponent)
+	//TODO: Use a templated fct to stop repeating code like if(has entity) do that etc
+	void PropertiesPanel::DrawComponents(Entity entity)
 	{
-		ImGui::Text("Tag");
+		HandleComponent<TagComponent>("Tag", entity, [](auto& component)
+			{
+				DrawTagComponent(component);
+			}, false);
 
+		HandleComponent<TransformComponent>("Transform", entity, [](auto& component)
+			{
+				DrawTransformComponent(component);
+			});
+
+		HandleComponent<SpriteRendererComponent>("Sprite Properties", entity, [](auto& component)
+			{
+				DrawSpriteRenderComponent(component);
+			});
+
+		HandleComponent<CameraComponent>("Camera Properties", entity, [](auto& component)
+			{
+				DrawCameraComponent(component);
+			});
+	}
+
+	static void DrawTagComponent(TagComponent& tagComponent)
+	{
 		ImGui::Columns(2);
 		float columnWidth = 100.0f;
 		ImGui::SetColumnWidth(0, columnWidth);
@@ -264,27 +299,8 @@ namespace Eternal {
 		ImGui::Columns(1);
 	}
 
-	void PropertiesPanel::DrawTransformComponent(TransformComponent& transformComponent)
+	static void DrawTransformComponent(TransformComponent& transformComponent)
 	{
-		ImGui::NewLine();
-		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4,4 });
-		ImGui::Text("Transform");
-		ImGui::SameLine(ImGui::GetWindowWidth()- 25.0f);
-		if (ImGui::Button("+", ImVec2{20, 20}))
-		{
-			ImGui::OpenPopup("ComponentSettings");
-		}
-		ImGui::PopStyleVar();
-
-		bool removeComponent = false;
-		if (ImGui::BeginPopup("ComponentSettings"))
-		{
-			if (ImGui::MenuItem("Remove Component"))
-				removeComponent = true;
-
-			ImGui::EndPopup();
-		}
-
 		//z-Position should be between near and far clip of camera!
 		auto& position = transformComponent.Position;
 		DrawVec3Control("Position", position);
@@ -294,19 +310,10 @@ namespace Eternal {
 
 		auto& rotation = transformComponent.Rotation;
 		DrawVecControl("Rotation", rotation);
-
-		if (removeComponent)
-		{
-			auto& entity = m_SceneHierachyPanel->m_SelectedEntity;
-			entity.RemoveComponent<TransformComponent>();
-		}
 	}
 
-	void PropertiesPanel::DrawSpriteRenderComponent(SpriteRendererComponent& spriteRenderComponent)
+	static void DrawSpriteRenderComponent(SpriteRendererComponent& spriteRenderComponent)
 	{
-		ImGui::NewLine();
-		ImGui::Text("Sprite properties");
-
 		auto& texture = spriteRenderComponent.Texture;
 		if (texture != nullptr)
 		{
@@ -335,11 +342,8 @@ namespace Eternal {
 		ImGui::Columns(1);
 	}
 
-	void PropertiesPanel::DrawCameraComponent(CameraComponent& cameraComponent)
+	static void DrawCameraComponent(CameraComponent& cameraComponent)
 	{
-		ImGui::NewLine();
-		ImGui::Text("Camera properties");
-
 		ImGui::Columns(2);
 		float columnWidth = 100.0f;
 		ImGui::SetColumnWidth(0, columnWidth);

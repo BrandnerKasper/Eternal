@@ -36,6 +36,9 @@ namespace Eternal {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
+		io.Fonts->AddFontFromFileTTF("assets/fonts/Work_Sans/WorkSans-Bold.ttf", 17.0f);
+		io.FontDefault= io.Fonts->AddFontFromFileTTF("assets/fonts/Work_Sans/WorkSans-Medium.ttf", 17.0f);
+
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();
