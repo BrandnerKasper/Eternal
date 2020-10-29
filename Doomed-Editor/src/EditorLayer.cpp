@@ -28,19 +28,19 @@ namespace Eternal {
         colorSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
         
         auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
-        //chessSquare.AddComponent<TransformComponent>() = { glm::vec3{ 1.0f, 1.0f, 0.1f } };
+        chessSquare.GetComponent<TransformComponent>().Position = { glm::vec3{ 1.0f, 1.0f, 0.1f } };
         chessSquare.AddComponent<SpriteRendererComponent>(checkerboardTexture);
         
-        //auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
-        //ChernoSquare.AddComponent<TransformComponent>() = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
-        //ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
+        auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
+        ChernoSquare.GetComponent<TransformComponent>().Position = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
+        ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
         
         auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
-        //DoomSquare.AddComponent<TransformComponent>() = { glm::vec3{ -1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f };
+        DoomSquare.GetComponent<TransformComponent>().Position = { glm::vec3{ -1.0f, -1.0f, -0.1f } };
+        DoomSquare.GetComponent<TransformComponent>().Size = {glm::vec2{ 5.0f, 5.0f }};
         DoomSquare.AddComponent<SpriteRendererComponent>(doomTexture);
         
         auto camera = m_ActiveScene->CreateEntity("Camera Entity");
-        //camera.AddComponent<TransformComponent>();
         camera.AddComponent<CameraComponent>();
         
         camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
