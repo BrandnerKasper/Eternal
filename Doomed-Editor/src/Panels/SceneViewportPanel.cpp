@@ -34,7 +34,26 @@ namespace Eternal {
 		{
 			m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 
-			m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		}
+	}
+
+	void SceneViewportPanel::OnViewportResize(uint32_t width, uint32_t height)
+	{
+		ET_CORE_ERROR("Viewport Resized width, height: {0}, {1}", width, height);
+		m_Scene->m_ViewportWidth = width;
+		m_Scene->m_ViewportHeight = height;
+
+		//Resize non fixed Aspect ratio cameras
+		auto view = m_Scene->m_Registry.view<CameraComponent>();
+		for (auto entity : view)
+		{
+			auto& cameraComponent = view.get<CameraComponent>(entity);
+			if (!cameraComponent.FixedAspectRatio)
+			{
+				cameraComponent.Camera.SetViewportSize(width, height);
+			}
+
 		}
 	}
 

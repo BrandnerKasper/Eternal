@@ -11,9 +11,6 @@ namespace Eternal {
 
 	Scene::Scene()
 	{
-		entt::entity entity = m_Registry.create();
-
-		m_Registry.emplace<TransformComponent>(entity);
 	}
 
 	Scene::~Scene()
@@ -24,11 +21,17 @@ namespace Eternal {
 	Entity Scene::CreateEntity(const std::string& name)
 	{
 		Entity entity = { m_Registry.create(), this };
+		entity.AddComponent<TransformComponent>();
 
 		auto& tag = entity.AddComponent<TagComponent>();
 		tag.Tag = name.empty() ? "Entity" : name;
 		
 		return entity;
+	}
+
+	void Scene::DestroyEntity(Entity entity)
+	{
+		m_Registry.destroy(entity);
 	}
 
 	void Scene::OnUpdate(Timestep ts)
@@ -60,7 +63,7 @@ namespace Eternal {
 
 		//Camera
 		Camera* mainCamera = nullptr;
-		glm::mat4* cameraTransform = nullptr;
+		glm::mat4 cameraTransform;
 
 		{
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
@@ -71,45 +74,60 @@ namespace Eternal {
 				if (camera.Primary)
 				{
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transform;
+					cameraTransform = transform.Transform;
 					break;
 				}
 			}
 		}
 
-		if (mainCamera) {
-			//Render Scene
-			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
-
-			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-			//Sort this group by entity transform position z value but how...
-			for (auto entity : group)
+		{
+			if (mainCamera) 
 			{
-				
-				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-				Renderer2D::DrawQuad(transform.Transform, sprite.Texture, sprite.TextureScale, sprite.Color);
-			}
+				//Render Scene
+				Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
-			Renderer2D::EndScene();
+				//auto view = m_Registry.view<TransformComponent,SpriteRendererComponent>();
+				//Sort this group by entity transform position z value but how...
+				auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+				for (auto entity : group)
+				{
+					auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+					Renderer2D::DrawQuad(transform.Transform, sprite.Texture, sprite.TextureScale, sprite.Color);
+				}
+				Renderer2D::EndScene();
+			}
 		}
 	}
 
-	void Scene::OnViewportResize(uint32_t width, uint32_t height)
+	template<typename T>
+	void Scene::OnComponentAdded(Entity entity, T& component)
 	{
-		ET_CORE_ERROR("Viewport Resized width, height: {0}, {1}", width, height);
-		m_ViewportWidth = width;
-		m_ViewportHeight = height;
+		static_assert(false);
+	}
 
-		//Resize non fixed Aspect ratio cameras
-		auto view = m_Registry.view<CameraComponent>();
-		for (auto entity : view)
-		{
-			auto& cameraComponent = view.get<CameraComponent>(entity);
-			if (!cameraComponent.FixedAspectRatio)
-			{
-				cameraComponent.Camera.SetViewportSize(width, height);
-			}
+	template<>
+	void Scene::OnComponentAdded<TagComponent>(Entity entity, TagComponent& component)
+	{
+	}
 
-		}
+	template<>
+	void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
+	{
+		component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
+	}
+
+	template<>
+	void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
+	{
 	}
 }

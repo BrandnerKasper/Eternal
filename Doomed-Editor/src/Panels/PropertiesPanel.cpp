@@ -21,8 +21,35 @@ namespace Eternal {
 		ImGui::Begin("Properties Panel");
 		auto& entity = m_SceneHierachyPanel->m_SelectedEntity;
 		if (entity)
+		{
 			DrawComponents(entity);
 
+			if (ImGui::Button("Add Component"))
+				ImGui::OpenPopup("AddComponent");
+
+			if (ImGui::BeginPopup("AddComponent"))
+			{
+				if (ImGui::MenuItem("TransformComponent"))
+				{
+					entity.AddComponent<TransformComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+
+				if (ImGui::MenuItem("SpriteRenderComponent"))
+				{
+					entity.AddComponent<SpriteRendererComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+
+				if (ImGui::MenuItem("Camera"))
+				{
+					entity.AddComponent<CameraComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::EndPopup();
+			}
+		}
 		ImGui::End();
 	}
 
@@ -54,7 +81,7 @@ namespace Eternal {
 		ImGui::PopStyleColor(3);
 
 		ImGui::SameLine();
-		ImGui::DragFloat("##R", &value, 0.1f, 0.0f, 0.0f, "%.2f");
+		ImGui::DragFloat("##R", &value, 1.0f, 0.0f, 360.0f, "%.2f");
 		ImGui::PopItemWidth();
 
 		ImGui::PopItemWidth();
@@ -240,7 +267,23 @@ namespace Eternal {
 	void PropertiesPanel::DrawTransformComponent(TransformComponent& transformComponent)
 	{
 		ImGui::NewLine();
+		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4,4 });
 		ImGui::Text("Transform");
+		ImGui::SameLine(ImGui::GetWindowWidth()- 25.0f);
+		if (ImGui::Button("+", ImVec2{20, 20}))
+		{
+			ImGui::OpenPopup("ComponentSettings");
+		}
+		ImGui::PopStyleVar();
+
+		bool removeComponent = false;
+		if (ImGui::BeginPopup("ComponentSettings"))
+		{
+			if (ImGui::MenuItem("Remove Component"))
+				removeComponent = true;
+
+			ImGui::EndPopup();
+		}
 
 		//z-Position should be between near and far clip of camera!
 		auto& position = transformComponent.Position;
@@ -251,6 +294,12 @@ namespace Eternal {
 
 		auto& rotation = transformComponent.Rotation;
 		DrawVecControl("Rotation", rotation);
+
+		if (removeComponent)
+		{
+			auto& entity = m_SceneHierachyPanel->m_SelectedEntity;
+			entity.RemoveComponent<TransformComponent>();
+		}
 	}
 
 	void PropertiesPanel::DrawSpriteRenderComponent(SpriteRendererComponent& spriteRenderComponent)

@@ -30,7 +30,8 @@ namespace Eternal {
 		static Statistics GetStats();
 
 	private:
-		static void StartNewBatch();
+		static void StartBatch();
+		static void NextBatch();
 		static bool TooManyQuads();
 		static bool TooManyTextures();
 		static float GetTextureSlot(const Ref<Texture2D>& texture);

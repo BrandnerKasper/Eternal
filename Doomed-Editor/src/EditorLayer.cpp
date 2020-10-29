@@ -16,39 +16,37 @@ namespace Eternal {
         auto checkerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
         auto doomTexture = Texture2D::Create("assets/textures/EternalLogo.png");
     
+        m_SceneViewportPanel = CreateRef<SceneViewportPanel>();
         m_ActiveScene = CreateRef<Scene>();
         m_SceneHierachyPanel = CreateRef<SceneHierarchyPanel>();
         m_PropertiesPanel = CreateRef<PropertiesPanel>();
         m_SettingsPanel = CreateRef<SettingsPanel>();
-        m_SceneViewportPanel = CreateRef<SceneViewportPanel>();
 
         //Entitys
-        auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
-        chessSquare.AddComponent<TransformComponent>() = { glm::vec3{ 1.0f, 1.0f, 0.1f } };
-        chessSquare.AddComponent<SpriteRendererComponent>(checkerboardTexture);
-        m_ChessSquareEntity = chessSquare;
-
+        
         auto colorSquare = m_ActiveScene->CreateEntity("One Color Square");
-        colorSquare.AddComponent<TransformComponent>();
         colorSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
-
-        auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
-        ChernoSquare.AddComponent<TransformComponent>() = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
-        ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
-
+        
+        auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
+        //chessSquare.AddComponent<TransformComponent>() = { glm::vec3{ 1.0f, 1.0f, 0.1f } };
+        chessSquare.AddComponent<SpriteRendererComponent>(checkerboardTexture);
+        
+        //auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
+        //ChernoSquare.AddComponent<TransformComponent>() = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
+        //ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
+        
         auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
-        DoomSquare.AddComponent<TransformComponent>() = { glm::vec3{ -1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f };
+        //DoomSquare.AddComponent<TransformComponent>() = { glm::vec3{ -1.0f, -1.0f, -0.1f }, glm::vec2{ 5.0f, 5.0f }, 30.0f };
         DoomSquare.AddComponent<SpriteRendererComponent>(doomTexture);
-   
+        
         auto camera = m_ActiveScene->CreateEntity("Camera Entity");
-        camera.AddComponent<TransformComponent>();
+        //camera.AddComponent<TransformComponent>();
         camera.AddComponent<CameraComponent>();
-
+        
         camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-        m_CameraEntity = camera;
+        m_SceneViewportPanel->SetContext(m_ActiveScene);
         m_SceneHierachyPanel->SetContext(m_ActiveScene);
         m_PropertiesPanel->SetContext(m_SceneHierachyPanel);
-        m_SceneViewportPanel->SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OnDetach()
@@ -127,10 +125,10 @@ namespace Eternal {
         }
 
         //Panels
+        m_SceneViewportPanel->OnImGuiRender();
         m_SceneHierachyPanel->OnImGuiRender();
         m_PropertiesPanel->OnImGuiRender();
         m_SettingsPanel->OnImGuiRender();
-        m_SceneViewportPanel->OnImGuiRender();
 
         if (dockingEnabled)
             ImGui::End();

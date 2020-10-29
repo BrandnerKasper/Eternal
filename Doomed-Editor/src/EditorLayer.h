@@ -24,8 +24,6 @@ namespace Eternal {
 		OrthographicCameraController m_CameraController;
 
 		Ref<Scene> m_ActiveScene;
-		Entity m_ChessSquareEntity;
-		Entity m_CameraEntity;
 		
 		//Panel
 		Ref<SceneHierarchyPanel> m_SceneHierachyPanel;

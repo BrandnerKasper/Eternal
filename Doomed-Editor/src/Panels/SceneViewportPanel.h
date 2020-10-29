@@ -13,6 +13,7 @@ namespace Eternal {
 
 		void OnUpdate(Timestep ts);
 		void HandleResize();
+		void OnViewportResize(uint32_t width, uint32_t height);
 		void UpdateScene(Timestep ts);
 
 		void OnImGuiRender();

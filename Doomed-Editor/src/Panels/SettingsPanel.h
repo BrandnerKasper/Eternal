@@ -14,6 +14,7 @@ namespace Eternal {
 
 		void OnImGuiRender();
 	private:
+		Ref<Scene> m_Context;
 		Timestep m_timestep;
 	};
 }

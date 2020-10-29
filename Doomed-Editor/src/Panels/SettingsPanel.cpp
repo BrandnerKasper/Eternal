@@ -6,7 +6,7 @@
 
 namespace Eternal {
 
-	void SettingsPanel::OnImGuiRender()
+    void SettingsPanel::OnImGuiRender()
 	{
         ImGui::Begin("Settings");
 
@@ -22,6 +22,7 @@ namespace Eternal {
         ImGui::Text("Index Count: %d", stats.GetTotalIndexCount());
         //For renderer vendor etc. include graphics context -> see OpenGL context
         ImGui::Text("Frame Time: %d", 1000 / (int)m_timestep.GetMilliseconds());
+
         ImGui::End();
 	}
 }

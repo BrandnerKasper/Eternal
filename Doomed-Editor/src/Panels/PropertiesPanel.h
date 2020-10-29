@@ -27,6 +27,5 @@ namespace Eternal {
 		void DrawCameraComponent(CameraComponent& cameraComponent);
 	private:
 		Ref<SceneHierarchyPanel> m_SceneHierachyPanel;
-
 	};
 }
