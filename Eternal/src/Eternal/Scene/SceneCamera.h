@@ -24,7 +24,7 @@ namespace Eternal {
 	private:
 		void RecalculateProjection();
 	private:
-		float m_OrthograpicSize = 10.0f;
+		float m_OrthograpicSize = 15.0f;
 		float m_OrthographicNear = -1.0f, m_OrthograpghicFar = 1.0f;
 
 		float m_AspectRatio= 0.0f;

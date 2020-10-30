@@ -24,31 +24,7 @@ namespace Eternal {
 		{
 			DrawComponents(entity);
 
-			if (ImGui::Button("Add Component"))
-				ImGui::OpenPopup("AddComponent");
-
-			if (ImGui::BeginPopup("AddComponent"))
-			{
-				if (ImGui::MenuItem("TransformComponent"))
-				{
-					entity.AddComponent<TransformComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-
-				if (ImGui::MenuItem("SpriteRenderComponent"))
-				{
-					entity.AddComponent<SpriteRendererComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-
-				if (ImGui::MenuItem("Camera"))
-				{
-					entity.AddComponent<CameraComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-
-				ImGui::EndPopup();
-			}
+			HandleAddComponentButton(entity);
 		}
 		ImGui::End();
 	}
@@ -229,7 +205,7 @@ namespace Eternal {
 			if (showRemove)
 			{
 				ImGui::SameLine(contentRegionAvailable.x - lineHeight * 0.5f);
-				if (ImGui::Button("+", ImVec2{ lineHeight, lineHeight }))
+				if (ImGui::Button("-", ImVec2{ lineHeight, lineHeight }))
 				{
 					ImGui::OpenPopup("ComponentSettings");
 				}
@@ -254,7 +230,6 @@ namespace Eternal {
 		}
 	}
 
-	//TODO: Use a templated fct to stop repeating code like if(has entity) do that etc
 	void PropertiesPanel::DrawComponents(Entity entity)
 	{
 		HandleComponent<TagComponent>("Tag", entity, [](auto& component)
@@ -387,4 +362,41 @@ namespace Eternal {
 		ImGui::Columns(1);
 	}
 
+	void PropertiesPanel::HandleAddComponentButton(Entity entity)
+	{
+		if (ImGui::Button("Add Component"))
+			ImGui::OpenPopup("AddComponent");
+
+		if (ImGui::BeginPopup("AddComponent"))
+		{
+			if (!entity.HasComponent<TransformComponent>())
+			{
+				if (ImGui::MenuItem("TransformComponent"))
+				{
+					entity.AddComponent<TransformComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			if (!entity.HasComponent<SpriteRendererComponent>())
+			{
+				if (ImGui::MenuItem("SpriteRenderComponent"))
+				{
+					entity.AddComponent<SpriteRendererComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			if (!entity.HasComponent<CameraComponent>())
+			{
+				if (ImGui::MenuItem("Camera"))
+				{
+					entity.AddComponent<CameraComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			ImGui::EndPopup();
+		}
+	}
 }

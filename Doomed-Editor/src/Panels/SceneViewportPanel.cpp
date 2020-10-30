@@ -65,7 +65,7 @@ namespace Eternal {
 		m_FrameBuffer->Bind();
 
 		//Render Clear
-		RenderCommand::SetClearColor({ 0.7f, 0.7f, 0.7f, 1 });
+		RenderCommand::SetClearColor({ 0.839, 1, 0.917, 0.8 });
 		RenderCommand::Clear();
 
 		//Update Scene!!!!!!!!!!!!!!!!!!!!!!!!
