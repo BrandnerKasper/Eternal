@@ -6,6 +6,7 @@
 #include "Eternal/Renderer/Texture.h"
 #include "Eternal/Scene/SceneCamera.h"
 #include "Eternal/Scene/ScriptableEntity.h"
+#include "Eternal/Renderer/Texture.h"
 
 namespace Eternal {
 
@@ -85,6 +86,7 @@ namespace Eternal {
 
 	struct SpriteRendererComponent
 	{
+		std::string TextureFilepath = "";
 		Ref<Texture2D> Texture = nullptr;
 		int TextureScale = 1;
 
@@ -98,6 +100,11 @@ namespace Eternal {
 			: Texture(texture), TextureScale(textureScale), Color(tintColor) {}
 		SpriteRendererComponent(const Ref<Texture2D>& texture)
 			: Texture(texture){}
+		SpriteRendererComponent(const std::string textureFilepath)
+			: TextureFilepath(textureFilepath) 
+		{
+			Texture = Texture2D::Create(TextureFilepath);
+		}
 	};
 
 	struct CameraComponent
@@ -113,6 +120,7 @@ namespace Eternal {
 
 	struct NativeScriptComponent
 	{
+		std::string ScriptFilepath = "0";
 		ScriptableEntity* Instance = nullptr;
 
 		ScriptableEntity* (*InstantiateScript)();
@@ -123,6 +131,13 @@ namespace Eternal {
 		{
 			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
 			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+		}
+
+		NativeScriptComponent() = default;
+		NativeScriptComponent(std::string filepath)
+			: ScriptFilepath(filepath)
+		{
+			
 		}
 	};
 }

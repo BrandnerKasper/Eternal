@@ -57,6 +57,8 @@ namespace Eternal {
 		{
 			return !(*this == other);
 		}
+
+		int GetEntityID() { return (int) m_EntityHandle; }
 	private:
 		entt::entity m_EntityHandle{ entt::null };
 		Scene* m_Scene = nullptr;

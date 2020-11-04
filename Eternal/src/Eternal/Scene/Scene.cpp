@@ -13,6 +13,11 @@ namespace Eternal {
 	{
 	}
 
+	Scene::Scene(std::string name)
+	{
+		m_Name = name;
+	}
+
 	Scene::~Scene()
 	{
 

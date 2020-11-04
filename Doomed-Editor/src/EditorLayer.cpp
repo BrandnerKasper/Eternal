@@ -1,8 +1,9 @@
-#include "EditorLayer.h"
-#include "imgui/imgui.h"
-#include "Scripts/CameraController.h"
-
+#include <imgui/imgui.h>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "EditorLayer.h"
+#include "Scripts/CameraController.h"
+#include "Eternal/Scene/SceneSerializer.h"
 
 namespace Eternal {
 
@@ -13,40 +14,41 @@ namespace Eternal {
 
     void EditorLayer::OnAttach()
     {
-        auto checkerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
-        auto doomTexture = Texture2D::Create("assets/textures/EternalLogo.png");
-    
         m_SceneViewportPanel = CreateRef<SceneViewportPanel>();
         m_ActiveScene = CreateRef<Scene>();
         m_SceneHierachyPanel = CreateRef<SceneHierarchyPanel>();
         m_PropertiesPanel = CreateRef<PropertiesPanel>();
         m_SettingsPanel = CreateRef<SettingsPanel>();
 
+#if 0
         //Entitys
-        
         auto colorSquare = m_ActiveScene->CreateEntity("One Color Square");
         colorSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
         
         auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
         chessSquare.GetComponent<TransformComponent>().Position = { glm::vec3{ 1.0f, 1.0f, 0.1f } };
-        chessSquare.AddComponent<SpriteRendererComponent>(checkerboardTexture);
+        chessSquare.AddComponent<SpriteRendererComponent>("assets/textures/Checkerboard.png");
         
         auto ChernoSquare = m_ActiveScene->CreateEntity("Cherno Square");
         ChernoSquare.GetComponent<TransformComponent>().Position = { glm::vec3{ -10.0f, -10.0f, 0.0f } };
-        ChernoSquare.AddComponent<SpriteRendererComponent>(Texture2D::Create("assets/textures/Logo.png"));
+        ChernoSquare.AddComponent<SpriteRendererComponent>("assets/textures/Logo.png");
         
         auto DoomSquare = m_ActiveScene->CreateEntity("Doom Square");
         DoomSquare.GetComponent<TransformComponent>().Position = { glm::vec3{ -1.0f, -1.0f, -0.1f } };
         DoomSquare.GetComponent<TransformComponent>().Size = {glm::vec2{ 5.0f, 5.0f }};
-        DoomSquare.AddComponent<SpriteRendererComponent>(doomTexture);
+        DoomSquare.AddComponent<SpriteRendererComponent>("assets/textures/EternalLogo.png");
         
         auto camera = m_ActiveScene->CreateEntity("Camera Entity");
         camera.AddComponent<CameraComponent>();
         
         camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+#endif
         m_SceneViewportPanel->SetContext(m_ActiveScene);
         m_SceneHierachyPanel->SetContext(m_ActiveScene);
         m_PropertiesPanel->SetContext(m_SceneHierachyPanel);
+
+        //SceneSerializer serializer(m_ActiveScene);
+        //serializer.Deserialize("assets/scenes/Example.eternal");
     }
 
     void EditorLayer::OnDetach()
@@ -117,10 +119,23 @@ namespace Eternal {
             {
                 if (ImGui::BeginMenu("File"))
                 {
-                    if (ImGui::MenuItem("Exit")) Application::Get().Close();
-                    //ImGui::Separator();
-                    //if (ImGui::MenuItem("Close DockSpace", NULL, false, &dockspaceOpen != NULL))
-                       // dockspaceOpen = false;
+                    if (ImGui::MenuItem("Load"))
+                    {
+                        SceneSerializer serializer(m_ActiveScene);
+                        serializer.Deserialize("assets/scenes/Example.eternal");
+                    }
+
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Safe"))
+                    {
+                        SceneSerializer serializer(m_ActiveScene);
+                        serializer.Serialize("assets/scenes/Example.eternal");
+                    }
+
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Exit"))
+                        Application::Get().Close();
+
                     ImGui::EndMenu();
                 }
 

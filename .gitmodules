@@ -13,3 +13,6 @@
 [submodule "Eternal/vendor/glm"]
 	path = Eternal/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "Eternal/vendor/yaml-cpp"]
+	path = Eternal/vendor/yaml-cpp
+	url = https://github.com/BrandnerKasper/yaml-cpp
