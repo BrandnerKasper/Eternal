@@ -17,6 +17,9 @@ namespace Eternal {
 		void UpdateScene(Timestep ts);
 
 		void OnImGuiRender();
+
+		float GetViewportSizeX() { return m_ViewportSize.x; }
+		float GetViewportSizeY() { return m_ViewportSize.y; }
 	private:
 		Ref<Scene> m_Scene;
 		Ref<FrameBuffer> m_FrameBuffer;

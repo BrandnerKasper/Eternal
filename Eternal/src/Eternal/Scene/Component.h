@@ -120,7 +120,7 @@ namespace Eternal {
 
 	struct NativeScriptComponent
 	{
-		std::string ScriptFilepath = "0";
+		std::string ScriptFilepath = "";
 		ScriptableEntity* Instance = nullptr;
 
 		ScriptableEntity* (*InstantiateScript)();

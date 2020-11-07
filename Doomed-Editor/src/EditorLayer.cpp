@@ -4,6 +4,7 @@
 #include "EditorLayer.h"
 #include "Scripts/CameraController.h"
 #include "Eternal/Scene/SceneSerializer.h"
+#include "Eternal/Utils/PlatformUtils.h"
 
 namespace Eternal {
 
@@ -119,22 +120,24 @@ namespace Eternal {
             {
                 if (ImGui::BeginMenu("File"))
                 {
-                    if (ImGui::MenuItem("Load"))
+                    if (ImGui::MenuItem("New", "Ctrl+N"))
                     {
-                        SceneSerializer serializer(m_ActiveScene);
-                        serializer.Deserialize("assets/scenes/Example.eternal");
+                        NewScene();
+                    }
+
+                    if (ImGui::MenuItem("Open...", "Ctrl+O"))
+                    {
+                        OpenScene();
+                    }
+
+                    if (ImGui::MenuItem("Safe As...", "Ctrl+S"))
+                    {
+                        SaveSceneAs();
                     }
 
                     ImGui::Separator();
-                    if (ImGui::MenuItem("Safe"))
-                    {
-                        SceneSerializer serializer(m_ActiveScene);
-                        serializer.Serialize("assets/scenes/Example.eternal");
-                    }
-
-                    ImGui::Separator();
-                    if (ImGui::MenuItem("Exit"))
-                        Application::Get().Close();
+                    if (ImGui::MenuItem("Exit", "Ctrl+Q"))
+                        Exit();
 
                     ImGui::EndMenu();
                 }
@@ -156,6 +159,9 @@ namespace Eternal {
     void EditorLayer::OnEvent(Event& event)
     {
         m_CameraController.OnEvent(event);
+
+        EventDispatcher dispatcher(event);
+        dispatcher.Dispatch<KeyPressedEvent>(ET_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
     }
 
     void EditorLayer::ChangeSytle(bool show)
@@ -165,6 +171,85 @@ namespace Eternal {
             ImGui::ShowStyleEditor();
             ImGui::End();
         }
+    }
+
+    bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
+    {
+        // Shortcuts
+        if (e.GetRepeatCount() > 0)
+            return false;
+
+        bool control = Input::IsKeyPressed(ET_KEY_LEFT_CONTROL) || Input::IsKeyPressed(ET_KEY_RIGHT_CONTROL);
+        switch (e.GetKeyCode())
+        {
+        case ET_KEY_N:
+        {
+            if (control)
+                NewScene();
+
+            break;
+        }
+        case ET_KEY_O:
+        {
+            if (control)
+                OpenScene();
+
+            break;
+        }
+        case ET_KEY_S:
+        {
+            if (control)
+                SaveSceneAs();
+
+            break;
+        }
+        case ET_KEY_Q:
+        {
+            if (control)
+                Exit();
+
+            break;
+        }
+        }
+    }
+
+    void EditorLayer::NewScene()
+    {
+        m_ActiveScene = CreateRef<Scene>();
+        m_SceneViewportPanel->SetContext(m_ActiveScene);
+        m_SceneViewportPanel->OnViewportResize(m_SceneViewportPanel->GetViewportSizeX(), m_SceneViewportPanel->GetViewportSizeY());
+        m_SceneHierachyPanel->SetContext(m_ActiveScene);
+        m_PropertiesPanel->SetContext(m_SceneHierachyPanel);
+    }
+
+    void EditorLayer::OpenScene()
+    {
+        std::string filepath = FileDialogs::OpenFile("Eternal Scene (*.eternal)\0*.eternal\0");
+        if (!filepath.empty())
+        {
+            NewScene();
+
+            SceneSerializer serializer(m_ActiveScene);
+            serializer.Deserialize(filepath);
+            ET_CORE_TRACE(filepath);
+        }
+    }
+
+    void EditorLayer::SaveSceneAs()
+    {
+        std::string filepath = FileDialogs::SaveFile("Eternal Scene (*.eternal)\0*.eternal\0");
+        if (!filepath.empty())
+        {
+            m_ActiveScene->SetName("Untiled"); //set name to filepath .../ scenename .eternal!
+            SceneSerializer serializer(m_ActiveScene);
+            serializer.Serialize(filepath);
+            ET_CORE_TRACE(filepath);
+        }
+    }
+
+    void EditorLayer::Exit()
+    {
+        Application::Get().Close();
     }
 
     

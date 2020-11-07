@@ -19,7 +19,16 @@ namespace Eternal {
 		void OnUpdate(Eternal::Timestep ts) override;
 		virtual void OnImGuiRender() override;
 		void OnEvent(Eternal::Event& event) override;
+		
+	private:
 		void ChangeSytle(bool show);
+		bool OnKeyPressed(KeyPressedEvent& e);
+
+		void NewScene();
+		void OpenScene();
+		void SaveSceneAs();
+
+		void Exit();
 	private:
 		OrthographicCameraController m_CameraController;
 
