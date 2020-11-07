@@ -118,7 +118,7 @@ namespace Eternal {
 		out << YAML::BeginMap; //Entity
 
 		out << YAML::Key << "Entity";
-		out << YAML::Value << entity.GetEntityID(); //TODO: Random generated Entity goes here!
+		out << YAML::Value << entity.GetEntityID(); //TODO: Random generated Entity IDs go here!
 
 		if (entity.HasComponent<TagComponent>())
 		{

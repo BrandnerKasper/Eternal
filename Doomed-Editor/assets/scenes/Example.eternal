@@ -1,28 +1,25 @@
-Scene: Untiled
+Scene: Example.eternal
 Entities:
   - Entity: 4
     TagComponent:
-      Tag: Camera Entity
+      Tag: One Color Square
     TransformComponent:
       Position: [0, 0, 0]
       Rotation: 0
       Size: [1, 1]
-    CameraComponent:
-      Camera:
-        OrthographicSize: 15
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-      FixedAspectRatio: false
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0, 0.800000012, 0.800000012, 1]
   - Entity: 3
     TagComponent:
-      Tag: Doom Square
+      Tag: Chess Square
     TransformComponent:
-      Position: [-3.20000005, -1, -0.100000001]
+      Position: [1, 1, 0.100000001]
       Rotation: 0
-      Size: [5, 5]
+      Size: [1, 1]
     SpriteRendererComponent:
-      TextureFilepath: assets/textures/EternalLogo.png
+      TextureFilepath: assets/textures/Checkerboard.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
   - Entity: 2
@@ -38,23 +35,26 @@ Entities:
       Color: [1, 1, 1, 1]
   - Entity: 1
     TagComponent:
-      Tag: Chess Square
+      Tag: Doom Square
     TransformComponent:
-      Position: [1, 1, 0.100000001]
-      Rotation: 0
-      Size: [1, 1]
+      Position: [-3.20000005, -1, -0.100000001]
+      Rotation: 51
+      Size: [5, 5]
     SpriteRendererComponent:
-      TextureFilepath: assets/textures/Checkerboard.png
+      TextureFilepath: assets/textures/EternalLogo.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
   - Entity: 0
     TagComponent:
-      Tag: One Color Square
+      Tag: Camera Entity
     TransformComponent:
       Position: [0, 0, 0]
       Rotation: 0
       Size: [1, 1]
-    SpriteRendererComponent:
-      TextureFilepath: ""
-      TextureScale: 1
-      Color: [0, 0.800000012, 0.800000012, 1]
+    CameraComponent:
+      Camera:
+        OrthographicSize: 15
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false

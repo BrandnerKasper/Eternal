@@ -15,6 +15,7 @@ namespace Eternal {
 		void HandleResize();
 		void OnViewportResize(uint32_t width, uint32_t height);
 		void UpdateScene(Timestep ts);
+		//void ONEvent(Event& event);
 
 		void OnImGuiRender();
 
@@ -25,5 +26,6 @@ namespace Eternal {
 		Ref<FrameBuffer> m_FrameBuffer;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
+		// m_EditorCameraCOntroller!
 	};
 }

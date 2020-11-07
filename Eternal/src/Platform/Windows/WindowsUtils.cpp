@@ -27,7 +27,9 @@ namespace Eternal {
 		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
 
 		if (GetOpenFileNameA(&ofn) == TRUE)
+		{
 			return ofn.lpstrFile;
+		}
 		return std::string();
 	}
 
@@ -35,6 +37,7 @@ namespace Eternal {
 	{
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
+		CHAR szFilename[260] = { 0 };
 		ZeroMemory(&ofn, sizeof(OPENFILENAME));
 		ofn.lStructSize = sizeof(OPENFILENAME);
 		ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
@@ -48,7 +51,20 @@ namespace Eternal {
 		ofn.lpstrDefExt = strchr(filter, '\0') + 1;
 
 		if (GetSaveFileNameA(&ofn) == TRUE)
+		{
+			GetFileTitleA(ofn.lpstrFile, szFilename, sizeof(szFilename));
+			szFilename;
 			return ofn.lpstrFile;
+		}
 		return std::string();
+	}
+
+	std::string FileDialogs::GetFileName(std::string filepath)
+	{
+		CHAR szFile[260] = { 0 };
+		strcpy(szFile, filepath.c_str());
+		CHAR szFilename[260] = { 0 };
+		GetFileTitleA(szFile, szFilename, sizeof(szFilename));
+		return szFilename;
 	}
 }

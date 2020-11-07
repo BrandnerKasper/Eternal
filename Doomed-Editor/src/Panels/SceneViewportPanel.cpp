@@ -23,6 +23,8 @@ namespace Eternal {
 	{
 		HandleResize();
 		
+		//m_CameraController.Update(ts);
+
 		UpdateScene(ts);
 	}
 
@@ -43,6 +45,9 @@ namespace Eternal {
 		ET_CORE_ERROR("Viewport Resized width, height: {0}, {1}", width, height);
 		m_Scene->m_ViewportWidth = width;
 		m_Scene->m_ViewportHeight = height;
+
+		//Resize EditorCamera
+		//!!!!!!!!!!!
 
 		//Resize non fixed Aspect ratio cameras
 		auto view = m_Scene->m_Registry.view<CameraComponent>();

@@ -48,8 +48,6 @@ namespace Eternal {
         m_SceneHierachyPanel->SetContext(m_ActiveScene);
         m_PropertiesPanel->SetContext(m_SceneHierachyPanel);
 
-        //SceneSerializer serializer(m_ActiveScene);
-        //serializer.Deserialize("assets/scenes/Example.eternal");
     }
 
     void EditorLayer::OnDetach()
@@ -231,7 +229,6 @@ namespace Eternal {
 
             SceneSerializer serializer(m_ActiveScene);
             serializer.Deserialize(filepath);
-            ET_CORE_TRACE(filepath);
         }
     }
 
@@ -240,10 +237,9 @@ namespace Eternal {
         std::string filepath = FileDialogs::SaveFile("Eternal Scene (*.eternal)\0*.eternal\0");
         if (!filepath.empty())
         {
-            m_ActiveScene->SetName("Untiled"); //set name to filepath .../ scenename .eternal!
+            m_ActiveScene->SetName(FileDialogs::GetFileName(filepath)); //set name to filepath .../ scenename .eternal!
             SceneSerializer serializer(m_ActiveScene);
             serializer.Serialize(filepath);
-            ET_CORE_TRACE(filepath);
         }
     }
 

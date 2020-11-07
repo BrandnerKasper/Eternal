@@ -1,4 +1,4 @@
-Scene: Doomed Scene
+Scene: new example.eternal
 Entities:
   - Entity: 4
     TagComponent:
@@ -38,7 +38,7 @@ Entities:
       Tag: Doom Square
     TransformComponent:
       Position: [-3.20000005, -1, -0.100000001]
-      Rotation: 11
+      Rotation: 0
       Size: [5, 5]
     SpriteRendererComponent:
       TextureFilepath: assets/textures/EternalLogo.png
@@ -48,12 +48,12 @@ Entities:
     TagComponent:
       Tag: Camera Entity
     TransformComponent:
-      Position: [-1.79999995, 0, 0]
+      Position: [0, 0, 0]
       Rotation: 0
       Size: [1, 1]
     CameraComponent:
       Camera:
-        OrthographicSize: 23
+        OrthographicSize: 15
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
