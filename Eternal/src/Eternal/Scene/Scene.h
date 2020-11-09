@@ -27,9 +27,9 @@ namespace Eternal
 	private:
 		void UpdateTransforms();
 		void UpdateScripts(Timestep ts, bool play);
-		void UpdateCameras(Timestep ts, bool play);
-		void UpdateEditorCamera(Timestep ts);
-		void UpdateSceneCamera(Timestep ts);
+		void UpdateCameraRender(Timestep ts, bool play);
+		void UpdateEditorCameraRender(Timestep ts);
+		void UpdateSceneCameraRender(Timestep ts);
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
 	private:

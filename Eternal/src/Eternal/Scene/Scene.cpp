@@ -46,7 +46,7 @@ namespace Eternal {
 
 		UpdateScripts(ts, true);
 		
-		UpdateCameras(ts, false);
+		UpdateCameraRender(ts, false);
 	}
 
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
@@ -99,22 +99,21 @@ namespace Eternal {
 		}
 	}
 
-	void Scene::UpdateCameras(Timestep ts, bool play)
+	void Scene::UpdateCameraRender(Timestep ts, bool play)
 	{
 		if (!play)
 		{
-			UpdateEditorCamera(ts);
+			UpdateEditorCameraRender(ts);
 		}
 		else
 		{
-			UpdateSceneCamera(ts);
+			UpdateSceneCameraRender(ts);
 		}
 	}
 
-	void Scene::UpdateEditorCamera(Timestep ts)
+	void Scene::UpdateEditorCameraRender(Timestep ts)
 	{
 		//Use Editor Camera as Default!
-		m_EditorCamera->OnUpdate(ts);
 		Renderer2D::BeginScene(m_EditorCamera->GetCamera());
 
 		//auto view = m_Registry.view<TransformComponent,SpriteRendererComponent>();
@@ -128,7 +127,7 @@ namespace Eternal {
 		Renderer2D::EndScene();
 	}
 
-	void Scene::UpdateSceneCamera(Timestep ts)
+	void Scene::UpdateSceneCameraRender(Timestep ts)
 	{
 		//When Scene plays use Scene Camera (the primary one!)
 		Camera* mainCamera = nullptr;

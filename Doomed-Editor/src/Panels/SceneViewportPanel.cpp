@@ -22,8 +22,10 @@ namespace Eternal {
 	void SceneViewportPanel::OnUpdate(Timestep ts)
 	{
 		HandleResize();
-		
-		//m_Scene->m_EditorCamera->OnUpdate(ts);
+
+		//Update Camera only when Window is focused
+		if(m_ViewportFocused)
+			m_Scene->m_EditorCamera->OnUpdate(ts);
 
 		UpdateScene(ts);
 	}
@@ -65,7 +67,8 @@ namespace Eternal {
 
 	void SceneViewportPanel::OnEvent(Event& event)
 	{
-		m_Scene->m_EditorCamera->OnEvent(event);
+		if(m_ViewportFocused)
+			m_Scene->m_EditorCamera->OnEvent(event);
 	}
 
 	void SceneViewportPanel::OnImGuiRender()
