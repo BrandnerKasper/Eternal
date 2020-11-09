@@ -19,10 +19,10 @@ namespace Eternal {
 		glm::mat4 m_Projection = glm::mat4(1.0f);
 	};
 
-	class OrthographicCamera
+	class EditorCamera
 	{
 	public:
-		OrthographicCamera(float left, float right, float bottom, float top);
+		EditorCamera(float left, float right, float bottom, float top);
 
 		void SetProjection(float left, float right, float bottom, float top);
 

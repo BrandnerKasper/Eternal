@@ -238,7 +238,7 @@ private:
 
 	Eternal::Ref<Eternal::Texture2D> m_Texture, m_EternalLogo;
 
-	Eternal::OrthographicCameraController m_CameraController;
+	Eternal::EditorCameraController m_CameraController;
 
 	glm::vec3 m_PlayerPosition;
 	float m_PlayerMoveSpeed = 1.0f;

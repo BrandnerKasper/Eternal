@@ -8,16 +8,16 @@
 
 namespace Eternal {
 
-	class OrthographicCameraController
+	class EditorCameraController
 	{
 	public:
-		OrthographicCameraController(float aspectRatio, bool rotation = false);
+		EditorCameraController(float aspectRatio, bool rotation = false);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
 
-		OrthographicCamera& GetCamera() { return m_Camera; }
-		const OrthographicCamera& GetCamera() const { return m_Camera; }
+		EditorCamera& GetCamera() { return m_Camera; }
+		const EditorCamera& GetCamera() const { return m_Camera; }
 
 		float GetZoomLevel() { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }
@@ -35,6 +35,6 @@ namespace Eternal {
 		float m_CameraRotation = 0.0f;
 		float m_CameraRotationSpeed = 180.0f;
 
-		OrthographicCamera m_Camera;
+		EditorCamera m_Camera;
 	};
 }

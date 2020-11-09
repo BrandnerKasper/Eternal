@@ -6,13 +6,13 @@
 
 namespace Eternal {
 
-	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
+	EditorCameraController::EditorCameraController(float aspectRatio, bool rotation)
 		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_RotationEnabled(rotation)
 	{
 		
 	}
 
-	void OrthographicCameraController::OnUpdate(Timestep ts)
+	void EditorCameraController::OnUpdate(Timestep ts)
 	{
 		if (Input::IsKeyPressed(ET_KEY_LEFT) || Input::IsKeyPressed(ET_KEY_A))
 			m_CameraPosition.x -= m_CameraSpeed * ts;
@@ -41,19 +41,19 @@ namespace Eternal {
 		m_CameraSpeed = m_ZoomLevel * 2.0f;
 	}
 
-	void OrthographicCameraController::OnViewportResize(uint32_t width, uint32_t height)
+	void EditorCameraController::OnViewportResize(uint32_t width, uint32_t height)
 	{
 		m_AspectRatio = (float)width/(float)height;
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 	}
 
-	void OrthographicCameraController::OnEvent(Event& e)
+	void EditorCameraController::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<MouseScrolledEvent>(ET_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
+		dispatcher.Dispatch<MouseScrolledEvent>(ET_BIND_EVENT_FN(EditorCameraController::OnMouseScrolled));
 	}
 
-	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
+	bool EditorCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
 		m_ZoomLevel -= e.GetYOffset() * 0.5f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);

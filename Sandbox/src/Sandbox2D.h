@@ -15,7 +15,7 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Eternal::Event& event) override;
 private:
-	Eternal::OrthographicCameraController m_CameraController;
+	Eternal::EditorCameraController m_CameraController;
 
 	//Temporary!!
 	Eternal::Ref<Eternal::VertexArray> m_SquareVertexArray;

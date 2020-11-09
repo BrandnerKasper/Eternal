@@ -36,7 +36,7 @@ namespace Eternal
 		entt::registry m_Registry;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 		std::string m_Name = "Untitled";
-		Ref<OrthographicCameraController> m_EditorCamera;
+		Ref<EditorCameraController> m_EditorCamera;
 
 		friend class Entity;
 		friend class SceneHierarchyPanel;
