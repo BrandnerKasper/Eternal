@@ -2,7 +2,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "EditorLayer.h"
-#include "Scripts/CameraController.h"
+#include "Scripts/SimpleController.h"
 #include "Eternal/Scene/SceneSerializer.h"
 #include "Eternal/Utils/PlatformUtils.h"
 

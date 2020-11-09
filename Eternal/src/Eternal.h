@@ -12,7 +12,7 @@
 #include "Eternal/Core/KeyCodes.h"
 #include "Eternal/Core/MouseButtonCodes.h"
 
-#include "Eternal/Renderer/CameraController.h"
+#include "Eternal/Renderer/EditorCameraController.h"
 
 #include "Eternal/ImGui/ImGuiLayer.h"
 

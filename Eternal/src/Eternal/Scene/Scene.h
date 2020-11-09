@@ -4,7 +4,7 @@
 
 #include "Eternal/Core/Timestep.h"
 
-#include "Eternal/Renderer/CameraController.h"
+#include "Eternal/Renderer/EditorCameraController.h"
 
 namespace Eternal
 {

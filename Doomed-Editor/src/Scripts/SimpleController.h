@@ -5,12 +5,12 @@
 
 namespace Eternal {
 
-    class CameraController : public ScriptableEntity
+    class SimpleController : public ScriptableEntity
     {
     public:
         void OnCreate()
         {
-            //std::cout << "i am alive.";
+            std::cout << "i am alive.";
         }
 
         void OnDestroy()
