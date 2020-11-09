@@ -9,7 +9,7 @@
 namespace Eternal {
 
     EditorLayer::EditorLayer()
-        : Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f)
+        : Layer("EditorLayer")
     {
     }
 
@@ -59,11 +59,6 @@ namespace Eternal {
     {
         m_SceneViewportPanel->OnUpdate(ts);
         m_SettingsPanel->SetTimestep(ts);
-        //Update
-        //if (m_ViewportFocused)
-        //Old TODO remove
-        m_CameraController.OnUpdate(ts);
-
     }
 
     void EditorLayer::OnImGuiRender()
@@ -156,7 +151,7 @@ namespace Eternal {
 
     void EditorLayer::OnEvent(Event& event)
     {
-        m_CameraController.OnEvent(event);
+        m_SceneViewportPanel->OnEvent(event);
 
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<KeyPressedEvent>(ET_BIND_EVENT_FN(EditorLayer::OnKeyPressed));

@@ -30,8 +30,6 @@ namespace Eternal {
 
 		void Exit();
 	private:
-		OrthographicCameraController m_CameraController;
-
 		Ref<Scene> m_ActiveScene;
 		
 		//Panel

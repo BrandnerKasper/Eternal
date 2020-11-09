@@ -10,20 +10,20 @@ namespace Eternal {
 		frameBufferSpec.Width = 1280;
 		frameBufferSpec.Height = 720;
 		m_FrameBuffer = FrameBuffer::Create(frameBufferSpec);
-		
-		//SetContext(context);
 	}
 
 	void SceneViewportPanel::SetContext(const Ref<Scene>& context)
 	{
 		m_Scene = context;
+		m_Scene->m_EditorCamera = CreateRef<OrthographicCameraController>(m_ViewportSize.x, m_ViewportSize.y);
+
 	}
 
 	void SceneViewportPanel::OnUpdate(Timestep ts)
 	{
 		HandleResize();
 		
-		//m_CameraController.Update(ts);
+		//m_Scene->m_EditorCamera->OnUpdate(ts);
 
 		UpdateScene(ts);
 	}
@@ -43,23 +43,7 @@ namespace Eternal {
 	void SceneViewportPanel::OnViewportResize(uint32_t width, uint32_t height)
 	{
 		ET_CORE_ERROR("Viewport Resized width, height: {0}, {1}", width, height);
-		m_Scene->m_ViewportWidth = width;
-		m_Scene->m_ViewportHeight = height;
-
-		//Resize EditorCamera
-		//!!!!!!!!!!!
-
-		//Resize non fixed Aspect ratio cameras
-		auto view = m_Scene->m_Registry.view<CameraComponent>();
-		for (auto entity : view)
-		{
-			auto& cameraComponent = view.get<CameraComponent>(entity);
-			if (!cameraComponent.FixedAspectRatio)
-			{
-				cameraComponent.Camera.SetViewportSize(width, height);
-			}
-
-		}
+		m_Scene->OnViewportResize(width, height);
 	}
 
 	void SceneViewportPanel::UpdateScene(Timestep ts)
@@ -77,6 +61,11 @@ namespace Eternal {
 		m_Scene->OnUpdate(ts);
 
 		m_FrameBuffer->Unbind();
+	}
+
+	void SceneViewportPanel::OnEvent(Event& event)
+	{
+		m_Scene->m_EditorCamera->OnEvent(event);
 	}
 
 	void SceneViewportPanel::OnImGuiRender()

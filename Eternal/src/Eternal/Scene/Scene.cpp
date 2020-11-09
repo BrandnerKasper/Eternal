@@ -11,6 +11,7 @@ namespace Eternal {
 
 	Scene::Scene()
 	{
+		
 	}
 
 	Scene::Scene(std::string name)
@@ -41,17 +42,48 @@ namespace Eternal {
 
 	void Scene::OnUpdate(Timestep ts)
 	{
-		//Update Transforms
+		UpdateTransforms();
+
+		UpdateScripts(ts, true);
+		
+		UpdateCameras(ts, false);
+	}
+
+	void Scene::OnViewportResize(uint32_t width, uint32_t height)
+	{
+		m_ViewportWidth = width;
+		m_ViewportHeight = height;
+
+		//Resize EditorCamera
+		m_EditorCamera->OnViewportResize(width, height);
+
+		//Resize non fixed Aspect ratio cameras
+		auto view = m_Registry.view<CameraComponent>();
+		for (auto entity : view)
 		{
-			auto view = m_Registry.view<TransformComponent>();
-			for (auto entity : view)
+			auto& cameraComponent = view.get<CameraComponent>(entity);
+			if (!cameraComponent.FixedAspectRatio)
 			{
-				view.get<TransformComponent>(entity).CheckTransform();
+				cameraComponent.Camera.SetViewportSize(width, height);
 			}
+
 		}
-		// Update scripts
+	}
+
+	void Scene::UpdateTransforms()
+	{
+		auto view = m_Registry.view<TransformComponent>();
+		for (auto entity : view)
 		{
-			//TODO: block events when window is not focused!
+			view.get<TransformComponent>(entity).CheckTransform();
+		}
+	}
+
+	void Scene::UpdateScripts(Timestep ts, bool play)
+	{
+		// Only Update Scripts when Button is pressed! TODO add play button!!
+		if (play)
+		{
 			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 				{
 					// TODO: Move to Scene::OnScenePlay
@@ -65,42 +97,70 @@ namespace Eternal {
 					nsc.Instance->OnUpdate(ts);
 				});
 		}
+	}
 
-		//Camera
+	void Scene::UpdateCameras(Timestep ts, bool play)
+	{
+		if (!play)
+		{
+			UpdateEditorCamera(ts);
+		}
+		else
+		{
+			UpdateSceneCamera(ts);
+		}
+	}
+
+	void Scene::UpdateEditorCamera(Timestep ts)
+	{
+		//Use Editor Camera as Default!
+		m_EditorCamera->OnUpdate(ts);
+		Renderer2D::BeginScene(m_EditorCamera->GetCamera());
+
+		//auto view = m_Registry.view<TransformComponent,SpriteRendererComponent>();
+		//Sort this group by entity transform position z value but how...
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+		for (auto entity : group)
+		{
+			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+			Renderer2D::DrawQuad(transform.Transform, sprite.Texture, sprite.TextureScale, sprite.Color);
+		}
+		Renderer2D::EndScene();
+	}
+
+	void Scene::UpdateSceneCamera(Timestep ts)
+	{
+		//When Scene plays use Scene Camera (the primary one!)
 		Camera* mainCamera = nullptr;
 		glm::mat4 cameraTransform;
 
+		auto view = m_Registry.view<TransformComponent, CameraComponent>();
+		for (auto entity : view)
 		{
-			auto view = m_Registry.view<TransformComponent, CameraComponent>();
-			for (auto entity : view)
-			{
-				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+			auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
-				if (camera.Primary)
-				{
-					mainCamera = &camera.Camera;
-					cameraTransform = transform.Transform;
-					break;
-				}
+			if (camera.Primary)
+			{
+				mainCamera = &camera.Camera;
+				cameraTransform = transform.Transform;
+				break;
 			}
 		}
 
+		if (mainCamera)
 		{
-			if (mainCamera) 
-			{
-				//Render Scene
-				Renderer2D::BeginScene(*mainCamera, cameraTransform);
+			//Render Scene
+			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
-				//auto view = m_Registry.view<TransformComponent,SpriteRendererComponent>();
-				//Sort this group by entity transform position z value but how...
-				auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-				for (auto entity : group)
-				{
-					auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-					Renderer2D::DrawQuad(transform.Transform, sprite.Texture, sprite.TextureScale, sprite.Color);
-				}
-				Renderer2D::EndScene();
+			//auto view = m_Registry.view<TransformComponent,SpriteRendererComponent>();
+			//Sort this group by entity transform position z value but how...
+			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			for (auto entity : group)
+			{
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				Renderer2D::DrawQuad(transform.Transform, sprite.Texture, sprite.TextureScale, sprite.Color);
 			}
+			Renderer2D::EndScene();
 		}
 	}
 

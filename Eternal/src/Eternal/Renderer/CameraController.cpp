@@ -41,25 +41,22 @@ namespace Eternal {
 		m_CameraSpeed = m_ZoomLevel * 2.0f;
 	}
 
+	void OrthographicCameraController::OnViewportResize(uint32_t width, uint32_t height)
+	{
+		m_AspectRatio = (float)width/(float)height;
+		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+	}
+
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(ET_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
-		dispatcher.Dispatch<WindowResizeEvent>(ET_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
 		m_ZoomLevel -= e.GetYOffset() * 0.5f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
-		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
-
-		return false;
-	}
-
-	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
-	{
-		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 
 		return false;

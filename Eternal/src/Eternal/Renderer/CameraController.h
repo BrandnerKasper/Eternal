@@ -19,15 +19,14 @@ namespace Eternal {
 		OrthographicCamera& GetCamera() { return m_Camera; }
 		const OrthographicCamera& GetCamera() const { return m_Camera; }
 
-		//SetViewportSize(x,y)
 		float GetZoomLevel() { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }
+		void OnViewportResize(uint32_t width, uint32_t height);
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);
-		bool OnWindowResized(WindowResizeEvent& e);
 	private:
 		float m_AspectRatio = 1.0f;
-		float m_ZoomLevel = 1.0f;
+		float m_ZoomLevel = 5.0f;
 
 		bool m_RotationEnabled;
 
