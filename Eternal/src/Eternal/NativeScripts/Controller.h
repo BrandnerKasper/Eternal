@@ -5,12 +5,13 @@
 
 namespace Eternal {
 
-    class SimpleController : public ScriptableEntity
+    class Controller : public ScriptableEntity
     {
     public:
         void OnCreate()
         {
-            std::cout << "i am alive.";
+            auto& entityname = GetComponent<TagComponent>().Tag;
+            ET_INFO(entityname + " Controller created");
         }
 
         void OnDestroy()

@@ -82,19 +82,23 @@ namespace Eternal {
 	void Scene::UpdateScripts(Timestep ts, bool play)
 	{
 		// Only Update Scripts when Button is pressed! TODO add play button!!
-		if (play)
+		if (m_play)
 		{
 			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 				{
-					// TODO: Move to Scene::OnScenePlay
-					if (!nsc.Instance)
+					if (nsc.ScriptReference)
 					{
-						nsc.Instance = nsc.InstantiateScript();
-						nsc.Instance->m_Entity = Entity{ entity, this };
-						nsc.Instance->OnCreate();
-					}
+						// TODO: Move to Scene::OnScenePlay
+						if (!nsc.Instance)
+						{
+							nsc.Instance = nsc.ScriptReference;
+							//nsc.Instance = nsc.InstantiateScript();
+							nsc.Instance->m_Entity = Entity{ entity, this };
+							nsc.Instance->OnCreate();
+						}
 
-					nsc.Instance->OnUpdate(ts);
+						nsc.Instance->OnUpdate(ts);
+					}
 				});
 		}
 	}

@@ -8,7 +8,7 @@ workspace "Eternal"
 		"Dist"
 	}
 
-	startproject "Doomed-Editor"
+	startproject "Doomed_Editor"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -49,7 +49,8 @@ project "Eternal"
 		"%{prj.name}/vendor/stb_image/**.h",
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/assets/scripts/**.h"
 	}
 
 	defines
@@ -68,7 +69,7 @@ project "Eternal"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
 	}
 
 	links
@@ -77,7 +78,7 @@ project "Eternal"
 		"Glad",
 		"ImGui",
 		"yaml-cpp",
-		"opengl32.lib"
+		"opengl32.lib",
 	}
 
 	filter "system:windows"
@@ -160,8 +161,8 @@ project "Sandbox"
 
 -------------------------------------------------------------------------------------------
 
-project "Doomed-Editor" 
-	location "Doomed-Editor"
+project "Doomed_Editor" 
+	location "Doomed_Editor"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"

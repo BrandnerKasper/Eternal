@@ -1,0 +1,15 @@
+Scene: rotate test.eternal
+Entities:
+  - Entity: 0
+    TagComponent:
+      Tag: Doom Square
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 139.651871
+      Size: [3, 3]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\EternalLogo.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+    NativeScriptComponent:
+      ScriptFileName: Rotater.h

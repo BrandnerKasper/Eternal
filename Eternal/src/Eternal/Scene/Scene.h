@@ -24,6 +24,9 @@ namespace Eternal
 		void OnViewportResize(uint32_t width, uint32_t height);
 		std::string GetName() { return m_Name; }
 		void SetName(std::string name) { m_Name = name; }
+		void SetPlay(bool play) { m_play = play; }
+		bool GetPlay() { return m_play; }
+		bool m_play = false;
 	private:
 		void UpdateTransforms();
 		void UpdateScripts(Timestep ts, bool play);
@@ -32,6 +35,7 @@ namespace Eternal
 		void UpdateSceneCameraRender(Timestep ts);
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
+		
 	private:
 		entt::registry m_Registry;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;

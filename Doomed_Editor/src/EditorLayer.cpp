@@ -2,9 +2,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "EditorLayer.h"
-#include "Scripts/SimpleController.h"
 #include "Eternal/Scene/SceneSerializer.h"
 #include "Eternal/Utils/PlatformUtils.h"
+#include "Eternal/NativeScripts/ScriptHandler.h"
 
 namespace Eternal {
 
@@ -38,11 +38,12 @@ namespace Eternal {
         DoomSquare.GetComponent<TransformComponent>().Position = { glm::vec3{ -1.0f, -1.0f, -0.1f } };
         DoomSquare.GetComponent<TransformComponent>().Size = {glm::vec2{ 5.0f, 5.0f }};
         DoomSquare.AddComponent<SpriteRendererComponent>("assets/textures/EternalLogo.png");
+        DoomSquare.AddComponent<NativeScriptComponent>().SetScript(ScriptHandler::GetScript(Scripts::ERotater));
         
         auto camera = m_ActiveScene->CreateEntity("Camera Entity");
         camera.AddComponent<CameraComponent>();
         
-        camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+        camera.AddComponent<NativeScriptComponent>().SetScript(ScriptHandler::GetScript(Scripts::EController));
 #endif
         m_SceneViewportPanel->SetContext(m_ActiveScene);
         m_SceneHierachyPanel->SetContext(m_ActiveScene);
