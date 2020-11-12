@@ -6,6 +6,9 @@
 #include "Eternal/Scene/Entity.h"
 #include "Eternal/Scene/Component.h"
 
+#include "Eternal/NativeScripts/ScriptHandler.h"
+
+
 namespace YAML {
 
 	template<>
@@ -184,7 +187,7 @@ namespace Eternal {
 			out << YAML::BeginMap; // NativeScriptComponent
 
 			auto& nsc = entity.GetComponent<NativeScriptComponent>();
-			out << YAML::Key << "ScriptFilepath" << YAML::Value << nsc.ScriptFilepath;
+			out << YAML::Key << "ScriptFileName" << YAML::Value << nsc.ScriptName;
 
 			out << YAML::EndMap; // NativeScriptComponent
 		}
@@ -284,9 +287,10 @@ namespace Eternal {
 				auto nativeScriptComponent = entity["NativeScriptComponent"];
 				if (nativeScriptComponent)
 				{
-					//auto& nsc = deserializedEntity.AddComponent<NativeScriptComponent>();
-					//nsc.ScriptFilepath = nativeScriptComponent["ScriptFilepath"].as<std::string>();
-					//nsc.Bind<nsc.ScriptFilepath>();
+					auto& nsc = deserializedEntity.AddComponent<NativeScriptComponent>();
+					nsc.ScriptName = nativeScriptComponent["ScriptFileName"].as<std::string>();
+					auto scriptNumber = ScriptHandler::GetScriptNumber(nsc.ScriptName);
+					nsc.SetScript(ScriptHandler::GetScript(scriptNumber));
 				}
 			}
 		}
