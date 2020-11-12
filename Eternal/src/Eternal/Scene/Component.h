@@ -121,11 +121,22 @@ namespace Eternal {
 	struct NativeScriptComponent
 	{
 		std::string ScriptFilepath = "";
+		std::string ScriptName = "";
 		ScriptableEntity* Instance = nullptr;
 
+		ScriptableEntity* ScriptReference = nullptr;
 		ScriptableEntity* (*InstantiateScript)();
 		void (*DestroyScript)(NativeScriptComponent*);
 
+		void SetScript(ScriptableEntity* script)
+		{
+			delete Instance;
+			Instance = nullptr;
+			ScriptReference = script;
+			//DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+		}
+
+		//Lets leave it for now...
 		template<typename T>
 		void Bind()
 		{
@@ -134,10 +145,5 @@ namespace Eternal {
 		}
 
 		NativeScriptComponent() = default;
-		NativeScriptComponent(std::string filepath)
-			: ScriptFilepath(filepath)
-		{
-			
-		}
 	};
 }
