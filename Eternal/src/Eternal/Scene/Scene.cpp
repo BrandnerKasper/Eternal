@@ -44,9 +44,9 @@ namespace Eternal {
 	{
 		UpdateTransforms();
 
-		UpdateScripts(ts, true);
+		UpdateScripts(ts);
 		
-		UpdateCameraRender(ts, false);
+		UpdateCameraRender(ts);
 	}
 
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
@@ -79,7 +79,7 @@ namespace Eternal {
 		}
 	}
 
-	void Scene::UpdateScripts(Timestep ts, bool play)
+	void Scene::UpdateScripts(Timestep ts)
 	{
 		// Only Update Scripts when Button is pressed! TODO add play button!!
 		if (m_play)
@@ -103,9 +103,9 @@ namespace Eternal {
 		}
 	}
 
-	void Scene::UpdateCameraRender(Timestep ts, bool play)
+	void Scene::UpdateCameraRender(Timestep ts)
 	{
-		if (!play)
+		if (!m_play)
 		{
 			UpdateEditorCameraRender(ts);
 		}
@@ -120,9 +120,9 @@ namespace Eternal {
 		//Use Editor Camera as Default!
 		Renderer2D::BeginScene(m_EditorCamera->GetCamera());
 
-		//auto view = m_Registry.view<TransformComponent,SpriteRendererComponent>();
-		//Sort this group by entity transform position z value but how...
 		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+		SortEntitysByZValue();
+
 		for (auto entity : group)
 		{
 			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
@@ -155,9 +155,9 @@ namespace Eternal {
 			//Render Scene
 			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
-			//auto view = m_Registry.view<TransformComponent,SpriteRendererComponent>();
-			//Sort this group by entity transform position z value but how...
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			SortEntitysByZValue();
+
 			for (auto entity : group)
 			{
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
@@ -165,6 +165,15 @@ namespace Eternal {
 			}
 			Renderer2D::EndScene();
 		}
+	}
+
+	void Scene::SortEntitysByZValue()//Fix Blending Problems with Batch Renderer by sorting all rendered entitys by z-position
+	{
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+		group.sort<TransformComponent>([&group](const TransformComponent e1, const TransformComponent e2)
+			{
+				return e1.Position.z < e2.Position.z;
+			});
 	}
 
 	template<typename T>

@@ -1,5 +1,16 @@
 Scene: Example.eternal
 Entities:
+  - Entity: 5
+    TagComponent:
+      Tag: tinted example
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Checkerboard.png
+      TextureScale: 1
+      Color: [1, 0.419354856, 0.419354856, 1]
   - Entity: 4
     TagComponent:
       Tag: Camera Entity
@@ -20,8 +31,8 @@ Entities:
     TagComponent:
       Tag: Doom Square
     TransformComponent:
-      Position: [-1, -1, -0.100000001]
-      Rotation: 112.914619
+      Position: [-1.60000002, -1, -0.100000001]
+      Rotation: 0
       Size: [5, 5]
     SpriteRendererComponent:
       TextureFilepath: assets/textures/EternalLogo.png
@@ -33,7 +44,7 @@ Entities:
     TagComponent:
       Tag: Cherno Square
     TransformComponent:
-      Position: [-7.0999999, 0.5, 0]
+      Position: [0.100000001, 0.400000006, 0]
       Rotation: 0
       Size: [1, 1]
     SpriteRendererComponent:
@@ -44,7 +55,7 @@ Entities:
     TagComponent:
       Tag: Chess Square
     TransformComponent:
-      Position: [2.4000001, 3.20000005, 0.100000001]
+      Position: [2.4000001, 3.20000005, 0]
       Rotation: 0
       Size: [3.79999995, 3.9000001]
     SpriteRendererComponent:

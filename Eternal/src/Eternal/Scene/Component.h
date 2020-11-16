@@ -110,12 +110,13 @@ namespace Eternal {
 	struct CameraComponent
 	{
 		SceneCamera Camera;
-		bool Primary = true;
+		bool Primary = false;
 		bool FixedAspectRatio = false;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-
+		bool GetPrimary() { return Primary; }
+		void SetPrimary(bool primary) { Primary = primary; }
 	};
 
 	struct NativeScriptComponent

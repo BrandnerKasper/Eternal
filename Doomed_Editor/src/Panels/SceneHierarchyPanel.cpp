@@ -25,7 +25,7 @@ namespace Eternal {
 				Entity entity{ entityID , m_Context.get() };
 				DrawEntityNode(entity);
 			});
-
+		
 		HandleRigthClickOnBlankSpace();
 
 		ImGui::End();

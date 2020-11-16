@@ -259,10 +259,6 @@ namespace Eternal {
 			{
 				DrawNativeScriptComponent(component);
 			});
-
-		//Move to Button on top of SceneViewportPanel!
-		auto& play = m_SceneHierachyPanel->m_Context->m_play;
-		ImGui::Checkbox("Play", &play);
 	}
 
 	static void DrawTagComponent(TagComponent& tagComponent)
@@ -363,7 +359,7 @@ namespace Eternal {
 		ImGui::Text("Primary");
 
 		ImGui::NextColumn();
-		ImGui::Checkbox("##Primary", &cameraComponent.Primary);
+		ImGui::Checkbox("##Primary", &cameraComponent.Primary); //Handle multiple Cameras and set other Camera Primarys to false
 		ImGui::Columns(1);
 
 		ImGui::Columns(2);

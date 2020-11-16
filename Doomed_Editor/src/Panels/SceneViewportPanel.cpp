@@ -1,6 +1,7 @@
 #include "SceneViewportPanel.h"
 
 #include <imgui/imgui.h>
+#include <imgui/imgui_internal.h>
 
 namespace Eternal {
 
@@ -71,12 +72,65 @@ namespace Eternal {
 			m_Scene->m_EditorCamera->OnEvent(event);
 	}
 
+	static void DrawPlay(bool& play)
+	{
+		float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+		ImVec2 buttonSize = { lineHeight + 18.0f, lineHeight };
+
+		ImGuiIO& io = ImGui::GetIO();
+		auto boldFont = io.Fonts->Fonts[0];
+
+		//ImGui::Checkbox("Play", &play);
+		
+		ImGui::PushFont(boldFont);
+		const char* s = u8"\u0444";
+		//wchar_t* playText = L"\u0444";
+		//std::wstring ws(playText)
+		auto playText = "Play";
+		auto stopText = "Stop";
+		auto buttonText = "";
+		if (play == false)
+		{
+			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f });
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+			buttonText = playText;
+		}
+		else
+		{
+			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f });
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+			buttonText = stopText;
+		}
+		if (ImGui::Button(buttonText, buttonSize))
+		{
+			if (play == false)
+				play = true;
+			else
+				play = false;
+		}
+		//ImGui::ImageButton((void*)ButtonID, ImVec2(20,20)); TODO get that image rendered ... :D
+		ImGui::PopFont();
+		ImGui::PopStyleColor(3);
+	}
+
 	void SceneViewportPanel::OnImGuiRender()
 	{
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });
-
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,3 });
 		ImGui::Begin("Scene Viewport");
 
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoDecoration;
+		ImGui::BeginChild("Play Button", ImVec2(m_ViewportSize.x, 25),false, flags);
+
+		
+		ImGui::SameLine(m_ViewportSize.x / 2, 20.0f);
+		auto& play = m_Scene->m_play;
+		DrawPlay(play);
+		
+		ImGui::EndChild();
+
+		ImGui::BeginChild("Scene");
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
 		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
@@ -89,10 +143,10 @@ namespace Eternal {
 		uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
 
+		ImGui::EndChild();
+
 		ImGui::End();
 
 		ImGui::PopStyleVar();
 	}
-
-
 }
