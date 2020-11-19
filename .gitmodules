@@ -16,3 +16,6 @@
 [submodule "Eternal/vendor/yaml-cpp"]
 	path = Eternal/vendor/yaml-cpp
 	url = https://github.com/BrandnerKasper/yaml-cpp
+[submodule "Eternal/vendor/box2d"]
+	path = Eternal/vendor/box2d
+	url = https://github.com/BrandnerKasper/box2d

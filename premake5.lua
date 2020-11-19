@@ -21,12 +21,14 @@ IncludeDir["glm"] = "Eternal/vendor/glm"
 IncludeDir["stb_image"] = "Eternal/vendor/stb_image"
 IncludeDir["entt"] = "Eternal/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "Eternal/vendor/yaml-cpp/include"
+IncludeDir["box2d"] = "Eternal/vendor/box2d/include"
 
 group "Dependencies"
 	include "Eternal/vendor/GLFW"
 	include "Eternal/vendor/Glad"
 	include "Eternal/vendor/imgui"
 	include "Eternal/vendor/yaml-cpp"
+	include "Eternal/vendor/box2d"
 group ""
 
 project "Eternal"
@@ -70,6 +72,7 @@ project "Eternal"
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.box2d}"
 	}
 
 	links
@@ -78,6 +81,7 @@ project "Eternal"
 		"Glad",
 		"ImGui",
 		"yaml-cpp",
+		"box2d",
 		"opengl32.lib",
 	}
 
@@ -128,7 +132,8 @@ project "Sandbox"
 		"Eternal/vendor",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.box2d}"
 	}
 
 	links
@@ -184,7 +189,8 @@ project "Doomed_Editor"
 		"Eternal/vendor",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.box2d}"
 	}
 
 	links
