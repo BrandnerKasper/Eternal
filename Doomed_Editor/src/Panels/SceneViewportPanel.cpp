@@ -1,4 +1,4 @@
-#include "SceneViewportPanel.h"
+﻿#include "SceneViewportPanel.h"
 
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
@@ -83,10 +83,7 @@ namespace Eternal {
 		//ImGui::Checkbox("Play", &play);
 		
 		ImGui::PushFont(boldFont);
-		const char* s = u8"\u0444";
-		//wchar_t* playText = L"\u0444";
-		//std::wstring ws(playText)
-		auto playText = "Play";
+		auto playText = "Play"; //Maybe use unicode icon for play
 		auto stopText = "Stop";
 		auto buttonText = "";
 		if (play == false)

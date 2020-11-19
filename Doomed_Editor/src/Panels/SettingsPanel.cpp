@@ -21,7 +21,8 @@ namespace Eternal {
         ImGui::SameLine();
         ImGui::Text("Index Count: %d", stats.GetTotalIndexCount());
         //For renderer vendor etc. include graphics context -> see OpenGL context
-        ImGui::Text("Frame Time: %d", 1000 / (int)m_timestep.GetMilliseconds());
+        ImGui::Text("Frame Time: %d", (int)(m_timestep.GetMilliseconds()));
+        //ImGui::Text("Frame Rate: %d", 1000 / (int)m_timestep.GetMilliseconds());
 
         ImGui::End();
 	}

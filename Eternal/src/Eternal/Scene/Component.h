@@ -62,6 +62,9 @@ namespace Eternal {
 
 		void CalculateTransform()
 		{
+			//ET_CORE_INFO("Rotation in degree: {0}", Rotation);
+			//ET_CORE_INFO("Rotation in radians: {0}", glm::radians(Rotation));
+			//ET_CORE_INFO("Rotation in radians: {0}", glm::radians(Rotation) * 180.0f / 3.14f); !!!!
 			Transform = glm::translate(stdMat, Position)
 				* glm::rotate(stdMat, glm::radians(Rotation), { 0.0f, 0.0f, 1.0f })
 				* glm::scale(stdMat, { Size.x, Size.y, 1.0f });
