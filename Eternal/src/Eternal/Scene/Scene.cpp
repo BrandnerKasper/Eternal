@@ -44,9 +44,13 @@ namespace Eternal {
 	{
 		UpdateTransforms();
 
+		HandlePlay();
+
 		UpdateScripts(ts);
 		
 		UpdateCameraRender(ts);
+
+		UpdatePhysics(ts);
 	}
 
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
@@ -72,10 +76,13 @@ namespace Eternal {
 
 	void Scene::UpdateTransforms()
 	{
-		auto view = m_Registry.view<TransformComponent>();
-		for (auto entity : view)
+		//Update Transform only when Transform changed
 		{
-			view.get<TransformComponent>(entity).CheckTransform();
+			auto view = m_Registry.view<TransformComponent>();
+			for (auto entity : view)
+			{
+				view.get<TransformComponent>(entity).CheckTransform();
+			}
 		}
 	}
 
@@ -167,6 +174,82 @@ namespace Eternal {
 		}
 	}
 
+	void Scene::UpdatePhysics(Timestep ts)
+	{
+		if (m_play)
+		{
+			//Create all physics objects
+			{
+				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+				for (auto entity : view)
+				{
+					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+					if (!physics.body)
+					{
+						physics.SetPhysics(b2Vec2(transform.Position.x, transform.Position.y), b2Vec2(transform.Size.x, transform.Size.y), transform.Rotation);
+						physics.body = m_world->CreateBody(&physics.bodyDef);
+						physics.Fixture = physics.body->CreateFixture(&physics.fixtureDef);
+					}
+				}
+			}
+
+			//Start Physic Simulation
+			m_world->Step(ts, velocityIterations, positionIterations);
+
+			//Rewrite Position into optical position again!
+			{
+				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+				for (auto entity : view)
+				{
+					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+					transform.Position = glm::vec3(physics.body->GetPosition().x, physics.body->GetPosition().y, transform.Position.z);
+					transform.Rotation = (float)(physics.body->GetAngle() * 180.0f /3.141592f);
+				}
+			}
+		}
+	}
+
+	void Scene::HandlePlay()
+	{
+		//Set ResetTransform
+		if (m_play)
+		{
+			if (!m_initializeResetTransform)
+			{
+				m_initializeResetTransform = true;
+				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+				for (auto entity : view)
+				{
+					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+
+					//Safe Reset Transform
+					transform.ResetPosition = transform.Position;
+					transform.ResetRotation = transform.Rotation;
+				}
+			}
+		}
+		else
+		{
+			if (m_initializeResetTransform)
+			{
+				m_initializeResetTransform = false;
+				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+				for (auto entity : view)
+				{
+					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+
+					//Reset Transform when play is over
+					transform.Position = transform.ResetPosition;
+					transform.Rotation = transform.ResetRotation;
+
+					//Reset Physics
+					physics.body->DestroyFixture(physics.Fixture);
+					physics.body = nullptr;
+				}
+			}
+		}
+	}
+
 	void Scene::SortEntitysByZValue()//Fix Blending Problems with Batch Renderer by sorting all rendered entitys by z-position
 	{
 		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
@@ -205,6 +288,11 @@ namespace Eternal {
 
 	template<>
 	void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<PhysicsComponent>(Entity entity, PhysicsComponent& component)
 	{
 	}
 }

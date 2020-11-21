@@ -5,6 +5,7 @@
 #include "Panels/PropertiesPanel.h"
 #include "Panels/SettingsPanel.h"
 #include "Panels/SceneViewportPanel.h"
+#include "box2d/include/box2d/box2d.h"
 
 namespace Eternal {
 	class EditorLayer : public Layer
@@ -38,5 +39,6 @@ namespace Eternal {
 		Ref<SettingsPanel> m_SettingsPanel;
 		Ref<SceneViewportPanel> m_SceneViewportPanel;
 
+		float m_physicsTime = 1.0f / 60.0f;
 	};
 }

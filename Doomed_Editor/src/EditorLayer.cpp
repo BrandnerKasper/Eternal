@@ -22,6 +22,42 @@ namespace Eternal {
         m_SettingsPanel = CreateRef<SettingsPanel>();
 
 #if 0
+        //Defining static ground Body
+        b2BodyDef groundBodyDef;
+        groundBodyDef.position.Set(0.0f, -10.0f);
+        b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
+        b2PolygonShape groundBox;
+        groundBox.SetAsBox(0.5f, 0.5f);
+        groundBody->CreateFixture(&groundBox, 0.0f);
+        
+        //Defining dynamic body
+        b2BodyDef bodyDef;
+        bodyDef.type = b2_dynamicBody;
+        bodyDef.position.Set(0.0f, 4.0f);
+        m_body = m_world->CreateBody(&bodyDef);
+        b2PolygonShape dynamicBox;
+        dynamicBox.SetAsBox(0.5f, 0.5f);
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &dynamicBox;
+        fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.3f;
+        m_body->CreateFixture(&fixtureDef);
+#endif
+
+        auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");
+        chessSquare.GetComponent<TransformComponent>().Position = { glm::vec3{0.0f, 4.0f, 0.0f} };
+        chessSquare.AddComponent<SpriteRendererComponent>("assets/textures/Checkerboard.png");
+        chessSquare.AddComponent<PhysicsComponent>(true);
+
+        auto colorsquare = m_ActiveScene->CreateEntity("One Color Square");
+        colorsquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
+        colorsquare.AddComponent<PhysicsComponent>();
+
+        auto camera = m_ActiveScene->CreateEntity("Camera Entity");
+        camera.AddComponent<CameraComponent>();
+        camera.GetComponent<CameraComponent>().Primary = true;
+
+#if 0
         //Entitys
         auto colorSquare = m_ActiveScene->CreateEntity("One Color Square");
         colorSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 0.8f, 0.8f, 1 });
@@ -60,6 +96,14 @@ namespace Eternal {
     {
         m_SceneViewportPanel->OnUpdate(ts);
         m_SettingsPanel->SetTimestep(ts);
+
+        //m_ColorSquare.GetComponent<TransformComponent>().Position = { glm::vec3{m_body->GetPosition().x, m_body->GetPosition().y, 0.0f} };
+        //m_ColorSquare.GetComponent<TransformComponent>().Rotation = glm::radians(m_body->GetAngle());
+        //m_world->Step(ts, velocityIterations, positionIterations);
+        //b2Vec2 position = m_body->GetPosition();
+        //float angle = m_body->GetAngle();
+        //ET_CORE_WARN("physics cube position {0} {1}", position.x, position.y);
+        //ET_CORE_INFO("and angle {0}", angle);
     }
 
     void EditorLayer::OnImGuiRender()

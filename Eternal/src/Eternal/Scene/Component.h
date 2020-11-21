@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <box2d/box2d.h>
 
 #include "Eternal/Renderer/Texture.h"
 #include "Eternal/Scene/SceneCamera.h"
@@ -22,16 +23,20 @@ namespace Eternal {
 
 	struct TransformComponent
 	{
-		//Refactor so that Maybe when Transform gets newly Calculated every time someting changes
 		glm::mat4 stdMat{ 1.0f };
 		glm::mat4 Transform { 1.0f };
 		glm::vec3 Position { 0.0f, 0.0f, 0.0f };
 		glm::vec2 Size { 1.0f, 1.0f };
 		float Rotation = 0.0f;
 
-		glm::vec3 OldPosition;
-		glm::vec2 OldSize;
-		float OldRotation;
+		//Check variables for CeckTransform to only calculate Transform if necessary
+		glm::vec3 CheckPosition { 0.0f, 0.0f, 0.0f };
+		glm::vec2 CheckSize { 1.0f, 1.0f };
+		float CheckRotation = 0.0f;
+
+		//ResetPhysics variables to reset status before the physic simulation
+		glm::vec3 ResetPosition {1.0f};
+		float ResetRotation = 0.0f;
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
@@ -72,11 +77,11 @@ namespace Eternal {
 
 		bool TransformChanged()
 		{
-			if (OldPosition != Position || OldSize != Size || OldRotation != Rotation)
+			if (CheckPosition != Position || CheckSize != Size || CheckRotation != Rotation)
 			{
-				OldPosition = Position;
-				OldSize = Size;
-				OldRotation = Rotation;
+				CheckPosition = Position;
+				CheckSize = Size;
+				CheckRotation = Rotation;
 				return true;
 			}
 			else
@@ -149,5 +154,38 @@ namespace Eternal {
 		}
 
 		NativeScriptComponent() = default;
+	};
+
+	struct PhysicsComponent
+	{
+		bool Dynamic = false;
+		b2BodyDef bodyDef;
+		b2PolygonShape bodyShape;
+		b2FixtureDef fixtureDef;
+		b2Fixture* Fixture;
+		b2Body* body = nullptr;
+
+		void SetPhysics(b2Vec2 position, b2Vec2 size, float angle)
+		{
+			bodyDef.position.Set(position.x, position.y);
+			bodyShape.SetAsBox(size.x / 2, size.y / 2);
+			bodyDef.angle = glm::radians(angle);
+			if (Dynamic) {
+				bodyDef.type = b2_dynamicBody;
+				fixtureDef.shape = &bodyShape;
+				fixtureDef.density = 1.0f;
+				fixtureDef.friction = 0.3f;
+			}
+			else
+			{
+				fixtureDef.shape = &bodyShape;
+				fixtureDef.density = 0.0f;
+				fixtureDef.friction = 0.3f;
+			}
+		}
+
+		PhysicsComponent() = default;
+		PhysicsComponent(bool dynamic)
+			:Dynamic(dynamic) {}
 	};
 }

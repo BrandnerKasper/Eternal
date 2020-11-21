@@ -1,10 +1,12 @@
 #pragma once
 
-#include "entt.hpp"
+#include <entt.hpp>
+#include <box2d/box2d.h>
 
 #include "Eternal/Core/Timestep.h"
 
 #include "Eternal/Renderer/EditorCameraController.h"
+
 
 namespace Eternal
 {
@@ -32,6 +34,8 @@ namespace Eternal
 		void UpdateCameraRender(Timestep ts);
 		void UpdateEditorCameraRender(Timestep ts);
 		void UpdateSceneCameraRender(Timestep ts);
+		void UpdatePhysics(Timestep ts);
+		void HandlePlay();
 		void SortEntitysByZValue();
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
@@ -42,6 +46,16 @@ namespace Eternal
 		std::string m_Name = "Untitled";
 		Ref<EditorCameraController> m_EditorCamera;
 		bool m_play = false;
+
+		bool m_initializeResetTransform = false;
+		bool m_initializeResetPhysics = false;
+
+		//Physics
+		int32 velocityIterations = 6;
+		int32 positionIterations = 2;
+
+		b2Vec2* gravity = new b2Vec2(0.0f, -10.0f);
+		b2World* m_world = new b2World(*gravity);
 
 		friend class Entity;
 		friend class SceneHierarchyPanel;
