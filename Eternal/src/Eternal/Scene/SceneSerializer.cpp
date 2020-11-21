@@ -192,6 +192,17 @@ namespace Eternal {
 			out << YAML::EndMap; // NativeScriptComponent
 		}
 
+		if (entity.HasComponent<PhysicsComponent>())
+		{
+			out << YAML::Key << "PhysicsComponent";
+			out << YAML::BeginMap; // PhysicsComponent
+
+			auto& nsc = entity.GetComponent<PhysicsComponent>();
+			out << YAML::Key << "Dynamic" << YAML::Value << nsc.Dynamic;
+
+			out << YAML::EndMap; // PhysicsComponent
+		}
+
 		out << YAML::EndMap; //Entity
 	}
 
@@ -292,6 +303,13 @@ namespace Eternal {
 					nsc.ScriptName = nativeScriptComponent["ScriptFileName"].as<std::string>();
 					auto scriptNumber = ScriptHandler::GetScriptNumber(nsc.ScriptName);
 					nsc.SetScript(ScriptHandler::GetScript(scriptNumber));
+				}
+
+				auto physicsComponent = entity["PhysicsComponent"];
+				if (physicsComponent)
+				{
+					auto& phc = deserializedEntity.AddComponent<PhysicsComponent>();
+					phc.Dynamic = physicsComponent["Dynamic"].as<bool>();
 				}
 			}
 		}

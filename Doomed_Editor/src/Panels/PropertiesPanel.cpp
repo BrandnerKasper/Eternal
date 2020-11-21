@@ -259,6 +259,11 @@ namespace Eternal {
 			{
 				DrawNativeScriptComponent(component);
 			});
+
+		HandleComponent<PhysicsComponent>("Physics Properties", entity, [](auto& component)
+			{
+				DrawPhysicsComponent(component);
+			});
 	}
 
 	static void DrawTagComponent(TagComponent& tagComponent)
@@ -433,6 +438,19 @@ namespace Eternal {
 		ImGui::PopStyleColor(3);
 	}
 
+	static void DrawPhysicsComponent(PhysicsComponent& phc)
+	{
+		ImGui::Columns(2);
+		float columnWidth = 100.0f;
+		ImGui::SetColumnWidth(0, columnWidth);
+		ImGui::Text("Dynamic");
+
+		ImGui::NextColumn();
+
+		ImGui::Checkbox("## Dynamic", &phc.Dynamic);
+		ImGui::Columns(1);
+	}
+
 	void PropertiesPanel::HandleAddComponentButton(Entity entity)
 	{
 		if (ImGui::Button("Add Component"))
@@ -472,6 +490,15 @@ namespace Eternal {
 				if (ImGui::MenuItem("Script"))
 				{
 					entity.AddComponent<NativeScriptComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			if (!entity.HasComponent<PhysicsComponent>())
+			{
+				if (ImGui::MenuItem("Physics"))
+				{
+					entity.AddComponent<PhysicsComponent>();
 					ImGui::CloseCurrentPopup();
 				}
 			}

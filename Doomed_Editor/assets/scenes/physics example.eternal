@@ -1,0 +1,42 @@
+Scene: physics example.eternal
+Entities:
+  - Entity: 2
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    CameraComponent:
+      Camera:
+        OrthographicSize: 15
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 1
+    TagComponent:
+      Tag: dynamic cube
+    TransformComponent:
+      Position: [0, 4.19999981, 0]
+      Rotation: 27
+      Size: [1, 1]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Checkerboard.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+    PhysicsComponent:
+      Dynamic: true
+  - Entity: 0
+    TagComponent:
+      Tag: static cube
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1.20000005, 1]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0.411289275, 0.411286235, 0.411290348, 1]
+    PhysicsComponent:
+      Dynamic: false
