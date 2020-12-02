@@ -185,13 +185,10 @@ namespace Eternal {
 				fixtureDef.shape = &bodyShape;
 				break;
 			case BodyType::circle:
-				if (size.x == size.y)
-				{
-					circleShape.m_radius = size.x / 2;
-					fixtureDef.shape = &circleShape;
-				}
-				else
-					ET_CORE_ASSERT(size.x != size.y, "Circles need to be round, so width and height need to be the same :)!");
+				if(size.x != size.y)
+					ET_CORE_ERROR("Circles need to be round, so width and height need to be the same :)!");
+				circleShape.m_radius = size.x / 2;
+				fixtureDef.shape = &circleShape;
 				break;
 			default:
 				break;

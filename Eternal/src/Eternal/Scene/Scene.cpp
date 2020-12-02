@@ -187,14 +187,14 @@ namespace Eternal {
 					if (!physics.body)
 					{
 						physics.SetPhysics(b2Vec2(transform.Position.x, transform.Position.y), b2Vec2(transform.Size.x, transform.Size.y), transform.Rotation);
-						physics.body = m_world->CreateBody(&physics.bodyDef);
+						physics.body = physicsWorld->CreateBody(&physics.bodyDef);
 						physics.Fixture = physics.body->CreateFixture(&physics.fixtureDef);
 					}
 				}
 			}
 
 			//Start Physic Simulation
-			m_world->Step(ts, velocityIterations, positionIterations);
+			physicsWorld->Update(ts);
 
 			//Rewrite Position into optical position again!
 			{
