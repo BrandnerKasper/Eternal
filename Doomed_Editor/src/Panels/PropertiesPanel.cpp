@@ -6,6 +6,9 @@
 
 #include "Eternal/Utils/PlatformUtils.h"
 #include "Eternal/NativeScripts/ScriptHandler.h"
+#include "Eternal/Scene/Component.h"
+
+//TODO: TOOLTIPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 namespace Eternal {
 
@@ -440,14 +443,89 @@ namespace Eternal {
 
 	static void DrawPhysicsComponent(PhysicsComponent& phc)
 	{
-		ImGui::Columns(2);
 		float columnWidth = 100.0f;
+
+		//BodyType PopUp List
+		ImGui::Columns(2);
+		ImGui::SetColumnWidth(0, columnWidth);
+		ImGui::Text("Body Type");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("I am a tooltip over BodyType!");
+
+		ImGui::NextColumn();
+		auto& bodyType = phc.bodyType;
+		int selected_bodyType = (int)bodyType;
+		const char* names[] = { "Box", "Circle" };
+
+		// Simple selection popup (if you want to show the current selection inside the Button itself,
+		// you may want to build a string using the "###" operator to preserve a constant ID with a variable label)
+		if (ImGui::Button("Select.."))
+			ImGui::OpenPopup("bodyType PopUp");
+		ImGui::SameLine();
+		ImGui::TextUnformatted(selected_bodyType == -1 ? "<None>" : names[selected_bodyType]);
+		if (ImGui::BeginPopup("bodyType PopUp"))
+		{
+			for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+				if (ImGui::Selectable(names[i]))
+				{
+					selected_bodyType = i;
+					bodyType = (PhysicsComponent::BodyType)selected_bodyType;
+				}
+			ImGui::EndPopup();
+		}
+		ImGui::Columns(1);
+
+		//Dynamic Checkbox
+		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Dynamic");
 
 		ImGui::NextColumn();
 
-		ImGui::Checkbox("## Dynamic", &phc.Dynamic);
+		auto& dynamic = phc.Dynamic;
+		ImGui::Checkbox("## Dynamic", &dynamic);
+		if (dynamic) {
+			phc.bodyDef.type = b2_dynamicBody;
+			phc.fixtureDef.density = 1.0f;
+		}
+		else
+		{
+			phc.bodyDef.type = b2_staticBody;
+			phc.fixtureDef.density = 0.0f;
+		}
+		ImGui::Columns(1);
+
+		//Density Slider
+		if (phc.Dynamic)
+		{
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, columnWidth);
+			ImGui::Text("Density");
+
+			ImGui::NextColumn();
+			auto& density = phc.fixtureDef.density;
+			ImGui::SliderFloat("##Density", &density, 0.0f, 100.0f);
+			ImGui::Columns(1);
+		}
+
+		//Friction Slider
+		ImGui::Columns(2);
+		ImGui::SetColumnWidth(0, columnWidth);
+		ImGui::Text("Friction");
+
+		ImGui::NextColumn();
+		auto& friction = phc.fixtureDef.friction;
+		ImGui::SliderFloat("##Friction", &friction, 0.0f, 1.0f);
+		ImGui::Columns(1);
+
+		//Restitution Slider
+		ImGui::Columns(2);
+		ImGui::SetColumnWidth(0, columnWidth);
+		ImGui::Text("Restitution");
+
+		ImGui::NextColumn();
+		auto& restitution = phc.fixtureDef.restitution;
+		ImGui::SliderFloat("##Restitution", &restitution, 0.0f, 1.0f);
 		ImGui::Columns(1);
 	}
 

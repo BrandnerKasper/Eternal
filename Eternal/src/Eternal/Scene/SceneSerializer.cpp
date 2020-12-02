@@ -197,8 +197,12 @@ namespace Eternal {
 			out << YAML::Key << "PhysicsComponent";
 			out << YAML::BeginMap; // PhysicsComponent
 
-			auto& nsc = entity.GetComponent<PhysicsComponent>();
-			out << YAML::Key << "Dynamic" << YAML::Value << nsc.Dynamic;
+			auto& phc = entity.GetComponent<PhysicsComponent>();
+			out << YAML::Key << "BodyType" << YAML::Value << (int)phc.bodyType;
+			out << YAML::Key << "Dynamic" << YAML::Value << phc.Dynamic;
+			out << YAML::Key << "Density" << YAML::Value << phc.fixtureDef.density;
+			out << YAML::Key << "Friction" << YAML::Value << phc.fixtureDef.friction;
+			out << YAML::Key << "Restitution" << YAML::Value << phc.fixtureDef.restitution;
 
 			out << YAML::EndMap; // PhysicsComponent
 		}
@@ -309,7 +313,13 @@ namespace Eternal {
 				if (physicsComponent)
 				{
 					auto& phc = deserializedEntity.AddComponent<PhysicsComponent>();
+					phc.bodyType = (PhysicsComponent::BodyType)physicsComponent["BodyType"].as<int>();
 					phc.Dynamic = physicsComponent["Dynamic"].as<bool>();
+					if (phc.Dynamic)
+						phc.bodyDef.type = b2_dynamicBody;
+					phc.fixtureDef.density = physicsComponent["Density"].as<float>();
+					phc.fixtureDef.friction = physicsComponent["Friction"].as<float>();
+					phc.fixtureDef.restitution = physicsComponent["Restitution"].as<float>();
 				}
 			}
 		}

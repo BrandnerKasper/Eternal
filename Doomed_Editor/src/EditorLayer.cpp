@@ -82,6 +82,8 @@ namespace Eternal {
     {
         ChangeSytle(false);
 
+        //ImGui::ShowDemoWindow();
+
         static bool dockingEnabled = true;
         if (dockingEnabled)
         {

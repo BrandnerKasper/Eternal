@@ -16,27 +16,35 @@ Entities:
       FixedAspectRatio: false
   - Entity: 1
     TagComponent:
+      Tag: static cube
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 159
+      Size: [3.4000001, 1]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0.0611923598, 0, 0.935483873, 1]
+    PhysicsComponent:
+      BodyType: 0
+      Dynamic: false
+      Density: 0
+      Friction: 0.289999992
+      Restitution: 0
+  - Entity: 0
+    TagComponent:
       Tag: dynamic cube
     TransformComponent:
-      Position: [0, 4.19999981, 0]
-      Rotation: 27
+      Position: [0, 4.0999999, 0]
+      Rotation: 0
       Size: [1, 1]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Checkerboard.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
     PhysicsComponent:
+      BodyType: 1
       Dynamic: true
-  - Entity: 0
-    TagComponent:
-      Tag: static cube
-    TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: 0
-      Size: [1.20000005, 1]
-    SpriteRendererComponent:
-      TextureFilepath: ""
-      TextureScale: 1
-      Color: [0.411289275, 0.411286235, 0.411290348, 1]
-    PhysicsComponent:
-      Dynamic: false
+      Density: 1
+      Friction: 1
+      Restitution: 0.344999999

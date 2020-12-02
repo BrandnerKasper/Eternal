@@ -158,29 +158,43 @@ namespace Eternal {
 
 	struct PhysicsComponent
 	{
+		enum class BodyType
+		{
+			box,
+			circle
+		};
+
+		BodyType bodyType = BodyType::box;
 		bool Dynamic = false;
 		b2BodyDef bodyDef;
-		b2PolygonShape bodyShape;
-		b2FixtureDef fixtureDef;
-		b2Fixture* Fixture;
+		b2CircleShape circleShape; //ENUM for shape (for now box or circle?)
+		b2PolygonShape bodyShape; //shape!
+		b2FixtureDef fixtureDef; //density in kg/m2, friction [0,1], restitution [0,1], isSensor
+		b2Fixture* Fixture; //for Reset!
 		b2Body* body = nullptr;
 
 		void SetPhysics(b2Vec2 position, b2Vec2 size, float angle)
 		{
 			bodyDef.position.Set(position.x, position.y);
-			bodyShape.SetAsBox(size.x / 2, size.y / 2);
 			bodyDef.angle = glm::radians(angle);
-			if (Dynamic) {
-				bodyDef.type = b2_dynamicBody;
-				fixtureDef.shape = &bodyShape;
-				fixtureDef.density = 1.0f;
-				fixtureDef.friction = 0.3f;
-			}
-			else
+
+			switch (bodyType)
 			{
+			case BodyType::box:
+				bodyShape.SetAsBox(size.x / 2, size.y / 2);
 				fixtureDef.shape = &bodyShape;
-				fixtureDef.density = 0.0f;
-				fixtureDef.friction = 0.3f;
+				break;
+			case BodyType::circle:
+				if (size.x == size.y)
+				{
+					circleShape.m_radius = size.x / 2;
+					fixtureDef.shape = &circleShape;
+				}
+				else
+					ET_CORE_ASSERT(size.x != size.y, "Circles need to be round, so width and height need to be the same :)!");
+				break;
+			default:
+				break;
 			}
 		}
 
