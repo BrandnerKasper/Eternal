@@ -18,9 +18,9 @@ Entities:
     TagComponent:
       Tag: static cube
     TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: 159
-      Size: [3.4000001, 1]
+      Position: [0, -2.70000005, 0]
+      Rotation: 0
+      Size: [29.1000004, 1]
     SpriteRendererComponent:
       TextureFilepath: ""
       TextureScale: 1
@@ -42,9 +42,11 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Checkerboard.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
+    NativeScriptComponent:
+      ScriptFileName: Controller.h
     PhysicsComponent:
       BodyType: 1
       Dynamic: true
       Density: 1
-      Friction: 1
-      Restitution: 0.344999999
+      Friction: 0.79400003
+      Restitution: 0.345999986

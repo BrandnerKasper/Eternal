@@ -486,7 +486,8 @@ namespace Eternal {
 		ImGui::Checkbox("## Dynamic", &dynamic);
 		if (dynamic) {
 			phc.bodyDef.type = b2_dynamicBody;
-			phc.fixtureDef.density = 1.0f;
+			if(phc.fixtureDef.density == 0.0f)
+				phc.fixtureDef.density = 1.0f;
 		}
 		else
 		{

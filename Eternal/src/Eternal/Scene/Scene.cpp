@@ -46,11 +46,11 @@ namespace Eternal {
 
 		HandlePlay();
 
-		UpdateScripts(ts);
+		UpdatePhysics(ts);
 		
 		UpdateCameraRender(ts);
 
-		UpdatePhysics(ts);
+		UpdateScripts(ts);
 	}
 
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
@@ -189,10 +189,13 @@ namespace Eternal {
 						physics.SetPhysics(b2Vec2(transform.Position.x, transform.Position.y), b2Vec2(transform.Size.x, transform.Size.y), transform.Rotation);
 						physics.body = physicsWorld->CreateBody(&physics.bodyDef);
 						physics.Fixture = physics.body->CreateFixture(&physics.fixtureDef);
+						//physics.ApplyForce();
 					}
+					//physics.ApplyForce();
 				}
 			}
 
+			//UpdateScripts(ts);
 			//Start Physic Simulation
 			physicsWorld->Update(ts);
 
