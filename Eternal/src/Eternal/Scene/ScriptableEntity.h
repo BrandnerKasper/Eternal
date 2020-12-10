@@ -4,6 +4,13 @@
 
 namespace Eternal {
 
+	enum class ScriptType
+	{
+		default,
+		player,
+		deathbox
+	};
+
 	class ScriptableEntity
 	{
 	public:
@@ -15,13 +22,19 @@ namespace Eternal {
 			return m_Entity.GetComponent<T>();
 		}
 
+		ScriptType GetScriptType() { return m_ScriptType; }
+
+		virtual void HandleContact() {}
+
 	protected:
 		virtual void OnCreate() {}
 		virtual void OnDestroy() {}
 		virtual void OnUpdate(Timestep ts) {}
 
-	private:
+	protected:
 		Entity m_Entity;
+		ScriptType m_ScriptType = ScriptType::default;
+	private:
 		friend class Scene;
 	};
 }

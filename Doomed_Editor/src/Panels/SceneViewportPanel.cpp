@@ -25,8 +25,7 @@ namespace Eternal {
 		HandleResize();
 
 		//Update Camera only when Window is focused
-		if(m_ViewportFocused)
-			m_Scene->m_EditorCamera->OnUpdate(ts);
+		m_Scene->m_SceneFocused = m_ViewportFocused;
 
 		UpdateScene(ts);
 	}

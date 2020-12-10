@@ -64,7 +64,6 @@ namespace Eternal {
         m_SceneViewportPanel->SetContext(m_ActiveScene);
         m_SceneHierachyPanel->SetContext(m_ActiveScene);
         m_PropertiesPanel->SetContext(m_SceneHierachyPanel);
-
     }
 
     void EditorLayer::OnDetach()

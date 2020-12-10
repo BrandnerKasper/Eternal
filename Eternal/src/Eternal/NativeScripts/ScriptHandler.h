@@ -1,15 +1,19 @@
 #pragma once
 
 #include "Eternal/Scene/ScriptableEntity.h"
-#include "Controller.h"
+#include "Player.h"
 #include "Rotater.h"
+#include "Deathbox.h"
+#include "MoveableXPlatform.h"
 
 namespace Eternal {
 
 	enum class Scripts
 	{
-		EController = 0,
-		ERotater = 1
+		EPlayer = 0,
+		ERotater = 1,
+		EDeathbox = 2,
+		EMoveableXPlatform = 3
 	};
 
 	class ScriptHandler 
@@ -20,12 +24,17 @@ namespace Eternal {
 		{
 			switch (script)
 			{
-			case Scripts::EController:
-				return new Controller();
+			case Scripts::EPlayer:
+				return new Player();
 				break;
 			case Scripts::ERotater:
 				return new Rotater();
 				break;
+			case Scripts::EDeathbox:
+				return new Deathbox();
+				break;
+			case Scripts::EMoveableXPlatform:
+				return new MoveableXPlatform();
 			default:
 				return nullptr;
 			}
@@ -33,10 +42,14 @@ namespace Eternal {
 
 		static Scripts GetScriptNumber(std::string scriptname)
 		{
-			if (scriptname._Equal("Controller.h"))
-				return Scripts::EController;
+			if (scriptname._Equal("Player.h"))
+				return Scripts::EPlayer;
 			if (scriptname._Equal("Rotater.h"))
 				return Scripts::ERotater;
+			if (scriptname._Equal("Deathbox.h"))
+				return Scripts::EDeathbox;
+			if (scriptname._Equal("MoveableXPlatform.h"))
+				return Scripts::EMoveableXPlatform;
 			ET_CORE_ASSERT(false, "Script not initialized!");
 		}
 	};

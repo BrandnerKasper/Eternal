@@ -445,59 +445,68 @@ namespace Eternal {
 	{
 		float columnWidth = 100.0f;
 
+		//BodyShape PopUp List
+		ImGui::Columns(2);
+		ImGui::SetColumnWidth(0, columnWidth);
+		ImGui::Text("Body Shape");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("I am a tooltip over Body Shape!");
+
+		ImGui::NextColumn();
+		auto& bodyShape = phc.bodyShape;
+		int selected_bodyShape = (int)bodyShape;
+		const char* bodyShapesNames[] = { "Box", "Circle" };
+
+		// Simple selection popup (if you want to show the current selection inside the Button itself,
+		// you may want to build a string using the "###" operator to preserve a constant ID with a variable label)
+		if (ImGui::Button("Select.."))
+			ImGui::OpenPopup("bodyShape PopUp");
+		ImGui::SameLine();
+		ImGui::TextUnformatted(selected_bodyShape == -1 ? "<None>" : bodyShapesNames[selected_bodyShape]);
+		if (ImGui::BeginPopup("bodyShape PopUp"))
+		{
+			for (int i = 0; i < IM_ARRAYSIZE(bodyShapesNames); i++)
+				if (ImGui::Selectable(bodyShapesNames[i]))
+				{
+					selected_bodyShape = i;
+					bodyShape = (PhysicsComponent::BodyShape)selected_bodyShape;
+				}
+			ImGui::EndPopup();
+		}
+		ImGui::Columns(1);
+
 		//BodyType PopUp List
 		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Body Type");
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("I am a tooltip over BodyType!");
-
+		
 		ImGui::NextColumn();
 		auto& bodyType = phc.bodyType;
 		int selected_bodyType = (int)bodyType;
-		const char* names[] = { "Box", "Circle" };
-
+		const char* bodyTypesnames[] = { "Static", "Kinematic", "Dynamic" };
+		
 		// Simple selection popup (if you want to show the current selection inside the Button itself,
 		// you may want to build a string using the "###" operator to preserve a constant ID with a variable label)
-		if (ImGui::Button("Select.."))
+		if (ImGui::Button("Select..."))
 			ImGui::OpenPopup("bodyType PopUp");
 		ImGui::SameLine();
-		ImGui::TextUnformatted(selected_bodyType == -1 ? "<None>" : names[selected_bodyType]);
+		ImGui::TextUnformatted(selected_bodyType == -1 ? "<None>" : bodyTypesnames[selected_bodyType]);
 		if (ImGui::BeginPopup("bodyType PopUp"))
 		{
-			for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-				if (ImGui::Selectable(names[i]))
+			for (int i = 0; i < IM_ARRAYSIZE(bodyTypesnames); i++)
+				if (ImGui::Selectable(bodyTypesnames[i]))
 				{
 					selected_bodyType = i;
-					bodyType = (PhysicsComponent::BodyType)selected_bodyType;
+					bodyType = (b2BodyType)selected_bodyType;
 				}
 			ImGui::EndPopup();
 		}
 		ImGui::Columns(1);
 
-		//Dynamic Checkbox
-		ImGui::Columns(2);
-		ImGui::SetColumnWidth(0, columnWidth);
-		ImGui::Text("Dynamic");
-
-		ImGui::NextColumn();
-
-		auto& dynamic = phc.Dynamic;
-		ImGui::Checkbox("## Dynamic", &dynamic);
-		if (dynamic) {
-			phc.bodyDef.type = b2_dynamicBody;
-			if(phc.fixtureDef.density == 0.0f)
-				phc.fixtureDef.density = 1.0f;
-		}
-		else
-		{
-			phc.bodyDef.type = b2_staticBody;
-			phc.fixtureDef.density = 0.0f;
-		}
-		ImGui::Columns(1);
-
 		//Density Slider
-		if (phc.Dynamic)
+		if (phc.bodyType == b2BodyType::b2_dynamicBody)
 		{
 			ImGui::Columns(2);
 			ImGui::SetColumnWidth(0, columnWidth);

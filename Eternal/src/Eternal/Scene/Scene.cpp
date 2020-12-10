@@ -42,7 +42,7 @@ namespace Eternal {
 
 	void Scene::OnUpdate(Timestep ts)
 	{
-		UpdateTransforms();
+		UpdateNonPhysicalTransforms();
 
 		HandlePlay();
 
@@ -74,7 +74,7 @@ namespace Eternal {
 		}
 	}
 
-	void Scene::UpdateTransforms()
+	void Scene::UpdateNonPhysicalTransforms()
 	{
 		//Update Transform only when Transform changed
 		{
@@ -88,14 +88,13 @@ namespace Eternal {
 
 	void Scene::UpdateScripts(Timestep ts)
 	{
-		// Only Update Scripts when Button is pressed! TODO add play button!!
+		// Only Update Scripts when Button is pressed!
 		if (m_play)
 		{
-			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+			m_Registry.view<NativeScriptComponent>().each([=](auto& entity, auto& nsc)
 				{
 					if (nsc.ScriptReference)
 					{
-						// TODO: Move to Scene::OnScenePlay
 						if (!nsc.Instance)
 						{
 							nsc.Instance = nsc.ScriptReference;
@@ -103,7 +102,6 @@ namespace Eternal {
 							nsc.Instance->m_Entity = Entity{ entity, this };
 							nsc.Instance->OnCreate();
 						}
-
 						nsc.Instance->OnUpdate(ts);
 					}
 				});
@@ -124,6 +122,9 @@ namespace Eternal {
 
 	void Scene::UpdateEditorCameraRender(Timestep ts)
 	{
+		//Update input for Camera only when Scene is focused
+		if(m_SceneFocused)
+			m_EditorCamera->OnUpdate(ts);
 		//Use Editor Camera as Default!
 		Renderer2D::BeginScene(m_EditorCamera->GetCamera());
 
@@ -178,36 +179,43 @@ namespace Eternal {
 	{
 		if (m_play)
 		{
-			//Create all physics objects
-			{
-				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
-				for (auto entity : view)
-				{
-					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
-					if (!physics.body)
-					{
-						physics.SetPhysics(b2Vec2(transform.Position.x, transform.Position.y), b2Vec2(transform.Size.x, transform.Size.y), transform.Rotation);
-						physics.body = physicsWorld->CreateBody(&physics.bodyDef);
-						physics.Fixture = physics.body->CreateFixture(&physics.fixtureDef);
-						//physics.ApplyForce();
-					}
-					//physics.ApplyForce();
-				}
-			}
+			InitPhysics();
 
-			//UpdateScripts(ts);
 			//Start Physic Simulation
 			physicsWorld->Update(ts);
 
-			//Rewrite Position into optical position again!
+			UpdatePhysicalTransform();
+		}
+	}
+
+	void Scene::InitPhysics()
+	{
+		//Create all physics objects
+		{
+			auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+			for (auto entity : view)
 			{
-				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
-				for (auto entity : view)
+				auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+				if (!physics.body)
 				{
-					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
-					transform.Position = glm::vec3(physics.body->GetPosition().x, physics.body->GetPosition().y, transform.Position.z);
-					transform.Rotation = (float)(physics.body->GetAngle() * 180.0f /3.141592f);
+					physics.SetPhysicProperties(b2Vec2(transform.Position.x, transform.Position.y), b2Vec2(transform.Size.x, transform.Size.y), transform.Rotation);
+					physics.body = physicsWorld->CreateBody(&physics.bodyDef);
+					physics.Fixture = physics.body->CreateFixture(&physics.fixtureDef);
 				}
+			}
+		}
+	}
+
+	void Scene::UpdatePhysicalTransform()
+	{
+		//Rewrite Position into optical position again!
+		{
+			auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+			for (auto entity : view)
+			{
+				auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+				transform.Position = glm::vec3(physics.body->GetPosition().x, physics.body->GetPosition().y, transform.Position.z);
+				transform.Rotation = (float)(physics.body->GetAngle() * 180.0f / 3.141592f);
 			}
 		}
 	}
@@ -220,15 +228,7 @@ namespace Eternal {
 			if (!m_initializeResetTransform)
 			{
 				m_initializeResetTransform = true;
-				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
-				for (auto entity : view)
-				{
-					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
-
-					//Safe Reset Transform
-					transform.ResetPosition = transform.Position;
-					transform.ResetRotation = transform.Rotation;
-				}
+				SafeResetTransform();
 			}
 		}
 		else
@@ -236,19 +236,10 @@ namespace Eternal {
 			if (m_initializeResetTransform)
 			{
 				m_initializeResetTransform = false;
-				auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
-				for (auto entity : view)
-				{
-					auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
 
-					//Reset Transform when play is over
-					transform.Position = transform.ResetPosition;
-					transform.Rotation = transform.ResetRotation;
+				ResetPhysics();
 
-					//Reset Physics
-					physics.body->DestroyFixture(physics.Fixture);
-					physics.body = nullptr;
-				}
+				ResetScripts();
 			}
 		}
 	}
@@ -259,6 +250,51 @@ namespace Eternal {
 		group.sort<TransformComponent>([&group](const TransformComponent e1, const TransformComponent e2)
 			{
 				return e1.Position.z < e2.Position.z;
+			});
+	}
+
+	void Scene::SafeResetTransform()
+	{
+		auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+		for (auto entity : view)
+		{
+			auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+
+			//Safe Reset Transform
+			transform.ResetPosition = transform.Position;
+			transform.ResetRotation = transform.Rotation;
+		}
+	}
+
+	void Scene::ResetPhysics()
+	{
+		auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
+		for (auto entity : view)
+		{
+			auto [transform, physics] = view.get<TransformComponent, PhysicsComponent>(entity);
+
+			//Reset Transform when play is over
+			transform.Position = transform.ResetPosition;
+			transform.Rotation = transform.ResetRotation;
+
+			//Reset Physics
+			physics.body->DestroyFixture(physics.Fixture);
+			physicsWorld->DestroyBody(physics.body);
+			physics.body = nullptr;
+		}
+	}
+
+	void Scene::ResetScripts()
+	{
+		m_Registry.view<NativeScriptComponent>().each([=](auto& entity, auto& nsc)
+			{
+				if (nsc.ScriptReference)
+				{
+					if (nsc.Instance)
+					{
+						nsc.Instance = nullptr;
+					}
+				}
 			});
 	}
 

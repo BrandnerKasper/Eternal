@@ -2,21 +2,26 @@
 
 #include "ETpch.h"
 #include "Eternal.h"
+#include "Eternal/Physics/ContactListener.h"
 
 namespace Eternal {
 
-    class Controller : public ScriptableEntity
+    class Player : public ScriptableEntity
     {
     public:
         void OnCreate()
         {
             auto& entityname = GetComponent<TagComponent>().Tag;
             ET_INFO(entityname + " Controller created");
+
+            m_ScriptType = ScriptType::player;
+
+            m_PlayerBody = GetComponent<PhysicsComponent>().body;
+            m_PlayerBody->GetUserData().pointer = (uintptr_t)this;
         }
 
         void OnDestroy()
         {
-
         }
 
         void OnUpdate(Timestep ts)
