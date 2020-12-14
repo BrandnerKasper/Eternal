@@ -27,7 +27,7 @@ namespace Eternal {
             HandleLerp();
         }
 
-        float lerp(float a, float b, float f)
+        float Lerp(float a, float b, float f)
         {
             return a + f * (b - a);
         }
@@ -59,7 +59,7 @@ namespace Eternal {
 
             if (m_Allowlerp_X)
             {
-                cameraPositionX = lerp(cameraPositionX, playerPositionX, lerpSpeed);
+                cameraPositionX = Lerp(cameraPositionX, playerPositionX, lerpSpeed);
                 if (abs(cameraPositionX - playerPositionX) < lerpTolerance)
                     m_Allowlerp_X = false;
             }
@@ -75,7 +75,7 @@ namespace Eternal {
 
             if (m_Allowlerp_Y)
             {
-                cameraPositionY = lerp(cameraPositionY, playerPositionY, lerpSpeed);
+                cameraPositionY = Lerp(cameraPositionY, playerPositionY, lerpSpeed);
                 if (abs(cameraPositionY - playerPositionY) < lerpTolerance)
                     m_Allowlerp_Y = false;
             }
@@ -87,7 +87,7 @@ namespace Eternal {
 
         int lerpDistanceX = 13;
         int lerpDistanceY = 8;
-        int lerpTolerance = 3;
+        float lerpTolerance = 1.4;
         float lerpSpeed = 0.03f;
     };
 }
