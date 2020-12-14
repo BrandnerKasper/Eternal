@@ -1,16 +1,16 @@
 Scene: level01.eternal
 Entities:
-  - Entity: 5
+  - Entity: 11
     TagComponent:
-      Tag: Move Platform
+      Tag: Move Platform X
     TransformComponent:
       Position: [5.5, 0, 0]
       Rotation: 0
       Size: [3.4000001, 1]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\movePlatform_X.png
       TextureScale: 1
-      Color: [0.987903237, 0.609472573, 0.609472573, 1]
+      Color: [0.927419364, 0.882544219, 0.882544219, 1]
     NativeScriptComponent:
       ScriptFileName: MoveableXPlatform.h
     PhysicsComponent:
@@ -19,7 +19,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 4
+  - Entity: 10
     TagComponent:
       Tag: Ground2
     TransformComponent:
@@ -36,7 +36,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 3
+  - Entity: 9
     TagComponent:
       Tag: Deathbox
     TransformComponent:
@@ -55,7 +55,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 2
+  - Entity: 8
     TagComponent:
       Tag: Player
     TransformComponent:
@@ -74,7 +74,7 @@ Entities:
       Density: 1
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 1
+  - Entity: 7
     TagComponent:
       Tag: Ground
     TransformComponent:
@@ -91,17 +91,85 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 0
+  - Entity: 6
     TagComponent:
       Tag: Camera
     TransformComponent:
-      Position: [5, 0, 0]
+      Position: [32.0462875, 0, -0.100000001]
       Rotation: 0
       Size: [1, 1]
     CameraComponent:
       Camera:
-        OrthographicSize: 20
+        OrthographicSize: 22
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
+    NativeScriptComponent:
+      ScriptFileName: SceneCameraController.h
+  - Entity: 5
+    TagComponent:
+      Tag: Background Sky
+    TransformComponent:
+      Position: [56.7999992, 5.5999999, -0.899999976]
+      Rotation: 0
+      Size: [300, 40]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Background.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 4
+    TagComponent:
+      Tag: Background Mountain
+    TransformComponent:
+      Position: [-11.8999996, 1.29999995, -0.600000024]
+      Rotation: 0
+      Size: [24.2999992, 10.8999996]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains01.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 3
+    TagComponent:
+      Tag: Background Mountain02
+    TransformComponent:
+      Position: [38.9000015, 1.70000005, -0.699999988]
+      Rotation: 0
+      Size: [36.7000008, 16.3999996]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains02.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 2
+    TagComponent:
+      Tag: Background Hill
+    TransformComponent:
+      Position: [36.4000015, 11.1000004, -0.5]
+      Rotation: 0
+      Size: [140, 37.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill01.png
+      TextureScale: 1
+      Color: [0.911281228, 0.911290348, 0.911283612, 1]
+  - Entity: 1
+    TagComponent:
+      Tag: Background Clouds
+    TransformComponent:
+      Position: [-9.30000019, 6.5999999, -0.800000012]
+      Rotation: 0
+      Size: [12.5, 4.0999999]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud02.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 0
+    TagComponent:
+      Tag: Background Clouds02
+    TransformComponent:
+      Position: [33.9000015, 5, -0.800000012]
+      Rotation: 0
+      Size: [23.3999996, 5.5999999]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud03.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]

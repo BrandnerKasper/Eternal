@@ -40,6 +40,19 @@ namespace Eternal {
 		m_Registry.destroy(entity);
 	}
 
+	Entity Scene::GetEntity(std::string tag)
+	{
+		auto view = m_Registry.view<TagComponent>();
+		for (auto entity : view)
+		{
+			auto& Tag = view.get<TagComponent>(entity).Tag;
+			if (Tag._Equal(tag))
+				return Entity{ entity, this };
+
+		}
+		ET_CORE_ASSERT(false, "No Entity found with this Tag!");
+	}
+
 	void Scene::OnUpdate(Timestep ts)
 	{
 		UpdateNonPhysicalTransforms();

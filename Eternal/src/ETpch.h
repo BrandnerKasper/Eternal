@@ -9,6 +9,8 @@
 #include <array>
 #include <stdio.h>
 
+#include <math.h>
+
 #include <string>
 #include <vector>
 #include <unordered_map>
