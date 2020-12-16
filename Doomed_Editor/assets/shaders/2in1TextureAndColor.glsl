@@ -1,7 +1,7 @@
 //2 in 1 Shader for either a simple color or a texture with texture scaling and tint :)
 
 #type vertex
-#version 330 core
+#version 450 core
 
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec4 a_Color;
@@ -13,7 +13,7 @@ uniform mat4 u_ViewProjection;
 
 out vec4 v_Color;
 out vec2 v_TexCoord;
-out float v_TexID;
+out flat float v_TexID;
 out float v_TilFactor;
 
 void main()
@@ -26,13 +26,13 @@ void main()
 }
 
 #type fragment
-#version 330 core
+#version 450 core
 
 layout(location = 0) out vec4 color;
 
 in vec4 v_Color;
 in vec2 v_TexCoord;
-in float v_TexID;
+in flat float v_TexID;
 in float v_TilFactor;
 
 uniform sampler2D u_Textures[32];
