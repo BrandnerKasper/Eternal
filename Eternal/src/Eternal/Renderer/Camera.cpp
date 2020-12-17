@@ -6,24 +6,23 @@
 
 namespace Eternal {
 
-	EditorCamera::EditorCamera(float left, float right, float bottom, float top)
-		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(1.0f)
+	EditorCamera::EditorCamera(float fov, float aspectRatio, float nearClip, float farClip)
+		: m_FOV(fov), m_AspectRatio(aspectRatio), m_NearClip(nearClip), m_FarClip(farClip), Camera(glm::perspective(glm::radians(fov), aspectRatio, nearClip, farClip))
 	{
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		UpdateView();
 	}
 
-	void EditorCamera::SetProjection(float left, float right, float bottom, float top)
+	void EditorCamera::UpdateProjection()
 	{
-		m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		m_AspectRatio = m_ViewportWidth / m_ViewportHeight;
+		m_Projection = glm::perspective(glm::radians(m_FOV), m_AspectRatio, m_NearClip, m_FarClip);
 	}
 
-	void EditorCamera::RecalculateViewMatrix()
+	void EditorCamera::UpdateView()
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position)
-							* glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation), glm::vec3(0, 0, 1));
+			* glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation), glm::vec3(0, 0, 1));
 
-		m_ViewMatrix = glm::inverse(transform);
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		m_ViewMatrix = transform;
 	}
 }

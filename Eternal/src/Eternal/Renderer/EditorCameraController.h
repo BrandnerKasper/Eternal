@@ -30,7 +30,7 @@ namespace Eternal {
 
 		bool m_RotationEnabled;
 
-		glm::vec3 m_CameraPosition = {0.0f, 0.0f, 0.0f};
+		glm::vec3 m_CameraPosition = {0.0f, 0.0f, 20.0f};
 		float m_CameraSpeed = 3.0f;
 		float m_CameraRotation = 0.0f;
 		float m_CameraRotationSpeed = 180.0f;

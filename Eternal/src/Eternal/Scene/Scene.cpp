@@ -139,10 +139,10 @@ namespace Eternal {
 		if(m_SceneFocused)
 			m_EditorCamera->OnUpdate(ts);
 		//Use Editor Camera as Default!
-		Renderer2D::BeginScene(m_EditorCamera->GetCamera());
+		Renderer2D::BeginScene(m_EditorCamera->GetCamera(), m_EditorCamera->GetCamera().GetViewMatrix());
 
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 		SortEntitysByZValue();
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 
 		for (auto entity : group)
 		{
@@ -176,8 +176,8 @@ namespace Eternal {
 			//Render Scene
 			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
-			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 			SortEntitysByZValue();
+			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 
 			for (auto entity : group)
 			{

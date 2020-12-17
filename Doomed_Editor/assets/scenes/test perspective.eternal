@@ -1,81 +1,30 @@
-Scene: level01.eternal
+Scene: test perspective.eternal
 Entities:
-  - Entity: 11
-    TagComponent:
-      Tag: Background Clouds02
-    TransformComponent:
-      Position: [33.9000015, 8.30000019, -102.199997]
-      Rotation: 0
-      Size: [36.7999992, 10]
-    SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud03.png
-      TextureScale: 1
-      Color: [1, 1, 1, 1]
-  - Entity: 10
-    TagComponent:
-      Tag: Background Clouds
-    TransformComponent:
-      Position: [-14.8000002, 17.6000004, -75.0999985]
-      Rotation: 0
-      Size: [12.5, 4.0999999]
-    SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud02.png
-      TextureScale: 1
-      Color: [1, 1, 1, 1]
-  - Entity: 9
-    TagComponent:
-      Tag: Background Hill
-    TransformComponent:
-      Position: [11.3000002, 13.3999996, -62.5]
-      Rotation: 0
-      Size: [165.800003, 57.2999992]
-    SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill01.png
-      TextureScale: 1
-      Color: [0.911281228, 0.911290348, 0.911283612, 1]
-  - Entity: 8
-    TagComponent:
-      Tag: Background Mountain02
-    TransformComponent:
-      Position: [49.0999985, -1.10000002, -92.5]
-      Rotation: 0
-      Size: [95.0999985, 43.9000015]
-    SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains02.png
-      TextureScale: 1
-      Color: [1, 1, 1, 1]
-  - Entity: 7
-    TagComponent:
-      Tag: Background Mountain
-    TransformComponent:
-      Position: [-11.8999996, 1.29999995, -80.4000015]
-      Rotation: 0
-      Size: [80.5, 45]
-    SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains01.png
-      TextureScale: 1
-      Color: [1, 1, 1, 1]
   - Entity: 6
     TagComponent:
-      Tag: Background Sky
+      Tag: Background
     TransformComponent:
-      Position: [27.7999992, 31.1000004, -124.5]
+      Position: [0, 0, -500]
       Rotation: 0
-      Size: [300, 150]
+      Size: [1000, 500]
     SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Background.png
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Background_1.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
   - Entity: 5
     TagComponent:
       Tag: Camera
     TransformComponent:
-      Position: [32.0462875, 0, -0.100000001]
+      Position: [-25.9623928, -0.500863016, 20]
       Rotation: 0
       Size: [1, 1]
     CameraComponent:
       Camera:
-        OrthographicSize: 22
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 15
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
@@ -103,8 +52,8 @@ Entities:
     TagComponent:
       Tag: Player
     TransformComponent:
-      Position: [0, 4.0999999, 0]
-      Rotation: 0
+      Position: [-11.1000004, 5, 0.00999999978]
+      Rotation: 2986.09668
       Size: [1, 1]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\duck_egg.png
@@ -158,7 +107,7 @@ Entities:
     TagComponent:
       Tag: Move Platform X
     TransformComponent:
-      Position: [5.5, 0, 0]
+      Position: [5.61999989, 0, 0]
       Rotation: 0
       Size: [3.4000001, 1]
     SpriteRendererComponent:

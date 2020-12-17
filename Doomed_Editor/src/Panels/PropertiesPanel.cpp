@@ -358,11 +358,42 @@ namespace Eternal {
 
 	static void DrawCameraComponent(CameraComponent& cameraComponent)
 	{
-		ImGui::Columns(2);
 		float columnWidth = 100.0f;
-		ImGui::SetColumnWidth(0, columnWidth);
-
 		auto& camera = cameraComponent.Camera;
+
+		//Camera Type List
+		ImGui::Columns(2);
+		ImGui::SetColumnWidth(0, columnWidth);
+		ImGui::Text("Camera Perspective Type");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("I am a tooltip over Camera Perspective Type!");
+
+		ImGui::NextColumn();
+		
+		int selected_cameraType = (int)camera.GetProjectionType();
+		const char* cameraTypeNames[] = { "Perspective", "Orthographic" };
+
+		// Simple selection popup (if you want to show the current selection inside the Button itself,
+		// you may want to build a string using the "###" operator to preserve a constant ID with a variable label)
+		if (ImGui::Button("Select."))
+			ImGui::OpenPopup("Camera Type PopUp");
+		ImGui::SameLine();
+		ImGui::TextUnformatted(selected_cameraType == -1 ? "<None>" : cameraTypeNames[selected_cameraType]);
+		if (ImGui::BeginPopup("Camera Type PopUp"))
+		{
+			for (int i = 0; i < IM_ARRAYSIZE(cameraTypeNames); i++)
+				if (ImGui::Selectable(cameraTypeNames[i]))
+				{
+					selected_cameraType = i;
+					camera.SetProjectionType((SceneCamera::ProjectionType)selected_cameraType);
+				}
+			ImGui::EndPopup();
+		}
+		ImGui::Columns(1);
+
+		//Primary Checkbox
+		ImGui::Columns(2);
+		ImGui::SetColumnWidth(0, columnWidth);
 
 		ImGui::Text("Primary");
 
@@ -370,35 +401,74 @@ namespace Eternal {
 		ImGui::Checkbox("##Primary", &cameraComponent.Primary); //Handle multiple Cameras and set other Camera Primarys to false
 		ImGui::Columns(1);
 
-		ImGui::Columns(2);
 
-		ImGui::Text("View Size");
+		//Perspective
+		if (camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
+		{
+			ImGui::Columns(2);
 
-		ImGui::NextColumn();
+			ImGui::Text("Field Of View");
 
-		float orthoSize = camera.GetOrthographicSize();
-		if (ImGui::DragFloat("##View Size", &orthoSize))
-			camera.SetOrthographicSize(orthoSize);
-		ImGui::Columns(1);
+			ImGui::NextColumn();
 
-		ImGui::Columns(2);
-		ImGui::Text("Near Clip");
+			float perspectiveVerticalFov = glm::degrees(camera.GetPerspectiveVerticalFOV());
+			if (ImGui::DragFloat("##Field Of View", &perspectiveVerticalFov))
+				camera.SetPerspectiveVerticalFOV(glm::radians(perspectiveVerticalFov));
+			ImGui::Columns(1);
 
-		ImGui::NextColumn();
-		float orthoNear = camera.GetOrthographicNearClip();
-		if (ImGui::DragFloat("##Near Clip", &orthoNear))
-			camera.SetOrthographicNearClip(orthoNear);
-		ImGui::Columns(1);
+			ImGui::Columns(2);
+			ImGui::Text("Near Clip");
 
-		ImGui::Columns(2);
-		ImGui::Text("Far Clip");
+			ImGui::NextColumn();
+			float perspectiveNear = camera.GetPerspectiveNearClip();
+			if (ImGui::DragFloat("##Near Clip", &perspectiveNear))
+				camera.SetPerspectiveNearClip(perspectiveNear);
+			ImGui::Columns(1);
 
-		ImGui::NextColumn();
-		float orthoFar = camera.GetOrthographicFarClip();
-		if (ImGui::DragFloat("##Far Clip", &orthoFar))
-			camera.SetOrthographicFarClip(orthoFar);
+			ImGui::Columns(2);
+			ImGui::Text("Far Clip");
 
-		ImGui::Columns(1);
+			ImGui::NextColumn();
+			float perspectiveFar = camera.GetPerspectiveFarClip();
+			if (ImGui::DragFloat("##Far Clip", &perspectiveFar))
+				camera.SetPerspectiveFarClip(perspectiveFar);
+
+			ImGui::Columns(1);
+		}
+
+		//Orthographic
+		if (camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
+		{
+			ImGui::Columns(2);
+
+			ImGui::Text("View Size");
+
+			ImGui::NextColumn();
+
+			float orthoSize = camera.GetOrthographicSize();
+			if (ImGui::DragFloat("##View Size", &orthoSize))
+				camera.SetOrthographicSize(orthoSize);
+			ImGui::Columns(1);
+
+			ImGui::Columns(2);
+			ImGui::Text("Near Clip");
+
+			ImGui::NextColumn();
+			float orthoNear = camera.GetOrthographicNearClip();
+			if (ImGui::DragFloat("##Near Clip", &orthoNear))
+				camera.SetOrthographicNearClip(orthoNear);
+			ImGui::Columns(1);
+
+			ImGui::Columns(2);
+			ImGui::Text("Far Clip");
+
+			ImGui::NextColumn();
+			float orthoFar = camera.GetOrthographicFarClip();
+			if (ImGui::DragFloat("##Far Clip", &orthoFar))
+				camera.SetOrthographicFarClip(orthoFar);
+
+			ImGui::Columns(1);
+		}
 	}
 
 	static void DrawNativeScriptComponent(NativeScriptComponent& nsc)

@@ -7,7 +7,7 @@
 namespace Eternal {
 
 	EditorCameraController::EditorCameraController(float aspectRatio, bool rotation)
-		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_RotationEnabled(rotation)
+		: m_AspectRatio(aspectRatio), m_Camera(45.0f, aspectRatio, 0.1f, 1000.0f), m_RotationEnabled(rotation)
 	{
 		
 	}
@@ -44,7 +44,7 @@ namespace Eternal {
 	void EditorCameraController::OnViewportResize(uint32_t width, uint32_t height)
 	{
 		m_AspectRatio = (float)width/(float)height;
-		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		m_Camera.SetViewportSize(width, height);
 	}
 
 	void EditorCameraController::OnEvent(Event& e)
@@ -57,7 +57,12 @@ namespace Eternal {
 	{
 		m_ZoomLevel -= e.GetYOffset() * 0.5f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
-		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+
+		auto fov = 45.0f * m_ZoomLevel/ 5.0f;
+		//ET_CORE_INFO("Zoom Level, fov {0}, {1}: ", m_ZoomLevel, fov);
+		fov = std::max(fov, 10.0f);
+		//ET_CORE_INFO("camera fov {0}: ", fov);
+		m_Camera.SetFOV(fov);
 
 		return false;
 	}

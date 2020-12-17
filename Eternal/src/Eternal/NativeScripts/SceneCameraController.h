@@ -14,8 +14,6 @@ namespace Eternal {
         {
             auto& entityname = GetComponent<TagComponent>().Tag;
             ET_INFO(entityname + " Scene Camera Movement Script created");
-            lerpDistanceX = GetComponent<CameraComponent>().Camera.GetOrthographicSize() / 2 + 1;
-            lerpDistanceY = GetComponent<CameraComponent>().Camera.GetOrthographicSize() / 4 + 2;
         }
 
         void OnDestroy()
@@ -85,8 +83,8 @@ namespace Eternal {
         bool m_Allowlerp_X = false;
         bool m_Allowlerp_Y = false;
 
-        int lerpDistanceX = 13;
-        int lerpDistanceY = 8;
+        int lerpDistanceX = 11;
+        int lerpDistanceY = 4;
         float lerpTolerance = 1.4;
         float lerpSpeed = 0.03f;
     };

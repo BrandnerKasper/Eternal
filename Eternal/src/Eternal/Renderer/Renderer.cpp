@@ -18,9 +18,8 @@ namespace Eternal {
 		RenderCommand::SetViewport(0, 0, width, height);
 	}
 
-	void Renderer::BeginScene(EditorCamera& camera)
+	void Renderer::BeginScene()
 	{
-		m_SceneData->ViewProjecionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	void Renderer::EndScene()

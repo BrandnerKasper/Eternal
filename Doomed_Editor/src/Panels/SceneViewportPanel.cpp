@@ -16,7 +16,8 @@ namespace Eternal {
 	void SceneViewportPanel::SetContext(const Ref<Scene>& context)
 	{
 		m_Scene = context;
-		m_Scene->m_EditorCamera = CreateRef<EditorCameraController>(m_ViewportSize.x, m_ViewportSize.y);
+
+		m_Scene->m_EditorCamera = CreateRef<EditorCameraController>(1.778f);
 
 	}
 
