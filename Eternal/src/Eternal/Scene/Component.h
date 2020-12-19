@@ -14,6 +14,7 @@ namespace Eternal {
 	struct TagComponent
 	{
 		std::string Tag;
+		int Group_ID = 0;
 
 		TagComponent() = default;
 		TagComponent(const TagComponent&) = default;

@@ -16,6 +16,7 @@ namespace Eternal {
 		void OnImGuiRender();
 	private:
 		void DrawComponents(Entity entity);
+		void DrawGroup(Group* group);
 
 		template<typename T, typename UIFunction>
 		static void HandleComponent(const std::string& name, Entity entity, UIFunction uiFunction, bool showRemove = true);		

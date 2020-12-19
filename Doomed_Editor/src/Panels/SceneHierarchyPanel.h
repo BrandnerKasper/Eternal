@@ -4,6 +4,8 @@
 
 namespace Eternal {
 
+	
+
 	class SceneHierarchyPanel 
 	{
 	public:
@@ -16,15 +18,19 @@ namespace Eternal {
 
 		Entity GetSelectedEntity() { return m_SelectedEntity; }
 	private:
+		void DrawSceneHierachy();
+		void DrawGroupNode(Group* group);
 		void DrawEntityNode(Entity entity);
-		void HandleRightClickOnEntity();
+		void HandleRightClickOnEntity(Entity entity);
 		void DeleteEntity(Entity entity);
 		void HandleRigthClickOnBlankSpace();
+		void DeSelect();
 	private:
 		Ref<Scene> m_Context;
 		Entity m_SelectedEntity;
 		bool m_entityDeleted = false;
-
+		
+		Group* m_SelectedGroup;
 		friend class PropertiesPanel;
 	};
 }

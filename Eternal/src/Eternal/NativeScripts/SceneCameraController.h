@@ -37,7 +37,7 @@ namespace Eternal {
             auto& cameraPositionX = cameraPosition.x;
             auto& cameraPositionY = cameraPosition.y;
 
-            auto& playerPosition = m_Entity.GetScene()->GetEntity("Player").GetComponent<TransformComponent>().Position;
+            auto& playerPosition = m_Entity.GetScene()->GetEntityByTag("Player").GetComponent<TransformComponent>().Position;
 
             auto& playerPositionX = playerPosition.x;
             auto& playerPositionY = playerPosition.y;

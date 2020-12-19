@@ -116,6 +116,19 @@ namespace Eternal {
 		return out;
 	}
 
+	static void SerializeGroup(YAML::Emitter& out, Group* group)
+	{
+		out << YAML::BeginMap; //Group
+
+		out << YAML::Key << "Group Name";
+		out << YAML::Value << group->m_Name;
+
+		out << YAML::Key << "Group ID";
+		out << YAML::Value << group->m_ID;
+
+		out << YAML::EndMap; //Group
+	}
+
 	static void SerializeEntity(YAML::Emitter& out, Entity entity)
 	{
 		out << YAML::BeginMap; //Entity
@@ -131,6 +144,8 @@ namespace Eternal {
 			auto& tag = entity.GetComponent<TagComponent>().Tag;
 			out << YAML::Key << "Tag" << YAML::Value << tag;
 			
+			auto& groupID = entity.GetComponent<TagComponent>().Group_ID;
+			out << YAML::Key << "GroupID" << YAML::Value << groupID;
 			out << YAML::EndMap; //TagComponent
 		}
 
@@ -219,6 +234,14 @@ namespace Eternal {
 		YAML::Emitter out;
 		out << YAML::BeginMap;
 		out << YAML::Key << "Scene" << YAML::Value << m_Scene->GetName();
+
+		out << YAML::Key << "Groups" << YAML::Value << YAML::BeginSeq;
+		for each (Group* group in m_Scene->m_Groups)
+		{
+			SerializeGroup(out, group);
+		}
+		out << YAML::EndSeq;
+
 		out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
 
 		m_Scene->m_Registry.each([&](auto entityID)
@@ -230,6 +253,7 @@ namespace Eternal {
 				SerializeEntity(out, entity);
 			});
 		out << YAML::EndSeq;
+		
 		out << YAML::EndMap;
 
 		std::ofstream fout(filepath);
@@ -252,6 +276,22 @@ namespace Eternal {
 		ET_CORE_TRACE("Deserializing scene '{0}'", sceneName);
 		m_Scene->SetName(sceneName);
 
+		//Deserialize Groups
+		auto groups = data["Groups"];
+		if (groups)
+		{
+			for (auto group : groups)
+			{
+				std::string name = group["Group Name"].as<std::string>();
+				uint32_t id = group["Group ID"].as<uint32_t>();
+				auto n_group = new Group(name, id);
+				m_Scene->m_Groups.push_back(n_group);
+
+				ET_CORE_TRACE("Deserialized group with ID = {0}, name = {1}", id, name);
+			}
+		}
+
+		//Deserialize Entities
 		auto entities = data["Entities"];
 		if (entities)
 		{
@@ -267,6 +307,12 @@ namespace Eternal {
 				ET_CORE_TRACE("Deserialized entity with ID = {0}, name = {1}", uuid, name);
 
 				Entity deserializedEntity = m_Scene->CreateEntity(name);
+
+				if (tagComponent)
+				{
+					auto& tagc = deserializedEntity.GetComponent<TagComponent>();
+					tagc.Group_ID = tagComponent["GroupID"].as<int>();
+				}
 
 				auto transformComponent = entity["TransformComponent"];
 				if (transformComponent)

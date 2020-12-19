@@ -40,7 +40,7 @@ namespace Eternal {
 		m_Registry.destroy(entity);
 	}
 
-	Entity Scene::GetEntity(std::string tag)
+	Entity Scene::GetEntityByTag(std::string tag)
 	{
 		auto view = m_Registry.view<TagComponent>();
 		for (auto entity : view)

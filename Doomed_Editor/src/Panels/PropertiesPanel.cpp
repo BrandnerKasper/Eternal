@@ -25,6 +25,7 @@ namespace Eternal {
 	void PropertiesPanel::OnImGuiRender()
 	{
 		ImGui::Begin("Properties Panel");
+		//Draw Entity properties
 		auto& entity = m_SceneHierachyPanel->m_SelectedEntity;
 		if (entity)
 		{
@@ -32,6 +33,11 @@ namespace Eternal {
 
 			HandleAddComponentButton(entity);
 		}
+
+		//Draw Group porperties ->Maybe do not show Group ID!! -> Work with Drag and drop?
+		auto selectedGroup = m_SceneHierachyPanel->m_SelectedGroup;
+		if(selectedGroup)
+			DrawGroup(selectedGroup);
 		ImGui::End();
 	}
 
@@ -269,10 +275,61 @@ namespace Eternal {
 			});
 	}
 
+	void PropertiesPanel::DrawGroup(Group* group)
+	{
+		const ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap | ImGuiTreeNodeFlags_FramePadding;
+
+		ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+
+		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4, 4 });
+		float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+		ImGui::Separator();
+		bool open = ImGui::TreeNodeEx("Group", treeNodeFlags);
+		ImGui::PopStyleVar();
+
+		if (open)
+		{
+
+			float columnWidth = 100.0f;
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, columnWidth);
+
+			auto& tag = group->m_Name;
+			ImGui::Text("Name");
+
+			ImGui::NextColumn();
+			char buffer[256];
+			memset(buffer, 0, sizeof(buffer));
+			strcpy_s(buffer, sizeof(buffer), tag.c_str());
+			if (ImGui::InputText("##TagGroup", buffer, sizeof(buffer)))
+			{
+				tag = std::string(buffer);
+			}
+
+			ImGui::Columns(1);
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, columnWidth);
+
+			auto& groupID = group->m_ID;
+			ImGui::Text("ID");
+
+			ImGui::NextColumn();
+			ImGui::SliderInt("##Group ID", &groupID, 1, 10);
+
+			ImGui::Columns(1);
+
+			ImGui::TreePop();
+
+		}
+	}
+
 	static void DrawTagComponent(TagComponent& tagComponent)
 	{
-		ImGui::Columns(2);
 		float columnWidth = 100.0f;
+		
+		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 
 		auto& tag = tagComponent.Tag;
@@ -288,6 +345,18 @@ namespace Eternal {
 		}
 
 		ImGui::Columns(1);
+
+		ImGui::Columns(2);
+		ImGui::SetColumnWidth(0, columnWidth);
+
+		auto& groupID = tagComponent.Group_ID;
+		ImGui::Text("Group ID");
+
+		ImGui::NextColumn();
+		ImGui::SliderInt("##Group ID", &groupID, 0, 10);
+
+		ImGui::Columns(1);
+
 	}
 
 	static void DrawTransformComponent(TransformComponent& transformComponent)

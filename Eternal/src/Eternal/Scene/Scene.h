@@ -10,6 +10,19 @@
 
 namespace Eternal
 {
+	struct Group
+	{
+		Group() = default;
+		Group(std::string name) : m_Name(name), m_ID(++g_ID) {}
+		Group(std::string name, int id) : m_Name(name), m_ID(id)
+		{
+			++g_ID;
+		}
+		std::string m_Name = "";
+		int m_ID = 0;
+		static inline uint32_t g_ID = 0;
+	};
+
 	class Entity;
 
 	class Scene 
@@ -21,7 +34,7 @@ namespace Eternal
 
 		Entity CreateEntity(const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
-		Entity GetEntity(std::string tag);
+		Entity GetEntityByTag(std::string tag);
 
 		void OnUpdate(Timestep ts);
 		void OnViewportResize(uint32_t width, uint32_t height);
@@ -52,6 +65,9 @@ namespace Eternal
 		std::string m_Name = "Untitled";
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 		Ref<EditorCameraController> m_EditorCamera;
+
+		//Scene Hierachy
+		std::vector<Group*> m_Groups;
 
 		//Play and reset conditions
 		bool m_SceneFocused;
