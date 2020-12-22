@@ -116,15 +116,15 @@ namespace Eternal {
 		return out;
 	}
 
-	static void SerializeGroup(YAML::Emitter& out, Group* group)
+	static void SerializeGroup(YAML::Emitter& out, const Group group)
 	{
 		out << YAML::BeginMap; //Group
 
 		out << YAML::Key << "Group Name";
-		out << YAML::Value << group->m_Name;
+		out << YAML::Value << group.m_Name;
 
 		out << YAML::Key << "Group ID";
-		out << YAML::Value << group->m_ID;
+		out << YAML::Value << group.m_ID;
 
 		out << YAML::EndMap; //Group
 	}
@@ -236,7 +236,7 @@ namespace Eternal {
 		out << YAML::Key << "Scene" << YAML::Value << m_Scene->GetName();
 
 		out << YAML::Key << "Groups" << YAML::Value << YAML::BeginSeq;
-		for each (Group* group in m_Scene->m_Groups)
+		for each (Group group in m_Scene->m_Groups)
 		{
 			SerializeGroup(out, group);
 		}
@@ -284,7 +284,7 @@ namespace Eternal {
 			{
 				std::string name = group["Group Name"].as<std::string>();
 				uint32_t id = group["Group ID"].as<uint32_t>();
-				auto n_group = new Group(name, id);
+				auto n_group = Group(name, id);
 				m_Scene->m_Groups.push_back(n_group);
 
 				ET_CORE_TRACE("Deserialized group with ID = {0}, name = {1}", id, name);

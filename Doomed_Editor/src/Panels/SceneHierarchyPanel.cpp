@@ -14,7 +14,7 @@ namespace Eternal {
 	{
 		m_Context = context;
 		m_SelectedEntity = {};
-		m_SelectedGroup = {};
+		m_SelectedGroup = nullptr;
 	}
 
 	void SceneHierarchyPanel::OnImGuiRender()
@@ -32,10 +32,11 @@ namespace Eternal {
 	{
 		if (m_Context->m_Groups.size() != 0)
 		{
-			for each (Group * group in m_Context->m_Groups)
+			for (auto& group : m_Context->m_Groups)
 			{
 				DrawGroupNode(group);
 			}
+			DrawEntityOutsideGroupNode();
 		}
 		else
 		{
@@ -47,17 +48,17 @@ namespace Eternal {
 		}
 	}
 
-	void SceneHierarchyPanel::DrawGroupNode(Group* group)
+	void SceneHierarchyPanel::DrawGroupNode(Group& group)
 	{
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_None;
 		if (m_SelectedGroup)
-			flags = ((m_SelectedGroup->m_ID == group->m_ID) ? ImGuiTreeNodeFlags_Selected : 0);
-		if (group)
+			flags = ((m_SelectedGroup->m_ID == group.m_ID) ? ImGuiTreeNodeFlags_Selected : 0);
+		if (group.m_ID != 0)
 		{
-			auto TreeGroup = ImGui::TreeNodeEx(group->m_Name.c_str(), flags);
+			auto TreeGroup = ImGui::TreeNodeEx(group.m_Name.c_str(), flags);
 			if (ImGui::IsItemClicked())
 			{
-				m_SelectedGroup = group;
+				m_SelectedGroup = &group;
 				m_SelectedEntity = {};
 			}
 
@@ -68,23 +69,30 @@ namespace Eternal {
 					{
 						Entity entity{ entityID , m_Context.get() };
 						auto entityGroupID = entity.GetComponent<TagComponent>().Group_ID;
-						if (group->m_ID == entityGroupID)
+						if (group.m_ID == entityGroupID)
 						{
 							DrawEntityNode(entity);
 						}
 					});
 				ImGui::TreePop();
 			}
+
+			HandleRightClickOnGroup();
+			DeleteGroup(group);
 		}
+	}
+
+	void SceneHierarchyPanel::DrawEntityOutsideGroupNode()
+	{
 		//Draw Entitys outside Group
 		m_Context->m_Registry.each([&](auto entityID)
 			{
 				bool drawMe = true;
 				Entity entity{ entityID , m_Context.get() };
 				auto entityGroupID = entity.GetComponent<TagComponent>().Group_ID;
-				for each (Group* group in m_Context->m_Groups)
+				for each (Group group in m_Context->m_Groups)
 				{
-					if (group->m_ID == entityGroupID)
+					if (group.m_ID == entityGroupID)
 					{
 						drawMe = false;
 					}
@@ -138,17 +146,44 @@ namespace Eternal {
 		}
 	}
 
+	void SceneHierarchyPanel::HandleRightClickOnGroup()
+	{
+		//Handle Right Click on Group
+		m_GroupDeleted = false;
+		if (ImGui::BeginPopupContextItem())
+		{
+			if (ImGui::MenuItem("Delete Group"))
+				m_GroupDeleted = true;
+
+			ImGui::EndPopup();
+		}
+	}
+
+	void SceneHierarchyPanel::DeleteGroup(Group& group)
+	{
+		//Delete entity at last to not run in misbehaviour
+		if (m_GroupDeleted)
+		{
+			if (m_SelectedGroup)
+			{
+				if (m_SelectedGroup->m_ID == group.m_ID)
+					m_SelectedGroup = {};
+			}
+			m_Context->DestroyGroup(group);
+		}
+	}
+
 	void SceneHierarchyPanel::HandleRigthClickOnBlankSpace()
 	{
 		//Right Click on blank space
 		if (ImGui::BeginPopupContextWindow(0, 1, false))
 		{
+			m_SelectedGroup = nullptr; //TODO
 			if (ImGui::MenuItem("Create Empty Entity"))
 				m_Context->CreateEntity("Empty Entity");
 			if (ImGui::MenuItem("Create Empty Group"))
 			{
-				auto group = new Group("Nameless Group" + std::to_string(Group::g_ID + 1));
-				m_Context->m_Groups.push_back(group);
+				m_Context->CreateGroup("Nameless Group");
 			}
 			ImGui::EndPopup();
 		}
@@ -160,7 +195,7 @@ namespace Eternal {
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
 		{
 			m_SelectedEntity = {};
-			m_SelectedGroup = {};
+			m_SelectedGroup = nullptr;
 		}
 	}
 

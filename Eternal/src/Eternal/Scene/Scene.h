@@ -6,23 +6,12 @@
 
 #include "Eternal/Renderer/EditorCameraController.h"
 
+#include "Eternal/Scene/Group.h"
+
 #include "Eternal/Physics/PhysicsWorld.h"
 
 namespace Eternal
 {
-	struct Group
-	{
-		Group() = default;
-		Group(std::string name) : m_Name(name), m_ID(++g_ID) {}
-		Group(std::string name, int id) : m_Name(name), m_ID(id)
-		{
-			++g_ID;
-		}
-		std::string m_Name = "";
-		int m_ID = 0;
-		static inline uint32_t g_ID = 0;
-	};
-
 	class Entity;
 
 	class Scene 
@@ -35,6 +24,9 @@ namespace Eternal
 		Entity CreateEntity(const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
 		Entity GetEntityByTag(std::string tag);
+
+		void CreateGroup(std::string name);
+		void DestroyGroup(Group& group);
 
 		void OnUpdate(Timestep ts);
 		void OnViewportResize(uint32_t width, uint32_t height);
@@ -67,7 +59,7 @@ namespace Eternal
 		Ref<EditorCameraController> m_EditorCamera;
 
 		//Scene Hierachy
-		std::vector<Group*> m_Groups;
+		std::vector<Group> m_Groups;
 
 		//Play and reset conditions
 		bool m_SceneFocused;

@@ -53,6 +53,18 @@ namespace Eternal {
 		ET_CORE_ASSERT(false, "No Entity found with this Tag!");
 	}
 
+	void Scene::CreateGroup(std::string name)
+	{
+		auto group = Group("Nameless Group" + std::to_string(Group::g_ID + 1));
+		m_Groups.push_back(group);
+	}
+
+	void Scene::DestroyGroup(Group& group)
+	{
+		ET_CORE_INFO("Destroy group with id {0}", group.m_ID);
+		m_Groups.erase(std::remove(m_Groups.begin(), m_Groups.end(), group), m_Groups.end());
+	}
+
 	void Scene::OnUpdate(Timestep ts)
 	{
 		UpdateNonPhysicalTransforms();

@@ -36,8 +36,10 @@ namespace Eternal {
 
 		//Draw Group porperties ->Maybe do not show Group ID!! -> Work with Drag and drop?
 		auto selectedGroup = m_SceneHierachyPanel->m_SelectedGroup;
-		if(selectedGroup)
+		if (selectedGroup)
+		{
 			DrawGroup(selectedGroup);
+		}
 		ImGui::End();
 	}
 
