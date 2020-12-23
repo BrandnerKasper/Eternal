@@ -26,6 +26,8 @@ namespace Eternal {
 		void DeleteEntity(Entity entity);
 		void HandleRightClickOnGroup();
 		void DeleteGroup(Group& group);
+		void HandleDrag(Entity entity);
+		void HandleDrop(Group& group);
 		void HandleRigthClickOnBlankSpace();
 		void DeSelect();
 	private:

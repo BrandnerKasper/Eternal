@@ -62,32 +62,7 @@ namespace Eternal {
 				m_SelectedEntity = {};
 			}
 
-			//HandleDragAndDrop --- Part 2 ...Drop
-			if (ImGui::BeginDragDropTarget())
-			{
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DragEntityIntoGroup"))
-				{
-					ET_ASSERT(payload->DataSize == sizeof(int), "The dragged Payload does not contain the right data!");
-
-					int payload_n = *(const int*)payload->Data;
-					//payload_n = group_ID;
-					ET_CORE_ERROR("Print data stored in drag {0}", *(const int*)payload->Data);
-					//if ((int)entity.GetEntityID() == (int)payload_n)
-					//{
-					//	auto& entityGroupID = entity.GetComponent<TagComponent>().Group_ID;
-					//	entityGroupID = group_ID;
-					//}
-					m_Context->m_Registry.each([&](auto entityID)
-						{
-							Entity entity{ entityID , m_Context.get() };
-							auto& entityGroupID = entity.GetComponent<TagComponent>().Group_ID;
-							if ((int)entityID == (int)payload_n)
-								entityGroupID = group.m_ID;
-						});
-
-					ImGui::EndDragDropTarget();
-				}
-			}
+			HandleDrop(group);
 
 			if (TreeGroup)
 			{
@@ -133,7 +108,7 @@ namespace Eternal {
 	void SceneHierarchyPanel::DrawEntityNode(Entity entity)
 	{
 		auto& tag = entity.GetComponent<TagComponent>().Tag;
-		auto& group_ID = entity.GetComponent<TagComponent>().Group_ID;
+
 		ImGuiTreeNodeFlags flags = ((m_SelectedEntity == entity) ? ImGuiTreeNodeFlags_Selected : 0);
 		flags |= ImGuiTreeNodeFlags_SpanAvailWidth;
 		flags |= ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_NoTreePushOnOpen;
@@ -144,43 +119,8 @@ namespace Eternal {
 			m_SelectedGroup = {};
 		}
 
-		//HandleDragAndDrop --- Part 1 Drag...
-		if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
-		{
-			auto entityID = entity.GetEntityID();
-			// Set payload to carry the index of our item (could be anything)
-			ImGui::SetDragDropPayload("DragEntityIntoGroup", &entityID, sizeof(int));
-			// Display preview
-			ImGui::Text("Move %s", tag.c_str());
-			ImGui::EndDragDropSource();
-		}
-		//if (ImGui::BeginDragDropTarget())
-		//{
-		//	if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DragEntityIntoGroup"))
-		//	{
-		//		ET_ASSERT(payload->DataSize == sizeof(int), "The dragged Payload does not contain the right data!");
-		//
-		//		int payload_n = *(const int*)payload->Data;
-		//		//payload_n = group_ID;
-		//		ET_CORE_ERROR("Print data stored in drag {0}", *(const int*)payload->Data);
-		//		//if ((int)entity.GetEntityID() == (int)payload_n)
-		//		//{
-		//		//	auto& entityGroupID = entity.GetComponent<TagComponent>().Group_ID;
-		//		//	entityGroupID = group_ID;
-		//		//}
-		//		m_Context->m_Registry.each([&](auto entityID)
-		//			{
-		//				Entity entity{ entityID , m_Context.get() };
-		//				auto& entityGroupID = entity.GetComponent<TagComponent>().Group_ID;
-		//				if ((int)entityID == (int)payload_n)
-		//					entityGroupID = group_ID;
-		//			});
-		//
-		//		ImGui::EndDragDropTarget();
-		//	}
-		//}
-
-
+		HandleDrag(entity);
+		
 		HandleRightClickOnEntity(entity);
 
 		DeleteEntity(entity);
@@ -235,6 +175,45 @@ namespace Eternal {
 					m_SelectedGroup = {};
 			}
 			m_Context->DestroyGroup(group);
+		}
+	}
+
+	void SceneHierarchyPanel::HandleDrag(Entity entity)
+	{
+		//HandleDragAndDrop --- Part 1 Drag...
+		if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
+		{
+			auto entityID = entity.GetEntityID();
+			auto& tag = entity.GetComponent<TagComponent>().Tag;
+			// Set payload to carry the index of our item (could be anything)
+			ImGui::SetDragDropPayload("DragEntityIntoGroup", &entityID, sizeof(int));
+			// Display preview
+			ImGui::Text("Move %s", tag.c_str());
+			ImGui::EndDragDropSource();
+		}
+	}
+
+	void SceneHierarchyPanel::HandleDrop(Group& group)
+	{
+		//HandleDragAndDrop --- Part 2 ...Drop
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DragEntityIntoGroup"))
+			{
+				ET_ASSERT(payload->DataSize == sizeof(int), "The dragged Payload does not contain the right data!");
+
+				int payload_n = *(const int*)payload->Data;
+
+				m_Context->m_Registry.each([&](auto entityID)
+					{
+						Entity entity{ entityID , m_Context.get() };
+						auto& entityGroupID = entity.GetComponent<TagComponent>().Group_ID;
+						if ((int)entityID == (int)payload_n)
+							entityGroupID = group.m_ID;
+					});
+
+				ImGui::EndDragDropTarget();
+			}
 		}
 	}
 

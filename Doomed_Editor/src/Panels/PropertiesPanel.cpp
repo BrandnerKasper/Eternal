@@ -34,7 +34,7 @@ namespace Eternal {
 			HandleAddComponentButton(entity);
 		}
 
-		//Draw Group porperties ->Maybe do not show Group ID!! -> Work with Drag and drop?
+		//Draw Group properties
 		auto selectedGroup = m_SceneHierachyPanel->m_SelectedGroup;
 		if (selectedGroup)
 		{
@@ -311,20 +311,7 @@ namespace Eternal {
 
 			ImGui::Columns(1);
 
-			//Refactor with an Drag and Drop Feature!
-			//ImGui::Columns(2);
-			//ImGui::SetColumnWidth(0, columnWidth);
-			//
-			//auto& groupID = group->m_ID;
-			//ImGui::Text("ID");
-			//
-			//ImGui::NextColumn();
-			//ImGui::SliderInt("##Group ID", &groupID, 1, 10);
-			//
-			//ImGui::Columns(1);
-			//
 			ImGui::TreePop();
-
 		}
 	}
 
@@ -348,18 +335,6 @@ namespace Eternal {
 		}
 
 		ImGui::Columns(1);
-
-		//ImGui::Columns(2);
-		//ImGui::SetColumnWidth(0, columnWidth);
-		//
-		//auto& groupID = tagComponent.Group_ID;
-		//ImGui::Text("Group ID");
-		//
-		//ImGui::NextColumn();
-		//ImGui::SliderInt("##Group ID", &groupID, 0, 10);
-		//
-		//ImGui::Columns(1);
-
 	}
 
 	static void DrawTransformComponent(TransformComponent& transformComponent)

@@ -81,7 +81,7 @@ namespace Eternal {
     {
         ChangeSytle(false);
 
-        ImGui::ShowDemoWindow();
+        //ImGui::ShowDemoWindow();
 
         static bool dockingEnabled = true;
         if (dockingEnabled)
@@ -250,7 +250,7 @@ namespace Eternal {
         std::string filepath = FileDialogs::SaveFile("Eternal Scene (*.eternal)\0*.eternal\0");
         if (!filepath.empty())
         {
-            m_ActiveScene->SetName(FileDialogs::GetFileName(filepath)); //set name to filepath .../ scenename .eternal!
+            m_ActiveScene->SetName(FileDialogs::GetFileName(filepath));
             SceneSerializer serializer(m_ActiveScene);
             serializer.Serialize(filepath);
         }

@@ -61,7 +61,7 @@ namespace Eternal {
 
 	void Scene::DestroyGroup(Group& group)
 	{
-		ET_CORE_INFO("Destroy group with id {0}", group.m_ID);
+		//ET_CORE_INFO("Destroy group with id {0}", group.m_ID);
 		m_Groups.erase(std::remove(m_Groups.begin(), m_Groups.end(), group), m_Groups.end());
 	}
 
