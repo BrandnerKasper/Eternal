@@ -1,94 +1,265 @@
 Scene: level01.eternal
+Groups:
+  - Group Name: Static Level Elements
+    Group ID: 1
+  - Group Name: Background Elements
+    Group ID: 2
+  - Group Name: Player
+    Group ID: 3
+  - Group Name: Deathboxes
+    Group ID: 4
+  - Group Name: Start
+    Group ID: 6
+  - Group Name: Platforms
+    Group ID: 7
 Entities:
-  - Entity: 11
+  - Entity: 28
     TagComponent:
-      Tag: Background Clouds02
+      Tag: Rock 01
+      GroupID: 1
     TransformComponent:
-      Position: [33.9000015, 8.30000019, -102.199997]
+      Position: [93, -1.70000005, 0]
       Rotation: 0
-      Size: [36.7999992, 10]
+      Size: [2.29999995, 2.5]
     SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud03.png
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0.310483873, 0.310480773, 0.310480773, 1]
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 0
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 27
+    TagComponent:
+      Tag: Move Platform Y 01
+      GroupID: 7
+    TransformComponent:
+      Position: [98.1999969, 0, 0]
+      Rotation: 0
+      Size: [3.5999999, 1.20000005]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\movePlatform_Y.png
+      TextureScale: 1
+      Color: [0.919354856, 1, 0.984158874, 1]
+    NativeScriptComponent:
+      ScriptFileName: MoveableYPlatform.h
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 1
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 26
+    TagComponent:
+      Tag: Rock 02
+      GroupID: 1
+    TransformComponent:
+      Position: [113.099998, 0, 0]
+      Rotation: 0
+      Size: [20.3999996, 26.1000004]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0.45161289, 0.45160836, 0.45160836, 1]
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 0
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 25
+    TagComponent:
+      Tag: Dark Cloud 02
+      GroupID: 2
+    TransformComponent:
+      Position: [134.300003, 87.1999969, -227.100006]
+      Rotation: 0
+      Size: [34.2000008, 18.7000008]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\darkCloud02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 10
+  - Entity: 24
     TagComponent:
-      Tag: Background Clouds
+      Tag: Dark Cloud 01
+      GroupID: 2
     TransformComponent:
-      Position: [-14.8000002, 17.6000004, -75.0999985]
+      Position: [164.899994, 59.5999985, -204.600006]
       Rotation: 0
-      Size: [12.5, 4.0999999]
+      Size: [42.4000015, 22.8999996]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\darkCloud01.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 23
+    TagComponent:
+      Tag: Dark Tower
+      GroupID: 2
+    TransformComponent:
+      Position: [151.199997, 54.2000008, -217]
+      Rotation: 0
+      Size: [27.8999996, 104.400002]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\tower.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 22
+    TagComponent:
+      Tag: Post Process Effect
+      GroupID: 0
+    TransformComponent:
+      Position: [0, 0, 1]
+      Rotation: 0
+      Size: [1000, 1000]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0, 0, 0, 0.0588235296]
+  - Entity: 21
+    TagComponent:
+      Tag: Invisible wall
+      GroupID: 6
+    TransformComponent:
+      Position: [-11.3000002, 5, -0.300000012]
+      Rotation: 0
+      Size: [3.5999999, 15.3999996]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [1, 0.657258034, 0.657258034, 1]
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 0
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 20
+    TagComponent:
+      Tag: Cloud 01
+      GroupID: 2
+    TransformComponent:
+      Position: [-17.1000004, 42.7999992, -377]
+      Rotation: 0
+      Size: [164.399994, 43.9000015]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 9
+  - Entity: 19
     TagComponent:
-      Tag: Background Hill
+      Tag: Cloud 02
+      GroupID: 2
     TransformComponent:
-      Position: [11.3000002, 13.3999996, -62.5]
+      Position: [233.699997, 56.5, -135]
       Rotation: 0
-      Size: [165.800003, 57.2999992]
+      Size: [100, 50]
     SpriteRendererComponent:
-      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill01.png
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud03.png
       TextureScale: 1
-      Color: [0.911281228, 0.911290348, 0.911283612, 1]
-  - Entity: 8
+      Color: [1, 1, 1, 1]
+  - Entity: 18
     TagComponent:
-      Tag: Background Mountain02
+      Tag: Mountain 02
+      GroupID: 2
     TransformComponent:
-      Position: [49.0999985, -1.10000002, -92.5]
+      Position: [499.899994, 21.2999992, -290]
       Rotation: 0
-      Size: [95.0999985, 43.9000015]
+      Size: [300, 170.899994]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 7
+  - Entity: 17
     TagComponent:
-      Tag: Background Mountain
+      Tag: Mountain 01
+      GroupID: 2
     TransformComponent:
-      Position: [-11.8999996, 1.29999995, -80.4000015]
+      Position: [-39.7000008, 2.9000001, -300]
       Rotation: 0
-      Size: [80.5, 45]
+      Size: [310.899994, 111.900002]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 6
+  - Entity: 16
     TagComponent:
-      Tag: Background Sky
+      Tag: Hill 03
+      GroupID: 2
     TransformComponent:
-      Position: [27.7999992, 31.1000004, -124.5]
+      Position: [200, -38.4000015, -200]
       Rotation: 0
-      Size: [300, 150]
+      Size: [1200, 120]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill03.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 15
+    TagComponent:
+      Tag: Hill 02
+      GroupID: 2
+    TransformComponent:
+      Position: [150, -37.4000015, -150]
+      Rotation: 0
+      Size: [900, 90]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill02.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 14
+    TagComponent:
+      Tag: Hill 01
+      GroupID: 2
+    TransformComponent:
+      Position: [100, -28.7999992, -100]
+      Rotation: 0
+      Size: [600, 60]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill01.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 13
+    TagComponent:
+      Tag: Sky
+      GroupID: 2
+    TransformComponent:
+      Position: [500, 0, -500]
+      Rotation: 0
+      Size: [2000, 600]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Background.png
       TextureScale: 1
-      Color: [1, 1, 1, 1]
-  - Entity: 5
+      Color: [0.883064508, 0.98259902, 1, 1]
+  - Entity: 12
     TagComponent:
       Tag: Camera
+      GroupID: 3
     TransformComponent:
-      Position: [32.0462875, 0, -0.100000001]
+      Position: [16.4235287, 13.0632963, 20.2000008]
       Rotation: 0
       Size: [1, 1]
     CameraComponent:
       Camera:
-        OrthographicSize: 22
+        ProjectionType: 0
+        PerspectiveFOV: 0.837758064
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 15
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
     NativeScriptComponent:
       ScriptFileName: SceneCameraController.h
-  - Entity: 4
+  - Entity: 11
     TagComponent:
-      Tag: Ground
+      Tag: Ground 01
+      GroupID: 1
     TransformComponent:
-      Position: [-15.6999998, -5.69999981, 0]
+      Position: [28.1000004, -6.0999999, 0.100000001]
       Rotation: 0
-      Size: [35.0999985, 6.5999999]
+      Size: [35.0999985, 7.19999981]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\ground.png
       TextureScale: 1
@@ -99,11 +270,12 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 3
+  - Entity: 10
     TagComponent:
       Tag: Player
+      GroupID: 3
     TransformComponent:
-      Position: [0, 4.0999999, 0]
+      Position: [-3.20000005, 0, 0.00999999978]
       Rotation: 0
       Size: [1, 1]
     SpriteRendererComponent:
@@ -117,33 +289,35 @@ Entities:
       BodyType: 2
       Density: 1
       Friction: 0.200000003
-      Restitution: 0
-  - Entity: 2
+      Restitution: 0.109999999
+  - Entity: 9
     TagComponent:
-      Tag: Deathbox
+      Tag: Deathbox W 010
+      GroupID: 4
     TransformComponent:
-      Position: [8.10000038, -6.69999981, -0.300000012]
+      Position: [54.5299988, -6.69999981, -0.300000012]
       Rotation: 0
-      Size: [20.7000008, 3.70000005]
+      Size: [26.2000008, 4.5999999]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\waves.png
       TextureScale: 1
-      Color: [0.196355239, 0.894117653, 0.278444856, 0.800000012]
+      Color: [1, 1, 1, 1]
     NativeScriptComponent:
-      ScriptFileName: Deathbox.h
+      ScriptFileName: MoveableDeathbox.h
     PhysicsComponent:
       BodyShape: 0
-      BodyType: 0
+      BodyType: 1
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 1
+  - Entity: 8
     TagComponent:
-      Tag: Ground2
+      Tag: Ground 02
+      GroupID: 1
     TransformComponent:
-      Position: [30, -5.5, 0]
+      Position: [83.6999969, -8, 0.100000001]
       Rotation: 0
-      Size: [29.8999996, 6.9000001]
+      Size: [42.2000008, 10.8000002]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\ground.png
       TextureScale: 1
@@ -154,13 +328,14 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 0
+  - Entity: 7
     TagComponent:
-      Tag: Move Platform X
+      Tag: Move Platform X 01
+      GroupID: 7
     TransformComponent:
-      Position: [5.5, 0, 0]
+      Position: [48.2400017, 0, 0]
       Rotation: 0
-      Size: [3.4000001, 1]
+      Size: [3.5999999, 1.20000005]
     SpriteRendererComponent:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\movePlatform_X.png
       TextureScale: 1
@@ -173,3 +348,77 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
+  - Entity: 6
+    TagComponent:
+      Tag: Deathbox W 011
+      GroupID: 4
+    TransformComponent:
+      Position: [54.7200012, -6.30000019, -2.20000005]
+      Rotation: 0
+      Size: [24.7999992, 4.0999999]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\waves.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+    NativeScriptComponent:
+      ScriptFileName: MoveableDeathbox.h
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 1
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 5
+    TagComponent:
+      Tag: Level 1-1
+      GroupID: 6
+    TransformComponent:
+      Position: [-0.800000012, 2.9000001, -0.200000003]
+      Rotation: 0
+      Size: [24.7999992, 16.7999992]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Level 1-1.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 4
+    TagComponent:
+      Tag: Level 1-1 Ground
+      GroupID: 6
+    TransformComponent:
+      Position: [0.400000006, -5, -0.100000001]
+      Rotation: 0
+      Size: [27, 5]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0.116935492, 0.116934322, 0.116934322, 1]
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 0
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 3
+    TagComponent:
+      Tag: Nest
+      GroupID: 6
+    TransformComponent:
+      Position: [-3.4000001, -2.29999995, 0]
+      Rotation: 0
+      Size: [5.9000001, 3.70000005]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\nest.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 2
+    TagComponent:
+      Tag: Cloud 03
+      GroupID: 2
+    TransformComponent:
+      Position: [554.799988, 52.7999992, -254.800003]
+      Rotation: 0
+      Size: [87.9000015, 22.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud01.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]

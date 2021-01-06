@@ -14,26 +14,8 @@ namespace Eternal {
         {
             auto& entityname = GetComponent<TagComponent>().Tag;
             ET_INFO(entityname + " Scene Camera Movement Script created");
-        }
 
-        void OnDestroy()
-        {
-        }
-
-        void OnUpdate(Timestep ts)
-        {
-            HandleLerp();
-        }
-
-        float Lerp(float a, float b, float f)
-        {
-            return a + f * (b - a);
-        }
-
-        void HandleLerp()
-        {
             auto& cameraPosition = GetComponent<TransformComponent>().Position;
-            
             auto& cameraPositionX = cameraPosition.x;
             auto& cameraPositionY = cameraPosition.y;
 
@@ -42,9 +24,39 @@ namespace Eternal {
             auto& playerPositionX = playerPosition.x;
             auto& playerPositionY = playerPosition.y;
 
-            HandleLerpX(cameraPositionX, playerPositionX);
+            auto newCameraPosition = glm::vec2(playerPositionX + 7.0f, playerPositionY + 2.0f);
+            cameraPosition = glm::vec3(newCameraPosition, cameraPosition.z);
+        }
 
-            HandleLerpY(cameraPositionY, playerPositionY);
+        void OnDestroy()
+        {
+        }
+        
+        void OnUpdate(Timestep ts)
+        {
+            JustFollow();
+        }
+
+        void JustFollow()
+        {
+            auto& cameraPosition = GetComponent<TransformComponent>().Position;
+            auto& cameraPositionX = cameraPosition.x;
+            auto& cameraPositionY = cameraPosition.y;
+
+            auto& playerPosition = m_Entity.GetScene()->GetEntityByTag("Player").GetComponent<TransformComponent>().Position;
+
+            auto& playerPositionX = playerPosition.x;
+            auto& playerPositionY = playerPosition.y;
+
+            auto newCameraPosition = glm::vec2(playerPositionX + 7.0f, playerPositionY + 2.0f);
+
+            HandleLerpX(cameraPositionX, newCameraPosition.x);
+            HandleLerpY(cameraPositionY, newCameraPosition.y);
+        }
+
+        float Lerp(float a, float b, float f)
+        {
+            return a + f * (b - a);
         }
 
         void HandleLerpX(float& cameraPositionX, float& playerPositionX)
@@ -58,7 +70,7 @@ namespace Eternal {
             if (m_Allowlerp_X)
             {
                 cameraPositionX = Lerp(cameraPositionX, playerPositionX, lerpSpeed);
-                if (abs(cameraPositionX - playerPositionX) < lerpTolerance)
+                if (abs(cameraPositionX - playerPositionX) < lerpToleranceX)
                     m_Allowlerp_X = false;
             }
         }
@@ -74,7 +86,7 @@ namespace Eternal {
             if (m_Allowlerp_Y)
             {
                 cameraPositionY = Lerp(cameraPositionY, playerPositionY, lerpSpeed);
-                if (abs(cameraPositionY - playerPositionY) < lerpTolerance)
+                if (abs(cameraPositionY - playerPositionY) < lerpToleranceY)
                     m_Allowlerp_Y = false;
             }
         }
@@ -83,9 +95,10 @@ namespace Eternal {
         bool m_Allowlerp_X = false;
         bool m_Allowlerp_Y = false;
 
-        int lerpDistanceX = 11;
-        int lerpDistanceY = 4;
-        float lerpTolerance = 1.4;
-        float lerpSpeed = 0.03f;
+        int lerpDistanceX = 7;
+        int lerpDistanceY = 10;
+        float lerpToleranceX = 1.6;
+        float lerpToleranceY = 0.5;
+        float lerpSpeed = 0.01f;
     };
 }

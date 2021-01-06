@@ -8,7 +8,8 @@ namespace Eternal {
 	{
 		default,
 		player,
-		deathbox
+		deathbox,
+		jumpwall
 	};
 
 	class ScriptableEntity
@@ -23,8 +24,6 @@ namespace Eternal {
 		}
 
 		ScriptType GetScriptType() { return m_ScriptType; }
-
-		virtual void HandleContact() {}
 
 	protected:
 		virtual void OnCreate() {}

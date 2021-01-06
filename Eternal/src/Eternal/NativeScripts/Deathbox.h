@@ -35,12 +35,11 @@ namespace Eternal {
         {
         }
 
-        void HandleContact() override
+        void HandlePlayerIsDead()
         {
             m_Entity.GetScene()->SetPlay(false);
         }
 
     private:
-        //b2Body* m_DeathboxBody;
     };
 }

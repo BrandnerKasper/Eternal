@@ -6,6 +6,9 @@
 #include "Deathbox.h"
 #include "MoveableXPlatform.h"
 #include "SceneCameraController.h"
+#include "MoveableDeathbox.h"
+#include "MoveableYPlatform.h"
+#include "JumpWall.h"
 
 namespace Eternal {
 
@@ -15,7 +18,10 @@ namespace Eternal {
 		ERotater = 1,
 		EDeathbox = 2,
 		EMoveableXPlatform = 3,
-		ESceneCameraController = 4
+		ESceneCameraController = 4,
+		EMoveableDeathbox = 5,
+		EMoveableYPlatform = 6,
+		EJumpWall = 7
 	};
 
 	class ScriptHandler 
@@ -41,6 +47,15 @@ namespace Eternal {
 			case Scripts::ESceneCameraController:
 				return new SceneCameraController();
 				break;
+			case Scripts::EMoveableDeathbox:
+				return new MoveableDeathbox();
+				break;
+			case Scripts::EMoveableYPlatform:
+				return new MoveableYPlatform();
+				break;
+			case Scripts::EJumpWall:
+				return new JumpWall();
+				break;
 			default:
 				return nullptr;
 			}
@@ -58,6 +73,12 @@ namespace Eternal {
 				return Scripts::EMoveableXPlatform;
 			if (scriptname._Equal("SceneCameraController.h"))
 				return Scripts::ESceneCameraController;
+			if (scriptname._Equal("MoveableDeathbox.h"))
+				return Scripts::EMoveableDeathbox;
+			if (scriptname._Equal("MoveableYPlatform.h"))
+				return Scripts::EMoveableYPlatform;
+			if (scriptname._Equal("JumpWall.h"))
+				return Scripts::EJumpWall;
 			ET_CORE_ASSERT(false, "Script not initialized!");
 		}
 	};
