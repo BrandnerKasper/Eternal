@@ -96,9 +96,9 @@ namespace Eternal {
         bool m_Allowlerp_Y = false;
 
         int lerpDistanceX = 7;
-        int lerpDistanceY = 10;
+        int lerpDistanceY = 5;
         float lerpToleranceX = 1.6;
-        float lerpToleranceY = 0.5;
+        float lerpToleranceY = 0.1;
         float lerpSpeed = 0.01f;
     };
 }

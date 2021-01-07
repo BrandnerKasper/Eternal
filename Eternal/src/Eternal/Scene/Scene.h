@@ -10,6 +10,8 @@
 
 #include "Eternal/Physics/PhysicsWorld.h"
 
+#include "Eternal/Events/KeyEvent.h"
+
 namespace Eternal
 {
 	class Entity;
@@ -34,6 +36,8 @@ namespace Eternal
 		void SetName(std::string name) { m_Name = name; }
 		void SetPlay(bool play) { m_play = play; }
 		bool GetPlay() { return m_play; }
+		void OnEvent(Event& event);
+		bool OnKeyPressed(KeyPressedEvent& event);
 
 	private:
 		void UpdateNonPhysicalTransforms();

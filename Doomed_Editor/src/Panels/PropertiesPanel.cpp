@@ -71,7 +71,7 @@ namespace Eternal {
 		ImGui::PopStyleColor(3);
 
 		ImGui::SameLine();
-		ImGui::DragFloat("##R", &value, 1.0f, 0.0f, 360.0f, "%.2f");
+		ImGui::DragFloat("##R", &value, 1.0f, -360.0f, 360.0f, "%.2f");
 		ImGui::PopItemWidth();
 
 		ImGui::PopItemWidth();

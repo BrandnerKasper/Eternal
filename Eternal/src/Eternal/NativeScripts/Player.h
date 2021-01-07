@@ -4,6 +4,8 @@
 #include "Eternal.h"
 #include "Eternal/Physics/ContactListener.h"
 
+#include "Eternal/Events/KeyEvent.h"
+
 namespace Eternal {
 
     class Player : public ScriptableEntity
@@ -28,14 +30,13 @@ namespace Eternal {
 
         void OnUpdate(Timestep ts)
         {
-            HandleMovement();
+            HandleSideMovement();
         }
 
-        void HandleMovement()
+        void OnEvent(Event& e)
         {
-            HandleSideMovement();
-
-            HandleJump();
+            EventDispatcher dispatcher(e);
+            dispatcher.Dispatch<KeyPressedEvent>(ET_BIND_EVENT_FN(Player::HandleJump));
         }
 
         void HandleSideMovement()
@@ -64,12 +65,15 @@ namespace Eternal {
             m_PlayerBody->ApplyLinearImpulse(b2Vec2(impulse_X, 0.0f), m_PlayerBody->GetWorldCenter(), true);
         }
 
-        void HandleJump()
+        bool HandleJump(KeyPressedEvent& e)
         {
+            if (e.GetRepeatCount() > 0)
+                return false;
+            ET_CORE_ERROR("KeyCode: {0}", e.GetKeyCode());
             m_PlayerBody = GetComponent<PhysicsComponent>().body;
 
-            //Handle Jump (we use pure force)
-            if (Input::IsKeyPressed(ET_KEY_SPACE))
+            //Handle Jump (we use impulse!)
+            if (e.GetKeyCode() == ET_KEY_SPACE)
             {
                 //WallJump
                 if (canWallJump)
@@ -77,16 +81,16 @@ namespace Eternal {
                     //WallJump on right Wall
                     if (isXDirectionRight)
                     {
-                        ET_CORE_WARN("Applying Right Wall Jump Force: {0}, {1}", m_WallJumpForceRight.x, m_WallJumpForceRight.y);
-                        m_PlayerBody->ApplyForceToCenter(m_WallJumpForceRight, true);
+                        ET_CORE_WARN("Applying Right Wall Jump Impulse: {0}, {1}", m_WallJumpForceImpulse.x, m_WallJumpForceImpulse.y);
+                        m_PlayerBody->ApplyLinearImpulse(m_WallJumpForceImpulse, m_PlayerBody->GetWorldCenter(), true);
                         isXDirectionRight = false;
                     }
 
                     //WallJump on left Wall
                     else
                     {
-                        ET_CORE_WARN("Applying Left Wall Jump Force: {0}, {1}", m_WallJumpForceLeft.x, m_WallJumpForceLeft.y);
-                        m_PlayerBody->ApplyForceToCenter(m_WallJumpForceLeft, true);
+                        ET_CORE_WARN("Applying Left Wall Jump Impulse: {0}, {1}", m_WallJumpForceImpulse.x, m_WallJumpForceImpulse.y);
+                        m_PlayerBody->ApplyLinearImpulse(m_WallJumpForceImpulse, m_PlayerBody->GetWorldCenter(), true);
                         isXDirectionRight = true;
                     }
 
@@ -98,8 +102,8 @@ namespace Eternal {
                     //Normal Jump
                     if (canJump)
                     {
-                        ET_CORE_WARN("Applying normal Jump Force: {0}, {1}", m_JumpForce.x, m_JumpForce.y);
-                        m_PlayerBody->ApplyForceToCenter(m_JumpForce, true);
+                        ET_CORE_WARN("Applying normal Jump Impulse: {0}, {1}", m_JumpImpulse.x, m_JumpImpulse.y);
+                        m_PlayerBody->ApplyLinearImpulse(m_JumpImpulse, m_PlayerBody->GetWorldCenter(), true);
 
                         canJump = false;
                     }
@@ -111,6 +115,7 @@ namespace Eternal {
         void HandleJumpContact()
         {
             canJump = true;
+            canWallJump = false; //-> Edge Case
         }
 
         void HandleJumpWallContact()
@@ -121,9 +126,9 @@ namespace Eternal {
     private:
         b2Body* m_PlayerBody;
         float m_walkvelocity = 5.0f;
-        b2Vec2 m_JumpForce = b2Vec2(0.0f, 1000.0f);
-        b2Vec2 m_WallJumpForceRight = b2Vec2(-1200.0f, 1000.0f);
-        b2Vec2 m_WallJumpForceLeft = b2Vec2(1200.0f, 1000.0f);
+        b2Vec2 m_JumpImpulse = b2Vec2(0.0f, 8.0f);
+        b2Vec2 m_WallJumpForceImpulse = b2Vec2(-10.0f, 9.0f);
+        b2Vec2 m_WallJumpForceImpulse = b2Vec2(-10.0f, 9.0f);
 
     private:
         b2Vec2 velocity;

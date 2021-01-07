@@ -5,6 +5,8 @@
 #include "Eternal/Renderer/Renderer2D.h"
 #include "Entity.h"
 
+#include "Eternal/NativeScripts/Player.h"
+
 #include <glm/glm.hpp>
 
 namespace Eternal {
@@ -321,6 +323,28 @@ namespace Eternal {
 					}
 				}
 			});
+	}
+
+	void Scene::OnEvent(Event& event)
+	{
+
+		//Scene Entity Scripts Events
+		if (m_play)
+		{
+			auto view = m_Registry.view<NativeScriptComponent>();
+			for each (auto entity in view)
+			{
+				auto nsc = view.get<NativeScriptComponent>(entity);
+
+				if (nsc.ScriptReference)
+				{
+					if (nsc.Instance)
+					{
+						nsc.Instance->OnEvent(event);
+					}
+				}
+			}
+		}
 	}
 
 	template<typename T>

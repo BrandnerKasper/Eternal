@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "Eternal/Events/KeyEvent.h"
 
 namespace Eternal {
 
@@ -29,7 +30,7 @@ namespace Eternal {
 		virtual void OnCreate() {}
 		virtual void OnDestroy() {}
 		virtual void OnUpdate(Timestep ts) {}
-
+		virtual void OnEvent(Event& event) {}
 	protected:
 		Entity m_Entity;
 		ScriptType m_ScriptType = ScriptType::default;

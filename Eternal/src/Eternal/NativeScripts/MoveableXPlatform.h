@@ -43,6 +43,6 @@ namespace Eternal {
     private:
         b2Body* m_MoveablePlatformBody;
         b2Vec2 m_MoveVelocity = b2Vec2(3.0f, 0.0f);
-        int distanceX = 8;
+        int distanceX = 10;
     };
 }
