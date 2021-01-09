@@ -17,15 +17,20 @@ namespace Eternal {
 		case ScriptType::default:
 			break;
 		case ScriptType::player:
-			ET_CORE_INFO("A is player");
-			if (scriptType_B == ScriptType::jumpwall)
+			//ET_CORE_INFO("A is player");
+			if (scriptType_B == ScriptType::jumpwallR)
 			{
 				auto player = reinterpret_cast<Player*>(ent_A);
-				player->HandleJumpWallContact();
+				player->HandleJumpWallRContact();
+			}
+			if (scriptType_B == ScriptType::jumpwallL)
+			{
+				auto player = reinterpret_cast<Player*>(ent_A);
+				player->HandleJumpWallLContact();
 			}
 			break;
 		case ScriptType::deathbox:
-			ET_CORE_INFO("A is deathbox");
+			//ET_CORE_INFO("A is deathbox");
 			if(scriptType_B == ScriptType::player)
 			{ 
 				auto deathbox = reinterpret_cast<Deathbox*>(ent_A);
@@ -41,15 +46,20 @@ namespace Eternal {
 		case ScriptType::default:
 			break;
 		case ScriptType::player:
-			ET_CORE_INFO("B is player");
-			if (scriptType_A == ScriptType::jumpwall)
+			//ET_CORE_INFO("B is player");
+			if (scriptType_A == ScriptType::jumpwallR)
 			{
 				auto player = reinterpret_cast<Player*>(ent_B);
-				player->HandleJumpWallContact();
+				player->HandleJumpWallRContact();
+			}
+			if (scriptType_A == ScriptType::jumpwallL)
+			{
+				auto player = reinterpret_cast<Player*>(ent_B);
+				player->HandleJumpWallLContact();
 			}
 			break;
 		case ScriptType::deathbox:
-			ET_CORE_INFO("B is deathbox");
+			//ET_CORE_INFO("B is deathbox");
 			if(scriptType_A == ScriptType::player)
 			{
 				auto deathbox = reinterpret_cast<Deathbox*>(ent_B);

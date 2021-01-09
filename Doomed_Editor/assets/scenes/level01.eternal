@@ -10,28 +10,42 @@ Groups:
     Group ID: 4
   - Group Name: Start
     Group ID: 6
+  - Group Name: Finish
+    Group ID: 7
   - Group Name: Platforms
-    Group ID: 8
+    Group ID: 9
+  - Group Name: Tree
+    Group ID: 14
+  - Group Name: Bush
+    Group ID: 13
+  - Group Name: Rock Walls
+    Group ID: 15
+  - Group Name: Grass
+    Group ID: 16
+  - Group Name: Stones
+    Group ID: 17
+  - Group Name: Signs
+    Group ID: 18
 Entities:
-  - Entity: 61
+  - Entity: 89
     TagComponent:
-      Tag: Small Rock 05
+      Tag: Rock 05
       GroupID: 1
     TransformComponent:
       Position: [192.300003, -7.30000019, -0.200000003]
       Rotation: 0
       Size: [3.5999999, 8.69999981]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Rock.png
       TextureScale: 1
-      Color: [0.350806475, 0.350802958, 0.350802958, 1]
+      Color: [1, 0.999989986, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 60
+  - Entity: 88
     TagComponent:
       Tag: Down Hill 01
       GroupID: 1
@@ -49,25 +63,25 @@ Entities:
       Density: 0
       Friction: 0.50999999
       Restitution: 0.51700002
-  - Entity: 59
+  - Entity: 87
     TagComponent:
-      Tag: Small Rock 01
+      Tag: Rock 01
       GroupID: 1
     TransformComponent:
-      Position: [55.0999985, -6.5, 0]
+      Position: [54.5, -6.4000001, -0.200000003]
       Rotation: 0
-      Size: [3.29999995, 6.69999981]
+      Size: [3.79999995, 6.69999981]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Rock.png
       TextureScale: 1
-      Color: [0.306451619, 0.306448549, 0.306448549, 1]
+      Color: [0.955645144, 0.955635548, 0.955635548, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 58
+  - Entity: 86
     TagComponent:
       Tag: Cloud 03
       GroupID: 2
@@ -79,7 +93,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 57
+  - Entity: 85
     TagComponent:
       Tag: Nest
       GroupID: 6
@@ -91,7 +105,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\nest.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 56
+  - Entity: 84
     TagComponent:
       Tag: Level 1-1 Ground
       GroupID: 6
@@ -109,7 +123,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 55
+  - Entity: 83
     TagComponent:
       Tag: Level 1-1
       GroupID: 6
@@ -121,7 +135,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Level 1-1.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 54
+  - Entity: 82
     TagComponent:
       Tag: Deathbox W 011
       GroupID: 4
@@ -141,10 +155,10 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 53
+  - Entity: 81
     TagComponent:
       Tag: Move Platform X 01
-      GroupID: 8
+      GroupID: 9
     TransformComponent:
       Position: [178.740005, -1.39999998, 0]
       Rotation: 0
@@ -161,7 +175,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 52
+  - Entity: 80
     TagComponent:
       Tag: Ground 02
       GroupID: 1
@@ -179,12 +193,12 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 51
+  - Entity: 79
     TagComponent:
       Tag: Deathbox W 010
       GroupID: 4
     TransformComponent:
-      Position: [54.5299988, -6.69999981, -0.300000012]
+      Position: [54.5299988, -6.69999981, -0.100000001]
       Rotation: 0
       Size: [26.2000008, 4.5999999]
     SpriteRendererComponent:
@@ -199,7 +213,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 50
+  - Entity: 78
     TagComponent:
       Tag: Player
       GroupID: 3
@@ -219,7 +233,7 @@ Entities:
       Density: 1
       Friction: 0.199000001
       Restitution: 0
-  - Entity: 49
+  - Entity: 77
     TagComponent:
       Tag: Ground 01
       GroupID: 1
@@ -237,12 +251,12 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 48
+  - Entity: 76
     TagComponent:
       Tag: Camera
       GroupID: 3
     TransformComponent:
-      Position: [3.79999995, 1.9994725, 20.2000008]
+      Position: [352.868256, 9.00662804, 20.2000008]
       Rotation: 0
       Size: [1, 1]
     CameraComponent:
@@ -258,7 +272,7 @@ Entities:
       FixedAspectRatio: false
     NativeScriptComponent:
       ScriptFileName: SceneCameraController.h
-  - Entity: 47
+  - Entity: 75
     TagComponent:
       Tag: Sky
       GroupID: 2
@@ -270,7 +284,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Background.png
       TextureScale: 1
       Color: [0.883064508, 0.98259902, 1, 1]
-  - Entity: 46
+  - Entity: 74
     TagComponent:
       Tag: Hill 01
       GroupID: 2
@@ -282,7 +296,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 45
+  - Entity: 73
     TagComponent:
       Tag: Hill 02
       GroupID: 2
@@ -294,7 +308,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 44
+  - Entity: 72
     TagComponent:
       Tag: Hill 03
       GroupID: 2
@@ -306,7 +320,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\hill03.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 43
+  - Entity: 71
     TagComponent:
       Tag: Mountain 01
       GroupID: 2
@@ -318,7 +332,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 42
+  - Entity: 70
     TagComponent:
       Tag: Mountain 02
       GroupID: 2
@@ -330,7 +344,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\mountains02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 41
+  - Entity: 69
     TagComponent:
       Tag: Cloud 02
       GroupID: 2
@@ -342,7 +356,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud03.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 40
+  - Entity: 68
     TagComponent:
       Tag: Cloud 01
       GroupID: 2
@@ -354,7 +368,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\cloud02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 39
+  - Entity: 67
     TagComponent:
       Tag: Invisible wall
       GroupID: 6
@@ -372,7 +386,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 38
+  - Entity: 66
     TagComponent:
       Tag: Post Process Effect
       GroupID: 0
@@ -384,7 +398,7 @@ Entities:
       TextureFilepath: ""
       TextureScale: 1
       Color: [0, 0, 0, 0.0588235296]
-  - Entity: 37
+  - Entity: 65
     TagComponent:
       Tag: Dark Tower
       GroupID: 2
@@ -396,7 +410,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\tower.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 36
+  - Entity: 64
     TagComponent:
       Tag: Dark Cloud 01
       GroupID: 2
@@ -408,7 +422,7 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\darkCloud01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 35
+  - Entity: 63
     TagComponent:
       Tag: Dark Cloud 02
       GroupID: 2
@@ -420,28 +434,28 @@ Entities:
       TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\darkCloud02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 34
+  - Entity: 62
     TagComponent:
-      Tag: Rock 01
+      Tag: Rock 09
       GroupID: 1
     TransformComponent:
-      Position: [113.099998, 0, 0]
+      Position: [113.099998, 0, 0.200000003]
       Rotation: 0
       Size: [20.3999996, 26.1000004]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
       TextureScale: 1
-      Color: [0.45161289, 0.45160836, 0.45160836, 1]
+      Color: [1, 0.999989986, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 33
+  - Entity: 61
     TagComponent:
       Tag: Move Platform Y 01
-      GroupID: 8
+      GroupID: 9
     TransformComponent:
       Position: [277, 12.1999998, 0]
       Rotation: 0
@@ -458,25 +472,25 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 32
+  - Entity: 60
     TagComponent:
-      Tag: Rock 02
+      Tag: Rock 10
       GroupID: 1
     TransformComponent:
-      Position: [94.0999985, 12, 0]
+      Position: [91.9000015, 12.6000004, 0.200000003]
       Rotation: 0
-      Size: [5.5, 15.6999998]
+      Size: [10, 16.8999996]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
       TextureScale: 1
-      Color: [0.407258093, 0.40725401, 0.40725401, 1]
+      Color: [1, 0.999989986, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 31
+  - Entity: 59
     TagComponent:
       Tag: Ground 03
       GroupID: 1
@@ -494,146 +508,146 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 30
+  - Entity: 58
     TagComponent:
-      Tag: Rock 03
+      Tag: Rock 11
       GroupID: 1
     TransformComponent:
-      Position: [155.199997, -11.1999998, 0]
+      Position: [155.199997, -11.1999998, -0.200000003]
       Rotation: 0
       Size: [18.2000008, 10.3999996]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Rock.png
       TextureScale: 1
-      Color: [0.495967746, 0.495962769, 0.495962769, 1]
+      Color: [1, 0.999989986, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 29
+  - Entity: 57
     TagComponent:
-      Tag: Jump Wall 01
+      Tag: Jump Wall R 01
       GroupID: 1
     TransformComponent:
-      Position: [103.400002, 0, 0.100000001]
+      Position: [103.400002, 0, 0.300000012]
       Rotation: 0
       Size: [1.20000005, 25.6000004]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\moos.png
       TextureScale: 1
-      Color: [0.270161271, 0.43526566, 1, 1]
+      Color: [0.879032254, 0.906395435, 1, 1]
     NativeScriptComponent:
-      ScriptFileName: JumpWall.h
+      ScriptFileName: JumpWallR.h
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 28
+  - Entity: 56
     TagComponent:
-      Tag: Jump Wall 02
+      Tag: Jump Wall L 02
       GroupID: 1
     TransformComponent:
-      Position: [96.4000015, 12, 0.100000001]
+      Position: [96.5, 13, 0.300000012]
       Rotation: 0
-      Size: [1, 15.1000004]
+      Size: [1, 16]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\moos.png
       TextureScale: 1
-      Color: [0.200312197, 0.476507187, 0.90322578, 1]
+      Color: [0.999989986, 0.99999392, 1, 1]
     NativeScriptComponent:
-      ScriptFileName: JumpWall.h
+      ScriptFileName: JumpWallL.h
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 27
+  - Entity: 55
     TagComponent:
       Tag: Rock 04
       GroupID: 1
     TransformComponent:
-      Position: [209, 0, 0]
+      Position: [209, 0, 0.300000012]
       Rotation: 0
       Size: [26.2999992, 28.2999992]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
       TextureScale: 1
-      Color: [0.375, 0.374996245, 0.374996245, 1]
+      Color: [1, 0.987903237, 0.987903237, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 26
+  - Entity: 54
     TagComponent:
       Tag: Rock 05
       GroupID: 1
     TransformComponent:
-      Position: [185.600006, 14.8999996, 0]
+      Position: [182.800003, 15, 0.200000003]
       Rotation: 0
-      Size: [6, 19.3999996]
+      Size: [11.8000002, 19.3999996]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
       TextureScale: 1
-      Color: [0.197580636, 0.197578654, 0.197578654, 1]
+      Color: [1, 0.999989986, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 25
+  - Entity: 53
     TagComponent:
-      Tag: Jump Wall 03
+      Tag: Jump Wall R 03
       GroupID: 1
     TransformComponent:
-      Position: [196.399994, 1.10000002, 0.100000001]
+      Position: [196.300003, 1.10000002, 0.400000006]
       Rotation: 0
       Size: [1.20000005, 25.7000008]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\moos.png
       TextureScale: 1
-      Color: [0, 0.517888069, 1, 1]
+      Color: [0.999989986, 0.999995172, 1, 1]
     NativeScriptComponent:
-      ScriptFileName: JumpWall.h
+      ScriptFileName: JumpWallR.h
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 24
+  - Entity: 52
     TagComponent:
-      Tag: Jump Wall 04
+      Tag: Jump Wall L 04
       GroupID: 1
     TransformComponent:
-      Position: [188.100006, 15.1999998, 0.100000001]
+      Position: [188.300003, 15.1999998, 0.300000012]
       Rotation: 0
       Size: [1.10000002, 19.7000008]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\moos.png
       TextureScale: 1
-      Color: [0.133064508, 0.433695257, 1, 1]
+      Color: [0.999989986, 0.99999404, 1, 1]
     NativeScriptComponent:
-      ScriptFileName: JumpWall.h
+      ScriptFileName: JumpWallL.h
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 23
+  - Entity: 51
     TagComponent:
       Tag: Deathbox W 020
       GroupID: 4
     TransformComponent:
-      Position: [184.399994, -9, -0.200000003]
+      Position: [184.399994, -9, -0.100000001]
       Rotation: 0
       Size: [30.1000004, 5.5999999]
     SpriteRendererComponent:
@@ -648,7 +662,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 22
+  - Entity: 50
     TagComponent:
       Tag: Deathbox W 021
       GroupID: 4
@@ -668,7 +682,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 21
+  - Entity: 49
     TagComponent:
       Tag: Deathbox W 030
       GroupID: 4
@@ -688,7 +702,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 20
+  - Entity: 48
     TagComponent:
       Tag: Deathbox W 031
       GroupID: 4
@@ -708,9 +722,9 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 19
+  - Entity: 47
     TagComponent:
-      Tag: Small Rock 02
+      Tag: Rock 02
       GroupID: 1
     TransformComponent:
       Position: [238.800003, 8.89999962, -0.200000003]
@@ -719,16 +733,16 @@ Entities:
     SpriteRendererComponent:
       TextureFilepath: ""
       TextureScale: 1
-      Color: [0.338709652, 0.338706255, 0.338706255, 1]
+      Color: [0.77822578, 0.775087774, 0.775087774, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.0829999968
       Restitution: 0
-  - Entity: 18
+  - Entity: 46
     TagComponent:
-      Tag: Small Rock 03
+      Tag: Rock 03
       GroupID: 1
     TransformComponent:
       Position: [262.799988, 10.1000004, -0.200000003]
@@ -737,14 +751,14 @@ Entities:
     SpriteRendererComponent:
       TextureFilepath: ""
       TextureScale: 1
-      Color: [0.366935492, 0.366931826, 0.366931826, 1]
+      Color: [0.822580636, 0.805996358, 0.805996358, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 17
+  - Entity: 45
     TagComponent:
       Tag: Trunk 01
       GroupID: 1
@@ -753,16 +767,16 @@ Entities:
       Rotation: 0
       Size: [18.3999996, 0.699999988]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\trunk.png
       TextureScale: 1
-      Color: [0.552419364, 0.498773485, 0.287347168, 1]
+      Color: [1, 0.999998033, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 2
       Density: 0.689999998
       Friction: 0.158999994
       Restitution: 0.296999991
-  - Entity: 16
+  - Entity: 44
     TagComponent:
       Tag: Trunk 02
       GroupID: 1
@@ -771,34 +785,34 @@ Entities:
       Rotation: 0
       Size: [16.7000008, 0.699999988]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\trunk.png
       TextureScale: 1
-      Color: [0.669354796, 0.637314558, 0.42104575, 1]
+      Color: [1, 0.999998689, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 2
       Density: 0.689999998
       Friction: 0.116999999
       Restitution: 0.233999997
-  - Entity: 15
+  - Entity: 43
     TagComponent:
       Tag: Rock 06
       GroupID: 1
     TransformComponent:
-      Position: [299.600006, 9.10000038, 0]
+      Position: [299.600006, 9.10000038, 0.200000003]
       Rotation: 0
       Size: [28.3999996, 34.7000008]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
       TextureScale: 1
-      Color: [0.40322578, 0.403221756, 0.403221756, 1]
+      Color: [0.991935492, 0.991925538, 0.991925538, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 14
+  - Entity: 42
     TagComponent:
       Tag: Down Hill 02
       GroupID: 1
@@ -816,7 +830,7 @@ Entities:
       Density: 0
       Friction: 0.551999986
       Restitution: 0.531000018
-  - Entity: 13
+  - Entity: 41
     TagComponent:
       Tag: Ground 04
       GroupID: 1
@@ -834,7 +848,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 12
+  - Entity: 40
     TagComponent:
       Tag: Deathbox W 040
       GroupID: 4
@@ -854,7 +868,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 11
+  - Entity: 39
     TagComponent:
       Tag: Deathbox W 041
       GroupID: 4
@@ -874,10 +888,10 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 10
+  - Entity: 38
     TagComponent:
       Tag: Move Platfrom X 02
-      GroupID: 8
+      GroupID: 9
     TransformComponent:
       Position: [377.600006, 9, 0]
       Rotation: 0
@@ -894,25 +908,25 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 9
+  - Entity: 37
     TagComponent:
-      Tag: Small Rock 04
+      Tag: Rock 04
       GroupID: 1
     TransformComponent:
       Position: [397.799988, 2.4000001, -0.200000003]
       Rotation: 0
       Size: [1, 9]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Rock.png
       TextureScale: 1
-      Color: [0.411290348, 0.411286235, 0.411286235, 1]
+      Color: [0.84677422, 0.839945376, 0.839945376, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 8
+  - Entity: 36
     TagComponent:
       Tag: Trunk 03
       GroupID: 1
@@ -921,19 +935,19 @@ Entities:
       Rotation: 0
       Size: [16.5, 0.699999988]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\trunk.png
       TextureScale: 1
-      Color: [0.729838729, 0.637469471, 0.320775896, 1]
+      Color: [1, 0.999997735, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 2
       Density: 0.689999998
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 7
+  - Entity: 35
     TagComponent:
       Tag: Move Platfrom Y 02
-      GroupID: 8
+      GroupID: 9
     TransformComponent:
       Position: [412.399994, 5.80000019, 0]
       Rotation: 0
@@ -950,7 +964,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 6
+  - Entity: 34
     TagComponent:
       Tag: Deathbox W 050
       GroupID: 4
@@ -963,14 +977,14 @@ Entities:
       TextureScale: 1
       Color: [0.73694396, 0.958034396, 0.987903237, 1]
     NativeScriptComponent:
-      ScriptFileName: Deathbox.h
+      ScriptFileName: MoveableDeathbox.h
     PhysicsComponent:
       BodyShape: 0
       BodyType: 1
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 5
+  - Entity: 33
     TagComponent:
       Tag: Deathbox W 051
       GroupID: 4
@@ -990,91 +1004,439 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 4
+  - Entity: 32
     TagComponent:
       Tag: Rock 07
       GroupID: 1
     TransformComponent:
-      Position: [434.600006, 14.8000002, 0]
+      Position: [434.600006, 14.8000002, 0.200000003]
       Rotation: 0
       Size: [27.7000008, 47.9000015]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
       TextureScale: 1
-      Color: [0.399193525, 0.397583872, 0.397583872, 1]
+      Color: [1, 0.999989986, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 3
+  - Entity: 31
     TagComponent:
       Tag: Rock 08
       GroupID: 1
     TransformComponent:
-      Position: [409.600006, 35.7000008, 0]
+      Position: [404.399994, 35.7000008, 0.200000003]
       Rotation: 0
-      Size: [6.5999999, 26.2000008]
+      Size: [17.2999992, 26.2000008]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
       TextureScale: 1
-      Color: [0.415322602, 0.415318429, 0.415318429, 1]
+      Color: [1, 0.999989986, 0.999989986, 1]
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 2
+  - Entity: 30
     TagComponent:
       Tag: Finish
       GroupID: 7
     TransformComponent:
-      Position: [458.5, 43.5, -0.100000001]
+      Position: [458.399994, 43, -0.100000001]
       Rotation: 0
-      Size: [20.6000004, 22]
+      Size: [20.6000004, 14.5]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\finish.png
       TextureScale: 1
-      Color: [9.99999997e-07, 9.99989993e-07, 9.99989993e-07, 1]
-  - Entity: 1
+      Color: [1, 0.999989986, 0.999989986, 1]
+  - Entity: 29
     TagComponent:
-      Tag: Jump Wall 05
+      Tag: Jump Wall R 05
       GroupID: 1
     TransformComponent:
-      Position: [421.200012, 15.6000004, 0.100000001]
+      Position: [421.200012, 15.6000004, 0.300000012]
       Rotation: 0
       Size: [1, 45.9000015]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\moos.png
       TextureScale: 1
-      Color: [0, 0.613108873, 1, 1]
+      Color: [0.999989986, 0.999996305, 1, 1]
     NativeScriptComponent:
-      ScriptFileName: JumpWall.h
+      ScriptFileName: JumpWallR.h
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 0
+  - Entity: 28
     TagComponent:
-      Tag: Jump Wall 06
+      Tag: Jump Wall L 06
       GroupID: 1
     TransformComponent:
-      Position: [412.5, 35.7999992, 0.100000001]
+      Position: [412.700012, 35.7999992, 0.300000012]
       Rotation: 0
       Size: [1, 25.3999996]
     SpriteRendererComponent:
-      TextureFilepath: ""
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\moos.png
       TextureScale: 1
-      Color: [0, 0.590857327, 0.963709652, 1]
+      Color: [0.999989986, 0.999996126, 1, 1]
     NativeScriptComponent:
-      ScriptFileName: JumpWall.h
+      ScriptFileName: JumpWallL.h
     PhysicsComponent:
       BodyShape: 0
       BodyType: 0
       Density: 0
       Friction: 0.200000003
       Restitution: 0
+  - Entity: 27
+    TagComponent:
+      Tag: RockWall 01
+      GroupID: 15
+    TransformComponent:
+      Position: [102.599998, 0, -6.4000001]
+      Rotation: 0
+      Size: [31.8999996, 22.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
+      TextureScale: 1
+      Color: [0.697580636, 0.697573662, 0.697573662, 1]
+  - Entity: 26
+    TagComponent:
+      Tag: RockWall 02
+      GroupID: 15
+    TransformComponent:
+      Position: [202, -2.5999999, -5.5999999]
+      Rotation: 0
+      Size: [39.2999992, 30]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
+      TextureScale: 1
+      Color: [0.633064508, 0.63305819, 0.63305819, 1]
+  - Entity: 25
+    TagComponent:
+      Tag: RockWall 03
+      GroupID: 15
+    TransformComponent:
+      Position: [429.100006, 9.19999981, -12.1000004]
+      Rotation: 0
+      Size: [55.4000015, 50.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\big rock.png
+      TextureScale: 1
+      Color: [0.693548381, 0.693541408, 0.693541408, 1]
+  - Entity: 24
+    TagComponent:
+      Tag: Grass 01
+      GroupID: 16
+    TransformComponent:
+      Position: [35.5, -1.79999995, 0]
+      Rotation: 0
+      Size: [3.5, 2.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\grass.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 23
+    TagComponent:
+      Tag: Grass 02
+      GroupID: 16
+    TransformComponent:
+      Position: [22.2000008, -1.79999995, 0]
+      Rotation: 0
+      Size: [4.19999981, 2.5999999]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\grass.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 22
+    TagComponent:
+      Tag: Grass 03
+      GroupID: 16
+    TransformComponent:
+      Position: [71.9000015, -1.70000005, -0.100000001]
+      Rotation: 0
+      Size: [3.70000005, 2.9000001]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\grass.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 21
+    TagComponent:
+      Tag: Grass 05
+      GroupID: 16
+    TransformComponent:
+      Position: [360.299988, 7.4000001, -0.100000001]
+      Rotation: 0
+      Size: [5.5, 3.9000001]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\grass.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 20
+    TagComponent:
+      Tag: Grass 04
+      GroupID: 16
+    TransformComponent:
+      Position: [166.100006, -1.89999998, -0.100000001]
+      Rotation: 0
+      Size: [4.5999999, 3.29999995]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\grass.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 19
+    TagComponent:
+      Tag: Bush 01
+      GroupID: 13
+    TransformComponent:
+      Position: [51.7999992, -4, -8.19999981]
+      Rotation: 0
+      Size: [22.8999996, 13.1000004]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\bush.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 18
+    TagComponent:
+      Tag: Bush 02
+      GroupID: 13
+    TransformComponent:
+      Position: [87.3000031, -2.70000005, 0.600000024]
+      Rotation: 0
+      Size: [17.2000008, 9.39999962]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\bush.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 17
+    TagComponent:
+      Tag: Tree 01
+      GroupID: 14
+    TransformComponent:
+      Position: [115, 17, -0.400000006]
+      Rotation: 0
+      Size: [5.9000001, 9.69999981]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\tree.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 16
+    TagComponent:
+      Tag: Bush 03
+      GroupID: 13
+    TransformComponent:
+      Position: [91.6999969, 21, 0.400000006]
+      Rotation: 0
+      Size: [8.69999981, 5.19999981]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\bush.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 15
+    TagComponent:
+      Tag: Tree 02
+      GroupID: 14
+    TransformComponent:
+      Position: [214.300003, 19.1000004, -0.200000003]
+      Rotation: 0
+      Size: [9, 11.8000002]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\tree.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 14
+    TagComponent:
+      Tag: Tree 03
+      GroupID: 14
+    TransformComponent:
+      Position: [292.899994, 29.7000008, -2.29999995]
+      Rotation: 0
+      Size: [6.9000001, 10]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\tree.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 13
+    TagComponent:
+      Tag: Tree 04
+      GroupID: 14
+    TransformComponent:
+      Position: [308.299988, 31.2000008, 0]
+      Rotation: 0
+      Size: [8.30000019, 11.6000004]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\tree.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 12
+    TagComponent:
+      Tag: Bush 04
+      GroupID: 13
+    TransformComponent:
+      Position: [182.300003, 24.7999992, 0.699999988]
+      Rotation: 0
+      Size: [10.3999996, 5.19999981]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\bush.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 11
+    TagComponent:
+      Tag: Bush 06
+      GroupID: 13
+    TransformComponent:
+      Position: [351.399994, 4.4000001, -2.20000005]
+      Rotation: 0
+      Size: [17.7999992, 10]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\bush.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 10
+    TagComponent:
+      Tag: Snow Tree 01
+      GroupID: 14
+    TransformComponent:
+      Position: [406.299988, 52.2999992, 0.400000006]
+      Rotation: 0
+      Size: [5.9000001, 9.39999962]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\snow tree.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 9
+    TagComponent:
+      Tag: Snow Tree 02
+      GroupID: 14
+    TransformComponent:
+      Position: [441.5, 43, 0.5]
+      Rotation: 0
+      Size: [8.30000019, 11.1000004]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\snow tree.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 8
+    TagComponent:
+      Tag: Snow Tree 03
+      GroupID: 14
+    TransformComponent:
+      Position: [428.100006, 42.0999985, -0.300000012]
+      Rotation: 0
+      Size: [5, 8.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\snow tree.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 7
+    TagComponent:
+      Tag: Finish ground
+      GroupID: 7
+    TransformComponent:
+      Position: [458.299988, 35.5, 0.200000003]
+      Rotation: 0
+      Size: [20.2000008, 5.80000019]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0.125, 0.123991936, 0.123991936, 1]
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 0
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 6
+    TagComponent:
+      Tag: Invisible Wall Finish
+      GroupID: 7
+    TransformComponent:
+      Position: [466.399994, 42.5, -0.200000003]
+      Rotation: 0
+      Size: [4.4000001, 18.2000008]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [1, 0.766129017, 0.766129017, 1]
+    PhysicsComponent:
+      BodyShape: 0
+      BodyType: 0
+      Density: 0
+      Friction: 0.200000003
+      Restitution: 0
+  - Entity: 5
+    TagComponent:
+      Tag: Stones 01
+      GroupID: 17
+    TransformComponent:
+      Position: [122.5, 12.8999996, 0.400000006]
+      Rotation: -18
+      Size: [4, 2.20000005]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\stones.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 4
+    TagComponent:
+      Tag: Stones 02
+      GroupID: 17
+    TransformComponent:
+      Position: [202.800003, 14.5, 0.400000006]
+      Rotation: 0
+      Size: [3.70000005, 2.4000001]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\stones.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 3
+    TagComponent:
+      Tag: Stones 03
+      GroupID: 17
+    TransformComponent:
+      Position: [299.299988, 26.7999992, 0.300000012]
+      Rotation: 0
+      Size: [7.80000019, 3.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\stones.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 2
+    TagComponent:
+      Tag: Snow 01
+      GroupID: 7
+    TransformComponent:
+      Position: [461.299988, 39, 0.400000006]
+      Rotation: 0
+      Size: [7, 2.5]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\snow.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 1
+    TagComponent:
+      Tag: Sign 01
+      GroupID: 18
+    TransformComponent:
+      Position: [29.2000008, -0.600000024, 10.6000004]
+      Rotation: 0
+      Size: [4, 5.4000001]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\sign.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 0
+    TagComponent:
+      Tag: Sign 02
+      GroupID: 18
+    TransformComponent:
+      Position: [327.700012, 16, 10.5]
+      Rotation: 0
+      Size: [4, 5.4000001]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\sign.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]

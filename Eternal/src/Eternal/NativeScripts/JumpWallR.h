@@ -6,7 +6,7 @@
 
 namespace Eternal {
 
-    class JumpWall : public ScriptableEntity
+    class JumpWallR : public ScriptableEntity
     {
     public:
 
@@ -16,7 +16,7 @@ namespace Eternal {
             ET_INFO(entityname + " JumpWall created");
 
             //Set ScriptType for ContactHandler
-            m_ScriptType = ScriptType::jumpwall;
+            m_ScriptType = ScriptType::jumpwallR;
 
             //Set User Data in Physics
             auto& jumpWallBody = GetComponent<PhysicsComponent>().body;

@@ -327,7 +327,6 @@ namespace Eternal {
 
 	void Scene::OnEvent(Event& event)
 	{
-
 		//Scene Entity Scripts Events
 		if (m_play)
 		{

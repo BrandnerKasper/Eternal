@@ -10,7 +10,8 @@ namespace Eternal {
 		default,
 		player,
 		deathbox,
-		jumpwall
+		jumpwallR,
+		jumpwallL
 	};
 
 	class ScriptableEntity
