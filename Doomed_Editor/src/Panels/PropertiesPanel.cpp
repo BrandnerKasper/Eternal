@@ -382,10 +382,11 @@ namespace Eternal {
 
 		if (ImGui::Button("Texture", buttonSize))
 		{
-			std::string filepath = FileDialogs::OpenFile("Textures (*.png)\0*.png\0");
-			if (!filepath.empty())
+			std::optional<std::string> filepath = *FileDialogs::OpenFile("Textures (*.png)\0*.png\0");
+			if (filepath)
 			{
-				spriteRenderComponent.TextureFilepath = filepath;
+				auto filename = *FileDialogs::GetFileName(*filepath);
+				spriteRenderComponent.TextureFilepath = "assets/textures/" + filename;
 				spriteRenderComponent.Texture = Texture2D::Create(spriteRenderComponent.TextureFilepath);
 			}
 		}
@@ -545,11 +546,10 @@ namespace Eternal {
 
 		if (ImGui::Button("Script", buttonSize))
 		{
-			std::string filepath = FileDialogs::OpenFile("Scripts (*.h)\0*.h\0");
-			if (!filepath.empty())
+			std::optional<std::string> filepath = FileDialogs::OpenFile("Scripts (*.h)\0*.h\0");
+			if (filepath)
 			{
-				nsc.ScriptFilepath = filepath;
-				nsc.ScriptName = FileDialogs::GetFileName(filepath);
+				nsc.ScriptName = *FileDialogs::GetFileName(*filepath);
 				auto scriptNumber = ScriptHandler::GetScriptNumber(nsc.ScriptName);
 				nsc.SetScript(ScriptHandler::GetScript(scriptNumber));
 			}

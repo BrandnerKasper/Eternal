@@ -245,24 +245,24 @@ namespace Eternal {
 
     void EditorLayer::OpenScene()
     {
-        std::string filepath = FileDialogs::OpenFile("Eternal Scene (*.eternal)\0*.eternal\0");
-        if (!filepath.empty())
+        std::optional<std::string> filepath = FileDialogs::OpenFile("Eternal Scene (*.eternal)\0*.eternal\0");
+        if (filepath)
         {
             NewScene();
 
             SceneSerializer serializer(m_ActiveScene);
-            serializer.Deserialize(filepath);
+            serializer.Deserialize(*filepath);
         }
     }
 
     void EditorLayer::SaveSceneAs()
     {
-        std::string filepath = FileDialogs::SaveFile("Eternal Scene (*.eternal)\0*.eternal\0");
-        if (!filepath.empty())
+        std::optional<std::string> filepath = FileDialogs::SaveFile("Eternal Scene (*.eternal)\0*.eternal\0");
+        if (filepath)
         {
-            m_ActiveScene->SetName(FileDialogs::GetFileName(filepath));
+            m_ActiveScene->SetName(*FileDialogs::GetFileName(*filepath));
             SceneSerializer serializer(m_ActiveScene);
-            serializer.Serialize(filepath);
+            serializer.Serialize(*filepath);
         }
     }
 
