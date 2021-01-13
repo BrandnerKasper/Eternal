@@ -19,3 +19,6 @@
 [submodule "Eternal/vendor/box2d"]
 	path = Eternal/vendor/box2d
 	url = https://github.com/BrandnerKasper/box2d
+[submodule "Eternal/vendor/Audio"]
+	path = Eternal/vendor/Audio
+	url = https://github.com/BrandnerKasper/HazelAudio.git

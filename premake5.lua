@@ -22,6 +22,7 @@ IncludeDir["stb_image"] = "Eternal/vendor/stb_image"
 IncludeDir["entt"] = "Eternal/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "Eternal/vendor/yaml-cpp/include"
 IncludeDir["box2d"] = "Eternal/vendor/box2d/include"
+IncludeDir["HazelAudio"] = "Eternal/vendor/Audio/HazelAudio/src"
 
 group "Dependencies"
 	include "Eternal/vendor/GLFW"
@@ -29,6 +30,10 @@ group "Dependencies"
 	include "Eternal/vendor/imgui"
 	include "Eternal/vendor/yaml-cpp"
 	include "Eternal/vendor/box2d"
+group ""
+
+group "Dependencies/Audio"
+	include "Eternal/vendor/Audio"
 group ""
 
 project "Eternal"
@@ -72,7 +77,8 @@ project "Eternal"
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
-		"%{IncludeDir.box2d}"
+		"%{IncludeDir.box2d}",
+		"%{IncludeDir.HazelAudio}"
 	}
 
 	links
@@ -82,6 +88,7 @@ project "Eternal"
 		"ImGui",
 		"yaml-cpp",
 		"box2d",
+		"HazelAudio",
 		"opengl32.lib",
 	}
 
@@ -133,7 +140,8 @@ project "Sandbox"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
-		"%{IncludeDir.box2d}"
+		"%{IncludeDir.box2d}",
+		"%{IncludeDir.HazelAudio}"
 	}
 
 	links
@@ -190,7 +198,8 @@ project "Doomed_Editor"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
-		"%{IncludeDir.box2d}"
+		"%{IncludeDir.box2d}",
+		"%{IncludeDir.HazelAudio}"
 	}
 
 	links
