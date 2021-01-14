@@ -9,7 +9,7 @@
 #include "Eternal/Scene/Group.h"
 #include "Eternal/Physics/PhysicsWorld.h"
 #include "Eternal/Events/KeyEvent.h"
-#include "Eternal/Auido/AudioManager.h"
+#include "Eternal/Audio/AudioManager.h"
 
 namespace Eternal
 {
