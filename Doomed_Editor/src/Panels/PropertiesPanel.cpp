@@ -275,6 +275,11 @@ namespace Eternal {
 			{
 				DrawPhysicsComponent(component);
 			});
+
+		HandleComponent<AudioComponent>("Audio Properties", entity, [](auto& component)
+			{
+				DrawAudioComponent(component);
+			});
 	}
 
 	void PropertiesPanel::DrawGroup(Group* group)
@@ -656,6 +661,72 @@ namespace Eternal {
 		ImGui::Columns(1);
 	}
 
+	static void DrawAudioComponent(AudioComponent& audioComponent)
+	{
+		if (!audioComponent.filename.empty())
+		{
+			ImGui::Columns(2);
+			float columnWidth = 100.0f;
+			ImGui::SetColumnWidth(0, columnWidth);
+			ImGui::Text("Audio File");
+
+			ImGui::NextColumn();
+
+			ImGui::Text(audioComponent.filename.c_str());
+			ImGui::Columns(1);
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, columnWidth);
+			ImGui::Text("Gain");
+
+			ImGui::NextColumn();
+
+			ImGui::DragFloat("##Gain", &audioComponent.Gain, 0.1f, 0.0f, 1.0f, "%.1f");
+			ImGui::Columns(1);
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, columnWidth);
+			ImGui::Text("Pitch");
+
+			ImGui::NextColumn();
+
+			ImGui::DragFloat("##Pitch", &audioComponent.Pitch, 0.1f, 0.0f, 1.0f, "%.1f");
+			ImGui::Columns(1);
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, columnWidth);
+			ImGui::Text("Looping");
+
+			ImGui::NextColumn();
+
+			ImGui::Checkbox("##Looping", &audioComponent.Looping); //Handle multiple Cameras and set other Camera Primarys to false
+			ImGui::Columns(1);
+		}
+		//Change Audio Button!
+		//Opens Filemanager and lets you load a AudioMP3File!
+		ImGuiIO& io = ImGui::GetIO();
+		auto boldFont = io.Fonts->Fonts[0];
+		float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+		ImVec2 buttonSize = { lineHeight * 4, lineHeight };
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.79f, 0.63f, 0.0f, 1.0f });
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.89f, 0.73f, 0.1f, 1.0f });
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.89f, 0.73f, 0.1f, 1.0f });
+		ImGui::PushFont(boldFont);
+
+		if (ImGui::Button("Audio", buttonSize))
+		{
+			std::optional<std::string> filepath = FileDialogs::OpenFile("Audio (*.mp3)\0*.mp3\0");
+			if (filepath)
+			{
+				audioComponent.filename = *FileDialogs::GetFileName(*filepath);
+				audioComponent.AudioFilePath = "assets/audio/" + audioComponent.filename;
+				audioComponent.LoadFile();
+			}
+		}
+		ImGui::PopFont();
+		ImGui::PopStyleColor(3);
+	}
+
 	void PropertiesPanel::HandleAddComponentButton(Entity entity)
 	{
 		if (ImGui::Button("Add Component"))
@@ -704,6 +775,15 @@ namespace Eternal {
 				if (ImGui::MenuItem("Physics"))
 				{
 					entity.AddComponent<PhysicsComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			if (!entity.HasComponent<AudioComponent>())
+			{
+				if (ImGui::MenuItem("Audio"))
+				{
+					entity.AddComponent<AudioComponent>();
 					ImGui::CloseCurrentPopup();
 				}
 			}

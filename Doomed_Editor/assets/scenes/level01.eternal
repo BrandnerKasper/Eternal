@@ -27,7 +27,7 @@ Groups:
   - Group Name: Signs
     Group ID: 18
 Entities:
-  - Entity: 90
+  - Entity: 91
     TagComponent:
       Tag: Snow Tree 04
       GroupID: 7
@@ -39,7 +39,7 @@ Entities:
       TextureFilepath: assets\textures\snow tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 89
+  - Entity: 90
     TagComponent:
       Tag: Sign 02
       GroupID: 18
@@ -51,7 +51,7 @@ Entities:
       TextureFilepath: assets\textures\sign.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 88
+  - Entity: 89
     TagComponent:
       Tag: Sign 01
       GroupID: 18
@@ -63,7 +63,7 @@ Entities:
       TextureFilepath: assets\textures\sign.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 87
+  - Entity: 88
     TagComponent:
       Tag: Snow 01
       GroupID: 7
@@ -75,7 +75,7 @@ Entities:
       TextureFilepath: assets\textures\snow.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 86
+  - Entity: 87
     TagComponent:
       Tag: Stones 03
       GroupID: 17
@@ -87,7 +87,7 @@ Entities:
       TextureFilepath: assets\textures\stones.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 85
+  - Entity: 86
     TagComponent:
       Tag: Stones 02
       GroupID: 17
@@ -99,7 +99,7 @@ Entities:
       TextureFilepath: assets\textures\stones.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 84
+  - Entity: 85
     TagComponent:
       Tag: Stones 01
       GroupID: 17
@@ -111,7 +111,7 @@ Entities:
       TextureFilepath: assets\textures\stones.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 83
+  - Entity: 84
     TagComponent:
       Tag: Invisible Wall Finish
       GroupID: 7
@@ -129,7 +129,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 82
+  - Entity: 83
     TagComponent:
       Tag: Finish ground
       GroupID: 7
@@ -147,7 +147,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 81
+  - Entity: 82
     TagComponent:
       Tag: Snow Tree 03
       GroupID: 14
@@ -159,7 +159,7 @@ Entities:
       TextureFilepath: assets\textures\snow tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 80
+  - Entity: 81
     TagComponent:
       Tag: Snow Tree 02
       GroupID: 14
@@ -171,7 +171,7 @@ Entities:
       TextureFilepath: assets\textures\snow tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 79
+  - Entity: 80
     TagComponent:
       Tag: Snow Tree 01
       GroupID: 14
@@ -183,7 +183,7 @@ Entities:
       TextureFilepath: assets\textures\snow tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 78
+  - Entity: 79
     TagComponent:
       Tag: Bush 06
       GroupID: 13
@@ -195,7 +195,7 @@ Entities:
       TextureFilepath: assets\textures\bush.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 77
+  - Entity: 78
     TagComponent:
       Tag: Bush 04
       GroupID: 13
@@ -207,7 +207,7 @@ Entities:
       TextureFilepath: assets\textures\bush.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 76
+  - Entity: 77
     TagComponent:
       Tag: Tree 04
       GroupID: 14
@@ -219,7 +219,7 @@ Entities:
       TextureFilepath: assets\textures\tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 75
+  - Entity: 76
     TagComponent:
       Tag: Tree 03
       GroupID: 14
@@ -231,7 +231,7 @@ Entities:
       TextureFilepath: assets\textures\tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 74
+  - Entity: 75
     TagComponent:
       Tag: Tree 02
       GroupID: 14
@@ -243,7 +243,7 @@ Entities:
       TextureFilepath: assets\textures\tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 73
+  - Entity: 74
     TagComponent:
       Tag: Bush 03
       GroupID: 13
@@ -255,7 +255,7 @@ Entities:
       TextureFilepath: assets\textures\bush.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 72
+  - Entity: 73
     TagComponent:
       Tag: Tree 01
       GroupID: 14
@@ -267,7 +267,7 @@ Entities:
       TextureFilepath: assets\textures\tree.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 71
+  - Entity: 72
     TagComponent:
       Tag: Bush 02
       GroupID: 13
@@ -279,7 +279,7 @@ Entities:
       TextureFilepath: assets\textures\bush.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 70
+  - Entity: 71
     TagComponent:
       Tag: Bush 01
       GroupID: 13
@@ -291,7 +291,7 @@ Entities:
       TextureFilepath: assets\textures\bush.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 69
+  - Entity: 70
     TagComponent:
       Tag: Grass 04
       GroupID: 16
@@ -303,7 +303,7 @@ Entities:
       TextureFilepath: assets\textures\grass.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 68
+  - Entity: 69
     TagComponent:
       Tag: Grass 05
       GroupID: 16
@@ -315,7 +315,7 @@ Entities:
       TextureFilepath: assets\textures\grass.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 67
+  - Entity: 68
     TagComponent:
       Tag: Grass 03
       GroupID: 16
@@ -327,7 +327,7 @@ Entities:
       TextureFilepath: assets\textures\grass.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 66
+  - Entity: 67
     TagComponent:
       Tag: Grass 02
       GroupID: 16
@@ -339,7 +339,7 @@ Entities:
       TextureFilepath: assets\textures\grass.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 65
+  - Entity: 66
     TagComponent:
       Tag: Grass 01
       GroupID: 16
@@ -351,7 +351,7 @@ Entities:
       TextureFilepath: assets\textures\grass.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 64
+  - Entity: 65
     TagComponent:
       Tag: RockWall 03
       GroupID: 15
@@ -363,7 +363,7 @@ Entities:
       TextureFilepath: assets\textures\big rock.png
       TextureScale: 1
       Color: [0.693548381, 0.693541408, 0.693541408, 1]
-  - Entity: 63
+  - Entity: 64
     TagComponent:
       Tag: RockWall 02
       GroupID: 15
@@ -375,7 +375,7 @@ Entities:
       TextureFilepath: assets\textures\big rock.png
       TextureScale: 1
       Color: [0.633064508, 0.63305819, 0.63305819, 1]
-  - Entity: 62
+  - Entity: 63
     TagComponent:
       Tag: RockWall 01
       GroupID: 15
@@ -387,7 +387,7 @@ Entities:
       TextureFilepath: assets\textures\big rock.png
       TextureScale: 1
       Color: [0.697580636, 0.697573662, 0.697573662, 1]
-  - Entity: 61
+  - Entity: 62
     TagComponent:
       Tag: Jump Wall L 06
       GroupID: 1
@@ -407,7 +407,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 60
+  - Entity: 61
     TagComponent:
       Tag: Jump Wall R 05
       GroupID: 1
@@ -427,7 +427,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 59
+  - Entity: 60
     TagComponent:
       Tag: Finish
       GroupID: 7
@@ -439,7 +439,7 @@ Entities:
       TextureFilepath: assets\textures\finish.png
       TextureScale: 1
       Color: [1, 0.999989986, 0.999989986, 1]
-  - Entity: 58
+  - Entity: 59
     TagComponent:
       Tag: Rock 08
       GroupID: 1
@@ -457,7 +457,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 57
+  - Entity: 58
     TagComponent:
       Tag: Rock 07
       GroupID: 1
@@ -475,7 +475,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 56
+  - Entity: 57
     TagComponent:
       Tag: Deathbox W 051
       GroupID: 4
@@ -495,7 +495,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 55
+  - Entity: 56
     TagComponent:
       Tag: Deathbox W 050
       GroupID: 4
@@ -515,7 +515,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 54
+  - Entity: 55
     TagComponent:
       Tag: Move Platfrom Y 02
       GroupID: 9
@@ -535,7 +535,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 53
+  - Entity: 54
     TagComponent:
       Tag: Trunk 03
       GroupID: 1
@@ -553,14 +553,14 @@ Entities:
       Density: 0.689999998
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 52
+  - Entity: 53
     TagComponent:
       Tag: Rock 04
       GroupID: 1
     TransformComponent:
       Position: [397.799988, 2.4000001, -0.200000003]
       Rotation: 0
-      Size: [1, 9]
+      Size: [0.800000012, 9]
     SpriteRendererComponent:
       TextureFilepath: assets\textures\Rock.png
       TextureScale: 1
@@ -571,7 +571,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 51
+  - Entity: 52
     TagComponent:
       Tag: Move Platfrom X 02
       GroupID: 9
@@ -591,7 +591,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 50
+  - Entity: 51
     TagComponent:
       Tag: Deathbox W 041
       GroupID: 4
@@ -611,7 +611,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 49
+  - Entity: 50
     TagComponent:
       Tag: Deathbox W 040
       GroupID: 4
@@ -631,7 +631,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 48
+  - Entity: 49
     TagComponent:
       Tag: Ground 04
       GroupID: 1
@@ -649,7 +649,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 47
+  - Entity: 48
     TagComponent:
       Tag: Down Hill 02
       GroupID: 1
@@ -667,7 +667,7 @@ Entities:
       Density: 0
       Friction: 0.551999986
       Restitution: 0.531000018
-  - Entity: 46
+  - Entity: 47
     TagComponent:
       Tag: Rock 06
       GroupID: 1
@@ -685,7 +685,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 45
+  - Entity: 46
     TagComponent:
       Tag: Trunk 02
       GroupID: 1
@@ -703,7 +703,7 @@ Entities:
       Density: 0.689999998
       Friction: 0.116999999
       Restitution: 0.233999997
-  - Entity: 44
+  - Entity: 45
     TagComponent:
       Tag: Trunk 01
       GroupID: 1
@@ -721,7 +721,7 @@ Entities:
       Density: 0.689999998
       Friction: 0.158999994
       Restitution: 0.296999991
-  - Entity: 43
+  - Entity: 44
     TagComponent:
       Tag: Rock 03
       GroupID: 1
@@ -739,7 +739,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 42
+  - Entity: 43
     TagComponent:
       Tag: Rock 02
       GroupID: 1
@@ -757,7 +757,7 @@ Entities:
       Density: 0
       Friction: 0.0829999968
       Restitution: 0
-  - Entity: 41
+  - Entity: 42
     TagComponent:
       Tag: Deathbox W 031
       GroupID: 4
@@ -777,7 +777,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 40
+  - Entity: 41
     TagComponent:
       Tag: Deathbox W 030
       GroupID: 4
@@ -797,7 +797,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 39
+  - Entity: 40
     TagComponent:
       Tag: Deathbox W 021
       GroupID: 4
@@ -817,7 +817,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 38
+  - Entity: 39
     TagComponent:
       Tag: Deathbox W 020
       GroupID: 4
@@ -837,7 +837,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 37
+  - Entity: 38
     TagComponent:
       Tag: Jump Wall L 04
       GroupID: 1
@@ -857,7 +857,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 36
+  - Entity: 37
     TagComponent:
       Tag: Jump Wall R 03
       GroupID: 1
@@ -877,7 +877,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 35
+  - Entity: 36
     TagComponent:
       Tag: Rock 05
       GroupID: 1
@@ -895,7 +895,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 34
+  - Entity: 35
     TagComponent:
       Tag: Rock 04
       GroupID: 1
@@ -913,7 +913,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 33
+  - Entity: 34
     TagComponent:
       Tag: Jump Wall L 02
       GroupID: 1
@@ -933,7 +933,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 32
+  - Entity: 33
     TagComponent:
       Tag: Jump Wall R 01
       GroupID: 1
@@ -953,7 +953,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 31
+  - Entity: 32
     TagComponent:
       Tag: Rock 11
       GroupID: 1
@@ -971,7 +971,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 30
+  - Entity: 31
     TagComponent:
       Tag: Ground 03
       GroupID: 1
@@ -989,7 +989,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 29
+  - Entity: 30
     TagComponent:
       Tag: Rock 10
       GroupID: 1
@@ -1007,7 +1007,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 28
+  - Entity: 29
     TagComponent:
       Tag: Move Platform Y 01
       GroupID: 9
@@ -1027,7 +1027,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 27
+  - Entity: 28
     TagComponent:
       Tag: Rock 09
       GroupID: 1
@@ -1045,7 +1045,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 26
+  - Entity: 27
     TagComponent:
       Tag: Dark Cloud 02
       GroupID: 2
@@ -1057,7 +1057,7 @@ Entities:
       TextureFilepath: assets\textures\darkCloud02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 25
+  - Entity: 26
     TagComponent:
       Tag: Dark Cloud 01
       GroupID: 2
@@ -1069,7 +1069,7 @@ Entities:
       TextureFilepath: assets\textures\darkCloud01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 24
+  - Entity: 25
     TagComponent:
       Tag: Dark Tower
       GroupID: 2
@@ -1081,7 +1081,7 @@ Entities:
       TextureFilepath: assets\textures\tower.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 23
+  - Entity: 24
     TagComponent:
       Tag: Post Process Effect
       GroupID: 0
@@ -1093,7 +1093,7 @@ Entities:
       TextureFilepath: ""
       TextureScale: 1
       Color: [0, 0, 0, 0.0235294122]
-  - Entity: 22
+  - Entity: 23
     TagComponent:
       Tag: Invisible wall
       GroupID: 6
@@ -1111,7 +1111,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 21
+  - Entity: 22
     TagComponent:
       Tag: Cloud 01
       GroupID: 2
@@ -1123,7 +1123,7 @@ Entities:
       TextureFilepath: assets\textures\cloud02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 20
+  - Entity: 21
     TagComponent:
       Tag: Cloud 02
       GroupID: 2
@@ -1135,7 +1135,7 @@ Entities:
       TextureFilepath: assets\textures\cloud03.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 19
+  - Entity: 20
     TagComponent:
       Tag: Mountain 02
       GroupID: 2
@@ -1147,7 +1147,7 @@ Entities:
       TextureFilepath: assets\textures\mountains02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 18
+  - Entity: 19
     TagComponent:
       Tag: Mountain 01
       GroupID: 2
@@ -1159,7 +1159,7 @@ Entities:
       TextureFilepath: assets\textures\mountains01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 17
+  - Entity: 18
     TagComponent:
       Tag: Hill 03
       GroupID: 2
@@ -1171,7 +1171,7 @@ Entities:
       TextureFilepath: assets\textures\hill03.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 16
+  - Entity: 17
     TagComponent:
       Tag: Hill 02
       GroupID: 2
@@ -1183,7 +1183,7 @@ Entities:
       TextureFilepath: assets\textures\hill02.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 15
+  - Entity: 16
     TagComponent:
       Tag: Hill 01
       GroupID: 2
@@ -1195,7 +1195,7 @@ Entities:
       TextureFilepath: assets\textures\hill01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 14
+  - Entity: 15
     TagComponent:
       Tag: Sky
       GroupID: 2
@@ -1207,12 +1207,12 @@ Entities:
       TextureFilepath: assets\textures\Background.png
       TextureScale: 1
       Color: [0.883064508, 0.98259902, 1, 1]
-  - Entity: 13
+  - Entity: 14
     TagComponent:
       Tag: Camera
       GroupID: 3
     TransformComponent:
-      Position: [403.759552, 10.9331808, 20.2000008]
+      Position: [170.736328, 3.74372339, 20.2000008]
       Rotation: 0
       Size: [1, 1]
     CameraComponent:
@@ -1228,7 +1228,7 @@ Entities:
       FixedAspectRatio: false
     NativeScriptComponent:
       ScriptFileName: SceneCameraController.h
-  - Entity: 12
+  - Entity: 13
     TagComponent:
       Tag: Ground 01
       GroupID: 1
@@ -1246,7 +1246,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 11
+  - Entity: 12
     TagComponent:
       Tag: Player
       GroupID: 3
@@ -1266,7 +1266,13 @@ Entities:
       Density: 1
       Friction: 0.199000001
       Restitution: 0.300999999
-  - Entity: 10
+    AudioComponent:
+      FileName: Player_Jump.mp3
+      FilePath: assets/audio/Player_Jump.mp3
+      Gain: 0.6
+      Pitch: 1
+      Looping: false
+  - Entity: 11
     TagComponent:
       Tag: Deathbox W 010
       GroupID: 4
@@ -1286,7 +1292,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 9
+  - Entity: 10
     TagComponent:
       Tag: Ground 02
       GroupID: 1
@@ -1304,7 +1310,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 8
+  - Entity: 9
     TagComponent:
       Tag: Move Platform X 01
       GroupID: 9
@@ -1324,7 +1330,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 7
+  - Entity: 8
     TagComponent:
       Tag: Deathbox W 011
       GroupID: 4
@@ -1344,7 +1350,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 6
+  - Entity: 7
     TagComponent:
       Tag: Level 1-1
       GroupID: 6
@@ -1356,7 +1362,7 @@ Entities:
       TextureFilepath: assets\textures\Level 1-1.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 5
+  - Entity: 6
     TagComponent:
       Tag: Level 1-1 Ground
       GroupID: 6
@@ -1374,7 +1380,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 4
+  - Entity: 5
     TagComponent:
       Tag: Nest
       GroupID: 6
@@ -1386,7 +1392,7 @@ Entities:
       TextureFilepath: assets\textures\nest.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 3
+  - Entity: 4
     TagComponent:
       Tag: Cloud 03
       GroupID: 2
@@ -1398,7 +1404,7 @@ Entities:
       TextureFilepath: assets\textures\cloud01.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
-  - Entity: 2
+  - Entity: 3
     TagComponent:
       Tag: Rock 01
       GroupID: 1
@@ -1416,7 +1422,7 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
-  - Entity: 1
+  - Entity: 2
     TagComponent:
       Tag: Down Hill 01
       GroupID: 1
@@ -1434,7 +1440,7 @@ Entities:
       Density: 0
       Friction: 0.50999999
       Restitution: 0.51700002
-  - Entity: 0
+  - Entity: 1
     TagComponent:
       Tag: Rock 05
       GroupID: 1
@@ -1452,3 +1458,19 @@ Entities:
       Density: 0
       Friction: 0.200000003
       Restitution: 0
+  - Entity: 0
+    TagComponent:
+      Tag: Background Sound
+      GroupID: 0
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    NativeScriptComponent:
+      ScriptFileName: BackgroundMusic.h
+    AudioComponent:
+      FileName: Level_1-1-Background.mp3
+      FilePath: assets/audio/Level_1-1-Background.mp3
+      Gain: 0.5
+      Pitch: 1
+      Looping: true

@@ -74,9 +74,12 @@ namespace Eternal {
             //Handle Jump (we use impulse!)
             if (e.GetKeyCode() == ET_KEY_SPACE)
             {
+
                 //WallJump on right Wall
                 if (canWallJumpR)
                 {
+                    PlayJumpSound();
+
                     //ET_CORE_WARN("Applying Right Wall Jump Impulse: {0}, {1}", m_WallJumpRForceImpulse.x, m_WallJumpRForceImpulse.y);
                     m_PlayerBody->ApplyLinearImpulse(m_WallJumpRForceImpulse, m_PlayerBody->GetWorldCenter(), true);
                     canWallJumpR = false;
@@ -85,6 +88,8 @@ namespace Eternal {
                 //WallJump on left Wall
                 else if (canWallJumpL)
                 {
+                    PlayJumpSound();
+
                     //ET_CORE_WARN("Applying Left Wall Jump Impulse: {0}, {1}", m_WallJumpLForceImpulse.x, m_WallJumpLForceImpulse.y);
                     m_PlayerBody->ApplyLinearImpulse(m_WallJumpLForceImpulse, m_PlayerBody->GetWorldCenter(), true);
                     canWallJumpL = false;
@@ -93,6 +98,8 @@ namespace Eternal {
                 //Normal Jump
                 else if (canJump)
                 {
+                    PlayJumpSound();
+
                     //ET_CORE_WARN("Applying normal Jump Impulse: {0}, {1}", m_JumpImpulse.x, m_JumpImpulse.y);
                     m_PlayerBody->ApplyLinearImpulse(m_JumpImpulse, m_PlayerBody->GetWorldCenter(), true);
 
@@ -100,6 +107,16 @@ namespace Eternal {
                 }
             
             }
+        }
+
+        void PlayJumpSound()
+        {
+            //Play Jump Sound
+            auto& audioComponent = GetComponent<AudioComponent>();
+            audioComponent.SetGain();
+            audioComponent.SetPitch();
+            audioComponent.SetLoop();
+            m_Entity.GetScene()->PlayAudioFile(audioComponent.file);
         }
 
         void HandleJumpContact()

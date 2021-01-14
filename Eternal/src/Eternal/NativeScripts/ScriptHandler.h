@@ -10,6 +10,7 @@
 #include "MoveableYPlatform.h"
 #include "JumpWallR.h"
 #include "JumpWallL.h"
+#include "BackgroundMusic.h"
 
 namespace Eternal {
 
@@ -23,7 +24,8 @@ namespace Eternal {
 		EMoveableDeathbox = 5,
 		EMoveableYPlatform = 6,
 		EJumpWallR = 7,
-		EJumpWallL = 8
+		EJumpWallL = 8,
+		EBackgroundMusic = 9
 	};
 
 	class ScriptHandler 
@@ -61,6 +63,9 @@ namespace Eternal {
 			case Scripts::EJumpWallL:
 				return new JumpWallL();
 				break;
+			case Scripts::EBackgroundMusic:
+				return new BackgroundMusic();
+				break;
 			default:
 				return nullptr;
 			}
@@ -86,6 +91,8 @@ namespace Eternal {
 				return Scripts::EJumpWallR;
 			if (scriptname._Equal("JumpWallL.h"))
 				return Scripts::EJumpWallL;
+			if (scriptname._Equal("BackgroundMusic.h"))
+				return Scripts::EBackgroundMusic;
 			ET_CORE_ASSERT(false, "Script not initialized!");
 		}
 	};

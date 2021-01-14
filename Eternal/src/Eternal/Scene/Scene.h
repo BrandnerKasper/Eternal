@@ -1,16 +1,15 @@
 #pragma once
 
+#pragma warning(push, 0)
 #include <entt.hpp>
+#pragma warning(pop)
 
 #include "Eternal/Core/Timestep.h"
-
 #include "Eternal/Renderer/EditorCameraController.h"
-
 #include "Eternal/Scene/Group.h"
-
 #include "Eternal/Physics/PhysicsWorld.h"
-
 #include "Eternal/Events/KeyEvent.h"
+#include "Eternal/Auido/AudioManager.h"
 
 namespace Eternal
 {
@@ -37,7 +36,7 @@ namespace Eternal
 		void SetPlay(bool play) { m_play = play; }
 		bool GetPlay() { return m_play; }
 		void OnEvent(Event& event);
-		bool OnKeyPressed(KeyPressedEvent& event);
+		void PlayAudioFile(const Hazel::AudioSource& source);
 
 	private:
 		void UpdateNonPhysicalTransforms();
@@ -53,6 +52,7 @@ namespace Eternal
 		void SafeResetTransform();
 		void ResetPhysics();
 		void ResetScripts();
+		void InitAudio();
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
 		

@@ -60,8 +60,8 @@ namespace Eternal {
 
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{
-			if (e.Handled)
-				break;
+			//if (e.Handled) -> Keep in Mind!
+			//	break;
 			(*it)->OnEvent(e);
 			
 		}

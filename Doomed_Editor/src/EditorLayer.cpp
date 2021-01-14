@@ -6,8 +6,6 @@
 #include "Eternal/Utils/PlatformUtils.h"
 #include "Eternal/NativeScripts/ScriptHandler.h"
 
-#include <HazelAudio.h>
-
 namespace Eternal {
 
     EditorLayer::EditorLayer()
@@ -23,6 +21,7 @@ namespace Eternal {
         m_PropertiesPanel = CreateRef<PropertiesPanel>();
         m_SettingsPanel = CreateRef<SettingsPanel>();
 
+#if 0
         Hazel::Audio::Init();
         // Load audio source from file
         auto source = Hazel::AudioSource::LoadFromFile("assets/audio/BackgroundMusic.mp3", false);
@@ -30,6 +29,7 @@ namespace Eternal {
         source.SetLoop(true);
         // Play audio source
         Hazel::Audio::Play(source);
+#endif
 
 #if 0
         auto chessSquare = m_ActiveScene->CreateEntity("Chess Square");

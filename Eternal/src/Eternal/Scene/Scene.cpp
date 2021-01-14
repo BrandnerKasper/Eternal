@@ -13,11 +13,12 @@ namespace Eternal {
 
 	Scene::Scene()
 	{
-		
+		InitAudio();
 	}
 
 	Scene::Scene(std::string name)
 	{
+		InitAudio();
 		m_Name = name;
 	}
 
@@ -319,10 +320,16 @@ namespace Eternal {
 				{
 					if (nsc.Instance)
 					{
+						nsc.Instance->OnDestroy();
 						nsc.Instance = nullptr;
 					}
 				}
 			});
+	}
+
+	void Scene::InitAudio()
+	{
+		AudioManager::Init();
 	}
 
 	void Scene::OnEvent(Event& event)
@@ -344,6 +351,11 @@ namespace Eternal {
 				}
 			}
 		}
+	}
+
+	void Scene::PlayAudioFile(const Hazel::AudioSource& source)
+	{
+		AudioManager::Play(source);
 	}
 
 	template<typename T>
@@ -380,6 +392,11 @@ namespace Eternal {
 
 	template<>
 	void Scene::OnComponentAdded<PhysicsComponent>(Entity entity, PhysicsComponent& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<AudioComponent>(Entity entity, AudioComponent& component)
 	{
 	}
 }

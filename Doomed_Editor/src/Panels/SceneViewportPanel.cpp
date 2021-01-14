@@ -68,13 +68,13 @@ namespace Eternal {
 
 	void SceneViewportPanel::OnEvent(Event& event)
 	{
+		m_Scene->OnEvent(event);
+		
 		if (m_ViewportFocused)
 		{
 			//Editor Camera Events 
-			m_Scene->m_EditorCamera->OnEvent(event);;
+			m_Scene->m_EditorCamera->OnEvent(event);
 		}
-
-		m_Scene->OnEvent(event);
 	}
 
 	static void DrawPlay(bool& play)

@@ -226,6 +226,21 @@ namespace Eternal {
 			out << YAML::EndMap; // PhysicsComponent
 		}
 
+		if (entity.HasComponent<AudioComponent>())
+		{
+			out << YAML::Key << "AudioComponent";
+			out << YAML::BeginMap; // AudioComponent
+
+			auto& audiocomponent = entity.GetComponent<AudioComponent>();
+			out << YAML::Key << "FileName" << YAML::Value << audiocomponent.filename;
+			out << YAML::Key << "FilePath" << YAML::Value << audiocomponent.AudioFilePath;
+			out << YAML::Key << "Gain" << YAML::Value << audiocomponent.Gain;
+			out << YAML::Key << "Pitch" << YAML::Value << audiocomponent.Pitch;
+			out << YAML::Key << "Looping" << YAML::Value << audiocomponent.Looping;
+
+			out << YAML::EndMap; // AudioComponent
+		}
+
 		out << YAML::EndMap; //Entity
 	}
 
@@ -374,6 +389,18 @@ namespace Eternal {
 					phc.fixtureDef.density = physicsComponent["Density"].as<float>();
 					phc.fixtureDef.friction = physicsComponent["Friction"].as<float>();
 					phc.fixtureDef.restitution = physicsComponent["Restitution"].as<float>();
+				}
+
+				auto audioComponent = entity["AudioComponent"];
+				if (audioComponent)
+				{
+					auto& auc = deserializedEntity.AddComponent<AudioComponent>();
+					auc.filename = audioComponent["FileName"].as<std::string>();
+					auc.AudioFilePath = audioComponent["FilePath"].as<std::string>();
+					auc.LoadFile();
+					auc.Gain = audioComponent["Gain"].as<float>();
+					auc.Pitch = audioComponent["Pitch"].as<float>();
+					auc.Looping = audioComponent["Looping"].as<bool>();
 				}
 			}
 		}

@@ -1,8 +1,12 @@
 #pragma once
 
+// This ignores all warnings raised inside External headers
+#pragma warning(push, 0)
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <box2d/box2d.h>
+#include <HazelAudio.h>
+#pragma warning(pop)
 
 #include "Eternal/Renderer/Texture.h"
 #include "Eternal/Scene/SceneCamera.h"
@@ -215,5 +219,37 @@ namespace Eternal {
 		}
 
 		PhysicsComponent() = default;
+	};
+
+	struct AudioComponent
+	{
+		std::string filename = "";
+		std::string AudioFilePath = "";
+		Hazel::AudioSource file = Hazel::AudioSource::LoadFromFile(AudioFilePath);
+		bool Looping = false;
+		float Gain = 1.0f;
+		float Pitch = 1.0f;
+
+		void LoadFile()
+		{
+			file = Hazel::AudioSource::LoadFromFile(AudioFilePath);
+		}
+
+		void SetLoop()
+		{
+			file.SetLoop(Looping);
+		}
+
+		void SetGain()
+		{
+			file.SetGain(Gain);
+		}
+
+		void SetPitch()
+		{
+			file.SetPitch(Pitch);
+		}
+
+		AudioComponent() = default;
 	};
 }
