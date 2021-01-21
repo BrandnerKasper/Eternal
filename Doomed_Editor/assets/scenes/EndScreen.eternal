@@ -1,56 +1,72 @@
-Scene: TitelScreen.eternal
+Scene: EndScreen.eternal
 Groups:
   - Group Name: Background
     Group ID: 1
   - Group Name: ForeGround 02
     Group ID: 2
 Entities:
-  - Entity: 15
+  - Entity: 16
     TagComponent:
-      Tag: Scene Transistion
+      Tag: Quack
       GroupID: 0
     TransformComponent:
       Position: [0, 0, 0]
       Rotation: 0
       Size: [1, 1]
     NativeScriptComponent:
-      ScriptFileName: Load1_1.h
+      ScriptFileName: BackgroundMusic.h
+    AudioComponent:
+      FileName: Quak_Sound.mp3
+      FilePath: assets/audio/Quak_Sound.mp3
+      Gain: 1
+      Pitch: 1
+      Looping: false
+  - Entity: 15
+    TagComponent:
+      Tag: Egg shell
+      GroupID: 0
+    TransformComponent:
+      Position: [6.69999981, -3.4000001, 0.200000003]
+      Rotation: 84
+      Size: [3.20000005, 3.79999995]
+    SpriteRendererComponent:
+      TextureFilepath: assets/textures/hatched_egg.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
   - Entity: 14
+    TagComponent:
+      Tag: Quit
+      GroupID: 0
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    NativeScriptComponent:
+      ScriptFileName: CloseApp.h
+  - Entity: 13
     TagComponent:
       Tag: Press Start
       GroupID: 0
     TransformComponent:
-      Position: [0, -2.5, -7]
+      Position: [0, -2.5, 1.00000906]
       Rotation: 0
       Size: [6, 2.5]
     SpriteRendererComponent:
-      TextureFilepath: assets/textures/press start 01.png
+      TextureFilepath: assets/textures/exit.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
     NativeScriptComponent:
       ScriptFileName: PressStart.h
-  - Entity: 13
-    TagComponent:
-      Tag: Nest
-      GroupID: 0
-    TransformComponent:
-      Position: [-10.5, -4.0999999, 0.300000012]
-      Rotation: 0
-      Size: [4.0999999, 2.5999999]
-    SpriteRendererComponent:
-      TextureFilepath: assets/textures/nest.png
-      TextureScale: 1
-      Color: [1, 1, 1, 1]
   - Entity: 12
     TagComponent:
-      Tag: Player
+      Tag: DoomDuck
       GroupID: 0
     TransformComponent:
-      Position: [-10.5, -3.9000001, 0.400000006]
-      Rotation: 26
-      Size: [1, 1]
+      Position: [-9.19999981, -0.699999988, 0.100000001]
+      Rotation: 0
+      Size: [8.19999981, 8.60000038]
     SpriteRendererComponent:
-      TextureFilepath: assets/textures/duck_egg.png
+      TextureFilepath: assets/textures/duck.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
   - Entity: 11
@@ -82,7 +98,7 @@ Entities:
       Tag: Grass 01
       GroupID: 2
     TransformComponent:
-      Position: [8.80000019, -3.4000001, -0.200000003]
+      Position: [12.3000002, -3.4000001, -0.200000003]
       Rotation: -4
       Size: [3.5999999, 2.4000001]
     SpriteRendererComponent:
@@ -182,14 +198,14 @@ Entities:
       FixedAspectRatio: false
   - Entity: 1
     TagComponent:
-      Tag: Titel
+      Tag: Thanks!
       GroupID: 0
     TransformComponent:
-      Position: [0, 4.4000001, 0]
+      Position: [0, 5.69999981, 0]
       Rotation: 0
-      Size: [10, 7]
+      Size: [15.3999996, 3.70000005]
     SpriteRendererComponent:
-      TextureFilepath: assets/textures/Titel.png
+      TextureFilepath: assets/textures/Thanks.png
       TextureScale: 1
       Color: [1, 1, 1, 1]
   - Entity: 0
@@ -203,8 +219,8 @@ Entities:
     NativeScriptComponent:
       ScriptFileName: BackgroundMusic.h
     AudioComponent:
-      FileName: Jungle Love.mp3
-      FilePath: assets/audio/Jungle Love.mp3
-      Gain: 1
+      FileName: Doom_Reference.mp3
+      FilePath: assets/audio/Doom_Reference.mp3
+      Gain: 0.800000012
       Pitch: 1
-      Looping: false
+      Looping: true

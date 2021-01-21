@@ -85,6 +85,26 @@ namespace Eternal {
     {
         m_SceneViewportPanel->OnUpdate(ts);
         m_SettingsPanel->SetTimestep(ts);
+
+        HandleChangeScene();
+    }
+
+    void EditorLayer::HandleChangeScene()
+    {
+        if (m_ActiveScene->GetChangeScene())
+        {
+            m_ActiveScene->ResetScripts();
+            auto filepath = m_ActiveScene->GetChangeSceneFilepath();
+            NewScene();
+            if (!filepath.empty())
+            {
+                SceneSerializer serializer(m_ActiveScene);
+                serializer.Deserialize(filepath);
+            }
+
+            //Set Play of new Scene
+            m_ActiveScene->SetPlay(true); 
+        }
     }
 
     void EditorLayer::OnImGuiRender()

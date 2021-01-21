@@ -38,6 +38,12 @@ namespace Eternal
 		void OnEvent(Event& event);
 		void PlayAudioFile(const Hazel::AudioSource& source);
 
+		void SetChangeScene(bool changeScene) { m_changeScene = changeScene; }
+		bool GetChangeScene() { return m_changeScene; }
+		void SetChangeSceneFilepath(std::string filepath) { m_ChangeSceneFilepath = filepath; }
+		std::string GetChangeSceneFilepath() { return m_ChangeSceneFilepath; }
+		void ResetScripts();
+
 	private:
 		void UpdateNonPhysicalTransforms();
 		void UpdateScripts(Timestep ts);
@@ -51,7 +57,6 @@ namespace Eternal
 		void SortEntitysByZValue();
 		void SafeResetTransform();
 		void ResetPhysics();
-		void ResetScripts();
 		void InitAudio();
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
@@ -73,6 +78,10 @@ namespace Eternal
 
 		//Physics
 		Ref<PhysicsWorld> physicsWorld = CreateRef<PhysicsWorld>();
+
+		//Change Scene
+		bool m_changeScene = false;
+		std::string m_ChangeSceneFilepath = "";
 
 		friend class Entity;
 		friend class SceneHierarchyPanel;

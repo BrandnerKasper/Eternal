@@ -12,6 +12,9 @@
 #include "JumpWallL.h"
 #include "BackgroundMusic.h"
 #include "PressStart.h"
+#include "Load1_1.h"
+#include "LoadEndScreen.h"
+#include "CloseApp.h"
 
 namespace Eternal {
 
@@ -27,7 +30,10 @@ namespace Eternal {
 		EJumpWallR = 7,
 		EJumpWallL = 8,
 		EBackgroundMusic = 9,
-		EPressStart = 10
+		EPressStart = 10,
+		ELoad1_1 = 11,
+		ELoadEndScreen = 12,
+		ECloseApp = 13
 	};
 
 	class ScriptHandler 
@@ -71,6 +77,15 @@ namespace Eternal {
 			case Scripts::EPressStart:
 				return new PressStart();
 				break;
+			case Scripts::ELoad1_1:
+				return new Load1_1();
+				break;
+			case Scripts::ECloseApp:
+				return new CloseApp();
+				break;
+			case Scripts::ELoadEndScreen:
+				return new LoadEndScreen();
+				break;
 			default:
 				return nullptr;
 			}
@@ -100,6 +115,12 @@ namespace Eternal {
 				return Scripts::EBackgroundMusic;
 			if (scriptname._Equal("PressStart.h"))
 				return Scripts::EPressStart;
+			if (scriptname._Equal("Load1_1.h"))
+				return Scripts::ELoad1_1;
+			if (scriptname._Equal("CloseApp.h"))
+				return Scripts::ECloseApp;
+			if (scriptname._Equal("LoadEndScreen.h"))
+				return Scripts::ELoadEndScreen;
 			ET_CORE_ASSERT(false, "Script not initialized!");
 		}
 	};

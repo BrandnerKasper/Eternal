@@ -24,6 +24,7 @@ namespace Eternal {
 	private:
 		void ChangeSytle(bool show);
 		bool OnKeyPressed(KeyPressedEvent& e);
+		void HandleChangeScene();
 
 		void NewScene();
 		void OpenScene();

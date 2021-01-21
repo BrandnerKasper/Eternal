@@ -11,7 +11,8 @@ namespace Eternal {
 		player,
 		deathbox,
 		jumpwallR,
-		jumpwallL
+		jumpwallL,
+		scenetransistion
 	};
 
 	class ScriptableEntity

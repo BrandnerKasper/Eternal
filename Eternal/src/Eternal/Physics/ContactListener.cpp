@@ -4,6 +4,7 @@
 #include "Eternal/NativeScripts/Deathbox.h"
 #include "Eternal/NativeScripts/Player.h"
 #include "Eternal/NativeScripts/MoveableDeathbox.h"
+#include "Eternal/NativeScripts/LoadEndScreen.h"
 
 namespace Eternal {
 
@@ -37,6 +38,14 @@ namespace Eternal {
 				deathbox->HandlePlayerIsDead();
 			}
 			break;
+		case ScriptType::scenetransistion:
+			//ET_CORE_INFO("A is scenetransistion");
+			if (scriptType_B == ScriptType::player)
+			{
+				auto scenetransistion = reinterpret_cast<LoadEndScreen*>(ent_A);
+				scenetransistion->HandlePlayerEntered();
+			}
+			break;
 		default:
 			break;
 		}
@@ -64,6 +73,14 @@ namespace Eternal {
 			{
 				auto deathbox = reinterpret_cast<Deathbox*>(ent_B);
 				deathbox->HandlePlayerIsDead();
+			}
+			break;
+		case ScriptType::scenetransistion:
+			//ET_CORE_INFO("B is scenetransistion");
+			if (scriptType_A == ScriptType::player)
+			{
+				auto scenetransistion = reinterpret_cast<LoadEndScreen*>(ent_B);
+				scenetransistion->HandlePlayerEntered();
 			}
 			break;
 		default:

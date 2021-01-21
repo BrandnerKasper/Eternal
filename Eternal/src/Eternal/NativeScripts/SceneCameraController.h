@@ -18,13 +18,13 @@ namespace Eternal {
             auto& cameraPosition = GetComponent<TransformComponent>().Position;
             auto& cameraPositionX = cameraPosition.x;
             auto& cameraPositionY = cameraPosition.y;
-
+            
             auto& playerPosition = m_Entity.GetScene()->GetEntityByTag("Player").GetComponent<TransformComponent>().Position;
-
+            
             auto& playerPositionX = playerPosition.x;
             auto& playerPositionY = playerPosition.y;
-
-            auto newCameraPosition = glm::vec2(playerPositionX + 7.0f, playerPositionY + 2.0f);
+            
+            auto newCameraPosition = glm::vec2(playerPositionX + 7.0f, playerPositionY + 3.0f);
             cameraPosition = glm::vec3(newCameraPosition, cameraPosition.z);
         }
 
@@ -48,7 +48,7 @@ namespace Eternal {
             auto& playerPositionX = playerPosition.x;
             auto& playerPositionY = playerPosition.y;
 
-            auto newCameraPosition = glm::vec2(playerPositionX + 7.0f, playerPositionY + 2.0f);
+            auto newCameraPosition = glm::vec2(playerPositionX + 7.0f, playerPositionY + 3.0f);
 
             HandleLerpX(cameraPositionX, newCameraPosition.x);
             HandleLerpY(cameraPositionY, newCameraPosition.y);
@@ -79,7 +79,9 @@ namespace Eternal {
         {
             if (!m_Allowlerp_Y)
             {
-                if (abs(cameraPositionY - playerPositionY) > lerpDistanceY)
+                if (playerPositionY - cameraPositionY > lerpDistanceYUp)
+                    m_Allowlerp_Y = true;
+                if (cameraPositionY - playerPositionY > lerpDistanceYDown)
                     m_Allowlerp_Y = true;
             }
 
@@ -96,9 +98,10 @@ namespace Eternal {
         bool m_Allowlerp_Y = false;
 
         int lerpDistanceX = 7;
-        int lerpDistanceY = 5;
+        int lerpDistanceYUp = 7;
+        int lerpDistanceYDown = 0.2;
         float lerpToleranceX = 1.6;
         float lerpToleranceY = 0.1;
-        float lerpSpeed = 0.01f;
+        float lerpSpeed = 0.015f;
     };
 }
