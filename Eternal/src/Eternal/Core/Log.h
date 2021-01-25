@@ -24,6 +24,8 @@ namespace Eternal {
 	};
 }
 
+#ifdef ET_ENABLE_LOGS
+
 //Core Log Macros (descending order)
 #define ET_CORE_FATAL(...)  ::Eternal::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 #define ET_CORE_ERROR(...)  ::Eternal::Log::GetCoreLogger()->error(__VA_ARGS__)
@@ -37,4 +39,23 @@ namespace Eternal {
 #define ET_WARN(...)        ::Eternal::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define ET_INFO(...)        ::Eternal::Log::GetClientLogger()->info(__VA_ARGS__)
 #define ET_TRACE(...)       ::Eternal::Log::GetClientLogger()->trace(__VA_ARGS__)
+
+#else
+
+//Core Log Macros (descending order)
+#define ET_CORE_FATAL(...) 
+#define ET_CORE_ERROR(...) 
+#define ET_CORE_WARN(...)  
+#define ET_CORE_INFO(...)  
+#define ET_CORE_TRACE(...) 
+
+//Client Log Macros (descending order)
+#define ET_FATAL(...)    
+#define ET_ERROR(...)    
+#define ET_WARN(...)     
+#define ET_INFO(...)     
+#define ET_TRACE(...)    
+
+
+#endif
 

@@ -14,7 +14,7 @@ namespace Eternal {
 
 	Application::Application(const std::string& name)
 	{
-		ET_CORE_ASSERT(s_Instance, "Application already exists!");
+		ET_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
 		m_Window = Scope<Window>(Window::Create(WindowProps(name)));
@@ -33,7 +33,7 @@ namespace Eternal {
 	void Application::Run()
 	{
 		while (m_Running) {
-			//printf("Slaying Demons...");
+			//printf("Slaying Demons..."); GOOD TIMES :)
 			float time = (float)Renderer::GetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;

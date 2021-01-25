@@ -278,7 +278,7 @@ namespace Eternal {
 	void SceneSerializer::SerializeRuntime(const std::string& filepath)
 	{
 		//Not implemented yet
-		ET_CORE_ASSERT(false);
+		ET_CORE_ASSERT(false, "Not implemented yet!");
 	}
 
 	bool SceneSerializer::Deserialize(const std::string& filepath)
@@ -411,7 +411,7 @@ namespace Eternal {
 	bool SceneSerializer::DeserializeRuntime(const std::string& filepath)
 	{
 		//Not implemented yet
-		ET_CORE_ASSERT(false);
+		ET_CORE_ASSERT(false, "Not implemented yet!");
 		return false;
 	}
 }

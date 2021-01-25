@@ -71,10 +71,10 @@ namespace Eternal {
 
 	Ref<Shader> ShaderLibrary::Get(const std::string& name)
 	{
-		ET_CORE_ASSERT(Exists(name), "Shader nor found!");
+		ET_CORE_ASSERT(Exists(name), "Shader not found!");
 		return m_Shaders[name];
 	}
-	bool ShaderLibrary::Exists(std::string& name) const
+	bool ShaderLibrary::Exists(const std::string& name) const
 	{
 		return m_Shaders.find(name) != m_Shaders.end();
 	}
