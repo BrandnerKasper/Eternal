@@ -1,0 +1,26 @@
+Scene: test string.eternal
+Groups:
+  []
+Entities:
+  - Entity: 1
+    TagComponent:
+      Tag: Empty Entity
+      GroupID: 0
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    SpriteRendererComponent:
+      TextureFilepath: assets/textures/bush.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+    NativeScriptComponent:
+      ScriptFileName: Deathbox.h
+  - Entity: 1048576
+    TagComponent:
+      Tag: Empty Entity
+      GroupID: 0
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]

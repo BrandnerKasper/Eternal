@@ -1,0 +1,20 @@
+Scene: test audio.eternal
+Groups:
+  []
+Entities:
+  - Entity: 0
+    TagComponent:
+      Tag: Empty Entity
+      GroupID: 0
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    NativeScriptComponent:
+      ScriptFileName: BackgroundMusic.h
+    AudioComponent:
+      FileName: Adventure.mp3
+      FilePath: assets/audio/Adventure.mp3
+      Gain: 0.400000006
+      Pitch: 1
+      Looping: false

@@ -116,8 +116,8 @@ project "Eternal"
 
 -------------------------------------------------------------------------------------------
 
-project "Sandbox" 
-	location "Sandbox"
+project "ProjectQuack" 
+	location "ProjectQuack"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"

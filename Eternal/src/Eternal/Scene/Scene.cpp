@@ -140,7 +140,8 @@ namespace Eternal {
 	{
 		if (!m_play)
 		{
-			UpdateEditorCameraRender(ts);
+			if(m_EditorCamera)
+				UpdateEditorCameraRender(ts);
 		}
 		else
 		{

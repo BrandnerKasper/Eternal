@@ -31,7 +31,7 @@ namespace Eternal {
 
 	void SceneCamera::SetViewportSize(uint32_t width, uint32_t height)
 	{
-		m_AspectRatio	= (float)width / (float)height;
+		m_AspectRatio	= (float)1920 / (float)1080; //for now
 		ET_CORE_INFO("AspectRatio: {0}", m_AspectRatio);
 
 		RecalculateProjection();

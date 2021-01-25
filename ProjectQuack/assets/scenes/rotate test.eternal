@@ -1,0 +1,68 @@
+Scene: rotate test.eternal
+Entities:
+  - Entity: 4
+    TagComponent:
+      Tag: Green
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [0.170720622, 0.705645204, 0.199377298, 1]
+  - Entity: 3
+    TagComponent:
+      Tag: Red
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: 0
+      Size: [1, 1]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Logo.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+  - Entity: 2
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Position: [-7.16247559, -0.974121094, 0]
+      Rotation: 0
+      Size: [1, 1]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\Logo.png
+      TextureScale: 1
+      Color: [0.935483873, 0.761966705, 0.934452593, 1]
+    CameraComponent:
+      Camera:
+        OrthographicSize: 15
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+    NativeScriptComponent:
+      ScriptFileName: Controller.h
+  - Entity: 1
+    TagComponent:
+      Tag: Doom Square
+    TransformComponent:
+      Position: [0, 0, -0.100000001]
+      Rotation: 323.471771
+      Size: [4.4000001, 4.30000019]
+    SpriteRendererComponent:
+      TextureFilepath: C:\dev\Eternal\Doomed_Editor\assets\textures\EternalLogo.png
+      TextureScale: 1
+      Color: [1, 1, 1, 1]
+    NativeScriptComponent:
+      ScriptFileName: Rotater.h
+  - Entity: 0
+    TagComponent:
+      Tag: Test
+    TransformComponent:
+      Position: [4.69999981, 0, -0.899999976]
+      Rotation: 0
+      Size: [1, 1]
+    SpriteRendererComponent:
+      TextureFilepath: ""
+      TextureScale: 1
+      Color: [1, 0.999989986, 0.999989986, 1]
