@@ -43,16 +43,18 @@ namespace Eternal {
 		ImGui::End();
 	}
 
-	static void DrawVecControl(const std::string& label, float& value, float resetValue = 0.0f, float columnWidth = 100.0f)
+	static void DrawVecControl(const std::string& label, const std::string& tooltip, float& value, float resetValue = 0.0f, float columnWidth = 100.0f)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
 
 		ImGui::PushID(label.c_str());
-
 		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text(label.c_str());
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip(tooltip.c_str());
+
 		ImGui::NextColumn();
 
 		ImGui::PushMultiItemsWidths(3, ImGui::CalcItemWidth());
@@ -83,7 +85,7 @@ namespace Eternal {
 		ImGui::PopID();
 	}
 
-	static void DrawVec2Control(const std::string& label, glm::vec2& values, float resetValue = 1.0f, float columnWidth = 100.0f)
+	static void DrawVec2Control(const std::string& label, const std::string& tooltip, glm::vec2& values, float resetValue = 1.0f, float columnWidth = 100.0f)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
@@ -93,6 +95,8 @@ namespace Eternal {
 		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text(label.c_str());
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip(tooltip.c_str());
 		ImGui::NextColumn();
 
 		ImGui::PushMultiItemsWidths(3, ImGui::CalcItemWidth());
@@ -136,7 +140,7 @@ namespace Eternal {
 
 	}
 
-	static void DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f)
+	static void DrawVec3Control(const std::string& label, const std::string& tooltip, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
@@ -146,6 +150,8 @@ namespace Eternal {
 		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text(label.c_str());
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip(tooltip.c_str());
 		ImGui::NextColumn();
 
 		ImGui::PushMultiItemsWidths(3, ImGui::CalcItemWidth());
@@ -346,13 +352,13 @@ namespace Eternal {
 	{
 		//z-Position should be between near and far clip of camera!
 		auto& position = transformComponent.Position;
-		DrawVec3Control("Position", position);
+		DrawVec3Control("Position", "Position in the 3D world.", position);
 
 		auto& size = transformComponent.Size;
-		DrawVec2Control("Scale", size);
+		DrawVec2Control("Scale", "Scales the object.", size);
 
 		auto& rotation = transformComponent.Rotation;
-		DrawVecControl("Rotation", rotation);
+		DrawVecControl("Rotation", "Rotate the object in the XY plane.", rotation);
 	}
 
 	static void DrawSpriteRenderComponent(SpriteRendererComponent& spriteRenderComponent)
@@ -366,6 +372,9 @@ namespace Eternal {
 			float columnWidth = 100.0f;
 			ImGui::SetColumnWidth(0, columnWidth);
 			ImGui::Text("UV Scaling");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("UV Scaling determines how often the texture repeats itself.");
+
 
 			ImGui::NextColumn();
 			auto& uvScale = spriteRenderComponent.TextureScale;
@@ -402,6 +411,8 @@ namespace Eternal {
 		float columnWidth = 100.0f;
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Tint Color");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Adds a tint over the given texture.");
 
 		ImGui::NextColumn();
 		auto& tintColor = spriteRenderComponent.Color;
@@ -419,7 +430,7 @@ namespace Eternal {
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Camera Perspective Type");
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("I am a tooltip over Camera Perspective Type!");
+			ImGui::SetTooltip("There a 2 types of cameras. Orthographic cameras display eyerything in a 2D plane, while Perspective cameras have a depth effect.");
 
 		ImGui::NextColumn();
 		
@@ -449,6 +460,8 @@ namespace Eternal {
 		ImGui::SetColumnWidth(0, columnWidth);
 
 		ImGui::Text("Primary");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("Set 1 of your Scene cameras as primary so the game knows which camera to use for rendering while the game is in playing state.");
 
 		ImGui::NextColumn();
 		ImGui::Checkbox("##Primary", &cameraComponent.Primary); //Handle multiple Cameras and set other Camera Primarys to false
@@ -461,6 +474,8 @@ namespace Eternal {
 			ImGui::Columns(2);
 
 			ImGui::Text("Field Of View");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Field of View is the angle of the horizontal and vertical sight radius.");
 
 			ImGui::NextColumn();
 
@@ -471,6 +486,8 @@ namespace Eternal {
 
 			ImGui::Columns(2);
 			ImGui::Text("Near Clip");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Basically how near in front of the camera can it see things.");
 
 			ImGui::NextColumn();
 			float perspectiveNear = camera.GetPerspectiveNearClip();
@@ -480,6 +497,8 @@ namespace Eternal {
 
 			ImGui::Columns(2);
 			ImGui::Text("Far Clip");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Basically how far can the camera see things.");
 
 			ImGui::NextColumn();
 			float perspectiveFar = camera.GetPerspectiveFarClip();
@@ -495,6 +514,8 @@ namespace Eternal {
 			ImGui::Columns(2);
 
 			ImGui::Text("View Size");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("How much can the camera see.");
 
 			ImGui::NextColumn();
 
@@ -505,6 +526,8 @@ namespace Eternal {
 
 			ImGui::Columns(2);
 			ImGui::Text("Near Clip");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("How near can the camera see. Orthographic cameras typically have a very slight latitude, since they project everything in 2D plane.");
 
 			ImGui::NextColumn();
 			float orthoNear = camera.GetOrthographicNearClip();
@@ -514,6 +537,8 @@ namespace Eternal {
 
 			ImGui::Columns(2);
 			ImGui::Text("Far Clip");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("How far can the camera see.Orthographic cameras typically have a very slight latitude, since they project everything in 2D plane.");
 
 			ImGui::NextColumn();
 			float orthoFar = camera.GetOrthographicFarClip();
@@ -572,7 +597,7 @@ namespace Eternal {
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Body Shape");
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("I am a tooltip over Body Shape!");
+			ImGui::SetTooltip("The Body Shape determines the physical behaviour of the shape of the drawn object!");
 
 		ImGui::NextColumn();
 		auto& bodyShape = phc.bodyShape;
@@ -602,7 +627,7 @@ namespace Eternal {
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Body Type");
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("I am a tooltip over BodyType!");
+			ImGui::SetTooltip("The Body Type determines the influence of physical forces on the body.\n Static means no forces have effect, Kinematic a linear velocity can be set (good for moving platforms)\n and Dynamic everything has effect, especially gravity!");
 		
 		ImGui::NextColumn();
 		auto& bodyType = phc.bodyType;
@@ -633,6 +658,8 @@ namespace Eternal {
 			ImGui::Columns(2);
 			ImGui::SetColumnWidth(0, columnWidth);
 			ImGui::Text("Density");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("The Density determines the weight of the object, the heavier the harder to move!");
 
 			ImGui::NextColumn();
 			auto& density = phc.fixtureDef.density;
@@ -644,6 +671,8 @@ namespace Eternal {
 		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Friction");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("The Friction determines a force between two surfaces that are sliding, or trying to slide, across each other!");
 
 		ImGui::NextColumn();
 		auto& friction = phc.fixtureDef.friction;
@@ -654,6 +683,8 @@ namespace Eternal {
 		ImGui::Columns(2);
 		ImGui::SetColumnWidth(0, columnWidth);
 		ImGui::Text("Restitution");
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip("The Resitution determines how much energy remains after a collsion, high Restituion equals a flummi!");
 
 		ImGui::NextColumn();
 		auto& restitution = phc.fixtureDef.restitution;
@@ -678,6 +709,9 @@ namespace Eternal {
 			ImGui::Columns(2);
 			ImGui::SetColumnWidth(0, columnWidth);
 			ImGui::Text("Gain");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("For simplicity determines the volume");
+
 
 			ImGui::NextColumn();
 
@@ -687,6 +721,9 @@ namespace Eternal {
 			ImGui::Columns(2);
 			ImGui::SetColumnWidth(0, columnWidth);
 			ImGui::Text("Pitch");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("The Pitch determines the highness or lowness of sound!");
+
 
 			ImGui::NextColumn();
 
@@ -696,6 +733,9 @@ namespace Eternal {
 			ImGui::Columns(2);
 			ImGui::SetColumnWidth(0, columnWidth);
 			ImGui::Text("Looping");
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("If the audio file finished, it simply plays again.");
+
 
 			ImGui::NextColumn();
 
