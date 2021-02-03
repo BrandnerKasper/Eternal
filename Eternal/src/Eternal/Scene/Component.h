@@ -72,9 +72,6 @@ namespace Eternal {
 
 		void CalculateTransform()
 		{
-			//ET_CORE_INFO("Rotation in degree: {0}", Rotation);
-			//ET_CORE_INFO("Rotation in radians: {0}", glm::radians(Rotation));
-			//ET_CORE_INFO("Rotation in radians: {0}", glm::radians(Rotation) * 180.0f / 3.14f); !!!!
 			Transform = glm::translate(stdMat, Position)
 				* glm::rotate(stdMat, glm::radians(Rotation), { 0.0f, 0.0f, 1.0f })
 				* glm::scale(stdMat, { Size.x, Size.y, 1.0f });
@@ -171,10 +168,10 @@ namespace Eternal {
 		BodyShape bodyShape = BodyShape::box;
 		b2BodyDef bodyDef;
 		b2BodyType bodyType = b2_staticBody;
-		b2CircleShape circleShape; //ENUM for shape (for now box or circle?)
-		b2PolygonShape polygonBodyShape; //shape!
+		b2CircleShape circleShape;
+		b2PolygonShape polygonBodyShape; 
 		b2FixtureDef fixtureDef; //density in kg/m2, friction [0,1], restitution [0,1], isSensor
-		b2Fixture* Fixture; //for Reset!
+		b2Fixture* Fixture; 
 		b2Body* body = nullptr;
 
 		void SetPhysicProperties(b2Vec2 position, b2Vec2 size, float angle)

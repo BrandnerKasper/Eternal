@@ -12,6 +12,12 @@ namespace Eternal {
 
 	Application* Application::s_Instance = nullptr;
 
+	/**
+	* Initialize a application by creating a window context, init the renderer and push an ImGui layer
+	*
+	* @param std::string& The name of the application.
+	* @return 
+	*/
 	Application::Application(const std::string& name)
 	{
 		ET_CORE_ASSERT(!s_Instance, "Application already exists!");
@@ -30,6 +36,7 @@ namespace Eternal {
 	{
 	}
 
+	/// <summary>The main loop of the application using the frametime.</summary>
 	void Application::Run()
 	{
 		while (m_Running) {
@@ -52,6 +59,12 @@ namespace Eternal {
 		};
 	}
 
+	/**
+	* Cascades down all important events to the layers the application consists of. Handles the immediate resize and close of the given window.
+	*
+	* @param Event& The event reference.
+	* @return
+	*/
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);

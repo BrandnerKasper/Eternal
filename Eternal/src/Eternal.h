@@ -2,19 +2,17 @@
 
 //used by eternal app
 
+//----Core---------------------------
 #include "Eternal/Core/Application.h"
 #include "Eternal/Core/Layer.h"
 #include "Eternal/Core/Log.h"
-
 #include "Eternal/Core/Timestep.h"
 
+//----Input---------------------------
 #include "Eternal/Core/Input.h"
 #include "Eternal/Core/KeyCodes.h"
 #include "Eternal/Core/MouseButtonCodes.h"
-
 #include "Eternal/Renderer/EditorCameraController.h"
-
-#include "Eternal/ImGui/ImGuiLayer.h"
 
 //----Scene---------------------------
 #include "Eternal/Scene/Scene.h"
@@ -34,4 +32,6 @@
 #include "Eternal/Renderer/FrameBuffer.h"
 
 #include "Eternal/Renderer/Camera.h"
-//-----------------------------------
+
+//----ImGui--------------------------
+#include "Eternal/ImGui/ImGuiLayer.h"

@@ -8,8 +8,6 @@
 #include "Eternal/NativeScripts/ScriptHandler.h"
 #include "Eternal/Scene/Component.h"
 
-//TODO: TOOLTIPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 namespace Eternal {
 
 	PropertiesPanel::PropertiesPanel(const Ref<SceneHierarchyPanel>& context)

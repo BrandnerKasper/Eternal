@@ -8,6 +8,12 @@
 
 namespace Eternal {
 
+	/**
+	* Manages the contact btw. one scriptable entity and another. For example the player entering a deathbox.
+	*
+	* @param ScriptableEntity* A pointer to the scritpable entity.
+	* @return 
+	*/
 	void ManageBeginContactBtw2ScriptableEntitys(ScriptableEntity* ent_A, ScriptableEntity* ent_B)
 	{
 		auto scriptType_A = ent_A->GetScriptType();
@@ -88,7 +94,13 @@ namespace Eternal {
 		}
 	}
 
-	void ManageBeginContactBtwPlayerAndDefaultPhysicisObj(ScriptableEntity* ent)
+	/**
+	* Manages the contact btw. one scriptable entity and a default pyhysic entity. For example the player and a wall.
+	*
+	* @param ScriptableEntity* A pointer to the scritpable entity.
+	* @return 
+	*/
+	void ManageBeginContactBtwPlayerAndDefaultPhysicsObj(ScriptableEntity* ent)
 	{
 		if (ent->GetScriptType() == ScriptType::player)
 		{
@@ -108,9 +120,9 @@ namespace Eternal {
 
 		//Handle Contact Btw. Player and a Physics Obj.
 		else if (ent_A)
-			ManageBeginContactBtwPlayerAndDefaultPhysicisObj(ent_A);
+			ManageBeginContactBtwPlayerAndDefaultPhysicsObj(ent_A);
 		else if (ent_B)
-			ManageBeginContactBtwPlayerAndDefaultPhysicisObj(ent_B);
+			ManageBeginContactBtwPlayerAndDefaultPhysicsObj(ent_B);
 	}
 
 	void ContactListener::EndContact(b2Contact* contact)

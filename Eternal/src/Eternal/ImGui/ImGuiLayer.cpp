@@ -1,16 +1,18 @@
 #include "ETpch.h"
 
-#include "Eternal/ImGui/ImGuiLayer.h"
-
+#pragma warning(push, 0)
 #include <imgui.h>
 #include <examples/imgui_impl_glfw.h>
 #include <examples/imgui_impl_opengl3.h>
-
-#include "Eternal/Core/Application.h"
-
 //Temporary
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#pragma warning(pop)
+
+#include "Eternal/ImGui/ImGuiLayer.h"
+#include "Eternal/Core/Application.h"
+
+
 
 namespace Eternal {
 
@@ -80,8 +82,6 @@ namespace Eternal {
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		//static bool show = true;
-		//ImGui::ShowDemoWindow(&show);
 	}
 
 	void ImGuiLayer::Begin()

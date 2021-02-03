@@ -12,7 +12,7 @@ namespace Eternal {
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
 	protected:
-		KeyEvent(int keyCode) // : after Constructor deklaraton defines the initialize member list, meaining if an KeyEvent is constructed the m_KeyCode will be initialized with the corresponding int givent to the Constructor!
+		KeyEvent(int keyCode)
 			: m_KeyCode(keyCode) {}
 
 		int m_KeyCode;

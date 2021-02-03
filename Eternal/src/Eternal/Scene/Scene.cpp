@@ -27,6 +27,7 @@ namespace Eternal {
 
 	}
 
+	/// <summary>Handles the creation of an entity in the scene.</summary>
 	Entity Scene::CreateEntity(const std::string& name)
 	{
 		Entity entity = { m_Registry.create(), this };
@@ -38,11 +39,18 @@ namespace Eternal {
 		return entity;
 	}
 
+	/// <summary>Handles the destruction of an entity in the scene.</summary>
 	void Scene::DestroyEntity(Entity entity)
 	{
 		m_Registry.destroy(entity);
 	}
 
+	/**
+	* Searches through all entitys to find the entity with the given name and return a copy of it.
+	*
+	* @param std::string The tag of the entity.
+	* @return Entity a copy of the wanted entity.
+	*/
 	Entity Scene::GetEntityByTag(std::string tag)
 	{
 		auto view = m_Registry.view<TagComponent>();
@@ -56,18 +64,20 @@ namespace Eternal {
 		ET_CORE_ASSERT(false, "No Entity found with this Tag!");
 	}
 
+	/// <summary>Handles the creation of groups in the scene.</summary>
 	void Scene::CreateGroup(std::string name)
 	{
 		auto group = Group("Nameless Group" + std::to_string(Group::g_ID + 1));
 		m_Groups.push_back(group);
 	}
 
+	/// <summary>Handles the desctruction of a group in the scene.</summary>
 	void Scene::DestroyGroup(Group& group)
 	{
-		//ET_CORE_INFO("Destroy group with id {0}", group.m_ID);
 		m_Groups.erase(std::remove(m_Groups.begin(), m_Groups.end(), group), m_Groups.end());
 	}
 
+	/// <summary>Handles the update loop of the scene.</summary>
 	void Scene::OnUpdate(Timestep ts)
 	{
 		UpdateNonPhysicalTransforms();
@@ -81,6 +91,12 @@ namespace Eternal {
 		UpdateScripts(ts);
 	}
 
+	/**
+	* Resizes editor and scene cameras when user resized the viewport panel.
+	*
+	* @param width and height of the viewport.
+	* @return
+	*/
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
 	{
 		m_ViewportWidth = width;
@@ -102,6 +118,7 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Updates transform of every object while in edit mode.</summary>
 	void Scene::UpdateNonPhysicalTransforms()
 	{
 		//Update Transform only when Transform changed
@@ -114,6 +131,7 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Updates the scripts of each entity, but only when when in play mode.</summary>
 	void Scene::UpdateScripts(Timestep ts)
 	{
 		// Only Update Scripts when Button is pressed!
@@ -136,6 +154,7 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Decides which camera to render to. When in edit mode use editor camera, when in play mode use scene camera.</summary>
 	void Scene::UpdateCameraRender(Timestep ts)
 	{
 		if (!m_play)
@@ -149,11 +168,18 @@ namespace Eternal {
 		}
 	}
 
+	/**
+	* Updates editor camera input and use it to render.
+	*
+	* @param Timestep the frametime.
+	* @return
+	*/
 	void Scene::UpdateEditorCameraRender(Timestep ts)
 	{
 		//Update input for Camera only when Scene is focused
 		if(m_SceneFocused)
 			m_EditorCamera->OnUpdate(ts);
+
 		//Use Editor Camera as Default!
 		Renderer2D::BeginScene(m_EditorCamera->GetCamera(), m_EditorCamera->GetCamera().GetViewMatrix());
 
@@ -168,6 +194,12 @@ namespace Eternal {
 		Renderer2D::EndScene();
 	}
 
+	/**
+	* Searches through all entitys to find the primary scene camera and then use it to render.
+	*
+	* @param Timestep the frametime.
+	* @return
+	*/
 	void Scene::UpdateSceneCameraRender(Timestep ts)
 	{
 		//When Scene plays use Scene Camera (the primary one!)
@@ -204,22 +236,22 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Updates physics simulation!</summary>
 	void Scene::UpdatePhysics(Timestep ts)
 	{
 		if (m_play)
 		{
 			InitPhysics();
 
-			//Start Physic Simulation
 			physicsWorld->Update(ts);
 
 			UpdatePhysicalTransform();
 		}
 	}
 
+	/// <summary>Intial all physics objects!</summary>
 	void Scene::InitPhysics()
 	{
-		//Create all physics objects
 		{
 			auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
 			for (auto entity : view)
@@ -235,9 +267,9 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Rewrites the pysical position into optical position!</summary>
 	void Scene::UpdatePhysicalTransform()
 	{
-		//Rewrite Position into optical position again!
 		{
 			auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
 			for (auto entity : view)
@@ -249,6 +281,7 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Handles the play state of the scene. Pressing the play button once saves a reset state, that when pressing the play button (now the stop button) again resets to the saved state.</summary>
 	void Scene::HandlePlay()
 	{
 		//Set ResetTransform
@@ -273,7 +306,8 @@ namespace Eternal {
 		}
 	}
 
-	void Scene::SortEntitysByZValue()//Fix Blending Problems with Batch Renderer by sorting all rendered entitys by z-position
+	/// <summary>Sorts entitys by their Z value of their transformcomponent. Fixes blending problems with batch renderer!</summary>
+	void Scene::SortEntitysByZValue()
 	{
 		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 		group.sort<TransformComponent>([&group](const TransformComponent e1, const TransformComponent e2)
@@ -282,6 +316,7 @@ namespace Eternal {
 			});
 	}
 
+	/// <summary>Safes the transform of every gameobject with physics component</summary>
 	void Scene::SafeResetTransform()
 	{
 		auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
@@ -295,6 +330,7 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Resets phxsics when the game is over</summary>
 	void Scene::ResetPhysics()
 	{
 		auto view = m_Registry.view<TransformComponent, PhysicsComponent>();
@@ -313,6 +349,7 @@ namespace Eternal {
 		}
 	}
 
+	/// <summary>Resets the script when the game is over</summary>
 	void Scene::ResetScripts()
 	{
 		m_Registry.view<NativeScriptComponent>().each([=](auto& entity, auto& nsc)
@@ -328,11 +365,18 @@ namespace Eternal {
 			});
 	}
 
+	/// <summary>Initials the Audio Manager</summary>
 	void Scene::InitAudio()
 	{
 		AudioManager::Init();
 	}
 
+	/**
+	* Cascades events down into every script of the game objects.
+	*
+	* @param Event& especially key events.
+	* @return
+	*/
 	void Scene::OnEvent(Event& event)
 	{
 		//Scene Entity Scripts Events
@@ -354,6 +398,12 @@ namespace Eternal {
 		}
 	}
 
+	/**
+	* Plays an audio file.
+	*
+	* @param &source needs to be a valid .mp3 file.
+	* @return
+	*/
 	void Scene::PlayAudioFile(const Hazel::AudioSource& source)
 	{
 		AudioManager::Play(source);
@@ -380,6 +430,12 @@ namespace Eternal {
 	{
 	}
 
+	/**
+	* When a camera component gets added to an entity, the camera viewport needs to be resized to the current Viewport
+	*
+	* @param Entity, CameraComponent& 
+	* @return
+	*/
 	template<>
 	void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
 	{

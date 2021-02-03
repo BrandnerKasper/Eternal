@@ -1,6 +1,7 @@
 #pragma once
 
-//from glfw3-h!!
+//Own wrapper for key codes (if you change to sth. else than glfw it wouldn't break, for now it uses the same keycodes as glfw3.h!!
+
 /* Printable keys */
 #define ET_KEY_SPACE              32
 #define ET_KEY_APOSTROPHE         39  /* ' */

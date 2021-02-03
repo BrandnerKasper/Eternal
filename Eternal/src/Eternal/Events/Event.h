@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Eternal/Core/Core.h" //hmmmmmm instead we could use #include "../Core.h" if the Eternal/src would not be defined as include path!!
+#include "Eternal/Core/Core.h"
 
 namespace Eternal {
 
@@ -19,7 +19,7 @@ namespace Eternal {
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
-	enum EventCategory //maybe make enum class
+	enum EventCategory
 	{
 		None = 0,
 		EventCategoryApplication = BIT(0),

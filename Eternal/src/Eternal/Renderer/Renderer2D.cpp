@@ -7,6 +7,9 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+
+//Using a 2D Batch Renderer
+
 namespace Eternal {
 
 	struct QuadVertex
@@ -44,6 +47,7 @@ namespace Eternal {
 
 	static Renderer2DData s_Data;
 
+	/// <summary>Typically a 2D renderer only draws quads, consisting of 4 vertices and 6 indicies. The shader needs for every vertex point a position, a color, a texture coordinate, a texture index (so on which texture slot of the CPU lies the wanted texture) and a tiling factor.</summary>
 	void Renderer2D::Init()
 	{
 		s_Data.QuadVertexArray = VertexArray::Create();
@@ -106,6 +110,12 @@ namespace Eternal {
 		delete[] s_Data.QuadVertexBufferBase;
 	}
 
+	/**
+	* Begins to draw a scene to a camera.
+	*
+	* @param const Camera&, const glm::mat4& transform The camera reference to draw to and it's transform.
+	* @return 
+	*/
 	void Renderer2D::BeginScene(const Camera& camera, const glm::mat4& transform)
 	{
 		glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
@@ -121,6 +131,7 @@ namespace Eternal {
 		Flush();
 	}
 
+	/// <summary>Instead of rendering every quad in it's own draw call we can batch multiple of them together, which speeds up the render pipeline.</summary>
 	void Renderer2D::StartBatch()
 	{
 		s_Data.QuadIndexCount = 0;
@@ -129,6 +140,7 @@ namespace Eternal {
 		s_Data.TextureSlotIndex = 1;
 	}
 
+	/// <summary>Flushing a batch results in one draw call. The conditions of flushing is limited to the max number of quads and texture slots.</summary>
 	void Renderer2D::Flush()
 	{
 		if (s_Data.QuadIndexCount == 0)
@@ -151,6 +163,12 @@ namespace Eternal {
 		StartBatch();
 	}
 
+	/**
+	* Draws a single quad and adds it to the batch.
+	*
+	* @param const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor Drawing a quad depending on transform, texture reference, texture scale and a tint color.
+	* @return 
+	*/
 	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
 		constexpr size_t quadVertexCount = 4;
