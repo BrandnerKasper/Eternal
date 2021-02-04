@@ -6,7 +6,7 @@
 
 namespace Eternal {
 
-	Ref<FrameBuffer> FrameBuffer::Create(const FrameBufferSpecification& spec)
+	SharedPtr<FrameBuffer> FrameBuffer::Create(const FrameBufferSpecification& spec)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -15,7 +15,7 @@ namespace Eternal {
 			return nullptr;
 			break;
 		case RendererAPI::API::OpenGl:
-			return CreateRef<OpenGLFramebuffer>(spec);
+			return CreateSharedPtr<OpenGLFramebuffer>(spec);
 			break;
 		default:
 			ET_CORE_ASSERT(false, "Unknown RendererAPI!");

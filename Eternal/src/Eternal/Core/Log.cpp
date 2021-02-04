@@ -6,8 +6,8 @@
 
 namespace Eternal {
 
-	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+	SharedPtr<spdlog::logger> Log::s_CoreLogger;
+	SharedPtr<spdlog::logger> Log::s_ClientLogger;
 
 	void Log::Init() {
 		spdlog::set_pattern("%^[%T] %n: %v%$");

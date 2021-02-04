@@ -4,6 +4,7 @@
 #include "Eternal/Core/Timestep.h"
 #include "Eternal/Physics/ContactListener.h"
 
+//Simple wrapper around Box2D
 namespace Eternal {
 	
 	class PhysicsWorld
@@ -22,8 +23,8 @@ namespace Eternal {
 		int32 velocityIterations = 6;
 		int32 positionIterations = 2;
 
-		b2Vec2* gravity = new b2Vec2(0.0f, -10.0f);
-		b2World* m_world = new b2World(*gravity);
+		b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
+		UniquePtr<b2World> m_world = CreateUniquePtr<b2World>(gravity);
 
 		//Contacthandler
 		ContactListener m_ContactListener;

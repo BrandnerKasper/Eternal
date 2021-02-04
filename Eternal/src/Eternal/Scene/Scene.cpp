@@ -144,7 +144,6 @@ namespace Eternal {
 						if (!nsc.Instance)
 						{
 							nsc.Instance = nsc.ScriptReference;
-							//nsc.Instance = nsc.InstantiateScript();
 							nsc.Instance->m_Entity = Entity{ entity, this };
 							nsc.Instance->OnCreate();
 						}

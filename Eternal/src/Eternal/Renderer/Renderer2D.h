@@ -15,7 +15,7 @@ namespace Eternal {
 		static void EndScene();
 		static void Flush();
 
-		static void DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+		static void DrawQuad(const glm::mat4& transform, const SharedPtr<Texture2D>& texture, const int textureScale = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
 
 		struct Statistics
 		{
@@ -33,6 +33,6 @@ namespace Eternal {
 		static void NextBatch();
 		static bool TooManyQuads();
 		static bool TooManyTextures();
-		static float GetTextureSlot(const Ref<Texture2D>& texture);
+		static float GetTextureSlot(const SharedPtr<Texture2D>& texture);
 	};
 }

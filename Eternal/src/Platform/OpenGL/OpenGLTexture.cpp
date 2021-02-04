@@ -26,7 +26,7 @@ namespace Eternal {
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
 		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-		ET_CORE_ASSERT(data, "Failed to load image!");
+		//ET_CORE_ASSERT(data, "Failed to load image!");
 
 		m_Width = width;
 		m_Height = height;
@@ -46,7 +46,7 @@ namespace Eternal {
 		m_InternalFormat = internalFormat;
 		m_DataFormat = dataFormat;
 
-		ET_CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
+		//ET_CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);

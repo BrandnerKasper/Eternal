@@ -6,7 +6,7 @@
 
 namespace Eternal {
 
-	Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
+	SharedPtr<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -24,7 +24,7 @@ namespace Eternal {
 		}
 	}
 
-	Ref<Texture2D> Texture2D::Create(const std::string& path)
+	SharedPtr<Texture2D> Texture2D::Create(const std::string& path)
 	{
 		switch (Renderer::GetAPI())
 		{

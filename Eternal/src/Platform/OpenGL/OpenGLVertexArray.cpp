@@ -47,7 +47,7 @@ namespace Eternal {
 		glBindVertexArray(0);
 	}
 
-	void Eternal::OpenGLVertexArray::AddVertexBuffer(Ref<VertexBuffer>& vertexBuffer)
+	void Eternal::OpenGLVertexArray::AddVertexBuffer(SharedPtr<VertexBuffer>& vertexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		vertexBuffer->Bind();
@@ -73,7 +73,7 @@ namespace Eternal {
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void Eternal::OpenGLVertexArray::SetIndexBuffer(Ref<IndexBuffer>& indexBuffer)
+	void Eternal::OpenGLVertexArray::SetIndexBuffer(SharedPtr<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();

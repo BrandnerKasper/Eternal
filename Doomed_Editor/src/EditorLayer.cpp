@@ -15,11 +15,11 @@ namespace Eternal {
 
     void EditorLayer::OnAttach()
     {
-        m_SceneViewportPanel = CreateRef<SceneViewportPanel>();
-        m_ActiveScene = CreateRef<Scene>();
-        m_SceneHierachyPanel = CreateRef<SceneHierarchyPanel>();
-        m_PropertiesPanel = CreateRef<PropertiesPanel>();
-        m_SettingsPanel = CreateRef<SettingsPanel>();
+        m_SceneViewportPanel = CreateSharedPtr<SceneViewportPanel>();
+        m_ActiveScene = CreateSharedPtr<Scene>();
+        m_SceneHierachyPanel = CreateSharedPtr<SceneHierarchyPanel>();
+        m_PropertiesPanel = CreateSharedPtr<PropertiesPanel>();
+        m_SettingsPanel = CreateSharedPtr<SettingsPanel>();
 
 #if 0
         Hazel::Audio::Init();
@@ -256,7 +256,7 @@ namespace Eternal {
 
     void EditorLayer::NewScene()
     {
-        m_ActiveScene = CreateRef<Scene>();
+        m_ActiveScene = CreateSharedPtr<Scene>();
         m_SceneViewportPanel->SetContext(m_ActiveScene);
         m_SceneViewportPanel->OnViewportResize(m_SceneViewportPanel->GetViewportSizeX(), m_SceneViewportPanel->GetViewportSizeY());
         m_SceneHierachyPanel->SetContext(m_ActiveScene);

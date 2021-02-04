@@ -13,11 +13,11 @@ namespace Eternal {
 		m_FrameBuffer = FrameBuffer::Create(frameBufferSpec);
 	}
 
-	void SceneViewportPanel::SetContext(const Ref<Scene>& context)
+	void SceneViewportPanel::SetContext(const SharedPtr<Scene>& context)
 	{
 		m_Scene = context;
 
-		m_Scene->m_EditorCamera = CreateRef<EditorCameraController>(1.778f);
+		m_Scene->m_EditorCamera = CreateSharedPtr<EditorCameraController>(1.778f);
 
 	}
 
@@ -112,7 +112,6 @@ namespace Eternal {
 			else
 				play = false;
 		}
-		//ImGui::ImageButton((void*)ButtonID, ImVec2(20,20)); TODO get that image rendered ... :D
 		ImGui::PopFont();
 		ImGui::PopStyleColor(3);
 	}
@@ -135,7 +134,7 @@ namespace Eternal {
 		ImGui::BeginChild("Scene");
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
-		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
+		Application::Get().GetImGuiLayer().BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		if (m_ViewportSize != *((glm::vec2*) & viewportPanelSize))

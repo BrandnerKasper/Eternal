@@ -8,7 +8,7 @@
 
 namespace Eternal {
 
-	Ref<VertexArray> VertexArray::Create()
+	SharedPtr<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())
 		{

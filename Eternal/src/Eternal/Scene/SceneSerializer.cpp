@@ -90,7 +90,7 @@ namespace YAML {
 
 namespace Eternal {
 
-	SceneSerializer::SceneSerializer(const Ref<Scene>& scene)
+	SceneSerializer::SceneSerializer(const SharedPtr<Scene>& scene)
 		: m_Scene(scene)
 	{
 	}

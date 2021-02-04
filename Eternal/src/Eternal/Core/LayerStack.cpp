@@ -9,23 +9,25 @@ namespace Eternal {
 
 	LayerStack::~LayerStack()
 	{
-		for (Layer* layer : m_Layers) {
-			delete layer;
-		}
+		//for ( auto it = m_Layers.begin(); it < m_Layers.end(); ++it)
+		//{
+		//	m_Layers.erase(it);
+		//}
+
 	}
 
-	void LayerStack::PushLayer(Layer* layer) 
+	void LayerStack::PushLayer(SharedPtr<Layer> layer)
 	{
 		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
 		m_LayerInsertIndex++;
 	}
 
-	void LayerStack::PushOverlay(Layer* overlay) 
+	void LayerStack::PushOverlay(SharedPtr<Layer> overlay)
 	{
 		m_Layers.emplace_back(overlay);
 	}
 
-	void LayerStack::PopLayer(Layer* layer) 
+	void LayerStack::PopLayer(SharedPtr<Layer> layer)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
 		if (it != m_Layers.end()) 
@@ -35,7 +37,7 @@ namespace Eternal {
 		}
 	}
 
-	void LayerStack::PopOverlay(Layer* overlay) 
+	void LayerStack::PopOverlay(SharedPtr<Layer> overlay)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end())

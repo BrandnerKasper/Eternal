@@ -10,9 +10,9 @@ namespace Eternal {
 	{
 	public:
 		SceneHierarchyPanel() = default;
-		SceneHierarchyPanel(const Ref<Scene>& context);
+		SceneHierarchyPanel(const SharedPtr<Scene>& context);
 
-		void SetContext(const Ref<Scene>& context);
+		void SetContext(const SharedPtr<Scene>& context);
 
 		void OnImGuiRender();
 
@@ -31,7 +31,7 @@ namespace Eternal {
 		void HandleRigthClickOnBlankSpace();
 		void DeSelect();
 	private:
-		Ref<Scene> m_Context;
+		SharedPtr<Scene> m_Context;
 		Entity m_SelectedEntity;
 		bool m_entityDeleted = false;
 		bool m_GroupDeleted = false;

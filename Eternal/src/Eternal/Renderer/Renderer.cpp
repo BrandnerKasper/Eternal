@@ -26,8 +26,8 @@ namespace Eternal {
 	{
 	}
 
-	void Renderer::Submit(const Ref<Shader>& shader,
-						const Ref<VertexArray>& vertexArray,
+	void Renderer::Submit(const SharedPtr<Shader>& shader,
+						const SharedPtr<VertexArray>& vertexArray,
 						const glm::mat4& transform)
 	{
 		shader->Bind();

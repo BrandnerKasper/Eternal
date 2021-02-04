@@ -25,6 +25,6 @@ namespace Eternal {
 
 		virtual const FrameBufferSpecification& GetSpecification() const = 0;
 
-		static Ref<FrameBuffer> Create(const FrameBufferSpecification& spec);
+		static SharedPtr<FrameBuffer> Create(const FrameBufferSpecification& spec);
 	};
 }

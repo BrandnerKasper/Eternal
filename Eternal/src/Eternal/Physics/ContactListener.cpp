@@ -24,7 +24,7 @@ namespace Eternal {
 		case ScriptType::default:
 			break;
 		case ScriptType::player:
-			//ET_CORE_INFO("A is player");
+			ET_CORE_INFO("A is player");
 			if (scriptType_B == ScriptType::jumpwallR)
 			{
 				auto player = reinterpret_cast<Player*>(ent_A);
@@ -37,7 +37,7 @@ namespace Eternal {
 			}
 			break;
 		case ScriptType::deathbox:
-			//ET_CORE_INFO("A is deathbox");
+			ET_CORE_INFO("A is deathbox");
 			if(scriptType_B == ScriptType::player)
 			{ 
 				auto deathbox = reinterpret_cast<Deathbox*>(ent_A);
@@ -45,7 +45,7 @@ namespace Eternal {
 			}
 			break;
 		case ScriptType::scenetransistion:
-			//ET_CORE_INFO("A is scenetransistion");
+			ET_CORE_INFO("A is scenetransistion");
 			if (scriptType_B == ScriptType::player)
 			{
 				auto scenetransistion = reinterpret_cast<LoadEndScreen*>(ent_A);
@@ -61,7 +61,7 @@ namespace Eternal {
 		case ScriptType::default:
 			break;
 		case ScriptType::player:
-			//ET_CORE_INFO("B is player");
+			ET_CORE_INFO("B is player");
 			if (scriptType_A == ScriptType::jumpwallR)
 			{
 				auto player = reinterpret_cast<Player*>(ent_B);
@@ -74,7 +74,7 @@ namespace Eternal {
 			}
 			break;
 		case ScriptType::deathbox:
-			//ET_CORE_INFO("B is deathbox");
+			ET_CORE_INFO("B is deathbox");
 			if(scriptType_A == ScriptType::player)
 			{
 				auto deathbox = reinterpret_cast<Deathbox*>(ent_B);
@@ -82,7 +82,7 @@ namespace Eternal {
 			}
 			break;
 		case ScriptType::scenetransistion:
-			//ET_CORE_INFO("B is scenetransistion");
+			ET_CORE_INFO("B is scenetransistion");
 			if (scriptType_A == ScriptType::player)
 			{
 				auto scenetransistion = reinterpret_cast<LoadEndScreen*>(ent_B);

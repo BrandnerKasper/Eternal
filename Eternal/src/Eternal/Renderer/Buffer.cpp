@@ -8,7 +8,7 @@
 
 namespace Eternal {
 
-	Ref<VertexBuffer> VertexBuffer::Create(uint32_t size)
+	SharedPtr<VertexBuffer> VertexBuffer::Create(uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -17,7 +17,7 @@ namespace Eternal {
 			return nullptr;
 			break;
 		case RendererAPI::API::OpenGl:
-			return CreateRef<OpenGLVertexBuffer>(size);
+			return CreateSharedPtr<OpenGLVertexBuffer>(size);
 			break;
 		default:
 			ET_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -26,7 +26,7 @@ namespace Eternal {
 		}
 	}
 
-	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
+	SharedPtr<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -35,7 +35,7 @@ namespace Eternal {
 			return nullptr;
 			break;
 		case RendererAPI::API::OpenGl:
-			return CreateRef<OpenGLVertexBuffer>(vertices, size);
+			return CreateSharedPtr<OpenGLVertexBuffer>(vertices, size);
 			break;
 		default:
 			ET_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -44,7 +44,7 @@ namespace Eternal {
 		}
 	}
 
-	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
+	SharedPtr<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -53,7 +53,7 @@ namespace Eternal {
 			return nullptr;
 			break;
 		case RendererAPI::API::OpenGl:
-			return CreateRef<OpenGLIndexBuffer>(indices, size);
+			return CreateSharedPtr<OpenGLIndexBuffer>(indices, size);
 			break;
 		default:
 			ET_CORE_ASSERT(false, "Unknown RendererAPI!");

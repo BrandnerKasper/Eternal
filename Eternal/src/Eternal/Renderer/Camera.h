@@ -45,7 +45,7 @@ namespace Eternal {
 		glm::mat4 m_ViewMatrix;
 
 
-		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
+		glm::vec3 m_Position = { 0.0f, 0.0f, 20.0f };
 		float m_Rotation = 0.0f;
 
 		float m_ViewportWidth = 1280, m_ViewportHeight = 720;

@@ -15,7 +15,7 @@ namespace Eternal {
             auto& entityname = GetComponent<TagComponent>().Tag;
             ET_INFO(entityname + " Moveable Platform created");
             
-            m_MoveablePlatformBody = GetComponent<PhysicsComponent>().body;
+            auto& m_MoveablePlatformBody = GetComponent<PhysicsComponent>().body;
             if (m_MoveablePlatformBody->GetType() != b2BodyType::b2_kinematicBody)
                 ET_ERROR("Moveable Platform needs to be a kinematic Body!");
         }
@@ -26,6 +26,8 @@ namespace Eternal {
 
         void OnUpdate(Timestep ts)
         {
+            auto& m_MoveablePlatformBody = GetComponent<PhysicsComponent>().body;
+
             int startPositionX = (int)GetComponent<TransformComponent>().ResetPosition.x;
             int endPositionX = startPositionX + distanceX;
             int positionX = (int)m_MoveablePlatformBody->GetPosition().x;
@@ -41,7 +43,6 @@ namespace Eternal {
         }
 
     private:
-        b2Body* m_MoveablePlatformBody;
         b2Vec2 m_MoveVelocity = b2Vec2(3.0f, 0.0f);
         int distanceX = 10;
     };

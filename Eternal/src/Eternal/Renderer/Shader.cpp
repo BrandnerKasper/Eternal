@@ -8,7 +8,7 @@
 
 namespace Eternal {
 
-	Ref<Shader> Shader::Create(const std::string& filepath)
+	SharedPtr<Shader> Shader::Create(const std::string& filepath)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -25,7 +25,7 @@ namespace Eternal {
 		}
 	}
 
-	Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+	SharedPtr<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -42,34 +42,34 @@ namespace Eternal {
 		}
 	}
 
-	void ShaderLibrary::Add(const std::string& name, const Ref<Shader>& shader)
+	void ShaderLibrary::Add(const std::string& name, const SharedPtr<Shader>& shader)
 	{
 		ET_CORE_ASSERT(!Exists(name), "Shader already exists!");
 		m_Shaders[name] = shader;
 	}
 
-	void ShaderLibrary::Add(const Ref<Shader>& shader)
+	void ShaderLibrary::Add(const SharedPtr<Shader>& shader)
 	{
 		auto& name = shader->GetName();
 		Add(name, shader);
 	}
 
 
-	Ref<Shader> ShaderLibrary::Load(const std::string& filepath)
+	SharedPtr<Shader> ShaderLibrary::Load(const std::string& filepath)
 	{
 		auto shader = Shader::Create(filepath);
 		Add(shader);
 		return shader;
 	}
 
-	Ref<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
+	SharedPtr<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
 	{
 		auto shader = Shader::Create(filepath);
 		Add(name, shader);
 		return shader;
 	}
 
-	Ref<Shader> ShaderLibrary::Get(const std::string& name)
+	SharedPtr<Shader> ShaderLibrary::Get(const std::string& name)
 	{
 		ET_CORE_ASSERT(Exists(name), "Shader not found!");
 		return m_Shaders[name];

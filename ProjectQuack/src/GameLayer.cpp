@@ -11,7 +11,7 @@ namespace Eternal {
 
 	void GameLayer::OnAttach()
 	{
-		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene = CreateSharedPtr<Scene>();
 		SceneSerializer serializer(m_ActiveScene);
 		serializer.Deserialize("assets/scenes/TitelScreen.eternal");
 		m_ActiveScene->SetPlay(true);
@@ -68,7 +68,7 @@ namespace Eternal {
 
 	void GameLayer::NewScene()
 	{
-		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene = CreateSharedPtr<Scene>();
 	}
 
 	void GameLayer::Exit()

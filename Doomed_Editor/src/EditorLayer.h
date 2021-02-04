@@ -32,13 +32,13 @@ namespace Eternal {
 
 		void Exit();
 	private:
-		Ref<Scene> m_ActiveScene;
+		SharedPtr<Scene> m_ActiveScene;
 		
 		//Panel
-		Ref<SceneHierarchyPanel> m_SceneHierachyPanel;
-		Ref<PropertiesPanel> m_PropertiesPanel;
-		Ref<SettingsPanel> m_SettingsPanel;
-		Ref<SceneViewportPanel> m_SceneViewportPanel;
+		SharedPtr<SceneHierarchyPanel> m_SceneHierachyPanel;
+		SharedPtr<PropertiesPanel> m_PropertiesPanel;
+		SharedPtr<SettingsPanel> m_SettingsPanel;
+		SharedPtr<SceneViewportPanel> m_SceneViewportPanel;
 
 		float m_physicsTime = 1.0f / 60.0f;
 	};

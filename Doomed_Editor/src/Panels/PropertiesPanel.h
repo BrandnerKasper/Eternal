@@ -9,9 +9,9 @@ namespace Eternal {
 	{
 	public:
 		PropertiesPanel() = default;
-		PropertiesPanel(const Ref<SceneHierarchyPanel>& context);
+		PropertiesPanel(const SharedPtr<SceneHierarchyPanel>& context);
 
-		void SetContext(const Ref<SceneHierarchyPanel>& context);
+		void SetContext(const SharedPtr<SceneHierarchyPanel>& context);
 
 		void OnImGuiRender();
 	private:
@@ -22,6 +22,6 @@ namespace Eternal {
 		static void HandleComponent(const std::string& name, Entity entity, UIFunction uiFunction, bool showRemove = true);		
 		static void HandleAddComponentButton(Entity entity);
 	private:
-		Ref<SceneHierarchyPanel> m_SceneHierachyPanel;
+		SharedPtr<SceneHierarchyPanel> m_SceneHierachyPanel;
 	};
 }

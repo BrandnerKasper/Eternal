@@ -40,51 +40,51 @@ namespace Eternal {
 	{
 	public:
 
-		static ScriptableEntity* GetScript(Scripts script)
+		static SharedPtr<ScriptableEntity> GetScript(Scripts script)
 		{
 			switch (script)
 			{
 			case Scripts::EPlayer:
-				return new Player();
+				return CreateSharedPtr<Player>();
 				break;
 			case Scripts::ERotater:
-				return new Rotater();
+				return CreateSharedPtr<Rotater>();
 				break;
 			case Scripts::EDeathbox:
-				return new Deathbox();
+				return CreateSharedPtr<Deathbox>();
 				break;
 			case Scripts::EMoveableXPlatform:
-				return new MoveableXPlatform();
+				return CreateSharedPtr<MoveableXPlatform>();
 				break;
 			case Scripts::ESceneCameraController:
-				return new SceneCameraController();
+				return CreateSharedPtr<SceneCameraController>();
 				break;
 			case Scripts::EMoveableDeathbox:
-				return new MoveableDeathbox();
+				return CreateSharedPtr<MoveableDeathbox>();
 				break;
 			case Scripts::EMoveableYPlatform:
-				return new MoveableYPlatform();
+				return CreateSharedPtr<MoveableYPlatform>();
 				break;
 			case Scripts::EJumpWallR:
-				return new JumpWallR();
+				return CreateSharedPtr<JumpWallR>();
 				break;
 			case Scripts::EJumpWallL:
-				return new JumpWallL();
+				return CreateSharedPtr<JumpWallL>();
 				break;
 			case Scripts::EBackgroundMusic:
-				return new BackgroundMusic();
+				return CreateSharedPtr<BackgroundMusic>();
 				break;
 			case Scripts::EPressStart:
-				return new PressStart();
+				return CreateSharedPtr<PressStart>();
 				break;
 			case Scripts::ELoad1_1:
-				return new Load1_1();
+				return CreateSharedPtr<Load1_1>();
 				break;
 			case Scripts::ECloseApp:
-				return new CloseApp();
+				return CreateSharedPtr<CloseApp>();
 				break;
 			case Scripts::ELoadEndScreen:
-				return new LoadEndScreen();
+				return CreateSharedPtr<LoadEndScreen>();
 				break;
 			default:
 				return nullptr;

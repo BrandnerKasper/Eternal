@@ -10,12 +10,12 @@
 
 namespace Eternal {
 
-	PropertiesPanel::PropertiesPanel(const Ref<SceneHierarchyPanel>& context)
+	PropertiesPanel::PropertiesPanel(const SharedPtr<SceneHierarchyPanel>& context)
 	{
 		SetContext(context);
 	}
 
-	void PropertiesPanel::SetContext(const Ref<SceneHierarchyPanel>& context)
+	void PropertiesPanel::SetContext(const SharedPtr<SceneHierarchyPanel>& context)
 	{
 		m_SceneHierachyPanel = context;
 	}

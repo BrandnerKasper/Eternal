@@ -10,7 +10,7 @@ namespace Eternal {
 	public:
 		ProjectQuack()
 		{
-			PushLayer(new GameLayer());
+			PushLayer(CreateUniquePtr<GameLayer>());
 		}
 
 		~ProjectQuack()

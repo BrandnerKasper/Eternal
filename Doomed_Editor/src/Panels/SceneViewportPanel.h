@@ -9,7 +9,7 @@ namespace Eternal {
 	public:
 		SceneViewportPanel();
 
-		void SetContext(const Ref<Scene>& context);
+		void SetContext(const SharedPtr<Scene>& context);
 
 		void OnUpdate(Timestep ts);
 		void HandleResize();
@@ -22,8 +22,8 @@ namespace Eternal {
 		float GetViewportSizeX() { return m_ViewportSize.x; }
 		float GetViewportSizeY() { return m_ViewportSize.y; }
 	private:
-		Ref<Scene> m_Scene;
-		Ref<FrameBuffer> m_FrameBuffer;
+		SharedPtr<Scene> m_Scene;
+		SharedPtr<FrameBuffer> m_FrameBuffer;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 	};

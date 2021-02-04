@@ -23,12 +23,12 @@ namespace Eternal {
 		ET_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-		m_Window = Scope<Window>(Window::Create(WindowProps(name)));
+		m_Window = UniquePtr<Window>(Window::Create(WindowProps(name)));
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
 		Renderer::Init();
 
-		m_ImGuiLayer = new ImGuiLayer();
+		m_ImGuiLayer = CreateUniquePtr<ImGuiLayer>();
 		PushOverlay(m_ImGuiLayer);
 	}
 
@@ -47,11 +47,11 @@ namespace Eternal {
 
 			if (!m_Minimized) {
 
-				for (Layer* layer : m_LayerStack)
+				for (SharedPtr<Layer> layer : m_LayerStack)
 					layer->OnUpdate(timestep);
 
 				m_ImGuiLayer->Begin();
-				for (Layer* layer : m_LayerStack)
+				for (SharedPtr<Layer> layer : m_LayerStack)
 					layer->OnImGuiRender();
 				m_ImGuiLayer->End();
 			}
@@ -80,13 +80,13 @@ namespace Eternal {
 		}
 	}
 
-	void Application::PushLayer(Layer* layer)
+	void Application::PushLayer(SharedPtr<Layer> layer)
 	{
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
-	void Application::PushOverlay(Layer* overlay)
+	void Application::PushOverlay(SharedPtr<Layer> overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();

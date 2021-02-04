@@ -97,7 +97,7 @@ namespace Eternal {
 	struct SpriteRendererComponent
 	{
 		std::string TextureFilepath = "";
-		Ref<Texture2D> Texture = nullptr;
+		SharedPtr<Texture2D> Texture = nullptr;
 		int TextureScale = 1;
 
 		glm::vec4 Color {1.0f, 1.0f, 1.0f, 1.0f};
@@ -106,9 +106,9 @@ namespace Eternal {
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(glm::vec4 color)
 			: Color(color) {}
-		SpriteRendererComponent(const Ref<Texture2D>& texture, const int textureScale, glm::vec4 tintColor)
+		SpriteRendererComponent(const SharedPtr<Texture2D>& texture, const int textureScale, glm::vec4 tintColor)
 			: Texture(texture), TextureScale(textureScale), Color(tintColor) {}
-		SpriteRendererComponent(const Ref<Texture2D>& texture)
+		SpriteRendererComponent(const SharedPtr<Texture2D>& texture)
 			: Texture(texture){}
 		SpriteRendererComponent(const std::string textureFilepath)
 			: TextureFilepath(textureFilepath) 
@@ -132,26 +132,14 @@ namespace Eternal {
 	struct NativeScriptComponent
 	{
 		std::string ScriptName = "";
-		ScriptableEntity* Instance = nullptr;
+		SharedPtr<ScriptableEntity> Instance = nullptr;
 
-		ScriptableEntity* ScriptReference = nullptr;
-		ScriptableEntity* (*InstantiateScript)();
-		void (*DestroyScript)(NativeScriptComponent*);
+		SharedPtr<ScriptableEntity> ScriptReference = nullptr;
 
-		void SetScript(ScriptableEntity* script)
+		void SetScript(SharedPtr<ScriptableEntity> script)
 		{
-			delete Instance;
 			Instance = nullptr;
 			ScriptReference = script;
-			//DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
-		}
-
-		//Lets leave it for now...
-		template<typename T>
-		void Bind()
-		{
-			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
-			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
 		}
 
 		NativeScriptComponent() = default;

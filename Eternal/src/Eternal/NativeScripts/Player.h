@@ -18,7 +18,7 @@ namespace Eternal {
 
             m_ScriptType = ScriptType::player;
 
-            m_PlayerBody = GetComponent<PhysicsComponent>().body;
+            auto& m_PlayerBody = GetComponent<PhysicsComponent>().body;
             m_PlayerBody->GetUserData().pointer = (uintptr_t)this;
 
             canJump = true;
@@ -44,18 +44,18 @@ namespace Eternal {
         void HandleSideMovement()
         {
             //Get Physics body
-            m_PlayerBody = GetComponent<PhysicsComponent>().body;
+            auto& m_PlayerBody = GetComponent<PhysicsComponent>().body;
             velocity = m_PlayerBody->GetLinearVelocity();
 
             //Handle Side Movement (we use impulse)
             desiredVelocity_X = velocity.x * 0.98f;
 
-            if (Input::IsKeyPressed(ET_KEY_D))
+            if (Input::IsKeyPressed(ET_KEY_D) || Input::IsKeyPressed(ET_KEY_RIGHT))
             {
                 desiredVelocity_X = b2Min(velocity.x + 0.1f, m_walkvelocity);
             }
 
-            if (Input::IsKeyPressed(ET_KEY_A))
+            if (Input::IsKeyPressed(ET_KEY_A) || Input::IsKeyPressed(ET_KEY_LEFT))
             {
                 desiredVelocity_X = b2Max(velocity.x - 0.1f, -m_walkvelocity);
             }
@@ -69,7 +69,7 @@ namespace Eternal {
         {
             if (e.GetRepeatCount() > 0)
                 return false;
-            m_PlayerBody = GetComponent<PhysicsComponent>().body;
+            auto& m_PlayerBody = GetComponent<PhysicsComponent>().body;
 
             //Handle Jump (we use impulse!)
             if (e.GetKeyCode() == ET_KEY_SPACE)
@@ -143,7 +143,6 @@ namespace Eternal {
         }
 
     private:
-        b2Body* m_PlayerBody;
         float m_walkvelocity = 6.0f;
         b2Vec2 m_JumpImpulse = b2Vec2(0.0f, 8.0f);
         b2Vec2 m_WallJumpRForceImpulse = b2Vec2(-10.0f, 9.0f);

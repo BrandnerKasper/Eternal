@@ -13,7 +13,7 @@ namespace Eternal {
 		DoomedEditor()
 			 : Application("Doomed Editor")
 		{
-			PushLayer(new EditorLayer());
+			PushLayer(CreateUniquePtr<EditorLayer>());
 		}
 		~DoomedEditor()
 		{

@@ -28,16 +28,16 @@ namespace Eternal {
 		static const uint32_t MaxIndices = MaxQuads * 6;
 		static const uint32_t MaxTextureSlots = 32; // TODO: RenderCaps
 
-		Ref<VertexArray> QuadVertexArray;
-		Ref<VertexBuffer> QuadVertexBuffer;
-		Ref<Shader> TextureShader;
-		Ref<Texture2D> WhiteTexture;
+		SharedPtr<VertexArray> QuadVertexArray;
+		SharedPtr<VertexBuffer> QuadVertexBuffer;
+		SharedPtr<Shader> TextureShader;
+		SharedPtr<Texture2D> WhiteTexture;
 
 		uint32_t QuadIndexCount = 0;
 		QuadVertex* QuadVertexBufferBase = nullptr;
 		QuadVertex* QuadVertexBufferPtr = nullptr;
 
-		std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
+		std::array<SharedPtr<Texture2D>, MaxTextureSlots> TextureSlots;
 		uint32_t TextureSlotIndex = 1; // 0 = white texture
 
 		glm::vec4 QuadVertexPositions[4];
@@ -80,7 +80,7 @@ namespace Eternal {
 			offset += 4;
 		}
 
-		Ref<IndexBuffer> quadIB = IndexBuffer::Create(quadIndices, s_Data.MaxIndices);
+		SharedPtr<IndexBuffer> quadIB = IndexBuffer::Create(quadIndices, s_Data.MaxIndices);
 		s_Data.QuadVertexArray->SetIndexBuffer(quadIB);
 		delete[] quadIndices;
 
@@ -166,10 +166,10 @@ namespace Eternal {
 	/**
 	* Draws a single quad and adds it to the batch.
 	*
-	* @param const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor Drawing a quad depending on transform, texture reference, texture scale and a tint color.
+	* @param const glm::mat4& transform, const SharedPtr<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor Drawing a quad depending on transform, texture reference, texture scale and a tint color.
 	* @return 
 	*/
-	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const SharedPtr<Texture2D>& texture, const int textureScale, const glm::vec4& tintColor)
 	{
 		constexpr size_t quadVertexCount = 4;
 		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
@@ -224,7 +224,7 @@ namespace Eternal {
 		return false;
 	}
 
-	float Renderer2D::GetTextureSlot(const Ref<Texture2D>& texture)
+	float Renderer2D::GetTextureSlot(const SharedPtr<Texture2D>& texture)
 	{
 		if (texture == nullptr)
 			return 0.0f;

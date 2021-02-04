@@ -65,7 +65,7 @@ namespace Eternal
 		entt::registry m_Registry;
 		std::string m_Name = "Untitled";
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
-		Ref<EditorCameraController> m_EditorCamera;
+		SharedPtr<EditorCameraController> m_EditorCamera;
 
 		//Scene Hierachy
 		std::vector<Group> m_Groups;
@@ -77,7 +77,7 @@ namespace Eternal
 		bool m_initializeResetPhysics = false;
 
 		//Physics
-		Ref<PhysicsWorld> physicsWorld = CreateRef<PhysicsWorld>();
+		SharedPtr<PhysicsWorld> physicsWorld = CreateSharedPtr<PhysicsWorld>();
 
 		//Change Scene
 		bool m_changeScene = false;

@@ -22,8 +22,7 @@ namespace Eternal {
 		void Exit();
 
 	private:
-
-		Ref<Scene> m_ActiveScene;
+		SharedPtr<Scene> m_ActiveScene;
 		bool m_restart = false;
 
 	};
