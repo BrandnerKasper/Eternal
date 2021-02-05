@@ -1,7 +1,7 @@
 # Eternal Engine
 
 # Abstract
-This project consists of 3 parts. At the core lies the Eternal Engine, containing features to create interactive applications. On top of that is the Doomed Editor, a basic game engine editor to easily use all these features at hand to apply them to a corresponding game level. Tthis editor makes the third and most important part, the game Project Quack possible. Project Quack is a 2D Jump 'n' Run in which you control a duck egg, helping to reach a safe place to hatch.
+This project consists of 3 parts. At the core lies the Eternal Engine, containing features to create interactive applications. On top of that is the Doomed Editor, a basic game engine editor to easily use all these features at hand to apply them to a corresponding game level. This editor makes the third and most important part, the game Project Quack possible. Project Quack is a 2D Jump 'n' Run in which you control a duck egg, helping to reach a safe place to hatch.
 
 ![Doomed-Editor](Documentation/Doomed-Editor.png) 
 *Doomed Editor Layout and Look*
